@@ -1,15 +1,22 @@
 <template>
- 
+  <div>
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </nav>
+    <footer>
+      <the-footer></the-footer>
+    </footer>
+  </div>
   <router-view/>
 </template>
-<script>
-export default {
-  name: 'App',
-  components:{
-    
-    
-  }
+
  
+
+<script>
+import TheFooter from './components/TheFooter.vue';
+export default {
+  components:{TheFooter},
 }
 </script>
 <style>
