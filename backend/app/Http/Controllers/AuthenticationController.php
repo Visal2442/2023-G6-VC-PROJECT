@@ -19,8 +19,8 @@ class AuthenticationController extends Controller
             'username' => ['required', 'min:5'],
             'phone_number' => ['required', 'min:8'],
             'email' => ['required','unique:users','email'],
-            'password' => ['required', 'min:8'],
-            'confirm_password' => ['required', 'min:8'],
+            'password_confirmation' => ['required'],
+            'password' => ['required', 'min:8','confirmed'],
         ]);
         
         if ($validator->fails()) {

@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import './axios';
+import './axios-http'
 
 // Vuetify
 import 'vuetify/styles'
@@ -32,7 +32,6 @@ const vuetify = createVuetify({
   components,
   directives,
 })
-
 const app = createApp(App)
 app.use(vuetify)
 app.use(pinia)

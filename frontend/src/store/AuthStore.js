@@ -1,5 +1,6 @@
 import { defineStore } from "pinia"
-import { ref } from 'vue';
+import { ref  } from 'vue';
+import { useRouter } from "vue-router";
 import axios from 'axios';
 
 export const useAuthStore = defineStore('auth',()=>{
@@ -7,27 +8,28 @@ export const useAuthStore = defineStore('auth',()=>{
     const password = ref(null);
     const phone_number = ref(null);
     const email = ref(null);
-    const confirm_password = ref(null);
+    const password_confirmation = ref(null);
     const errors = ref([]);
-    const isSuccess = ref(true);
+    const isSuccess = ref(null);
+    const router = useRouter();
     
     // // Register 
     let  register=()=>{
         const user = ref({
             username:username.value,
             password:password.value,
-            confirm_password:confirm_password.value,
+            password_confirmation:password_confirmation.value,
             phone_number:phone_number.value,
             email:email.value,
           })
-        axios.post('127.0.0.1:8080/api/register', user.value)
+        axios.post('register', user.value)
         .then((res)=>{
-            // JSON.parse('user', )
-            console.log(res);
+            localStorage.setItem('user', res.data.user.id)
+            localStorage.setItem('token', res.data.token)
+            router.push('/')
         }).catch((err)=> {
             errors.value = err.response.data.errors
             isSuccess.value = err.response.data.success
-            // console.log(err.response.data.errors);
         })
     }
 
@@ -36,9 +38,10 @@ export const useAuthStore = defineStore('auth',()=>{
         password,
         phone_number,
         email,
-        confirm_password,
+        password_confirmation,
         errors,
         isSuccess,
+        // token,
         register
     };
 })

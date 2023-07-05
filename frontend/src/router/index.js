@@ -5,6 +5,7 @@ import AboutView from '../views/AboutView.vue'
 import RegisterView from '../views/RegisterView.vue'
 // import LoginView from '../views/LoginView.vue'
 
+// import LoginForm from '../views/LoginView.vue'
 const routes = [
   {
     path: '/',
@@ -24,11 +25,11 @@ const routes = [
     name: 'Register',
     component: RegisterView
   },
-  // {
-  //   path: '/login',
-  //   name: 'login',
-  //   component: LoginView
-  // },
+  {
+    path: '/login',
+    name: 'Login',
+    component: LoginForm
+  },
 ]
 
 const router = createRouter({
