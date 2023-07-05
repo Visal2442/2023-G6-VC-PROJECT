@@ -16,32 +16,30 @@ class AuthenticationController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_name' => 'required',
-            'phone_number' => 'required',
-            'email' => 'required|unique:users,email',
-            'password' => 'required|min:8',
-
-            
+            'username' => ['required', 'min:5'],
+            'phone_number' => ['required', 'min:8'],
+            'email' => ['required','unique:users','email'],
+            'password' => ['required', 'min:8'],
+            'confirm_password' => ['required', 'min:8'],
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            return response()->json(['success'=>'false', 'errors' => $validator->errors()], 401);
         }
-
         $user = User::create([
-            'user_name' => $request->user_name,
+            'username' => $request->username,
             'phone_number' => $request->phone_number,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            
         ]);
 
         $token = $user->createToken('API Token', ['select'])->plainTextToken;
 
         return response()->json([
+            'success' => 'true',
             'user' => $user,
             'token' => $token,
-        ]);
+        ], 200);
     }
 
     public function logout(Request $request)
