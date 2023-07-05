@@ -68,7 +68,7 @@ class AuthenticationController extends Controller
             // Authentication successful
             $user = Auth::user();
             $token = $user->createToken('API Token', ['select'])->plainTextToken;
-            return response()->json(["message" => "login success","token" => $token], 200);
+            return response()->json(["message" => "login success","user"=>$user,"token" => $token], 200);
         } else {
             // Authentication failed
             return response()->json(['error' => 'Invalid email or password'], 401);
