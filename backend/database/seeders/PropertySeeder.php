@@ -15,10 +15,10 @@ class PropertySeeder extends Seeder
         //
         $property=[
             [
-                'name' => 'Luxury Villa',
+                'name' => 'Luxury room',
                 'price' => 5000,
-                'description' => 'This luxurious villa is the perfect place to relax and unwind.',
-                'type' => 'villa',
+                'description' => 'This luxurious room is the perfect place to relax and unwind.',
+                'type' => 'room',
                 'latitude' => 37.7749,
                 'longitude' => -122.4194,
                 'available' => true,

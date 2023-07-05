@@ -14,6 +14,7 @@ class RentalHouse extends Model
         'number_of_floor',
         'number_of_bathroom',
         'number_of_kitchen',
+        'available',
     ];
 
     public function property()

@@ -15,14 +15,14 @@ class RoomSeeder extends Seeder
         //
         $rooms=[
             [
-            'size' => "30",
+            'size' => "30x20",
             'number_of_bed' => 1,
             'number_of_bathroom' => 1,
             'available' => true,
             'rental_room_id'=>1
             ],
             [
-                'size' => "40",
+                'size' => "40x20",
                 'number_of_bed' => 2,
                 'number_of_bathroom' => 2,
                 'available' => true,
