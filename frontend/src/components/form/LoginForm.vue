@@ -9,16 +9,25 @@
           <v-text-field
             ref="Email"
             label="Email"
+            v-model="email"
             color="green-accent-4"
             placeholder="Enter your email"
           ></v-text-field>
+          <div class="sms">
+            <span class="text-red-accent-4 text-left" v-if="errors && errors.email">{{ errors.email[0] }}</span>
+          </div>
+
           <v-text-field
             ref="Password"
-            v-model="Password"
+            v-model="password"
             label="Password"
             color="green-accent-4"
             placeholder=".................."
           ></v-text-field>
+          <div class="sms">
+            <span class="text-red-accent-4 text-left" v-if="errors && errors.password">{{ errors.password[0] }}</span>
+          </div>
+
           <v-card-actions>
             <v-col cols="auto pa-0" class="forgotPassword">
               <router-link to="/">Forgot Password?</router-link>
@@ -33,6 +42,7 @@
                 width="100%"
                 type="button"
                 class="login bg-green-accent-4 text-white"
+                @click="login()"
                 >Login</v-btn>
             </v-col>
           </v-card-actions>
@@ -45,11 +55,19 @@
     </v-col>
   </v-row>
 </template>
-<script setup></script>
+<script setup>
+import { storeToRefs } from 'pinia';
+import { useAuthStore } from '../../store/AuthStore';
+const authStore = useAuthStore();
+
+const { email,password, errors } = storeToRefs(authStore);
+const { login } = authStore;
+
+</script>
 
 <style>
 .forgotPassword {
-  margin-top: -10%;
+  /* margin-top: -10%; */
   margin-left: -2%;
 }
 .login {
@@ -58,5 +76,8 @@
 .google-lgo {
   margin-top: -10%;
   width: 70px;
+}
+.sms{
+  text-align: start;
 }
 </style>
