@@ -20,7 +20,7 @@ export const useAuthStore = defineStore('auth',()=>{
             phone_number:phone_number.value,
             email:email.value,
           })
-        axios.post('127.0.0.1:8080/api/register', user.value)
+        axios.post('http://127.0.0.1:8000/api/register', user.value)
         .then((res)=>{
             // JSON.parse('user', )
             console.log(res);
