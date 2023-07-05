@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import RegisterView from '../views/RegisterView.vue'
+// import LoginView from '../views/LoginView.vue'
 
 const routes = [
   {
@@ -23,6 +24,11 @@ const routes = [
     name: 'Register',
     component: RegisterView
   },
+  // {
+  //   path: '/login',
+  //   name: 'login',
+  //   component: LoginView
+  // },
 ]
 
 const router = createRouter({

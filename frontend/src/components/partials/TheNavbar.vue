@@ -26,7 +26,7 @@
     </v-toolbar-items>
     <!-- <v-contain> -->
       <v-btn class="tex-left" :to="{name:'Register'}">Register</v-btn>
-      <v-btn class="mr-4">Login</v-btn>
+      <v-btn class="mr-4" >Login</v-btn>
     <!-- </v-contain> -->
   </v-toolbar>
 </template>
