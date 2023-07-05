@@ -37,8 +37,9 @@
         <v-contain>
 
           <v-btn class="tex-left" text>
+            <router-link to="/register">Register</router-link>
            
-            Register
+          
           </v-btn>
           <v-btn class="mr-4" text>
            

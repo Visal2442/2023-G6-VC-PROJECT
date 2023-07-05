@@ -1,22 +1,17 @@
 <template>
-  <div>
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <footer>
-      <the-footer></the-footer>
-    </footer>
-  </div>
+
+  <HomeView></HomeView>
   <router-view/>
 </template>
 
  
 
 <script>
-import TheFooter from './components/TheFooter.vue';
+import HomeView from './views/HomeView.vue'
 export default {
-  components:{TheFooter},
+  components:{
+    HomeView
+  },
 }
 </script>
 <style>
