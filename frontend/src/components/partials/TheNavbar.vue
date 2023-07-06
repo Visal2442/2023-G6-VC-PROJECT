@@ -12,7 +12,7 @@
 
   <!-- Large Screen  -->
 
-  <v-toolbar color="green lighten-1" class="mb-5">
+  <v-toolbar color="green lighten-1">
     <v-toolbar-title class="text-uppercase font-weight-bold mr-4 ">
       <picture>
         <img src="../../assets/logo.png" alt="Logo" width="50" aspect-ratio="1/1">
@@ -21,7 +21,7 @@
     <v-spacer></v-spacer>
     <v-toolbar-items>
       <v-btn class="mr-4" :to="{name:'Home'}">Home</v-btn>
-      <v-btn class="mr-4" :to="{name:'Home'}">Property</v-btn>
+      <v-btn class="mr-4" :to="{name:'property'}">Property</v-btn>
       <v-btn class="mr-4" :to="{name:'About'}">About</v-btn>
     </v-toolbar-items>
       <v-btn class="tex-left" :to="{name:'Register'}">Register</v-btn>

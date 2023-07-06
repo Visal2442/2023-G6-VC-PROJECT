@@ -43,15 +43,8 @@
      position: relative;
 }
 
-/* .bg-text {
-     background: #d85959;
-     width: 100px;
-     height: 100px;
-
-} */
-
 h1 {
-     /* position: absolute; */
+
      margin-top: -15%;
      margin-bottom: 15%;
      margin-left: -50%;
@@ -81,8 +74,7 @@ h1 {
      border-radius: 5px;
 }
 
-.text1,
-.text2 {
+.text1,.text2 {
      display: flex;
      flex: 3;
      align-items: center;

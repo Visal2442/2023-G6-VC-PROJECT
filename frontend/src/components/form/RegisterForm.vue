@@ -49,7 +49,7 @@ const { register } = authStore;
 
 </script>
 
-<style>
+<style scoped>
 .v-text-field{
   /* background: whitesmoke; */
   padding: 0;
