@@ -24,18 +24,13 @@
       <v-btn class="mr-4" :to="{name:'Home'}">Property</v-btn>
       <v-btn class="mr-4" :to="{name:'About'}">About</v-btn>
     </v-toolbar-items>
-    <!-- <v-contain> -->
       <v-btn class="tex-left" :to="{name:'Register'}">Register</v-btn>
       <v-btn class="mr-4">Login</v-btn>
-    <!-- </v-contain> -->
   </v-toolbar>
 </template>
 
-<script>
+<script setup>
 
-export default {
-
-}
 </script>
 
 <style scoped>

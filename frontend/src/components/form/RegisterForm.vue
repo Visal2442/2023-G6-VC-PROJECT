@@ -22,11 +22,11 @@
            v-model="password"></v-text-field>
         <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.password" >{{ errors.password.length !== 0 ? errors.password[0]:'' }}</span>
 
-        <v-text-field  type="password" name="password_confirmation" color="green-accent-4" label="Confirm Password"
-          placeholder="Confirm Password" v-model="confirm_password"></v-text-field>
-        <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.password" >{{ errors.password.length !== 0 ? errors.password[0]:'' }}</span>
+        <v-text-field type="password" name="password_confirmation" color="green-accent-4" label="Confirm Password" placeholder="Confirm Password" 
+          v-model="password_confirmation"></v-text-field>
 
         <router-link to=""><img src="../../assets/google.png" alt="" width="50" /></router-link>
+
         <v-btn type="button" @click="register()" block class="mt-2 mb-5 bg-green-accent-4 text-white">Create</v-btn>
         <p>Already have an account? | <router-link to="/login" class="">Login Here</router-link></p>
       </v-form>
@@ -35,14 +35,15 @@
 </template>
 
 <script setup>
-// import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
 
-const { username, password, phone_number, email, confirm_password, errors, isSuccess } = storeToRefs(authStore);
+const { username, password, phone_number, email, password_confirmation, errors, isSuccess } = storeToRefs(authStore);
 const { register } = authStore;
- // Register
+
+
+
 
 
 
