@@ -7,34 +7,49 @@
       <h3 class="text-green-accent-4 mb-5">Register Account</h3>
       <v-form fast-fail class="d-flex flex-column">
         <v-text-field clearable color="green-accent-4" label="Username" placeholder="Enter your username"
-           v-model="username"></v-text-field>
-        <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.username" >{{ errors.username.length !== 0 ? errors.username[0]:'' }}</span>
+          v-model="username"></v-text-field>
+        <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.username">{{ errors.username.length !== 0 ?
+          errors.username[0] : '' }}</span>
 
-        <v-text-field color="green-accent-4" label="Phone Number" placeholder="Enter phone number" 
+        <v-text-field color="green-accent-4" label="Phone Number" placeholder="Enter phone number"
           v-model="phone_number"></v-text-field>
-        <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.phone_number" >{{ errors.phone_number.length !== 0 ? errors.phone_number[0]:'' }}</span>
+        <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.phone_number">{{ errors.phone_number.length
+          !== 0 ? errors.phone_number[0] : '' }}</span>
 
-        <v-text-field color="green-accent-4" label="Email" placeholder="Enter email address" 
+        <v-text-field color="green-accent-4" label="Email" placeholder="Enter email address"
           v-model="email"></v-text-field>
-        <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.email" >{{ errors.email.length !== 0 ? errors.email[0]:'' }}</span>
+        <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.email">{{ errors.email.length !== 0 ?
+          errors.email[0] : '' }}</span>
 
         <v-text-field type="password" name="password" color="green-accent-4" label="Password" placeholder="Enter password"
-           v-model="password"></v-text-field>
-        <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.password" >{{ errors.password.length !== 0 ? errors.password[0]:'' }}</span>
+          v-model="password"></v-text-field>
+        <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.password">{{ errors.password.length !== 0 ?
+          errors.password[0] : '' }}</span>
 
-        <v-text-field type="password" name="password_confirmation" color="green-accent-4" label="Confirm Password" placeholder="Confirm Password" 
-          v-model="password_confirmation"></v-text-field>
+        <v-text-field type="password" name="password_confirmation" color="green-accent-4" label="Confirm Password"
+          placeholder="Confirm Password" v-model="password_confirmation"></v-text-field>
 
-        <router-link to=""><img src="../../assets/google.png" alt="" width="50" /></router-link>
+        <v-btn @click="log"><img src="../../assets/google.png" alt="" width="50" /></v-btn>
+        <!-- <router-link><img src="../../assets/google.png" alt="" width="50" /></router-link> -->
 
         <v-btn type="button" @click="register()" block class="mt-2 mb-5 bg-green-accent-4 text-white">Create</v-btn>
         <p>Already have an account? | <router-link to="/login" class="">Login Here</router-link></p>
+        <v-btn @click="getCookie">Reset Cookie</v-btn>
       </v-form>
     </v-sheet>
   </v-row>
+  <div>
+    <template v-if="login">
+      <GoogleLogin :callback="callback" prompt style="display:none"></GoogleLogin>
+    </template>
+  </div>
 </template>
 
+
 <script setup>
+import { ref } from 'vue';
+import { GoogleLogin, decodeCredential } from "vue3-google-login"
+
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
@@ -42,20 +57,27 @@ const authStore = useAuthStore();
 const { username, password, phone_number, email, password_confirmation, errors, isSuccess } = storeToRefs(authStore);
 const { register } = authStore;
 
+const login = ref(false);
 
-
-
-
-
+const callback =  (res) => {
+    console.log(decodeCredential(res.credential));
+}
+const log = () => {
+  login.value = true;
+}
+// Reset cookie (testing)
+const getCookie = () => {
+  document.cookie = 'g_state=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT; secure';
+  location.reload();
+}
 </script>
 
 <style>
-.v-text-field{
-  /* background: whitesmoke; */
+.v-text-field {
   padding: 0;
   margin-bottom: 5px;
 }
-.v-input_details{
+
+.v-input_details {
   display: none;
-}
-</style>
+}</style>

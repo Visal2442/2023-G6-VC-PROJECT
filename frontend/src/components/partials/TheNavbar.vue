@@ -24,12 +24,23 @@
       <v-btn class="mr-4" :to="{name:'Home'}">Property</v-btn>
       <v-btn class="mr-4" :to="{name:'About'}">About</v-btn>
     </v-toolbar-items>
-      <v-btn class="tex-left" :to="{name:'Register'}">Register</v-btn>
+      <v-btn class="tex-left" :to="{name:'Register'}" v-if="token==null">Register</v-btn>
       <v-btn class="mr-4">Login</v-btn>
+  <h1>{{ token }}</h1>
   </v-toolbar>
 </template>
 
 <script setup>
+import { computed } from 'vue';
+let tokens = '';
+const token = computed({
+  get:()=>{
+    tokens = localStorage.getItem('token');
+    return tokens
+  }
+})
+console.log(localStorage.getItem('token'));
+
 
 </script>
 
