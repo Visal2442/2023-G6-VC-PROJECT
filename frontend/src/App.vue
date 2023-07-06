@@ -1,19 +1,16 @@
 <template>
-
-  <HomeView></HomeView>
+  <TheNavbar></TheNavbar>
   <router-view/>
+  <TheFooter></TheFooter>
 </template>
 
- 
 
-<script>
-import HomeView from './views/HomeView.vue'
-export default {
-  components:{
-    HomeView
-  },
-}
+<script setup>
+import TheNavbar from '@/components/partials/TheNavbar.vue'
+import TheFooter from '@/components/partials/TheFooter.vue';
 </script>
+
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -32,7 +29,7 @@ nav a {
   color: #2c3e50;
 }
 
-nav a.router-link-exact-active {
+nav a.router-link-active {
   color: #42b983;
 }
 </style>

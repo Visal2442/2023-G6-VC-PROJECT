@@ -74,15 +74,26 @@ img{
     align-items: center;
     margin-bottom: 10px;
 }
-.icon{
+
+.icon {
     margin: 10px;
     color: white;
 }
+
 
 h3{
     margin-bottom: 10px;
 }
 icon{
     color:"white";
+}
+
+h3 {
+    margin-bottom: 10px;
+}
+
+icon {
+    color: "white";
+
 }
 </style>
