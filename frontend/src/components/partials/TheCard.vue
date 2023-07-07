@@ -1,7 +1,8 @@
 <template>
+  <div>
   <v-container class="pa-4 text-center">
     <v-row class="fill-height" align="center" justify="center">
-      <template v-for="(item, i) in items" :key="i">
+      <template v-for="(item, i) of items" :key="i">
         <v-col cols="12" md="4">
           <v-hover v-slot="{ isHovering, props }">
             <v-card :elevation="isHovering ? 1 : 12" :class="{ 'on-hover': isHovering }" v-bind="props">
@@ -54,6 +55,7 @@
       </template>
     </v-row>
   </v-container>
+</div>
 </template>
 <script>
 export default {
@@ -78,7 +80,6 @@ export default {
         subtext: 'Chill beats to mellow you out.',
         img: 'https://images.sanantoniomag.com/wp-content/uploads/2022/02/Sanctuary-1-1246x700.jpg',
       },
-
     ],
     transparent: 'rgba(255, 255, 255, 0)',
   }),

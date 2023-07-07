@@ -16,10 +16,10 @@ class AuthenticationController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => ['required', 'min:5'],
-            'phone_number' => ['required', 'min:8'],
-            'email' => ['required','unique:users','email'],
-            'password_confirmation' => ['required'],
+            // 'username' => ['required', 'min:5'],
+            // 'phone_number' => ['required', 'min:8'],
+            'email' => ['unique:users','email'],
+            // 'password_confirmation' => ['required'],
             'password' => ['required', 'min:8','confirmed'],
         ]);
         

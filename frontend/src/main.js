@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import './axios-http'
 
+
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
@@ -19,7 +20,7 @@ import { aliases, fa } from 'vuetify/iconsets/fa'
 // Pinia 
 import { createPinia } from 'pinia';
 const pinia = createPinia();
-
+// import './style.css'
 const vuetify = createVuetify({
     icons:{
         defaultSet:'fa',

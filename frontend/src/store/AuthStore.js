@@ -1,4 +1,4 @@
-import { defineStore } from "pinia"
+import { defineStore } from "pinia";
 import { ref } from 'vue';
 import { useRouter } from "vue-router";
 import axios from 'axios';
@@ -12,6 +12,8 @@ export const useAuthStore = defineStore('auth', () => {
   const errors = ref([]);
   const isSuccess = ref(null);
   const router = useRouter();
+  const isValide= ref(false)
+
 
   // Register 
   let register = () => {
@@ -58,6 +60,7 @@ export const useAuthStore = defineStore('auth', () => {
     password_confirmation,
     errors,
     isSuccess,
+    isValide,
     register,
     login
   };
