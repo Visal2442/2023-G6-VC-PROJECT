@@ -1,4 +1,5 @@
 <template>
+   <TheNavbar></TheNavbar>
   <TheBanner></TheBanner>
   <TheCard></TheCard>
 </template>

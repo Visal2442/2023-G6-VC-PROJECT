@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from 'vue';
 import { useRouter } from "vue-router";
+import Cookies from 'js-cookie';
 import axios from 'axios';
 
 export const useAuthStore = defineStore('auth', () => {
@@ -26,8 +27,10 @@ export const useAuthStore = defineStore('auth', () => {
     }
     axios.post('/register', user)
       .then((res) => {
+        Cookies.set('email', email.value, { expires: 30 });
         localStorage.setItem('user', res.data.user.id)
         localStorage.setItem('token', res.data.token)
+        resetForm();
         router.push('/')
       })
       .catch((err) => {
@@ -43,15 +46,46 @@ export const useAuthStore = defineStore('auth', () => {
     }
     axios.post('/login', user)
       .then((res) => {
+        Cookies.set('email', email.value, { expires: 30 });
         localStorage.setItem('user', res.data.user.id)
         localStorage.setItem('token', res.data.token)
-        router.push('/')
+        resetForm();
+        router.push('/');
       })
       .catch((err) => {
-        errors.value = err.response.data.errors
+        console.log(err.response.data.errors);
+        errors.value = err.response.data.errors;
+        isSuccess.value = err.response.data.success
       })
   };
+  const logout = () => {
+    axios.post('/logout', null, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then((res) => {
+      console.log(res);
+      Cookies.remove('email');
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+  
+      router.push('/login');
+    })
+    .catch((err) => {
+      errors.value = err.response.data.errors;
+      isSuccess.value = err.response.data.success;
+      
+    });
+  };
 
+  const resetForm= ()=>{
+    username.value=''
+    password.value=''
+    password_confirmation.value=''
+    phone_number.value=''
+    email.value=''
+  };
   return {
     username,
     password,
@@ -62,6 +96,7 @@ export const useAuthStore = defineStore('auth', () => {
     isSuccess,
     isValide,
     register,
-    login
+    login,
+    logout
   };
 });

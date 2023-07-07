@@ -56,10 +56,10 @@ class AuthenticationController extends Controller
         // Validate the input data
         $validator = Validator::make($request->all(), [
             'email' => ['required','email'],
-            'password' => ['required', 'min:8'],
+            'password' => ['required','min:8'],
         ]);
         if($validator->fails()){
-            return response()->json(['success'=>'false', 'errors' => $validator->errors()], 401);
+            return response()->json(['success'=>'false', 'errors' => $validator->errors()]  , 401);
         }
         // get email and password
         $credentials = $request->only('email', 'password');
@@ -71,7 +71,7 @@ class AuthenticationController extends Controller
             return response()->json(["message" => "login success","user"=>$user,"token" => $token], 200);
         } else {
             // Authentication failed
-            return response()->json(['error' => 'Invalid email or password'], 401);
+            return response()->json(['errors' => 'Invalid email or password'], 401);
         }
     }
 
