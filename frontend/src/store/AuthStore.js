@@ -25,6 +25,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
     axios.post('/register', user)
       .then((res) => {
+        Cookies.set('email', email.value, { expires: 30 });
         localStorage.setItem('user', res.data.user.id)
         localStorage.setItem('token', res.data.token)
         resetForm();
@@ -44,14 +45,15 @@ export const useAuthStore = defineStore('auth', () => {
     axios.post('/login', user)
       .then((res) => {
         Cookies.set('email', email.value, { expires: 30 });
-        Cookies.set('password', password.value, { expires: 30 });
         localStorage.setItem('user', res.data.user.id)
         localStorage.setItem('token', res.data.token)
-        router.push('/');
         resetForm();
+        router.push('/');
       })
       .catch((err) => {
-        errors.value = err.response.data.errors
+        console.log(err.response.data.errors);
+        errors.value = err.response.data.errors;
+        isSuccess.value = err.response.data.success
       })
   };
   const logout = () => {
@@ -60,9 +62,9 @@ export const useAuthStore = defineStore('auth', () => {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     })
-    .then(() => {
+    .then((res) => {
+      console.log(res);
       Cookies.remove('email');
-      Cookies.remove('password');
       localStorage.removeItem('user');
       localStorage.removeItem('token');
   
