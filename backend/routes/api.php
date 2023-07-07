@@ -1,6 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\DistrictControllr;
+use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\ProvinceController;
+use App\Models\Booking;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/register', [AuthenticationController::class, 'register']);
+
+//search route 
+Route::get('/locations/{name}', [PropertyController::class, 'searchLocation']);
+Route::get('/district/{id}', [PropertyController::class,'showProperty']);

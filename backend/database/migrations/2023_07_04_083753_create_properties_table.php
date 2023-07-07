@@ -20,6 +20,8 @@ return new class extends Migration
             $table->float('latitude');
             $table->float('longitude');
             $table->boolean('available');
+            // $table->unsignedBigInteger("district_id");
+            $table->foreignId('district_id')->constrained(table:"districts")->onDelete("cascade")->onUpdate("cascade");
             $table->foreignId('user_id')->constrained(table:"users")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
