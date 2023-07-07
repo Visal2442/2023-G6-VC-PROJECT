@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import './axios-http'
-
+import TheNavbar from './components/partials/TheNavbar.vue'
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
@@ -34,6 +34,7 @@ const vuetify = createVuetify({
 })
 const app = createApp(App)
 app.use(vuetify)
+app.component('TheNavbar',TheNavbar)
 app.use(pinia)
 app.use(router)
 app.mount('#app')

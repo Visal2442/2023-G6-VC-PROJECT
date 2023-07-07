@@ -1,4 +1,5 @@
 <template>
+   <TheNavbar></TheNavbar>
   <login-form></login-form>
 </template>
 

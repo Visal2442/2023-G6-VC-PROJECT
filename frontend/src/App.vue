@@ -1,12 +1,12 @@
 <template>
-  <TheNavbar></TheNavbar>
+  <!-- <TheNavbar></TheNavbar> -->
   <router-view/>
   <TheFooter></TheFooter>
 </template>
 
 
 <script setup>
-import TheNavbar from '@/components/partials/TheNavbar.vue'
+// import TheNavbar from '@/components/partials/TheNavbar.vue'
 import TheFooter from '@/components/partials/TheFooter.vue';
 </script>
 
