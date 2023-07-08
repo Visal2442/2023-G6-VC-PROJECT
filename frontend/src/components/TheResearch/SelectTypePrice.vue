@@ -15,12 +15,10 @@
 
                </div>
                <div class="type">
-
                     <select name="type" id="type">
                          <option value="Select Type">Select Type</option>
                          <option value="house">House</option>
                          <option value="room">Room</option>
-                        
                     </select>
                </div>
           </div>

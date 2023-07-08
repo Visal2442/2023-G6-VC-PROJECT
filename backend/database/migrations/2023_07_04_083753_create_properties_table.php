@@ -17,9 +17,10 @@ return new class extends Migration
             $table->integer('price');
             $table->string('description');
             $table->string('type');
-            $table->float('latitude');
-            $table->float('longitude');
-            $table->boolean('available');
+            $table->string('image');
+            $table->decimal('latitude', 18,9);
+            $table->decimal('longitude', 18,9);
+            $table->boolean('available')->default(true);
             $table->foreignId('user_id')->constrained(table:"users")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
