@@ -16,11 +16,9 @@ class AuthenticationController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'username' => ['required', 'min:5'],
-            // 'phone_number' => ['required', 'min:8'],
             'email' => ['unique:users','email'],
             // 'password_confirmation' => ['required'],
-            'password' => ['required', 'min:8','confirmed'],
+            'password' => ['confirmed'],
         ]);
         
         if ($validator->fails()) {
@@ -54,13 +52,12 @@ class AuthenticationController extends Controller
     public function login(Request $request)
     {
         // Validate the input data
-        $validator = Validator::make($request->all(), [
-            'email' => ['required','email'],
-            'password' => ['required','min:8'],
-        ]);
-        if($validator->fails()){
-            return response()->json(['success'=>'false', 'errors' => $validator->errors()]  , 401);
-        }
+        // $validator = Validator::make($request->all(), [
+        //     'email' => ['email'],
+        // ]);
+        // if($validator->fails()){
+        //     return response()->json(['success'=>'false', 'errors' => $validator->errors()]  , 401);
+        // }
         // get email and password
         $credentials = $request->only('email', 'password');
         // Attempt to authenticate the user
@@ -68,10 +65,10 @@ class AuthenticationController extends Controller
             // Authentication successful
             $user = Auth::user();
             $token = $user->createToken('API Token', ['select'])->plainTextToken;
-            return response()->json(["message" => "login success","user"=>$user,"token" => $token], 200);
+            return response()->json(["message" => "login success", "user"=>$user,"token" => $token], 200);
         } else {
             // Authentication failed
-            return response()->json(['errors' => 'Invalid email or password'], 401);
+            return response()->json(['success'=>'false','errors' => 'Invalid email or password'], 401);
         }
     }
 
