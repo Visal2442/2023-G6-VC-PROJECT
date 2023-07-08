@@ -29,6 +29,7 @@
          <img src="{{house.image}}" alt="">
         </div>
       </div> -->
+      <v-btn @click="getLocation">Location</v-btn>
   </div>
 </template>
 
@@ -39,7 +40,7 @@ import { storeToRefs } from "pinia";
 import { usePropertyStore} from '../store/PropertyStore';
 const propertyStore = usePropertyStore()
 const {properties} = storeToRefs(propertyStore);
-
+const { getLocation} = propertyStore;
 // **
     // Resource : https://vue2-leaflet.netlify.app/components/LPopup.html#demo 
 // **
@@ -61,7 +62,10 @@ const dynamicSize = computed(() => {
 })
 const dynamicAnchor=computed(()=> {
       return [iconSize / 2, iconSize * 1.15];
-    })
+})
+
 </script>
 
-<style></style>
+<style>
+
+</style>

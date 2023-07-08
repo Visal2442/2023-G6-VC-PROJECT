@@ -12,7 +12,22 @@ export const usePropertyStore = defineStore('property', () => {
         console.log(err);
     })
 
+    // Get current location
+const getLocation = () =>{
+    navigator.geolocation.getCurrentPosition(showLocation, showError);
+}
+
+const showLocation = (location)=>{
+  console.log(location);
+}
+const showError = (error)=>{
+  console.log(error);
+}
+
     return {
-        properties
+        properties,
+        showLocation,
+        getLocation,
+        showError
     }
 });
