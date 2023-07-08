@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class RentalRoom extends Model
 {
     use HasFactory;
+    protected $fillable = ['propery_id'];
+
+    public function property()
+    {
+        return $this->belongsTo(Property::class);
+    }
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
 }

@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\PropertyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +27,16 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/register', [AuthenticationController::class, 'register']);
+
+Route::resource('property', PropertyController::class);
+
+
+
+
+
+
+// // Social Login (testing)
+// Route::middleware(['cors'])->group(function () {
+//     Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);
+//     Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback']);
+// });
