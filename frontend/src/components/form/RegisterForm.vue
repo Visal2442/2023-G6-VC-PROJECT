@@ -10,7 +10,7 @@
            v-model="username"></v-text-field>
         <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.username" >{{ errors.username.length !== 0 ? errors.username[0]:'' }}</span>
 
-        <v-text-field color="green-accent-4" label="Phone Number" placeholder="Enter phone number" 
+        <v-text-field type="text" color="green-accent-4" label="Phone Number" placeholder="Enter phone number" 
           v-model="phone_number"></v-text-field>
         <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.phone_number" >{{ errors.phone_number.length !== 0 ? errors.phone_number[0]:'' }}</span>
 
@@ -30,17 +30,35 @@
         <v-btn type="button" @click="register()" block class="mt-2 mb-5 bg-green-accent-4 text-white">Create</v-btn>
         <p>Already have an account? | <router-link to="/login" class="">Login Here</router-link></p>
       </v-form>
+
+      <v-alert v-model="alert.show" v-if="isSuccess" :type="alert.type" :dismissible="false">
+        {{ alert.message }}
+      </v-alert>
+
     </v-sheet>
   </v-row>
 </template>
 
 <script setup>
+import { watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
 
-const { username, password, phone_number, email, password_confirmation, errors, isSuccess } = storeToRefs(authStore);
+const { username, password, phone_number, email, password_confirmation, errors, isSuccess, alert} = storeToRefs(authStore);
 const { register } = authStore;
+
+
+
+watch(isSuccess, (value) => {
+  if (value) {
+    // set the alert properties when the registration is successful
+    alert.value.show = true;
+    alert.value.type = 'success';
+    alert.value.message = 'Registration successful!';
+  }
+  // console.log(isSuccess);
+});
 
 
 

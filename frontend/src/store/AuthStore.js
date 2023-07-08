@@ -12,6 +12,12 @@ export const useAuthStore = defineStore('auth',()=>{
     const errors = ref([]);
     const isSuccess = ref(null);
     const router = useRouter();
+    let alert = ref({
+        show:false,
+        type:'',
+        message:''
+    })
+
     
     // // Register 
     let  register=()=>{
@@ -21,9 +27,11 @@ export const useAuthStore = defineStore('auth',()=>{
             password_confirmation:password_confirmation.value,
             phone_number:phone_number.value,
             email:email.value,
+            
           })
         axios.post('register', user.value)
         .then((res)=>{
+            alert = true
             localStorage.setItem('user', res.data.user.id)
             localStorage.setItem('token', res.data.token)
             router.push('/')
@@ -32,6 +40,7 @@ export const useAuthStore = defineStore('auth',()=>{
             isSuccess.value = err.response.data.success
         })
     }
+    
 
     return {
         username,
@@ -41,6 +50,7 @@ export const useAuthStore = defineStore('auth',()=>{
         password_confirmation,
         errors,
         isSuccess,
+        alert,
         // token,
         register
     };
