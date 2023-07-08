@@ -1,30 +1,32 @@
 <template>
+  <div>
   <v-container class="pa-4 text-center">
+    
     <v-row class="fill-height" align="center" justify="center">
-      <template v-for="(item, i) in items" :key="i">
+      <template v-for="(item, i) of items" :key="i">
         <v-col cols="12" md="4">
-          <v-hover v-slot="{ isHovering, props }">
-            <v-card :elevation="isHovering ? 1 : 12" :class="{ 'on-hover': isHovering }" v-bind="props">
-              <v-img :src="item.img" height="225px" cover>
+         
+              <v-hover v-slot="{ isHovering, props }">
+            <v-card :elevation="isHovering ? 1 : 12" :class="{ 'on-hover': !isHovering }" v-bind="props">
+              <v-img :src="item.img" height="305px" cover>
                 <v-card-title class="text-h6 text-white d-flex flex-column">
-                  <p class="mt-4">
+                  <p v-if="isHovering" class="mt-4">
                     {{ item.title }}
                   </p>
                   <div>
-                    <p class="ma-0 text-body-1 font-weight-bold">
+                    <p v-if="isHovering"  class="ma-0 text-body-1 font-weight-bold">
                       {{ item.text }}
                     </p>
-                    <p class="text-caption font-weight-medium">
+                    <p v-if="isHovering" class="text-caption font-weight-medium">
                       {{ item.subtext }}
                     </p>
                   </div>
                 </v-card-title>
-                <div class="align-self-center mt-40">
-                  <v-btn variant="text" class="btn-detail mt-16 bg-blue" :class="{ 'detail': isHovering }"
-                    :color="transparent">
+                <div class="button">
+                  <v-btn  v-if="isHovering" variant="text" class="btn-detail mt-16 bg-blue">
                     detail
                   </v-btn>
-                  <v-btn variant="text" class="btn-booking mt-16 ml-5 bg-orange" :class="{ 'booking': isHovering }">
+                  <v-btn v-if="isHovering" variant="text" color="white" class="btn-booking mt-16 ml-5 bg-orange">
                     book now
                   </v-btn>
 
@@ -44,8 +46,8 @@
 
                 </div>
                 <div class="icon d-flex  justify-center align-center">
-                  <v-icon size="large" color="widte" class="mr-5" icon="mdi mdi-comment"></v-icon>
-                  <v-icon size="large" class="mr-4" color="widte" icon="mdi mdi-folder"></v-icon>
+                  <v-icon size="large"  class="mr-5 boder" icon="mdi mdi-comment"></v-icon>
+                  <v-icon size="large"  class="mr-4 boder"  icon="mdi mdi-bookmark  "></v-icon>
                 </div>
               </div>
             </v-card>
@@ -54,7 +56,9 @@
       </template>
     </v-row>
   </v-container>
+</div>
 </template>
+
 <script>
 export default {
   data: () => ({
@@ -78,16 +82,17 @@ export default {
         subtext: 'Chill beats to mellow you out.',
         img: 'https://images.sanantoniomag.com/wp-content/uploads/2022/02/Sanctuary-1-1246x700.jpg',
       },
-
     ],
     transparent: 'rgba(255, 255, 255, 0)',
   }),
 }
 </script>
+
 <style scoped>
 .v-card {
   transition: opacity .4s ease-in-out;
   margin-top: 15%;
+  background-color: transparent;
 }
 
 .v-card:not(.on-hover) {
@@ -97,11 +102,15 @@ export default {
 
 .detail,
 .booking {
-  color: rgba(255, 255, 255, 1) !important;
+  color: rgb(41, 24, 24) !important;
 }
 
-.btn-hover {
-  background: #18b45e;
+
+.button{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 25%;
+  margin-right: 20px;
 }
 </style>
-

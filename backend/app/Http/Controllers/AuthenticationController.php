@@ -16,13 +16,11 @@ class AuthenticationController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => ['required', 'min:5'],
-            'phone_number' => ['required',"string"],
-            'email' => ['required','unique:users','email'],
-            'password_confirmation' => ['required'],
-            'password' => ['required', 'min:8','','confirmed'],
+            'email' => ['unique:users','email'],
+            // 'password_confirmation' => ['required'],
+            'password' => ['confirmed'],
         ]);
-
+        
         if ($validator->fails()) {
             return response()->json(['success'=>'false', 'errors' => $validator->errors()], 401);
         }
@@ -41,7 +39,7 @@ class AuthenticationController extends Controller
             'token' => $token,
         ], 200);
     }
-
+    
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
@@ -50,18 +48,28 @@ class AuthenticationController extends Controller
         ], 200);
     }
 
+
     public function login(Request $request)
     {
+        // Validate the input data
+        // $validator = Validator::make($request->all(), [
+        //     'email' => ['email'],
+        // ]);
+        // if($validator->fails()){
+        //     return response()->json(['success'=>'false', 'errors' => $validator->errors()]  , 401);
+        // }
         // get email and password
         $credentials = $request->only('email', 'password');
-        // check if email and password valid
+        // Attempt to authenticate the user
         if (Auth::attempt($credentials)) {
+            // Authentication successful
             $user = Auth::user();
             $token = $user->createToken('API Token', ['select'])->plainTextToken;
-            return response()->json(["message" => "success", "user" => $user, "token" => $token], 200);
+            return response()->json(["message" => "login success", "user"=>$user,"token" => $token], 200);
+        } else {
+            // Authentication failed
+            return response()->json(['success'=>'false','errors' => 'Invalid email or password'], 401);
         }
-        return response()->json([
-            'message' => 'Invalid credentials'
-        ], 401);
     }
+
 }
