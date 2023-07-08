@@ -27,7 +27,7 @@
       <v-btn class="mr-4" :to="{name:'Home'}" >Property</v-btn>
       <v-btn class="mr-4" :to="{name:'About'}">About</v-btn>
     </v-toolbar-items>
-    <div v-if="isLogin">
+    <div v-if="cookieEmail == undefined">
       <v-btn class="tex-left" :to="{name:'Register'}" >Register</v-btn>
       <v-btn class="mr-4" :to="{name:'Login'}" >Login</v-btn>
     </div>
@@ -40,22 +40,21 @@
 </template>
 
 <script setup>
-import { storeToRefs } from 'pinia';
-import { computed } from 'vue';
-// import Cookies from 'js-cookie';
-// import { useAuthStore } from '.';
+// import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
+import Cookies from 'js-cookie';
+import { useAuthStore } from '../../store/AuthStore';
 
-// const authStore = useAuthStore();
-// const { isLoggedIn } = storeToRefs(authStore);
-// const { logout} = authStore;
+const authStore = useAuthStore();
+const { logout} = authStore;
 
-const isLogin = computed(()=>{
-  if(isLoggedIn.value != undefined){
-    return true;
-  }
-  return false;
-})
-// const cookieEmail=ref(Cookies.get('email'))
+// const isLogin = computed(()=>{
+//   if(isLoggedIn.value != undefined){
+//     return true;
+//   }
+//   return false;
+// })
+const cookieEmail=ref(Cookies.get('email'))
 </script>
 
 <style scoped>

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <TheNavbar></TheNavbar>
   <router-view></router-view>
   <TheFooter></TheFooter>
   </div>
@@ -8,14 +7,7 @@
 
 
 <script setup>
-// import TheNavbar from '@/components/partials/TheNavbar.vue'
 import TheFooter from '@/components/partials/TheFooter.vue';
-
-import { storeToRefs } from 'pinia';
-import { useAuthStore } from '../../store/AuthStore';
-const authStore = useAuthStore();
-
-const { isLoggedIn } = storeToRefs(authStore);
 </script>
 
 

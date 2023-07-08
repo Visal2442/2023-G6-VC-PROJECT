@@ -6,9 +6,9 @@
       <img src="../../assets/profileIcon.png" class="mt-5" width="50" />
       <h3 class="text-green-accent-4 mb-5">Login Account</h3>
       <v-expand-transition>
-        <v-alert closable type="error" class="text-red-accent-4 text-left mb-5" v-if="isSuccess && errors" :text='errors'></v-alert>
+        <v-alert type="error" class="text-red-accent-4 text-left mb-5" v-if="isSuccess && errors" :text='errors'></v-alert>
       </v-expand-transition>
-      <v-form fast-fail class="d-flex flex-column" v-model="isValide">
+      <v-form fast-fail x="d-flex flex-column" v-model="isValide">
         <v-text-field type="email" clearable color="green-accent-4" label="Email" placeholder="Enter email address"
           v-model="email" :rules="rules.emailRules"></v-text-field>
 

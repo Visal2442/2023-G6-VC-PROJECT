@@ -1,5 +1,5 @@
 <template>
-   <!-- <TheNavbar></TheNavbar> -->
+   <TheNavbar></TheNavbar>
   <TheBanner></TheBanner>
   <TheCard></TheCard>
   <router-view></router-view>
