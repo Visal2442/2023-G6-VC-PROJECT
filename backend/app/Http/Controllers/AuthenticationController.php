@@ -17,10 +17,10 @@ class AuthenticationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'username' => ['required', 'min:5'],
-            'phone_number' => ['required', 'min:8'],
+            'phone_number' => ['required',"string"],
             'email' => ['required','unique:users','email'],
             'password_confirmation' => ['required'],
-            'password' => ['required', 'min:8','confirmed'],
+            'password' => ['required', 'min:8','','confirmed'],
         ]);
 
         if ($validator->fails()) {
