@@ -39,6 +39,7 @@ import vue3GoogleLogin from 'vue3-google-login';
 const CLIENT_ID = '407027706473-pdvs2mj4qeei8ajpn9tok7gdmiqqfgd7.apps.googleusercontent.com';
 
 const app = createApp(App)
+app.component('TheNavbar', TheNavbar)
 app.use(vuetify)
 app.use(pinia)
 app.use(router)
