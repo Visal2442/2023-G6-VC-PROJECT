@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('size');
             $table->integer('number_of_bed');
             $table->integer('number_of_bathroom');
-            $table->boolean('avalible');
+            $table->boolean('available');
             $table->foreignId('rental_room_id')->constrained(table: 'rental_rooms')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
