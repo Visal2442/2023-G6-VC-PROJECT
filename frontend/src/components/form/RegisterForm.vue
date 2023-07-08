@@ -9,14 +9,8 @@
         <v-text-field clearable color="green-accent-4" label="Username" placeholder="Enter your username"
           v-model="username" :rules="rules.usernameRules"></v-text-field>
 
-<<<<<<< HEAD
-        <v-text-field type="text" color="green-accent-4" label="Phone Number" placeholder="Enter phone number" 
-          v-model="phone_number"></v-text-field>
-        <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.phone_number" >{{ errors.phone_number.length !== 0 ? errors.phone_number[0]:'' }}</span>
-=======
         <v-text-field type="tel" clearable color="green-accent-4" label="Phone Number" placeholder="Enter phone number"
           v-model="phone_number" :rules="rules.phoneRules"></v-text-field>
->>>>>>> 53741446336a8a09eb956dd2a2883557dd6139a7
 
         <v-text-field type="email" clearable color="green-accent-4" label="Email" placeholder="Enter email address"
           v-model="email" :rules="rules.emailRules"></v-text-field>
@@ -46,20 +40,12 @@
 </template>
 
 <script setup>
-<<<<<<< HEAD
-import { watch } from 'vue';
-=======
 import { ref } from 'vue';
->>>>>>> 53741446336a8a09eb956dd2a2883557dd6139a7
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
 
-<<<<<<< HEAD
-const { username, password, phone_number, email, password_confirmation, errors, isSuccess, alert} = storeToRefs(authStore);
-=======
-const { username, password, phone_number, email, password_confirmation, errors, isSuccess, isValide } = storeToRefs(authStore);
->>>>>>> 53741446336a8a09eb956dd2a2883557dd6139a7
+const { username, password, phone_number, email, password_confirmation, errors, isSuccess, alert, isValide} = storeToRefs(authStore);
 const { register } = authStore;
 
 // Validation rules 
