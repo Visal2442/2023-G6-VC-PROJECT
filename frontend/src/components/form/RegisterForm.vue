@@ -39,9 +39,9 @@
     </v-sheet>
   </v-row>
   <div>
-    <template v-if="login">
-      <GoogleLogin :callback="callback" prompt style="display:none"></GoogleLogin>
-    </template>
+    <!-- <template v-if="login"> -->
+      <GoogleLogin :callback="callback" >Login</GoogleLogin>
+    <!-- </template> -->
   </div>
 </template>
 
@@ -70,6 +70,7 @@ const getCookie = () => {
   document.cookie = 'g_state=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT; secure';
   location.reload();
 }
+
 </script>
 
 <style>
