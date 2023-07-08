@@ -45,15 +45,8 @@
      position: relative;
 }
 
-/* .bg-text {
-     background: #d85959;
-     width: 100px;
-     height: 100px;
-
-} */
-
 h1 {
-     /* position: absolute; */
+
      margin-top: -15%;
      margin-bottom: 15%;
      margin-left: -50%;

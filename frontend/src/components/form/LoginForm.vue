@@ -9,11 +9,9 @@
         <v-alert type="error" class="text-red-accent-4 text-left mb-5" v-if="isSuccess && errors" :text='errors'></v-alert>
       </v-expand-transition>
       <v-form fast-fail x="d-flex flex-column" v-model="isValide">
-        <v-text-field type="email" clearable color="green-accent-4" label="Email" placeholder="Enter email address"
-          v-model="email" :rules="rules.emailRules"></v-text-field>
+        <v-text-field type="email" clearable color="green-accent-4" label="Email" placeholder="Enter email address" v-model="email" :rules="rules.emailRules"></v-text-field>
 
-        <v-text-field type="password" clearable name="password" color="green-accent-4" label="Password"
-          placeholder="Enter password" v-model="password" :rules="rules.passwordRules"></v-text-field>
+        <v-text-field type="password" clearable color="green-accent-4" label="Password" name="password" placeholder="Enter password" v-model="password" :rules="rules.passwordRules"></v-text-field>
 
         <router-link to=""><img src="../../assets/google.png" alt="" width="50" /></router-link>
 
@@ -40,7 +38,7 @@ const rules = ref({
 
 </script>
 
-<style>
+<style scoped>
 .forgotPassword {
   /* margin-top: -10%; */
   margin-left: -2%;
