@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Small Screen  -->
-    <v-layout>
+    <!-- <v-layout>
     <v-navigation-drawer v-model="sidebar" temporary>
       <v-list>
         <v-list-item v-for="item in menuItems" :key="item.title" :to="{ name: item.name }">
@@ -11,7 +11,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    </v-layout>
+    </v-layout> -->
 
   <!-- Large Screen  -->
 
@@ -23,12 +23,12 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-      <v-btn class="mr-4" :to="{name:'Home'}">Home</v-btn>
-      <v-btn class="mr-4" :to="{name:'Home'}">Property</v-btn>
+      <v-btn class="mr-4" :to="{name:'Home'}" >Home</v-btn>
+      <v-btn class="mr-4" :to="{name:'Home'}" >Property</v-btn>
       <v-btn class="mr-4" :to="{name:'About'}">About</v-btn>
     </v-toolbar-items>
-    <div v-if="cookieEmail == undefined">
-      <v-btn class="tex-left" :to="{name:'Register'}">Register</v-btn>
+    <div v-if="isLogin">
+      <v-btn class="tex-left" :to="{name:'Register'}" >Register</v-btn>
       <v-btn class="mr-4" :to="{name:'Login'}" >Login</v-btn>
     </div>
     <div v-else class="pf">
@@ -40,18 +40,22 @@
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
-import Cookies from 'js-cookie';
-import { useAuthStore } from '../../store/AuthStore';
+// import Cookies from 'js-cookie';
+// import { useAuthStore } from '.';
 
-const authStore = useAuthStore();
+// const authStore = useAuthStore();
+// const { isLoggedIn } = storeToRefs(authStore);
+// const { logout} = authStore;
 
-
-const { logout} = authStore;
-
-const cookieEmail = computed(() => {
-    return Cookies.get('email');
-  });
+const isLogin = computed(()=>{
+  if(isLoggedIn.value != undefined){
+    return true;
+  }
+  return false;
+})
+// const cookieEmail=ref(Cookies.get('email'))
 </script>
 
 <style scoped>

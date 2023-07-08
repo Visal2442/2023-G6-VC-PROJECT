@@ -1,5 +1,5 @@
 <template>
-   <TheNavbar></TheNavbar>
+   <!-- <TheNavbar></TheNavbar> -->
   <register-form></register-form>
 </template>
 <script setup>

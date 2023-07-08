@@ -8,11 +8,9 @@
       <v-form fast-fail class="d-flex flex-column" v-model="isValide">
         <v-text-field clearable color="green-accent-4" label="Username" placeholder="Enter your username"
           v-model="username" :rules="rules.usernameRules"></v-text-field>
-        <!-- <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.username" >{{ errors.username.length !== 0 ? errors.username[0]:'' }}</span> -->
 
         <v-text-field type="tel" clearable color="green-accent-4" label="Phone Number" placeholder="Enter phone number"
           v-model="phone_number" :rules="rules.phoneRules"></v-text-field>
-        <!-- <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.phone_number" >{{ errors.phone_number.length !== 0 ? errors.phone_number[0]:'' }}</span> -->
 
         <v-text-field type="email" clearable color="green-accent-4" label="Email" placeholder="Enter email address"
           v-model="email" :rules="rules.emailRules"></v-text-field>
@@ -21,14 +19,13 @@
 
         <v-text-field type="password" clearable name="password" color="green-accent-4" label="Password"
           placeholder="Enter password" v-model="password" :rules="rules.passwordRules"></v-text-field>
-        <!-- <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.password" >{{ errors.password.length !== 0 ? errors.password[0]:'' }}</span> -->
 
         <v-text-field type="password" clearable name="password_confirmation" color="green-accent-4"
           label="Confirm Password" placeholder="Confirm Password" v-model="password_confirmation"
           :rules="rules.confirmRules"></v-text-field>
 
         <v-btn type="button" @click="register()" block class="mt-2 mb-5 bg-green-accent-4 text-white pa-5">Create</v-btn>
-        <p class=" tw-text-amber-500" >Or Login With</p>
+        <p class=" tw-text-amber-500">Or Login With</p>
         <router-link to=""><img src="../../assets/google.png" alt="" width="50" /></router-link>
         <hr>
         <p class="ma-2">Already have an account? | <router-link to="/login">Login Here</router-link></p>
@@ -73,4 +70,5 @@ const rules = ref({
 
 .v-input_details {
   display: none;
-}</style>
+}
+</style>

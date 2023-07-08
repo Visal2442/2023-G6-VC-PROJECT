@@ -10,10 +10,11 @@ export const useAuthStore = defineStore('auth', () => {
   const phone_number = ref(null);
   const email = ref(null);
   const password_confirmation = ref(null);
-  const errors = ref([]);
-  const isSuccess = ref(null);
+  const errors = ref('');
+  const isSuccess = ref(true);
   const router = useRouter();
-  const isValide= ref(false)
+  let isValide= ref(false);
+  let isLoggedIn = ref('undefined')
 
 
   // Register 
@@ -37,6 +38,7 @@ export const useAuthStore = defineStore('auth', () => {
         errors.value = err.response.data.errors
         isSuccess.value = err.response.data.success
       })
+      console.log(Cookies.get('email'));
   };
 
   let login = () => {
@@ -50,34 +52,35 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.setItem('user', res.data.user.id)
         localStorage.setItem('token', res.data.token)
         resetForm();
+        isLoggedIn.value = Cookies.get('email');
+        console.log(Cookies.get('email'));
         router.push('/');
       })
       .catch((err) => {
-        console.log(err.response.data.errors);
+        console.log(err.response.data);
         errors.value = err.response.data.errors;
         isSuccess.value = err.response.data.success
       })
-  };
-  const logout = () => {
-    axios.post('/logout', null, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-    .then((res) => {
-      console.log(res);
-      Cookies.remove('email');
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
-  
-      router.push('/login');
-    })
-    .catch((err) => {
-      errors.value = err.response.data.errors;
-      isSuccess.value = err.response.data.success;
-      
-    });
-  };
+    };
+    const logout = () => {
+      axios.post('/logout', null, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then((res) => {
+        console.log(res);
+        Cookies.remove('email');
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        router.push('/login');
+      })
+      .catch((err) => {
+        errors.value = err.response.data.errors;
+        isSuccess.value = err.response.data.success;
+      });
+      console.log(Cookies.get('email'));
+    };
 
   const resetForm= ()=>{
     username.value=''
@@ -96,6 +99,7 @@ export const useAuthStore = defineStore('auth', () => {
     isSuccess,
     isValide,
     register,
+    isLoggedIn,
     login,
     logout
   };

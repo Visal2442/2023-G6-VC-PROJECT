@@ -1,5 +1,5 @@
 <template>
-   <TheNavbar></TheNavbar>
+   <!-- <TheNavbar></TheNavbar> -->
   <login-form></login-form>
 </template>
 
