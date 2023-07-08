@@ -23,6 +23,7 @@
       <v-btn class="mr-4" :to="{name:'Home'}">Home</v-btn>
       <v-btn class="mr-4" :to="{name:'Home'}">Property</v-btn>
       <v-btn class="mr-4" :to="{name:'About'}">About</v-btn>
+      <v-btn class="mr-4" :to="{name:'Map'}">Map</v-btn>
     </v-toolbar-items>
       <v-btn class="tex-left" :to="{name:'Register'}" v-if="token==null">Register</v-btn>
       <v-btn class="mr-4">Login</v-btn>
