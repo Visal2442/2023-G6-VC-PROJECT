@@ -18,9 +18,6 @@ class RentalRoomSeeder extends Seeder
             [
                 'property_id' => 1,
             ],
-            [
-                'property_id' => 2,
-            ]
         ];
 
         foreach ($rentalRoom as $room){

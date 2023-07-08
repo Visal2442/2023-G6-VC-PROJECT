@@ -17,11 +17,11 @@ class UserSeeder extends Seeder
         
        $users= [
             [
-            'username' => 'john_doe',
-            'phone_number' => '1234567890',
-            'email' => 'john.doe@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'user',
+                'username' => 'john_doe',
+                'phone_number' => '0234567890',
+                'email' => 'john.doe@example.com',
+                'password' => bcrypt('password'),
+                'role' => 'customer',
             ],
             [
                 'username' => 'jane_doe',

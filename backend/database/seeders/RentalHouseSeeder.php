@@ -21,15 +21,6 @@ class RentalHouseSeeder extends Seeder
                 'number_of_bathroom' => 3,
                 'number_of_kitchen' => 1,
                 'available'=>true,
-                'property_id'=>1
-            ],
-            [
-                'size' => 100,
-                'number_of_room' => 2,
-                'number_of_floor' => 1,
-                'number_of_bathroom' => 1,
-                'number_of_kitchen' => 1,
-                'available'=>true,
                 'property_id'=>2
             ]
         ];

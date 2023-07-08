@@ -13,6 +13,7 @@ class Property extends Model
         'price',
         'description',
         'type',
+        'image',
         'latitude',
         'longitude',
         'available',
@@ -26,12 +27,12 @@ class Property extends Model
 
     public function rentalHouses()
     {
-        return $this->hasMany(RentalHouse::class);
+        return $this->hasOne(RentalHouse::class);
     }
 
     public function rentalRooms()
     {
-        return $this->hasMany(RentalRoom::class);
+        return $this->hasOne(RentalRoom::class);
     }
 
     public function comments()

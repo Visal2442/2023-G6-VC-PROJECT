@@ -27,6 +27,11 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/register', [AuthenticationController::class, 'register']);
 
+
+
+
+
+
 // // Social Login (testing)
 // Route::middleware(['cors'])->group(function () {
 //     Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);

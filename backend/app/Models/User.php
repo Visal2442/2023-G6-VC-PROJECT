@@ -40,6 +40,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Booking::class);
     }
+    public function rate()
+    {
+        return $this->hasMany(Rating::class);
+    }
 
 
     /**
