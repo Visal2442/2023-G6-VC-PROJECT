@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
@@ -56,7 +56,6 @@ watch(isSuccess, (value) => {
     alert.value.type = 'success';
     alert.value.message = 'Registration successful!';
   }
-  // console.log(isSuccess);
 });
 
 

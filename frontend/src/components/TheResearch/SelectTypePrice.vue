@@ -23,44 +23,46 @@
                </div>
           </div>
      </div>
-
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        
-      }
-    },
-  }
+export default {
+     data() {
+          return {
+
+          }
+     },
+}
 </script>
 <style scoped>
-.price-type{
+.price-type {
      display: flex;
      justify-content: center;
      align-items: center;
      margin-top: -38%;
      margin-bottom: 35%;
 }
-.select{
-    
+
+.select {
+
      display: flex;
      align-items: center;
      justify-content: space-evenly;
      width: 45%;
 }
-.price, .type{
+
+.price,
+.type {
      width: 50%;
 }
-select{
+
+select {
 
      width: 95%;
      text-align: center;
      padding: 8px;
-     background:white;
+     background: white;
      border-radius: 5px;
-   
-}
 
+}
 </style>

@@ -116,12 +116,10 @@
   margin-left: 20px;
 
 }
-
 .bnt-detail {
   background-color: orange;
   color: #000;
 }
-
 .button:hover {
   background-color: #000;
   color: #fff;
