@@ -36,15 +36,14 @@
 
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+
+import { decodeCredential } from 'vue3-google-login';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
-
 const { username, password, phone_number, email, password_confirmation, errors, isSuccess, alert, isValide} = storeToRefs(authStore);
 const { register } = authStore;
-
-// const login = ref(false);
 
 const callback =  (res) => {
     console.log(decodeCredential(res.credential));
@@ -78,10 +77,6 @@ watch(isSuccess, (value) => {
     alert.value.message = 'Registration successful!';
   }
 });
-
-
-
-
 
 
 </script>

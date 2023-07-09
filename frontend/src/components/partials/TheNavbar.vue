@@ -15,7 +15,7 @@
 
   <!-- Large Screen  -->
 
-  <v-toolbar color="green lighten-1">
+  <v-toolbar color=" lighten-1" sticky="true">
     <v-toolbar-title class="text-uppercase font-weight-bold mr-4 ">
       <picture>
         <img class="logo" src="../../assets/logo.png" alt="Logo" width="50" aspect-ratio="1/1">
@@ -53,6 +53,7 @@ const cookieEmail=ref(Cookies.get('email'))
 </script>
 
 <style scoped>
+
 .logo {
   border-radius: 50%;
   margin-right: 70%;

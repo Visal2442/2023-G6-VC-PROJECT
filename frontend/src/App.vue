@@ -1,35 +1,18 @@
 <template>
-  <div>
-    <router-view></router-view>
-    <TheFooter></TheFooter>
-  </div>
+  <v-app>
+    <v-main>
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
+<script>
 
-<script setup>
-import TheFooter from '@/components/partials/TheFooter.vue';
+export default {
+  name: 'App',
+
+  data: () => ({
+    //
+  }),
+}
 </script>
-
-
-<style scoped>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-active {
-  color: #42b983;
-}
-</style>
