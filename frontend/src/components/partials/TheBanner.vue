@@ -1,4 +1,5 @@
 <template>
+     <div>
      <div class="banner">
           <div class="banner-img">
                <img src="../../assets/banner.jpg" alt="" width="1280" height="640">
@@ -32,6 +33,7 @@
                </div>
           </div>
      </v-card>
+</div>
 </template>
 
 <script setup>

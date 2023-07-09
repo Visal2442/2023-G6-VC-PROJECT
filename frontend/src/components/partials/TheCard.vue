@@ -23,13 +23,8 @@
                     </div>
                   </v-card-title>
                   <div class="button">
-                    <v-btn v-if="isHovering" variant="text" class="btn-detail mt-16 bg-blue">
-                      detail
-                    </v-btn>
-                    <v-btn v-if="isHovering" variant="text" color="white" class="btn-booking mt-16 ml-5 bg-orange">
-                      book now
-                    </v-btn>
-
+                    <v-btn v-if="isHovering" variant="text" class="btn-detail mt-16 bg-blue">detail</v-btn>
+                    <v-btn v-if="isHovering" variant="text" color="white" class="btn-booking mt-16 ml-5 bg-orange">book now</v-btn>
                   </div>
                 </v-img>
                 <div class="d-flex justify-space-between p-5 bg-green">
@@ -99,12 +94,10 @@ export default {
   opacity: 0.6;
 }
 
-
 .detail,
 .booking {
   color: rgb(41, 24, 24) !important;
 }
-
 
 .button {
   display: flex;

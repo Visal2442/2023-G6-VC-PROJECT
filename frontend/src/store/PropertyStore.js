@@ -4,6 +4,9 @@ import axios from 'axios';
 
 export const usePropertyStore = defineStore('property', () => {
     const properties = ref([]);
+    let currentLat = ref(0);
+    let currentLng = ref(0);
+
     // Get all properties
     axios.get('/properties').then(res=>{
         properties.value = res.data.data;
@@ -11,23 +14,22 @@ export const usePropertyStore = defineStore('property', () => {
     }).catch(err=>{
         console.log(err);
     })
-
-    // Get current location
-const getLocation = () =>{
+    // Callback function 
+    const showLocation = (location)=>{
+        currentLat.value = location.coords.latitude;
+        currentLng.value =  location.coords.longitude;
+    }
+    const showError = (error)=>{
+        console.log(error);
+    }
+    // Get current location 
     navigator.geolocation.getCurrentPosition(showLocation, showError);
-}
-
-const showLocation = (location)=>{
-  console.log(location);
-}
-const showError = (error)=>{
-  console.log(error);
-}
 
     return {
         properties,
         showLocation,
-        getLocation,
+        currentLat,
+        currentLng,
         showError
     }
 });

@@ -1,4 +1,5 @@
 <template>
+  <div>
   <!-- Resource: vuetify  -->
   <v-row justify="center" class="" align="center">
     <img src="../../assets/register.jpg" alt="" width="500" height="500" />
@@ -37,6 +38,7 @@
       <GoogleLogin :callback="callback"></GoogleLogin>
     <!-- </template> -->
   </div>
+</div>
 </template>
 
 

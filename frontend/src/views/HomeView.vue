@@ -1,9 +1,10 @@
 <template>
-   <TheNavbar></TheNavbar>
-  <TheBanner></TheBanner>
-  <TheCard></TheCard>
-  <router-view></router-view>
-
+  <div>
+    <TheNavbar></TheNavbar>
+    <TheBanner></TheBanner>
+    <TheCard></TheCard>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script setup>
