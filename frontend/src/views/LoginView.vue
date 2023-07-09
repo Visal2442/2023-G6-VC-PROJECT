@@ -1,6 +1,5 @@
 <template>
   <div>
-   <TheNavbar></TheNavbar>
   <login-form></login-form>
   </div>
 </template>

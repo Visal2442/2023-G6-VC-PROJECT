@@ -1,6 +1,5 @@
 <template>
   <div>
-    <the-navbar></the-navbar>
 
     <!-- ** -->
     <!-- Resource : https://vue2-leaflet.netlify.app/components/LPopup.html#demo -->

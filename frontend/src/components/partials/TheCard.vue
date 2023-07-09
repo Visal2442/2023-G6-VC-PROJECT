@@ -2,7 +2,7 @@
   <div class="container">
     <div class="card">
       <div class=" item">
-        <img src="../../assets/banner1.jpg" alt="Card Image">
+        <img src="../../assets/google.png" alt="Card Image">
 
         <div class="overlay">
           <div class="overlay-content">
@@ -34,6 +34,10 @@
     </div>
   </div>
 </template>
+
+<script setup>
+
+</script>
  
  <!-- Get code form AI -->
 <style scoped>

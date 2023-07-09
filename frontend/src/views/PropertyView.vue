@@ -1,6 +1,5 @@
 <template>
      <div>
-          <TheNavbar></TheNavbar>
           <div class="banner">
                <div class="banner-img">
                     <img src="../assets/banner-property.jpg" alt="" width="1280" height="640">
