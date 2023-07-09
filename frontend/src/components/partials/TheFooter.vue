@@ -1,6 +1,6 @@
 <template>
-    <div class="bg-grey-darken-3 text-center mt-5 d-flex flex-column">
-        <div class="footer">
+    <div class=" text-center mt-5 d-flex flex-column">
+        <div class="footer bg-black">
             <div class="item pt-0 mx-4">
                 <h3>Contact Us</h3>
                 <span>Email: </span>rentalhouse@gmail.com
@@ -18,7 +18,7 @@
             </div>
 
         </div>
-        <div class="footer-center">
+        <div class="footer-center bg-green">
             <div class="icon">
                 <v-btn class="mx-3" icon="mdi mdi-facebook"></v-btn>
                 <v-btn class="mx-3" icon="mdi mdi-linkedin"></v-btn>

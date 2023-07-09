@@ -15,6 +15,11 @@ export const useAuthStore = defineStore('auth', () => {
   const router = useRouter();
   let isValide= ref(false);
   let isLoggedIn = ref('undefined')
+  let alert = ref({
+    show:false,
+    type:'',
+    message:''
+  })
 
 
   // Register 
@@ -101,6 +106,7 @@ export const useAuthStore = defineStore('auth', () => {
     register,
     isLoggedIn,
     login,
+    alert,
     logout
   };
 });

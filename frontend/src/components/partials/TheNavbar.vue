@@ -15,7 +15,7 @@
 
   <!-- Large Screen  -->
 
-  <v-toolbar color="green lighten-1" class="mb-5">
+  <v-toolbar color="green lighten-1">
     <v-toolbar-title class="text-uppercase font-weight-bold mr-4 ">
       <picture>
         <img class="logo" src="../../assets/logo.png" alt="Logo" width="50" aspect-ratio="1/1">
@@ -23,8 +23,8 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-      <v-btn class="mr-4" :to="{name:'Home'}" >Home</v-btn>
-      <v-btn class="mr-4" :to="{name:'Home'}" >Property</v-btn>
+      <v-btn class="mr-4" :to="{name:'Home'}">Home</v-btn>
+      <v-btn class="mr-4" :to="{name:'property'}">Property</v-btn>
       <v-btn class="mr-4" :to="{name:'About'}">About</v-btn>
       <v-btn class="mr-4" :to="{name:'Map'}">Map</v-btn>
     </v-toolbar-items>
@@ -49,12 +49,6 @@ import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
 const { logout} = authStore;
 
-// const isLogin = computed(()=>{
-//   if(isLoggedIn.value != undefined){
-//     return true;
-//   }
-//   return false;
-// })
 const cookieEmail=ref(Cookies.get('email'))
 </script>
 

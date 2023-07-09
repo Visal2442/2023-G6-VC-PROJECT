@@ -1,8 +1,7 @@
 <template>
   <div>
-    <!-- <the-navbar></the-navbar> -->
-  <router-view></router-view>
-  <TheFooter></TheFooter>
+    <router-view></router-view>
+    <TheFooter></TheFooter>
   </div>
 </template>
 
@@ -12,7 +11,7 @@ import TheFooter from '@/components/partials/TheFooter.vue';
 </script>
 
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
