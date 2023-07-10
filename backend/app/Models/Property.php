@@ -13,10 +13,15 @@ class Property extends Model
         'price',
         'description',
         'type',
+        'size',
+        'number_of_floor',
+        'number_of_room',
+        'number_of_bathroom',
+        'number_of_kitchen',
+        'available',
         'image',
         'latitude',
         'longitude',
-        'available',
         'user_id',
     ];
 
