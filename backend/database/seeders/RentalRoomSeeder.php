@@ -16,6 +16,7 @@ class RentalRoomSeeder extends Seeder
         //
         $rentalRoom=[
             [
+                'name' => "The Best House",
                 'property_id' => 1,
             ],
         ];

@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class RentalRoom extends Model
 {
     use HasFactory;
-    protected $fillable = ['propery_id'];
+    protected $fillable = [
+        'name',
+        'propery_id'
+    ];
 
     public function property()
     {
