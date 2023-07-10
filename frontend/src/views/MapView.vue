@@ -8,7 +8,6 @@
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
 
       <div v-for="(property, index) of properties" :key="index">
-        <!-- <div v-for="house of property" :key="house.property_id"> -->
           <l-marker :lat-lng="[property.latitude, property.longitude]" @click="getLatlng">
             <LPopup>
               <v-card class="mx-auto" max-width="400" elevation='0'>
@@ -40,7 +39,6 @@
             </LPopup>
             <LIcon :icon-size="dynamicSize" :icon-url="homeIcon" :icon-anchor="dynamicAnchor"></LIcon>
           </l-marker>
-        <!-- </div> -->
       </div>
 
     </l-map>
