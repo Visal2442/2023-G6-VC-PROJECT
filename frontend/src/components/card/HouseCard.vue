@@ -13,8 +13,8 @@
         </v-card-actions>
         <v-card-actions>
             <div class="d-flex align-center">
-            <v-avatar :image="require('../../assets/pf.jpg')" class=" ml-2"></v-avatar>
-            <v-card-subtitle>Sal</v-card-subtitle>
+                <v-avatar :image="require('../../assets/pf.jpg')" class=" ml-2"></v-avatar>
+                <v-card-subtitle>Sal</v-card-subtitle>
             </div>
             <v-spacer></v-spacer>
             <BaseButton type="bg-green-accent-3">More Detail</BaseButton>
@@ -31,8 +31,9 @@ import BaseButton from '../widget/BaseButton.vue'
 #house-card {
     border-radius: 12px;
 }
+
 .seconday-btn {
-  border: 1px solid #00E676;
-  margin-left: 2px;
+    border: 1px solid #00E676;
+    margin-left: 2px;
 }
 </style>
