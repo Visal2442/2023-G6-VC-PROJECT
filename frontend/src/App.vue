@@ -1,35 +1,19 @@
 <template>
-  <TheNavbar></TheNavbar>
-  <router-view/>
-  <TheFooter></TheFooter>
+  <the-navbar></the-navbar>
+  <router-view></router-view>
+  <the-footer></the-footer>
 </template>
 
-
 <script setup>
-import TheNavbar from '@/components/partials/TheNavbar.vue'
-import TheFooter from '@/components/partials/TheFooter.vue';
-</script>
+import TheNavbar from './components/partials/TheNavbar.vue';
+import TheFooter from './components/partials/TheFooter.vue';
 
+</script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-active {
-  color: #42b983;
+  background-color: #f9fcff;
+  background-image: linear-gradient(147deg, #f9fcff 0%, #f6f6f6 74%);
+  font-family: 'Signika Negative', sans-serif;
 }
 </style>

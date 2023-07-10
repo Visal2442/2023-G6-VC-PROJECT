@@ -26,6 +26,26 @@ class User extends Authenticatable
         'role'
     ];
 
+    public function properties()
+    {
+        return $this->hasMany(Property::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+    public function rate()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *

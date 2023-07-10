@@ -17,11 +17,18 @@ return new class extends Migration
             $table->integer('price');
             $table->string('description');
             $table->string('type');
+<<<<<<< HEAD
             $table->float('latitude');
             $table->float('longitude');
             $table->boolean('available');
             // $table->unsignedBigInteger("district_id");
             $table->foreignId('district_id')->constrained(table:"districts")->onDelete("cascade")->onUpdate("cascade");
+=======
+            $table->string('image');
+            $table->decimal('latitude', 18,9);
+            $table->decimal('longitude', 18,9);
+            $table->boolean('available')->default(true);
+>>>>>>> main
             $table->foreignId('user_id')->constrained(table:"users")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
