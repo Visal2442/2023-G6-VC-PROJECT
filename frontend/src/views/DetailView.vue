@@ -46,15 +46,18 @@
             <LPopup>
               <v-card class="mx-auto" elevation='0'>
                 <v-img class="align-end text-white" :src="require('../assets/home/living-room-2732939_1280.jpg')">
-                  <v-card-title>{{property.name}}</v-card-title>
+                  <v-card-title>{{property.property_name}}</v-card-title>
                 </v-img>
 
                 <v-card-subtitle class="pt-4">{{ distance }} KM</v-card-subtitle>
 
                 <v-card-text>
-                  <div>{{property.district}}</div>
-
-                  <!-- <div>Whitsunday Island, Whitsunday Islands</div> -->
+                  <div>
+                    {{property.district.name}}, {{property.district.province.name}}
+                  </div>
+                  <div>
+                    ${{property.price}}/Month
+                  </div>
                 </v-card-text>
               </v-card>
             </LPopup>
@@ -134,18 +137,18 @@ function calculateDistance(lat1, lat2, lon1, lon2) {
 }
 
 // Fetch data from database 
-const property = ref([]);
-axios.get(`/properties/detail/${route.params.id}`)
-.then(res=>{
-  if(res.data.data.length>1){
-    property.value = res.data.data[0];
-  }else{
-    property.value = res.data.data;
-  }
-  center.value.splice(0, 1, property.value.latitude);
-  center.value.splice(1,1 , property.value.longitude);
-  console.log(property.value.latitude);
-})
+  const property = ref([]);
+  axios.get(`/properties/detail/${route.params.id}`)
+  .then(res=>{
+    if(res.data.data.length>1){
+      property.value = res.data.data[0];
+    }else{
+      property.value = res.data.data;
+    }
+    center.value.splice(0, 1, property.value.latitude);
+    center.value.splice(1,1 , property.value.longitude);
+    console.log(property.value.district.name);
+  })
 
 </script>
 

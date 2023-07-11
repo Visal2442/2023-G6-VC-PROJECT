@@ -30,7 +30,7 @@ const router = useRouter();
 defineProps(['property'])
 
 const getDetail =(property_id)=>{
-    router.push({name:'Detail', params:{id:property_id}});
+    router.push(`/detail/${property_id}`);
 }
 
 </script>
