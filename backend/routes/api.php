@@ -43,7 +43,8 @@ Route::group(['prefix'=>'properties'], function(){
     Route::get('/pagination', [PropertyController::class, 'pagination']);
 });
 
-
+// show property by ID
+Route::get('/house/{id}', [PropertyController::class, 'show']);
 
 
 
