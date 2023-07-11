@@ -46,6 +46,22 @@ class PropertySeeder extends Seeder
                 'longitude' => 103.18163954869556,
                 'user_id'=>2
             ],
+            [
+                'name' => 'Beach House',
+                'price' => 2500,
+                'description' => 'This cozy beach house is just steps away from the ocean.',
+                'type' => 'house',
+                'size' => 200,
+                'number_of_floor' => 2,
+                'number_of_room' => 20,
+                'number_of_bathroom' => 3,
+                'number_of_kitchen' => 1,
+                'available'=>true,
+                'image' => 'https://impacthomes.co.in/wp-content/uploads/2023/04/luxury-home.jpg',
+                'latitude' => 16.087255235965642,
+                'longitude' => 106.18163954869556,
+                'user_id'=>2
+            ],
         ];
         foreach($properties as $property){
             Property::create($property);
