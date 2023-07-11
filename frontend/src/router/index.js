@@ -5,6 +5,7 @@ import AboutView from '../views/AboutView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import PropertyView from '../views/PropertyView.vue'
 import LoginView from '../views/LoginView.vue'
+import WishlistView from '../views/WishlistView.vue'
 
 // import LoginForm from '../views/LoginView.vue'
 const routes = [
@@ -35,6 +36,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: LoginView
+  },
+  {
+    path: '/wishlist',
+    name: 'Wishlist',
+    component: WishlistView
   },
 ]
 

@@ -26,6 +26,7 @@
       <v-btn class="mr-4" :to="{name:'Home'}">Home</v-btn>
       <v-btn class="mr-4" :to="{name:'property'}">Property</v-btn>
       <v-btn class="mr-4" :to="{name:'About'}">About</v-btn>
+      <v-btn class="mr-4" :to="{name:'Wishlist'}">My Wishlist</v-btn>
     </v-toolbar-items>
     <div v-if="cookieEmail == undefined">
       <v-btn class="tex-left" :to="{name:'Register'}" >Register</v-btn>
