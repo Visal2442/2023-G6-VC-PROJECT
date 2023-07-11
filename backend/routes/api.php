@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DistrictControllr;
+use App\Http\Controllers\GraphController;
 use App\Http\Controllers\ProvinceController;
 use App\Models\Booking;
 use App\Models\Province;
@@ -42,6 +43,10 @@ Route::group(['prefix'=>'properties'], function(){
     Route::get('/', [PropertyController::class, 'index']);
     Route::get('/pagination', [PropertyController::class, 'pagination']);
 });
+
+Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);
+
+
 
 
 

@@ -30,9 +30,16 @@ class Property extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function district_id()
     {
         return $this->belongsTo(District::class);
     }
+    
+    public function booking()
+    {
+        return $this->hasOne(booking::class);
+    }
+
 
 }
