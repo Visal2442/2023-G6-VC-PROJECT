@@ -11,11 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
 {
-    public function index() {
+    public function index() 
+    {
         $properties= Property::all();
         return response()->json(['success'=>true, 'data'=>$properties], 200);
     }
-    
+
     // search district location name 
     public function searchLocation(Request $request)
     {

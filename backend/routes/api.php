@@ -37,7 +37,6 @@ Route::post('/register', [AuthenticationController::class, 'register']);
 //search route 
 Route::get('/locations/{name}', [PropertyController::class, 'searchLocation']);
 Route::get('/district/{id}', [PropertyController::class,'showProperty']);
-Route::resource('properties', PropertyController::class);
 // Property 
 Route::group(['prefix'=>'properties'], function(){
     Route::get('/', [PropertyController::class, 'index']);
