@@ -48,7 +48,6 @@ Route::group(['prefix'=>'properties'], function(){
 
 
 
-
 // // Social Login (testing)
 // Route::middleware(['cors'])->group(function () {
 //     Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);
