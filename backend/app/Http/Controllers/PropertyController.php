@@ -45,4 +45,21 @@ class PropertyController extends Controller
 
         return response()->json(['success' => true, 'data' => $properties], 200);
     }
+
+    // show properties by order price
+
+    public function showPropertyByPrice($minPrice, $maxPrice)
+    {
+        $properties = Property::whereIn('type', ['room', 'house'])
+        ->where('available', true)
+            ->whereBetween('price', [$minPrice, $maxPrice])
+            ->orderBy('price')
+            ->get();
+
+        if ($properties->isEmpty()) {
+            return response()->json(['success' => false, 'message' => 'No properties found within the specified price range.'], 404);
+        }
+
+        return response()->json(['success' => true, 'data' => $properties], 200);
+    }
 }

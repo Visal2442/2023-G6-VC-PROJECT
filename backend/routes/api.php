@@ -44,7 +44,8 @@ Route::group(['prefix'=>'properties'], function(){
 });
 
 
-
+// show Property By Price
+Route::get('/properties/{minPrice}/{maxPrice}', [PropertyController::class,'showPropertyByPrice']);
 
 
 
