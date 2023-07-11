@@ -1,11 +1,13 @@
 <template>
-  <div>
+  <v-container fluid class=" my-10">
   <!-- Resource: vuetify  -->
   <v-row justify="center" class="" align="center">
-    <img src="../../assets/register.jpg" alt="" width="500" height="500" />
+    <img :src="require('../../assets/register.jpg')" alt="" width="500" height="500" />
     <v-sheet class="m-10 w-33 bg-white pa-5" elevation="4">
-      <img src="../../assets/profileIcon.png" class="mt-5" width="50" />
-      <p class=" text-lg-h5 mb-5 text-green-accent-4">Register Account</p>
+      <div class=" d-flex flex-column align-center">
+        <img :src="require('../../assets/profileIcon.png')" class="mt-5" width="50" />
+        <p class=" text-lg-h5 mb-5 text-green-accent-4">Register Account</p>
+      </div>
       <v-form fast-fail class="d-flex flex-column" v-model="isValide">
         <v-text-field clearable color="green-accent-4" label="Username" placeholder="Enter your username" v-model="username" :rules="rules.usernameRules"></v-text-field>
         <v-text-field type="tel" clearable color="green-accent-4" label="Phone Number" placeholder="Enter phone number" v-model="phone_number" :rules="rules.phoneRules"></v-text-field>
@@ -13,49 +15,61 @@
         <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.email">{{ errors.email.length !== 0 ? errors.email[0] : '' }}</span>
         <v-text-field type="password" clearable name="password" color="green-accent-4" label="Password" placeholder="Enter password" v-model="password" :rules="rules.passwordRules"></v-text-field>
         <v-text-field type="password" clearable name="password_confirmation" color="green-accent-4" label="Confirm Password" placeholder="Confirm Password" v-model="password_confirmation" :rules="rules.confirmRules"></v-text-field>
-        <v-btn type="button" @click="register()" block class="mt-2 mb-5 bg-green-accent-4 text-white pa-5">Create</v-btn>
-        <p class=" tw-text-amber-500">Or Login With</p>
-        <router-link to=""><img src="../../assets/google.png" alt="" width="50" /></router-link>
-        <hr>
-        <p class="ma-2">Already have an account? | <router-link to="/login">Login Here</router-link></p>
+        <v-btn type="button" @click="signUp()" block class="mt-2 mb-5 bg-green-accent-4 text-white pa-5">Register</v-btn>
+        <div class=" d-flex flex-column align-center">
+          <p class="">Or Register With</p>
+          <GoogleLogin :callback="callback" class=" my-5"></GoogleLogin>
+        <p class="ma-2">Already have an account? | <router-link :to="{name:'Login'}">Login Here</router-link></p>
+        </div>
       </v-form>
-
-      <v-alert v-model="alert.show" v-if="isSuccess" :type="alert.type" :dismissible="false">
-        {{ alert.message }}
-      </v-alert>
 
     </v-sheet>
   </v-row>
-  <div>
-    <!-- <template v-if="login"> -->
-      <GoogleLogin :callback="callback"></GoogleLogin>
-    <!-- </template> -->
-  </div>
-</div>
+  </v-container>
 </template>
 
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
 import { decodeCredential } from 'vue3-google-login';
+// Pinia Store 
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
-const { username, password, phone_number, email, password_confirmation, errors, isSuccess, alert, isValide} = storeToRefs(authStore);
+const { errors, isSuccess, isValide} = storeToRefs(authStore);
 const { register } = authStore;
 
+const username = ref(null);
+const password = ref(null);
+const email = ref(null);
+const phone_number = ref(null);
+const password_confirmation = ref(null);
+
+// Login with google 
 const callback =  (res) => {
     console.log(decodeCredential(res.credential));
+    const userDetail = decodeCredential(res.credential);
+    const user = {
+      username: userDetail.given_name + ' ' +  userDetail.family_name,
+      email:userDetail.email,
+      password:Math.floor(Math.random() * 10000000000),
+      isGoogle:true,
+    }
+    register(user);
 }
-// const log = () => {
-//   login.value = true;
-// }
-// Reset cookie (testing)
-// const getCookie = () => {
-//   document.cookie = 'g_state=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT; secure';
-//   location.reload();
-// }
+// Login with form 
+const signUp=()=>{
+  const user={
+    username: username.value,
+    password: password.value,
+    password_confirmation: password_confirmation.value,
+    phone_number: phone_number.value,
+    email: email.value,
+  }
+  register(user);
+}
+
 // Validation rules 
 const rules = ref({
   usernameRules:[ value => !!value || 'Username is required',
@@ -69,16 +83,11 @@ const rules = ref({
                   value => (value && value.length >= 8) || 'Confirm Password at least 8 characters'],
 })
 
-watch(isSuccess, (value) => {
-  if (value) {
-    // set the alert properties when the registration is successful
-    alert.value.show = true;
-    alert.value.type = 'success';
-    alert.value.message = 'Registration successful!';
-  }
-});
-
-
+// Reset cookie (testing)
+// const getCookie = () => {
+//   document.cookie = 'g_state=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT; secure';
+//   location.reload();
+// }
 </script>
 
 <style scoped>
