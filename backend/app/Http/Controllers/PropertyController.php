@@ -54,6 +54,7 @@ class PropertyController extends Controller
         ->where('available', true)
             ->whereBetween('price', [$minPrice, $maxPrice])
             ->orderBy('price')
+            ->with(['district', 'user'])
             ->get();
 
         if ($properties->isEmpty()) {

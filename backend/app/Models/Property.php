@@ -30,7 +30,7 @@ class Property extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function district_id()
+    public function district()
     {
         return $this->belongsTo(District::class);
     }
