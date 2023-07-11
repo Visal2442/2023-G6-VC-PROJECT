@@ -2,48 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\Property;
+use App\Models\RentalHouse;
+use App\Models\RentalRoom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index() 
     {
-        //
+        $properties= Property::all();
+        return response()->json(['success'=>true, 'data'=>$properties], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    // search district location name 
+    public function searchLocation(Request $request)
     {
-        //
+        $name = $request->name;
+        $districts = District::where('name', 'like', '%' . $name . '%')->get();
+        if ($districts->isEmpty()) {
+            return response()->json(['message' => 'Districts not found for "' . $name . '"'], 404);
+        }
+        return response()->json(['success' => true, 'data' => $districts], 200);
+    }
+    
+    public function pagination()
+    {
+        $properties = Property::paginate(1);
+        return response()->json(['success'=>true, 'data'=>$properties], 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Property $property)
+    ///show property  by Id distric 
+    public function showProperty($districtId)
     {
-        //
-    }
+        $properties = Property::where('district_id', $districtId)->get();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Property $property)
-    {
-        //
-    }
+        if ($properties->isEmpty()) {
+            return response()->json(['message' => 'No properties found for district ' . $districtId], 404);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Property $property)
-    {
-        //
+        return response()->json(['success' => true, 'data' => $properties], 200);
     }
 }

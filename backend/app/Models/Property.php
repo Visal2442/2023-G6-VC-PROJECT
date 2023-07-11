@@ -13,10 +13,16 @@ class Property extends Model
         'price',
         'description',
         'type',
+        'size',
+        'number_of_floor',
+        'number_of_room',
+        'number_of_bathroom',
+        'number_of_kitchen',
         'image',
         'latitude',
         'longitude',
         'available',
+        'district_id',
         'user_id',
     ];
 
@@ -24,24 +30,9 @@ class Property extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public function rentalHouses()
+    public function district_id()
     {
-        return $this->hasOne(RentalHouse::class);
+        return $this->belongsTo(District::class);
     }
 
-    public function rentalRooms()
-    {
-        return $this->hasOne(RentalRoom::class);
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-    public function ratings()
-    {
-        return $this->hasMany(Rating::class);
-    }
 }

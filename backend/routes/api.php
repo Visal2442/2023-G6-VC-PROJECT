@@ -2,6 +2,12 @@
 
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\DistrictControllr;
+use App\Http\Controllers\ProvinceController;
+use App\Models\Booking;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -21,11 +27,22 @@ use Laravel\Socialite\Facades\Socialite;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+// Authentication 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthenticationController::class, 'logout']);
 });
 Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/register', [AuthenticationController::class, 'register']);
+
+//search route 
+Route::get('/locations/{name}', [PropertyController::class, 'searchLocation']);
+Route::get('/district/{id}', [PropertyController::class,'showProperty']);
+// Property 
+Route::group(['prefix'=>'properties'], function(){
+    Route::get('/', [PropertyController::class, 'index']);
+    Route::get('/pagination', [PropertyController::class, 'pagination']);
+});
+
 
 
 

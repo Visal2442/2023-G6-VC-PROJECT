@@ -2,7 +2,7 @@
   <div class="container">
     <div class="card">
       <div class=" item">
-        <img src="../../assets/banner1.jpg" alt="Card Image">
+        <img src="../../assets/google.png" alt="Card Image">
 
         <div class="overlay">
           <div class="overlay-content">
@@ -34,6 +34,10 @@
     </div>
   </div>
 </template>
+
+<script setup>
+
+</script>
  
  <!-- Get code form AI -->
 <style scoped>
@@ -53,7 +57,6 @@
   border-radius: 4px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-
 
 .card img {
   width: 100%;

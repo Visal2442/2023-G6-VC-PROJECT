@@ -42,11 +42,9 @@
     display: flex;
 
 }
-
 .item {
     margin: 30px;
     text-align: start;
-
 }
 
 img {

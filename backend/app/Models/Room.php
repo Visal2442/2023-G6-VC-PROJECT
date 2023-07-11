@@ -9,9 +9,6 @@ class Room extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'size',
-        'number_of_bed',
-        'number_of_bathroom',
         'available',
         'rental_room_id'
     ];
