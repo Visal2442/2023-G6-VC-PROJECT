@@ -17,16 +17,21 @@
                 <v-card-subtitle>Sal</v-card-subtitle>
             </div>
             <v-spacer></v-spacer>
-            <BaseButton type="bg-green-accent-3" @click="console.log(property.id)">More Detail</BaseButton>
+            <BaseButton type="bg-green-accent-3" @click="getDetail(property.id)">More Detail</BaseButton>
         </v-card-actions>
     </v-card>
 </template>
 
 <script setup>
 import { defineProps } from 'vue';
-import BaseButton from '../widget/BaseButton.vue'
-
+import BaseButton from '../widget/BaseButton.vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 defineProps(['property'])
+
+const getDetail =(property_id)=>{
+    router.push({name:'Detail', params:{id:property_id}});
+}
 
 </script>
 

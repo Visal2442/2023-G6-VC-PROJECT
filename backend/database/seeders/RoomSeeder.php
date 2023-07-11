@@ -18,6 +18,10 @@ class RoomSeeder extends Seeder
                 'available' => true,
                 'rental_room_id'=>1
             ],
+            [
+                'available' => false,
+                'rental_room_id'=>1
+            ],
         ];
        
         foreach($rooms as $room){

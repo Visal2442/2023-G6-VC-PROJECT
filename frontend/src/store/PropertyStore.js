@@ -11,7 +11,6 @@ export const usePropertyStore = defineStore('property', () => {
     // Get all properties
     axios.get('/properties').then(res=>{
         properties.value = res.data.data;
-        // console.log(properties.value);
     }).catch(err=>{
         console.log(err);
     }) 

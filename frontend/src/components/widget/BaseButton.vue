@@ -1,5 +1,5 @@
 <template>
-    <v-btn :class="type" outlined rounded="lg">
+    <v-btn :class="type" outlined rounded="lg" class="">
         <slot></slot>
     </v-btn>
 </template>

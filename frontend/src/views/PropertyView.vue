@@ -23,6 +23,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+// import { useRoute } from 'vue-router';
 
 import SearchLocation from '@/components/TheResearch/SearchLocation.vue';
 import SelectTypePrice from '@/components/TheResearch/SelectTypePrice.vue'
