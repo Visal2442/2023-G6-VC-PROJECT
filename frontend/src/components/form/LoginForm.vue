@@ -15,7 +15,7 @@
 
         <GoogleLogin :callback="callback" class=" my-5"></GoogleLogin>
 
-        <v-btn type="button" v-model="isLoggedIn" @click="login" block class="mt-2 mb-5 bg-green-accent-4 text-white">Login</v-btn>
+        <v-btn type="button" @click="signIn" block class="mt-2 mb-5 bg-green-accent-4 text-white">Login</v-btn>
         <p>Don't have an account? | <router-link :to="{ name: 'Register' }" class="">Register Here</router-link></p>
       </v-form>
     </v-sheet>
@@ -28,8 +28,11 @@ import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
 
-const { email, password, isValide, isSuccess, errors } = storeToRefs(authStore);
+const { isValide, isSuccess, errors } = storeToRefs(authStore);
 const { login } = authStore;
+
+const password = ref(null);
+const email = ref(null);
 
 const callback =  (res) => {
     console.log(decodeCredential(res.credential));
@@ -41,6 +44,13 @@ const callback =  (res) => {
       isGoogle:true,
     }
     login(user);
+}
+const signIn=()=>{
+  const user={
+    password: password.value,
+    email: email.value,
+  }
+  login(user);
 }
 
 

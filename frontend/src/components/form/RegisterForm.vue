@@ -43,8 +43,8 @@ const { register } = authStore;
 
 const username = ref(null);
 const password = ref(null);
-const phone_number = ref(null);
 const email = ref(null);
+const phone_number = ref(null);
 const password_confirmation = ref(null);
 
 // Login with google 
