@@ -15,15 +15,14 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $properties= [];
-        $rental_houses = RentalHouse::join('properties', 'properties.id', '=', 'rental_houses.property_id')
-                                // ->select('properties.*', 'rental_houses.*')
-                                ->get();
-        $rental_rooms = RentalRoom::join('properties', 'properties.id', '=', 'rental_rooms.property_id')
-                                // ->select('properties.*', 'rental_rooms.*')
-                                ->get();
-        array_push($properties, $rental_houses, $rental_rooms);
-        return response()->json(['success'=>true, 'data'=> $properties], 200);
+        $properties= Property::all();
+        return response()->json(['success'=>true, 'data'=>$properties], 200);
+    }
+    
+    public function pagination()
+    {
+        $properties = Property::paginate(1);
+        return response()->json(['success'=>true, 'data'=>$properties], 200);
     }
 
     /**

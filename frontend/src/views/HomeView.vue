@@ -29,6 +29,7 @@
         <v-col md="3">
           <house-card></house-card>
           
+          <!-- <house-card></house-card> -->
         </v-col>
       </template>
     </v-row>
