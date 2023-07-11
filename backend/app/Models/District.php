@@ -5,22 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class District extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id',
-        'propery_id',
-        'comment',
+        'name',
+        'province_id',
     ];
 
-    public function user()
+    public function province()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Province::class);
     }
-
     public function property()
     {
-        return $this->belongsTo(Property::class);
+        return $this->hasMany(Property::class);
     }
+
+   
 }
