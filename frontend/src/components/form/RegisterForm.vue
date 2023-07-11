@@ -17,10 +17,9 @@
         <v-text-field type="password" clearable name="password_confirmation" color="green-accent-4" label="Confirm Password" placeholder="Confirm Password" v-model="password_confirmation" :rules="rules.confirmRules"></v-text-field>
         <v-btn type="button" @click="signUp()" block class="mt-2 mb-5 bg-green-accent-4 text-white pa-5">Register</v-btn>
         <div class=" d-flex flex-column align-center">
-          <p class="">Or Login With</p>
+          <p class="">Or Register With</p>
           <GoogleLogin :callback="callback" class=" my-5"></GoogleLogin>
         <p class="ma-2">Already have an account? | <router-link :to="{name:'Login'}">Login Here</router-link></p>
-        <v-btn @click="logout">Logout</v-btn>
         </div>
       </v-form>
 
@@ -33,7 +32,7 @@
 <script setup>
 import { ref } from 'vue';
 
-import { decodeCredential, googleLogout } from 'vue3-google-login';
+import { decodeCredential } from 'vue3-google-login';
 // Pinia Store 
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
@@ -58,9 +57,6 @@ const callback =  (res) => {
       isGoogle:true,
     }
     register(user);
-}
-const logout=()=>{
-  googleLogout()
 }
 // Login with form 
 const signUp=()=>{

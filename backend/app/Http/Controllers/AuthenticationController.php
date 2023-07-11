@@ -18,11 +18,11 @@ class AuthenticationController extends Controller
         if ($request->isGoogle) {
             $user = User::where('email', $request->email)->get();
             // Attempt to authenticate the user
-            if ($user) {
+            if (count($user)>0) {
                 // Authentication successful
                 // $user = Auth::user();
-                $token = $user->createToken('API Token', ['select'])->plainTextToken;
-                return response()->json(["message" => "login success", "user" => $user, 'token'=> $token], 200);
+                $token = $user->createToken('API Token')->plainTextToken;
+                return response()->json(["message" => "login success", "user" => $user, 'token'=>$token], 200);
             } else {
                 // Authentication failed
                 $user = User::create([
@@ -30,9 +30,7 @@ class AuthenticationController extends Controller
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                 ]);
-        
                 $token = $user->createToken('API Token', ['select'])->plainTextToken;
-        
                 return response()->json([
                     'success' => 'true',
                     'user' => $user,
@@ -66,10 +64,9 @@ class AuthenticationController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
-        return response()->json([
-            'message' => 'your account has been logged out'
-        ], 200);
+        $user = $request->user();
+        $user->tokens()->delete();
+        return response()->json(['message' => 'your account has been logged out', 'user'=>$user], 200);
     }
 
 
@@ -79,6 +76,8 @@ class AuthenticationController extends Controller
         if($request->isGoogle){
             $user = User::where('email', $request->email)->get();
             $isForm = false;
+            // $token = $user->createToken('API Token', ['select'])->plainTextToken;
+            return response()->json(["message" => "login success", "user" => $user], 200);
         }
         if($isForm){
             // get email and password

@@ -1,10 +1,13 @@
 <template>
   <!-- Resource: vuetify  -->
+  <v-container fluid class=" my-10">
   <v-row justify="center" align="center">
     <img :src="require('../../assets/register.jpg')" alt="" width="500" height="500" />
     <v-sheet class="m-10 w-33 bg-white pa-8" elevation="4">
-      <img :src="require('../../assets/profileIcon.png')" class="mt-5" width="50" />
-      <h3 class="text-green-accent-4 mb-5">Login Account</h3>
+      <div class=" d-flex flex-column align-center">
+        <img :src="require('../../assets/profileIcon.png')" class="mt-5" width="50" />
+        <h3 class="text-green-accent-4 mb-5">Login Account</h3>
+      </div>
       <v-expand-transition>
         <v-alert type="error" class="text-red-accent-4 text-left mb-5" v-if="isSuccess && errors" :text='errors'></v-alert>
       </v-expand-transition>
@@ -13,13 +16,16 @@
 
         <v-text-field type="password" clearable color="green-accent-4" label="Password" name="password" placeholder="Enter password" v-model="password" :rules="rules.passwordRules"></v-text-field>
 
-        <GoogleLogin :callback="callback" class=" my-5"></GoogleLogin>
-
+        <div class=" d-flex flex-column align-center">
+          <p class="">Or Login With</p>
+          <GoogleLogin :callback="callback" class=" my-5"></GoogleLogin>
+        </div>
         <v-btn type="button" @click="signIn" block class="mt-2 mb-5 bg-green-accent-4 text-white">Login</v-btn>
         <p>Don't have an account? | <router-link :to="{ name: 'Register' }" class="">Register Here</router-link></p>
       </v-form>
     </v-sheet>
   </v-row>
+</v-container>
 </template>
 <script setup>
 import { ref } from 'vue';
