@@ -37,6 +37,7 @@ const pagination = ref({
 const getProperties = () => {
      axios.get('/properties/pagination?page=' + pagination.value.current)
           .then(res => {
+               console.log(res.data);
                properties.value = res.data.data.data;
                pagination.value.total = res.data.data.last_page;
                console.log(res.data.data.data.length);
