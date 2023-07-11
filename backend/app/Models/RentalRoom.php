@@ -9,7 +9,6 @@ class RentalRoom extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
         'propery_id'
     ];
 
