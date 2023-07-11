@@ -27,6 +27,7 @@ use Laravel\Socialite\Facades\Socialite;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+// Authentication 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthenticationController::class, 'logout']);
 });
@@ -37,6 +38,12 @@ Route::post('/register', [AuthenticationController::class, 'register']);
 Route::get('/locations/{name}', [PropertyController::class, 'searchLocation']);
 Route::get('/district/{id}', [PropertyController::class,'showProperty']);
 Route::resource('properties', PropertyController::class);
+// Property 
+Route::group(['prefix'=>'properties'], function(){
+    Route::get('/', [PropertyController::class, 'index']);
+    Route::get('/pagination', [PropertyController::class, 'pagination']);
+});
+
 
 
 

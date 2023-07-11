@@ -11,16 +11,26 @@ use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
 {
+    public function index() {
+        $properties= Property::all();
+        return response()->json(['success'=>true, 'data'=>$properties], 200);
+    }
+    
     // search district location name 
     public function searchLocation(Request $request)
     {
         $name = $request->name;
         $districts = District::where('name', 'like', '%' . $name . '%')->get();
-
         if ($districts->isEmpty()) {
             return response()->json(['message' => 'Districts not found for "' . $name . '"'], 404);
         }
         return response()->json(['success' => true, 'data' => $districts], 200);
+    }
+    
+    public function pagination()
+    {
+        $properties = Property::paginate(1);
+        return response()->json(['success'=>true, 'data'=>$properties], 200);
     }
 
     ///show property  by Id distric 

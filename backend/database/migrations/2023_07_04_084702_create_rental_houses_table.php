@@ -13,12 +13,6 @@ return new class extends Migration
     {
         Schema::create('rental_houses', function (Blueprint $table) {
             $table->id();
-            $table->string('size');
-            $table->integer('number_of_room');
-            $table->integer('number_of_floor');
-            $table->integer('number_of_bathroom');
-            $table->integer('number_of_kitchen');
-            $table->boolean('available')->default(true);
             $table->foreignId('property_id')->constrained(table:'properties')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

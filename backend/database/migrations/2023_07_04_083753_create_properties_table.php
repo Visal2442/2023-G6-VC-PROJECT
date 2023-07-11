@@ -17,6 +17,12 @@ return new class extends Migration
             $table->integer('price');
             $table->string('description');
             $table->string('type');
+            $table->string('size');
+            $table->integer('number_of_floor');
+            $table->integer('number_of_room');
+            $table->integer('number_of_bathroom');
+            $table->integer('number_of_kitchen');
+            $table->boolean('available')->default(true);
             $table->string('image');
             $table->decimal('latitude', 18,9);
             $table->decimal('longitude', 18,9);

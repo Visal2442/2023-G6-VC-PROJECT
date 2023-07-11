@@ -61,7 +61,6 @@ const background = ref('white');
 
 const onScroll =(e)=>{
   scrollY.value = e.currentTarget.scrollY;
-  console.log(e.currentTarget.scrollY);
 }
 window.addEventListener('scroll', onScroll);
 
