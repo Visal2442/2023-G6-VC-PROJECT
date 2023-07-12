@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { ref } from 'vue';
-import axios from 'axios';
+import { ref } from "vue";
+import axios from "axios";
 
 export const usePropertyStore = defineStore('property', () => {
     const properties = ref([]);
