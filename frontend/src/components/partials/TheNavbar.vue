@@ -58,6 +58,7 @@ const navItems = ref([
   { title:'Property', name:'property'},
   { title:'About', name:'About'},
   { title:'Map', name:'Map'},
+  // { title:'Detail', name:'Detail'},
 ])
 
 const cookieEmail = ref('');

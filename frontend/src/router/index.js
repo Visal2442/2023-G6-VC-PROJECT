@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // Components 
-import HomeView from '../views/HomeView.vue'
-import AboutView from '../views/AboutView.vue'
-import RegisterView from '../views/RegisterView.vue'
+import HomeView from '../views/HomeView.vue';
+import AboutView from '../views/AboutView.vue';
+import RegisterView from '../views/RegisterView.vue';
 import MapView from '../views/MapView.vue';
 import PropertyView from '../views/PropertyView.vue'
 import LoginView from '../views/LoginView.vue'
+import WishlistView from '../views/WishlistView.vue'
+import DetailView from '../views/DetailView.vue';
 
 // import LoginForm from '../views/LoginView.vue'
 const routes = [
@@ -17,15 +19,17 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: AboutView
   },
   {
     path: '/register',
     name: 'Register',
     component: RegisterView
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: LoginView
   },
   {
     path: '/map',
@@ -38,9 +42,14 @@ const routes = [
     component: PropertyView
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: LoginView
+    path: '/detail/:id',
+    name: 'Detail',
+    component: DetailView
+  },
+  {
+    path: '/wishlist',
+    name: 'Wishlist',
+    component: WishlistView
   },
 ]
 
