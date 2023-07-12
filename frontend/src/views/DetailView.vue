@@ -46,14 +46,14 @@
             <LPopup>
               <v-card class="mx-auto" elevation='0'>
                 <v-img class="align-end text-white" :src="require('../assets/home/living-room-2732939_1280.jpg')">
-                  <v-card-title>{{property.property_name}}</v-card-title>
+                  <v-card-title>{{property?.property_name}}</v-card-title>
                 </v-img>
 
                 <v-card-subtitle class="pt-4">{{ distance }} KM</v-card-subtitle>
 
                 <v-card-text>
                   <div>
-                    {{property.district.name}}, {{property.district.province.name}}
+                    {{property.district?.name}}, {{property.district?.province?.name}}
                   </div>
                   <div>
                     ${{property.price}}/Month
