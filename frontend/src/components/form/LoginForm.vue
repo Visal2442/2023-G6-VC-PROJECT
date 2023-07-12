@@ -15,7 +15,11 @@
         <v-text-field type="email" clearable color="green-accent-4" label="Email" placeholder="Enter email address" v-model="email" :rules="rules.emailRules"></v-text-field>
 
         <v-text-field type="password" clearable color="green-accent-4" label="Password" name="password" placeholder="Enter password" v-model="password" :rules="rules.passwordRules"></v-text-field>
-
+        <v-card-actions>
+              <v-col cols="auto pa-0" class="forgotPassword">
+                <router-link :to="{name:'Email'}">Forgot Password?</router-link>
+              </v-col>
+            </v-card-actions>
         <div class=" d-flex flex-column align-center">
           <p class="">Or Login With</p>
           <GoogleLogin :callback="callback" class=" my-5"></GoogleLogin>

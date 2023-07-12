@@ -20,6 +20,7 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.setItem('user', res.data.user.id)
         localStorage.setItem('token', res.data.token)
         // resetForm();
+        window.location.reload();
         router.push('/')
         console.log(Cookies.get('email'));
       })
@@ -41,6 +42,7 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.setItem('token', res.data.token)
         // resetForm();
         console.log(Cookies.get('email'));
+        window.location.reload();
         router.push('/');
       })
       .catch((err) => {
@@ -61,6 +63,7 @@ export const useAuthStore = defineStore('auth', () => {
         Cookies.remove('email');
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        window.location.reload();
         router.push('/login');
       })
       .catch((err) => {
