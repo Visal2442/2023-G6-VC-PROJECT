@@ -10,11 +10,11 @@
 
           <v-container fluid class="ml-md-9">
                <v-row class="mr-md-10" v-if="isFound">
-                    <template v-for="(property,i) of properties" :key="i" >
+                    <div v-for="(property,i) of properties" :key="i" >
                          <v-col md="3">
                               <house-card :property="property"></house-card>
                          </v-col>
-                    </template>
+                    </div>
                </v-row>
                <v-row v-else class="h-50">
                     <v-col class="text-center text-h4">
