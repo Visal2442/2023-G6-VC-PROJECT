@@ -79,6 +79,7 @@ class PropertySeeder extends Seeder
                 'image' => 'https://impacthomes.co.in/wp-content/uploads/2023/04/luxury-home.jpg',
                 'latitude' => 16.087255235965642,
                 'longitude' => 106.18163954869556,
+                'district_id'=>1,
                 'user_id'=>2
             ],
         ];
