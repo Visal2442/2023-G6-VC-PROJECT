@@ -15,15 +15,59 @@ class DistrictSeeder extends Seeder
     {
         $districts=[
             [
-                'name'=>'Khan Sensok',
+                'name'=>'Khan Sen sok',
                 'province_id'=>1,
             ],
             [
-                'name'=>'Chamkar Morn',
+                'name'=>'Prek Pnov district',
                 'province_id'=>1,
             ],
             [
-                'name'=>'Steoung Meanchey',
+                'name'=>'Khan Tuol Kouk',
+                'province_id'=>1,
+            ],
+            [
+                'name'=>'Khan Russey Keo',
+                'province_id'=>1,
+            ],
+            [
+                'name'=>'Khan Prampir Makara',
+                'province_id'=>1,
+            ],
+            [
+                'name'=>'Khan Pou Senchey',
+                'province_id'=>1,
+            ],
+            [
+                'name'=>'Khan Mean Chey',
+                'province_id'=>1,
+            ],
+            [
+                'name'=>'Khan Dangkao',
+                'province_id'=>1,
+            ],
+            [
+                'name'=>'Khan Chroy Changvar',
+                'province_id'=>1,
+            ],
+            [
+                'name'=>'Khan Chbar Ampov',
+                'province_id'=>1,
+            ],
+            [
+                'name'=>'Khan Chamkar Mon',
+                'province_id'=>1,
+            ],
+            [
+                'name'=>'Khan Kamboul',
+                'province_id'=>1,
+            ],
+            [
+                'name'=>'Doun Penh section',
+                'province_id'=>1,
+            ],
+            [
+                'name'=>'Khan Boeng Keng Kang',
                 'province_id'=>1,
             ],
         ];

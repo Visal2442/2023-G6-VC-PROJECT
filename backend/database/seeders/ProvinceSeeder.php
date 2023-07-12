@@ -16,13 +16,8 @@ class ProvinceSeeder extends Seeder
         $provinces=[
             [
                 'name'=>'Phnom Penh',
-            ],
-            [
-                'name'=>'Battambang',
-            ],
-            [
-                'name'=>'Siem Reap',
-            ],
+            ]
+            
         ];
         foreach ($provinces as $province){
             Province::create($province);
