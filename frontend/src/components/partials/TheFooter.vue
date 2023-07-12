@@ -17,27 +17,15 @@
             <span>Location: </span><p>BP 511, Phum Tropeang Chhuk (Borey Sorla) Sangtak, Street 371, Phnom Penh</p>
         </div>
 
-    </div>
-    <div class="footer-center">
-        <div class="icon">
-            <v-btn
-                class="mx-3"
-                icon="mdi mdi-facebook"
-            ></v-btn>
-            <v-btn
-                class="mx-3"
-                icon="mdi mdi-linkedin"
-            ></v-btn>
-            <v-btn
-                class="mx-3"
-                icon="mdi mdi-youtube"
-            ></v-btn>
-            <v-btn
-                class="mx-3"
-                icon="mdi mdi-instagram"
-            ></v-btn>
         </div>
-    </div>
+        <div class="footer-center bg-green">
+            <div class="icon">
+                <v-btn class="mx-3" icon="mdi mdi-facebook"></v-btn>
+                <v-btn class="mx-3" icon="mdi mdi-linkedin"></v-btn>
+                <v-btn class="mx-3" icon="mdi mdi-youtube"></v-btn>
+                <v-btn class="mx-3" icon="mdi mdi-instagram"></v-btn>
+            </div>
+        </div>
 
     <div>
       {{ new Date().getFullYear() }} — <strong>Rentalhouse</strong>
@@ -61,7 +49,7 @@
 .item{
     margin: 30px;
     text-align: start;
-    
+
 }
 img{
     width: 100px;

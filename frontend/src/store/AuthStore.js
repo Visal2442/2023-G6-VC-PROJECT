@@ -5,54 +5,41 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 
 export const useAuthStore = defineStore('auth', () => {
-  const username = ref(null);
-  const password = ref(null);
-  const phone_number = ref(null);
-  const email = ref(null);
-  const password_confirmation = ref(null);
   const errors = ref('');
   const isSuccess = ref(true);
   const router = useRouter();
   let isValide= ref(false);
-  let isLoggedIn = ref('undefined')
 
 
   // Register 
-  let register = () => {
-    const user = {
-      username: username.value,
-      password: password.value,
-      password_confirmation: password_confirmation.value,
-      phone_number: phone_number.value,
-      email: email.value,
-    }
+  let register = (user) => {
+    console.log(user);
     axios.post('/register', user)
-      .then((res) => {
-        Cookies.set('email', email.value, { expires: 30 });
+    .then((res) => {
+        Cookies.set('email', user.email, { expires: 30 });
         localStorage.setItem('user', res.data.user.id)
         localStorage.setItem('token', res.data.token)
-        resetForm();
+        // resetForm();
         router.push('/')
+        console.log(Cookies.get('email'));
       })
       .catch((err) => {
         errors.value = err.response.data.errors
         isSuccess.value = err.response.data.success
       })
-      console.log(Cookies.get('email'));
   };
 
-  let login = () => {
-    const user = {
-      email: email.value,
-      password: password.value
-    }
+  let login = (user) => {
+    // const user = {
+    //   email: email.value,
+    //   password: password.value
+    // }
     axios.post('/login', user)
       .then((res) => {
-        Cookies.set('email', email.value, { expires: 30 });
+        Cookies.set('email', user.email, { expires: 30 });
         localStorage.setItem('user', res.data.user.id)
         localStorage.setItem('token', res.data.token)
-        resetForm();
-        isLoggedIn.value = Cookies.get('email');
+        // resetForm();
         console.log(Cookies.get('email'));
         router.push('/');
       })
@@ -62,6 +49,7 @@ export const useAuthStore = defineStore('auth', () => {
         isSuccess.value = err.response.data.success
       })
     };
+
     const logout = () => {
       axios.post('/logout', null, {
         headers: {
@@ -82,24 +70,23 @@ export const useAuthStore = defineStore('auth', () => {
       console.log(Cookies.get('email'));
     };
 
-  const resetForm= ()=>{
-    username.value=''
-    password.value=''
-    password_confirmation.value=''
-    phone_number.value=''
-    email.value=''
-  };
+  // const resetForm= ()=>{
+  //   username.value=''
+  //   password.value=''
+  //   password_confirmation.value=''
+  //   phone_number.value=''
+  //   email.value=''
+  // };
   return {
-    username,
-    password,
-    phone_number,
-    email,
-    password_confirmation,
+    // username,
+    // password,
+    // phone_number,
+    // email,
+    // password_confirmation,
     errors,
     isSuccess,
     isValide,
     register,
-    isLoggedIn,
     login,
     logout
   };

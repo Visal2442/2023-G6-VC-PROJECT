@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="navbar" class="" elevation="2">
     <!-- Small Screen  -->
     <!-- <v-layout>
     <v-navigation-drawer v-model="sidebar" temporary>
@@ -13,61 +13,105 @@
     </v-navigation-drawer>
     </v-layout> -->
 
-  <!-- Large Screen  -->
+    <!-- Large Screen  -->
+    <v-toolbar class="pa-3" :style="{background:backgroundNavbar}" v-model="cookieEmail">
+      <v-toolbar-items class="d-flex align-center">
 
-  <v-toolbar color="green lighten-1" class="mb-5">
-    <v-toolbar-title class="text-uppercase font-weight-bold mr-4 ">
-      <picture>
-        <img class="logo" src="../../assets/logo.png" alt="Logo" width="50" aspect-ratio="1/1">
-      </picture>
-    </v-toolbar-title>
-    <v-spacer></v-spacer>
-    <v-toolbar-items>
-      <v-btn class="mr-4" :to="{name:'Home'}" >Home</v-btn>
-      <v-btn class="mr-4" :to="{name:'Home'}" >Property</v-btn>
-      <v-btn class="mr-4" :to="{name:'About'}">About</v-btn>
-    </v-toolbar-items>
-    <div v-if="cookieEmail == undefined">
-      <v-btn class="tex-left" :to="{name:'Register'}" >Register</v-btn>
-      <v-btn class="mr-4" :to="{name:'Login'}" >Login</v-btn>
-    </div>
-    <div v-else class="pf">
-      <v-btn class="mr-3" @click="logout">Logout</v-btn>
-      <img src="../../assets/pf.jpg" width="40" height="40" class="mr-3">
-    </div>
-  </v-toolbar>
-    </div>
+        <img :src="require('../../assets/logo.png')" alt="" width="200">
+        <!-- <v-img src="../../assets//dream-house-logo.png" width="400" height="400"></v-img> -->
+      </v-toolbar-items>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class=" d-flex align-center">
+        <div class="text-black">
+          <template v-for="item in navItems" :key="item.name">
+            <router-link :to="{ name: item.name }" class="text-button text-decoration-none text-black mr-7">{{item.title}}</router-link>
+          </template>
+        </div>
+
+        <div class="ml-5" v-if="!isLoggedIn">
+          <router-link :to="{ name: 'Register' }"
+            class="text-button text-decoration-none text-black mr-2">Register</router-link>
+          <router-link :to="{ name: 'Login' }"
+            class="text-button text-decoration-none text-black mr-3">Login</router-link>
+        </div>
+        <div v-else class="pf">
+          <v-btn class="mr-3" @click="logout">Logout</v-btn>
+          <img :src="require('../../assets/pf.jpg')" width="40" height="40" class="mr-3">
+        </div>
+
+      </v-toolbar-items>
+    </v-toolbar>
+  </div>
 </template>
 
 <script setup>
-// import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Cookies from 'js-cookie';
+
+// Pinia Store 
 import { useAuthStore } from '../../store/AuthStore';
-
 const authStore = useAuthStore();
-const { logout} = authStore;
+const { logout } = authStore;
 
-// const isLogin = computed(()=>{
-//   if(isLoggedIn.value != undefined){
-//     return true;
-//   }
-//   return false;
-// })
-const cookieEmail=ref(Cookies.get('email'))
+const navItems = ref([
+  { title:'Home', name:'Home'},
+  { title:'Property', name:'property'},
+  { title:'About', name:'About'},
+  { title:'Map', name:'Map'},
+  // { title:'Detail', name:'Detail'},
+])
+
+const cookieEmail = ref('');
+const isLoggedIn = computed(()=>{
+  if(cookieEmail.value != undefined ){
+    return true;
+  }
+  return false;
+})
+const signIn=()=>{
+  cookieEmail.value=Cookies.get('email')
+}
+signIn();
+
+let scrollY = ref(0);
+const background = ref('white');
+const onScroll =(e)=>{
+  scrollY.value = e.currentTarget.scrollY;
+}
+window.addEventListener('scroll', onScroll);
+
+const backgroundNavbar=computed(()=>{
+  if(scrollY.value >= 60){
+    return background.value;
+  }
+  return 'none';
+})
+
 </script>
 
 <style scoped>
-.logo {
-  border-radius: 50%;
-  margin-right: 70%;
+.v-toolbar {
+  background: none;
+}
 
+#navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.router-link-active{
+  border-bottom: 4px solid rgb(47, 255, 54);
+}
+#login-btn{
+  background: none;
 }
 .pf {
   display: flex;
   align-items: center;
 }
-.pf img{
+
+.pf img {
   border-radius: 50%;
 }
+
 </style>
