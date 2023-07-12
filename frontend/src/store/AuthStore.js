@@ -13,7 +13,6 @@ export const useAuthStore = defineStore('auth', () => {
 
   // Register 
   let register = (user) => {
-    console.log(user);
     axios.post('/register', user)
     .then((res) => {
         Cookies.set('email', user.email, { expires: 30 });
@@ -21,11 +20,10 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.setItem('token', res.data.token)
         // resetForm();
         router.push('/')
-        console.log(Cookies.get('email'));
       })
       .catch((err) => {
-        errors.value = err.response.data.errors
-        isSuccess.value = err.response.data.success
+        errors.value = err.response.data
+        isSuccess.value = err.response.data.status
       })
   };
 
@@ -46,7 +44,7 @@ export const useAuthStore = defineStore('auth', () => {
       .catch((err) => {
         console.log(err.response.data);
         errors.value = err.response.data.errors;
-        isSuccess.value = err.response.data.success
+        isSuccess.value = err.response.data.status
       })
     };
 
@@ -65,7 +63,7 @@ export const useAuthStore = defineStore('auth', () => {
       })
       .catch((err) => {
         errors.value = err.response.data.errors;
-        isSuccess.value = err.response.data.success;
+        // isSuccess.value = err.response.data.status;
       });
       console.log(Cookies.get('email'));
     };

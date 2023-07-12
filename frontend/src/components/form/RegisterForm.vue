@@ -12,10 +12,19 @@
         <v-text-field clearable color="green-accent-4" label="Username" placeholder="Enter your username" v-model="username" :rules="rules.usernameRules"></v-text-field>
         <v-text-field type="tel" clearable color="green-accent-4" label="Phone Number" placeholder="Enter phone number" v-model="phone_number" :rules="rules.phoneRules"></v-text-field>
         <v-text-field type="email" clearable color="green-accent-4" label="Email" placeholder="Enter email address" v-model="email" :rules="rules.emailRules"></v-text-field>
-        <span class="text-red-accent-4 text-left" v-if="isSuccess && errors.email">{{ errors.email.length !== 0 ? errors.email[0] : '' }}</span>
+        <template v-if="errorMessage">
+          <template v-if="errorMessage.errors.email">
+            <span class="text-red-accent-4 text-left" >{{ errorMessage.errors.email[0] }}</span>
+          </template>
+        </template>
         <v-text-field type="password" clearable name="password" color="green-accent-4" label="Password" placeholder="Enter password" v-model="password" :rules="rules.passwordRules"></v-text-field>
         <v-text-field type="password" clearable name="password_confirmation" color="green-accent-4" label="Confirm Password" placeholder="Confirm Password" v-model="password_confirmation" :rules="rules.confirmRules"></v-text-field>
-        <v-btn type="button" @click="signUp()" block class="mt-2 mb-5 bg-green-accent-4 text-white pa-5">Register</v-btn>
+        <template v-if="errorMessage">
+          <template v-if="errorMessage.errors.password">
+            <span class="text-red-accent-4 text-left" >{{ errorMessage.errors.password[0] }}</span>
+          </template>
+        </template>
+        <v-btn type="button" :disabled="!isValide" @click="signUp()" block class="mt-2 mb-5 bg-green-accent-4 text-white pa-5">Register</v-btn>
         <div class=" d-flex flex-column align-center">
           <p class="">Or Register With</p>
           <GoogleLogin :callback="callback" class=" my-5"></GoogleLogin>
@@ -30,14 +39,15 @@
 
 
 <script setup>
-import { ref } from 'vue';
+import {  ref, watch } from 'vue';
 
 import { decodeCredential } from 'vue3-google-login';
 // Pinia Store 
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
-const { errors, isSuccess, isValide} = storeToRefs(authStore);
+// const { errors, isSuccess, isValide} = storeToRefs(authStore);
+const { isValide,errors} = storeToRefs(authStore);
 const { register } = authStore;
 
 const username = ref(null);
@@ -45,6 +55,7 @@ const password = ref(null);
 const email = ref(null);
 const phone_number = ref(null);
 const password_confirmation = ref(null);
+const errorMessage = ref(null);
 
 // Login with google 
 const callback =  (res) => {
@@ -68,7 +79,16 @@ const signUp=()=>{
     email: email.value,
   }
   register(user);
+  // console.log(errors.value.errors);
 }
+watch(errors, (newValue, oldValue) => {
+      console.log(`Count changed from ${oldValue} to ${newValue}`);
+      errorMessage.value = newValue;
+      console.log(errorMessage.value);
+})
+// const error = computed(()=>{
+//   return errorMessage.value
+// })
 
 // Validation rules 
 const rules = ref({
