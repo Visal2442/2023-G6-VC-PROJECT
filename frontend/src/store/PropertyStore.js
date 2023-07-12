@@ -23,6 +23,7 @@ export const usePropertyStore = defineStore('property', () => {
 
     // Callback function 
     const showLocation = (location)=>{
+        console.log(location);
         currentLat.value = location.coords.latitude;
         currentLng.value =  location.coords.longitude;
     }
