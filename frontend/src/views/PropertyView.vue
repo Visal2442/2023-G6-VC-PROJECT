@@ -22,7 +22,7 @@
                     </v-col>
                </v-row>
           </v-container>
-          <v-pagination v-if="isFound" v-model="pagination.current" :length="pagination.total" @click="onPageChange()"></v-pagination>
+          <v-pagination v-if="isFound" v-model="pagination.current" :length="pagination.total"  :total-visible="7" @click="onPageChange()"></v-pagination>
      </div>
 </template>
 

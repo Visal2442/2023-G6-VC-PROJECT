@@ -59,8 +59,8 @@ import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker, LPopup, LIcon } from "@vue-leaflet/vue-leaflet";
 import HomeIcon from '../assets/marker/homeIcon.png'
 // Map Configuration 
-const zoom = 8;
-const center = [12.768561493419046, 104.67705945739371];
+const zoom = 12;
+const center = [11.556576059366401, 104.92850555373343];
 const url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const attribution = '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors';
 // Marker Icon 
