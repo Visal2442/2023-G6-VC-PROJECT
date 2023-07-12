@@ -2,7 +2,7 @@
   <v-container fluid class="pa-11">
     <v-row>
         <v-col cols="7">
-            <v-img id="imgDetail" :src="require('../assets/home/living-room-2732939_1280.jpg')"></v-img>
+            <v-img id="imgDetail" :src="property.image"></v-img>
         </v-col>
         <v-col cols="5">
             <v-card class=" pa-5">
@@ -45,7 +45,7 @@
           <l-marker :lat-lng="center" @click="getLatlng">
             <LPopup>
               <v-card class="mx-auto" elevation='0'>
-                <v-img class="align-end text-white" :src="require('../assets/home/living-room-2732939_1280.jpg')">
+                <v-img class="align-end text-white" :src="property.image">
                   <v-card-title>{{property?.property_name}}</v-card-title>
                 </v-img>
 
