@@ -8,14 +8,16 @@ export const useAuthStore = defineStore('auth', () => {
   const errors = ref('');
   const router = useRouter();
   let isValide= ref(false);
+  let token = ref(localStorage.getItem('token'));
 
   // Register 
   let register = (user) => {
     axios.post('/register', user)
     .then((res) => {
         Cookies.set('email', user.email, { expires: 30 });
-        localStorage.setItem('user', res.data.user.id)
-        localStorage.setItem('token', res.data.token)
+        localStorage.setItem('user', res.data.user.id);
+        localStorage.setItem('token', res.data.token);
+        token.value = localStorage.getItem('token');
         router.push('/')
       })
       .catch((err) => {
@@ -28,8 +30,9 @@ export const useAuthStore = defineStore('auth', () => {
     axios.post('/login', user)
       .then((res) => {
         Cookies.set('email', user.email, { expires: 30 });
-        localStorage.setItem('user', res.data.user.id)
-        localStorage.setItem('token', res.data.token)
+        localStorage.setItem('user', res.data.user.id);
+        localStorage.setItem('token', res.data.token);
+        token.value = localStorage.getItem('token');
         router.push('/');
       })
       .catch((err) => {
@@ -48,7 +51,7 @@ export const useAuthStore = defineStore('auth', () => {
         Cookies.remove('email');
         localStorage.removeItem('user');
         localStorage.removeItem('token');
-        window.location.reload();
+        token.value = localStorage.getItem('token');
         router.push('/');
       })
       .catch((err) => {
@@ -60,6 +63,7 @@ export const useAuthStore = defineStore('auth', () => {
     isValide,
     register,
     login,
-    logout
+    logout,
+    token
   };
 });

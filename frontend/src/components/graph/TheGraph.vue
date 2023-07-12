@@ -4,7 +4,6 @@
       <h1 id="h1-home">Data Of Houses</h1>
     </v-row>
      <Bar id="my-chart-id" :data="chartData"/>
-
 </template>
 
 
