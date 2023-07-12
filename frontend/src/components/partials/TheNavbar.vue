@@ -14,34 +14,31 @@
     </v-layout> -->
 
     <!-- Large Screen  -->
-    <v-toolbar class="pa-3" :style="{background:backgroundNavbar}">
+    <v-toolbar class="pa-3" :style="{background:backgroundNavbar}" v-model="cookieEmail">
       <v-toolbar-items class="d-flex align-center">
+
         <img :src="require('../../assets/logo.png')" alt="" width="200">
         <!-- <v-img src="../../assets//dream-house-logo.png" width="400" height="400"></v-img> -->
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items class=" d-flex align-center">
         <div class="text-black">
-          <router-link :to="{ name: 'Home' }" class="text-button text-decoration-none text-black mr-7">Home</router-link>
-          <router-link :to="{ name: 'property' }"
-            class="text-button text-decoration-none text-black mr-7">Property</router-link>
-          <router-link :to="{ name: 'About' }"
-            class="text-button text-decoration-none text-black mr-7">About</router-link>
-          <router-link :to="{ name: 'Map' }" class="text-button text-decoration-none text-black mr-7">Map</router-link>
+          <template v-for="item in navItems" :key="item.name">
+            <router-link :to="{ name: item.name }" class="text-button text-decoration-none text-black mr-7">{{item.title}}</router-link>
+          </template>
         </div>
-      </v-toolbar-items>
-      <v-toolbar-items class="d-flex align-center ml-5 mr-10">
-        <div class=" d-flex align-center" v-if="cookieEmail == undefined">
+
+        <div class="ml-5" v-if="!isLoggedIn">
           <router-link :to="{ name: 'Register' }"
-            class="text-button text-decoration-none text-black">Register</router-link>
-            <h3 class="mx-2">/</h3>
+            class="text-button text-decoration-none text-black mr-2">Register</router-link>
           <router-link :to="{ name: 'Login' }"
             class="text-button text-decoration-none text-black mr-3">Login</router-link>
         </div>
         <div v-else class="pf">
           <v-btn class="mr-3" @click="logout">Logout</v-btn>
-          <img src="../../assets/pf.jpg" width="40" height="40" class="mr-3">
+          <img :src="require('../../assets/pf.jpg')" width="40" height="40" class="mr-3">
         </div>
+
       </v-toolbar-items>
     </v-toolbar>
   </div>
@@ -50,15 +47,34 @@
 <script setup>
 import { ref, computed } from 'vue';
 import Cookies from 'js-cookie';
-import { useAuthStore } from '../../store/AuthStore';
 
+// Pinia Store 
+import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
 const { logout } = authStore;
 
-const cookieEmail = ref(Cookies.get('email'))
+const navItems = ref([
+  { title:'Home', name:'Home'},
+  { title:'Property', name:'property'},
+  { title:'About', name:'About'},
+  { title:'Map', name:'Map'},
+  // { title:'Detail', name:'Detail'},
+])
+
+const cookieEmail = ref('');
+const isLoggedIn = computed(()=>{
+  if(cookieEmail.value != undefined ){
+    return true;
+  }
+  return false;
+})
+const signIn=()=>{
+  cookieEmail.value=Cookies.get('email')
+}
+signIn();
+
 let scrollY = ref(0);
 const background = ref('white');
-
 const onScroll =(e)=>{
   scrollY.value = e.currentTarget.scrollY;
 }
@@ -70,6 +86,7 @@ const backgroundNavbar=computed(()=>{
   }
   return 'none';
 })
+
 </script>
 
 <style scoped>

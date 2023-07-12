@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { ref } from 'vue';
-import axios from 'axios';
+import { ref } from "vue";
+import axios from "axios";
 
 export const usePropertyStore = defineStore('property', () => {
     const properties = ref([]);
@@ -12,6 +12,12 @@ export const usePropertyStore = defineStore('property', () => {
         console.log(res);   
         properties.value = res.data.data;
         console.log(properties.value);
+    }).catch(err=>{
+        console.log(err);
+    }) 
+    // Get 12 properties per page
+    axios.get('/properties/pagination').then(res=>{
+        propertiesPerpage.value= res.data;
     }).catch(err=>{
         console.log(err);
     })

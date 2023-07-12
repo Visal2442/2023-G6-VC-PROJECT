@@ -30,8 +30,7 @@ class Property extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public function district_id()
+    public function district()
     {
         return $this->belongsTo(District::class);
     }
@@ -41,5 +40,14 @@ class Property extends Model
         return $this->hasOne(booking::class);
     }
 
+    public function rentalHouse()
+    {
+        return $this->hasOne(RentalHouse::class);
+    }
+
+    public function rentalRoom()
+    {
+        return $this->hasOne(RentalRoom::class);
+    }
 
 }
