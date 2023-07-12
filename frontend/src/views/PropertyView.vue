@@ -6,7 +6,7 @@
                <!-- </div> -->
           <!-- </div> -->
           <SearchLocation @onSearch="onSearch" @onInput="onInput"></SearchLocation>
-          <SelectTypePrice></SelectTypePrice>
+          <SelectTypePrice @onSelect="onSelect"></SelectTypePrice>
 
           <v-container fluid class="ml-md-9">
                <v-row class="mr-md-10" v-if="isFound">
@@ -42,6 +42,7 @@ const pagination = ref({
 })
 
 const district_id=ref('');
+const type = ref('');
 const isFound = ref(true);
 const notFoundMessage = ref('');
 
@@ -49,6 +50,9 @@ const getProperties = () => {
      let url = ref('/properties/pagination?page=' + pagination.value.current);
      if(district_id.value !== ''){
           url.value = url.value + '&district_id='+district_id.value;
+     }
+     else if(type.value != ''){
+          url.value = url.value + '&type='+type.value;
      }
      axios.get(url.value)
           .then(res => {
@@ -74,6 +78,7 @@ onMounted(() => {
      getProperties();
 });
 
+// Search district 
 const onSearch=(id)=>{
      district_id.value = id;
      getProperties();
@@ -83,6 +88,12 @@ const onInput=(value)=>{
           district_id.value = '';
           getProperties();
      }
+}
+
+// Select type house or room 
+const onSelect=(value)=>{
+     type.value = value;
+     getProperties();
 }
 
 </script>

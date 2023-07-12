@@ -15,24 +15,26 @@
 
                </div>
                <div class="type">
-                    <select name="type" id="type">
-                         <option value="Select Type">Select Type</option>
-                         <option value="house">House</option>
-                         <option value="room">Room</option>
+                    <select name="type" id="type" v-model="selected">
+                         <option value="">Rent Type</option>
+                         <option value="house">House Rent</option>
+                         <option value="room">Room Rent</option>
                     </select>
                </div>
           </div>
      </div>
 </template>
 
-<script>
-export default {
-     data() {
-          return {
+<script setup>
+import { ref, watch , defineEmits} from 'vue';
 
-          }
-     },
-}
+const emit = defineEmits(['onSelect']);
+const selected = ref('');
+
+watch(selected, (value)=>{
+     emit('onSelect', value);
+})
+
 </script>
 <style scoped>
 .price-type {

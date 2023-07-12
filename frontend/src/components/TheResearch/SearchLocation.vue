@@ -1,12 +1,6 @@
 <template>
   <!-- <div class="search"> -->
     <div class="searchLocation d-flex flex-column align-center">
-      <!-- <v-input
-        class="research"
-        placeholder="search here"
-        v-model="searchText"
-        prepend-icon="mdi-account"
-      ></v-input> -->
       <v-text-field class=" w-50"
         density="compact"
         variant="solo"
@@ -16,7 +10,6 @@
         hide-details
         v-model="searchText"
       ></v-text-field>
-
 
       <div class="">
         <span

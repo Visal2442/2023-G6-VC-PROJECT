@@ -37,6 +37,9 @@ class PropertyController extends Controller
         elseif($request->min && $request->max){
             $properties = $properties->whereBetween('price',[$request->min, $request->max])->paginate(1);
         }
+        elseif($request->type){
+            $properties = $properties->where('type', $request->type)->paginate(1);
+        }
         else{
             $properties=$properties->paginate(1);
         }
