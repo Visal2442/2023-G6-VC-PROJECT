@@ -35,14 +35,13 @@ Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/register', [AuthenticationController::class, 'register']);
 
 //search route 
-Route::get('/locations/{name}', [PropertyController::class, 'searchLocation']);
-Route::get('/district/{id}', [PropertyController::class,'showProperty']);
 
 // Property 
 Route::group(['prefix'=>'properties'], function(){
     Route::get('/', [PropertyController::class, 'index']);
     Route::get('/pagination', [PropertyController::class, 'pagination']);
     Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
+    Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
 });
 
 
