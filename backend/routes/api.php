@@ -41,6 +41,7 @@ Route::get('/district/{id}', [PropertyController::class,'showProperty']);
 Route::group(['prefix'=>'properties'], function(){
     Route::get('/', [PropertyController::class, 'index']);
     Route::get('/pagination', [PropertyController::class, 'pagination']);
+    Route::get('/users/{userId}/wishlist', [WishlistController::class, 'index']);
 });
 
 
