@@ -1,11 +1,9 @@
 
  <template>
-  <div>
     <v-row class="my-16 d-flex flex-column" align="center">
       <h1 id="h1-home">Data Of Houses</h1>
     </v-row>
      <Bar id="my-chart-id" :data="chartData"/>
-  </div>
 
 </template>
 

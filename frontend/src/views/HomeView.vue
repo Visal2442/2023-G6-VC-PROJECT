@@ -77,9 +77,9 @@
       </v-col>
     </v-row>
 
-    <!-- <v-row class=""> -->
+    <v-row class="mr-md-10">
           <the-graph></the-graph>
-    <!-- </v-row> -->
+    </v-row>
 
   </v-container>
 </template>
