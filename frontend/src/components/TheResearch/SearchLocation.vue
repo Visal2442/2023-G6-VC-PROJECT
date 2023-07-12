@@ -1,47 +1,74 @@
 <template>
-  <div class="search">
-    <div class="searchLocation">
-      <input
+  <!-- <div class="search"> -->
+    <div class="searchLocation d-flex flex-column align-center">
+      <!-- <v-input
         class="research"
-        type="text"
         placeholder="search here"
-        v-model="searchQuery"
-      />
-      <v-icon size="large" color="white" icon="mdi mdi-magnify"></v-icon>
-      <div v-if="searchResults.length" class="districtCard">
+        v-model="searchText"
+        prepend-icon="mdi-account"
+      ></v-input> -->
+      <v-text-field class=" w-50"
+        density="compact"
+        variant="solo"
+        label="Search District"
+        append-inner-icon="mdi-magnify"
+        single-line
+        hide-details
+        v-model="searchText"
+      ></v-text-field>
+
+
+      <div class="">
         <span
           class="district"
-          v-for="result in searchResults"
-          :key="result.id"
-          >{{ result.name }}</span
+          v-for="district in districts"
+          :key="district.id"
+          @click="onClick(district)"
+          >{{ district.name }}</span
         >
+        <span class="district" v-if="isNotFound">{{ districts.message }}</span>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, defineEmits } from "vue";
 import axios from "axios";
 
-const URL = "http://127.0.0.1:8000/api/locations/";
-const searchQuery = ref("");
-const searchResults = ref([]);
-watch(searchQuery, async (value) => {
-  try {
-    const response = await axios.get(`${URL} + ?name=${value}`);
-    searchResults.value = response.data.data;
-  } catch (error) {
-    console.error(error);
+const emit = defineEmits(['onSearch', 'onInput']);
+const searchText = ref(null);
+const districts = ref([]);
+const isClicked = ref(false)
+const isNotFound = ref(false)
+
+watch(searchText, (newValue) => {
+  emit('onInput', newValue);
+  if(newValue!='' && !isClicked.value){
+    axios.get(`/properties/location/${newValue}`)
+    .then(res=>{
+      isNotFound.value = false;
+      districts.value= res.data.data;
+    }).catch(err=>{
+      isNotFound.value = true;
+      districts.value = err.response.data;
+    });
+  }
+  else{
+    isClicked.value = false;
+    districts.value = [];
   }
 });
+const onClick = (district)=>{
+  searchText.value= district.name;
+  isClicked.value = true;
+    emit('onSearch', district.id);
+}
 </script>
 
 <style scoped>
 .search {
   text-align: center;
-  margin-top: -40%;
-  margin-bottom: 40%;
 }
 .research {
   width: 40.5%;
@@ -58,8 +85,6 @@ watch(searchQuery, async (value) => {
 }
 .districtCard {
   width: 43.9%;
-  margin-left: 27.4%;
-  margin-top: -5px;
   text-align: center;
   background: white;
   box-shadow: 0px 0px 6px 0px rgba(128, 128, 128, 0.874);
@@ -73,7 +98,6 @@ watch(searchQuery, async (value) => {
 .district {
   display: flex;
   justify-content: center;
-  height: auto;
 }
 .district:hover {
   background-color: rgb(228, 228, 228);

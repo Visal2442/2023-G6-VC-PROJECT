@@ -39,8 +39,8 @@ export default {
      display: flex;
      justify-content: center;
      align-items: center;
-     margin-top: -38%;
-     margin-bottom: 35%;
+     /* margin-top: -38%; */
+     /* margin-bottom: 35%; */
 }
 
 .select {

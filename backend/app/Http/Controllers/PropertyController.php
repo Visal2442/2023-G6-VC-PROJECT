@@ -23,44 +23,26 @@ class PropertyController extends Controller
         $name = $request->name;
         $districts = District::where('name', 'like', '%' . $name . '%')->get();
         if ($districts->isEmpty()) {
-            return response()->json(['message' => 'Districts not found for "' . $name . '"'], 404);
+            return response()->json(['message' => 'District Not Found' ], 404);
         }
         return response()->json(['success' => true, 'data' => $districts], 200);
     }
-    
-    public function pagination()
+    // Get 12 properties perpage
+    public function pagination(Request $request)
     {
-        $properties = Property::paginate(1);
-        return response()->json(['success'=>true, 'data'=>$properties], 200);
-    }
-
-    ///show property  by Id distric 
-    public function showProperty($districtId)
-    {
-        $properties = Property::where('district_id', $districtId)->get();
-
-        if ($properties->isEmpty()) {
-            return response()->json(['message' => 'No properties found for district ' . $districtId], 404);
+        $properties= DB::table('properties');
+        if($request->district_id != ''){
+            $properties = $properties->where('district_id',$request->district_id)->paginate(1);
         }
-
-        return response()->json(['success' => true, 'data' => $properties], 200);
-    }
-
-    // show properties by order price
-
-    public function showPropertyByPrice($minPrice, $maxPrice)
-    {
-        $properties = Property::whereIn('type', ['room', 'house'])
-        ->where('available', true)
-            ->whereBetween('price', [$minPrice, $maxPrice])
-            ->orderBy('price')
-            ->with(['district', 'user'])
-            ->get();
-
-        if ($properties->isEmpty()) {
-            return response()->json(['success' => false, 'message' => 'No properties found within the specified price range.'], 404);
+        elseif($request->min && $request->max){
+            $properties = $properties->whereBetween('price',[$request->min, $request->max])->paginate(1);
         }
-
-        return response()->json(['success' => true, 'data' => $properties], 200);
+        else{
+            $properties=$properties->paginate(1);
+        }
+        if($properties->total()>0){
+            return response()->json(['success'=>true, 'data'=>$properties], 200);
+        }
+        return response()->json(['message'=>'Property Not Found'], 404);
     }
 }
