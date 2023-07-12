@@ -9,18 +9,16 @@
         <h3 class="text-green-accent-4 mb-5">Login Account</h3>
       </div>
       <v-expand-transition>
-        <v-alert type="error" class="text-red-accent-4 text-left mb-5" v-if="isSuccess && errors" :text='errors'></v-alert>
+        <v-alert type="error" v-if="errorMessage"  class="text-red-accent-4 text-left mb-5" :text='errorMessage.message'></v-alert>
       </v-expand-transition>
       <v-form fast-fail x="d-flex flex-column" v-model="isValide">
         <v-text-field type="email" clearable color="green-accent-4" label="Email" placeholder="Enter email address" v-model="email" :rules="rules.emailRules"></v-text-field>
-
         <v-text-field type="password" clearable color="green-accent-4" label="Password" name="password" placeholder="Enter password" v-model="password" :rules="rules.passwordRules"></v-text-field>
-
         <div class=" d-flex flex-column align-center">
           <p class="">Or Login With</p>
           <GoogleLogin :callback="callback" class=" my-5"></GoogleLogin>
         </div>
-        <v-btn type="button" @click="signIn" block class="mt-2 mb-5 bg-green-accent-4 text-white">Login</v-btn>
+        <v-btn type="button" @click="signIn" :disabled="!isValide" block class="mt-2 mb-5 bg-green-accent-4 text-white">Login</v-btn>
         <p>Don't have an account? | <router-link :to="{ name: 'Register' }" class="">Register Here</router-link></p>
       </v-form>
     </v-sheet>
@@ -28,18 +26,18 @@
 </v-container>
 </template>
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { decodeCredential } from 'vue3-google-login';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
 
-const { isValide, isSuccess, errors } = storeToRefs(authStore);
+const { isValide, errors } = storeToRefs(authStore);
 const { login } = authStore;
 
 const password = ref(null);
 const email = ref(null);
-
+const errorMessage = ref(null);
 const callback =  (res) => {
     console.log(decodeCredential(res.credential));
     const userDetail = decodeCredential(res.credential);
@@ -58,6 +56,12 @@ const signIn=()=>{
   }
   login(user);
 }
+
+watch(errors,(newValue, oldValue) => {
+  console.log('Old value: ' + oldValue);
+  console.log('New value: ' + newValue);
+  errorMessage.value = newValue;
+})
 
 
 // Validation rules 
