@@ -90,7 +90,7 @@ class AuthenticationController extends Controller
             return response()->json(["message" => "login success", "user" => $user, "token" => $token], 200);
         } else {
             // Authentication failed
-            return response()->json(['status' => false, 'errors' => 'Invalid email or password'], 401);
+            return response()->json(['status' => false, 'message' => 'Invalid email or password'], 401);
         }
     }
 }
