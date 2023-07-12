@@ -6,10 +6,8 @@ import axios from 'axios';
 
 export const useAuthStore = defineStore('auth', () => {
   const errors = ref('');
-  const isSuccess = ref(true);
   const router = useRouter();
   let isValide= ref(false);
-
 
   // Register 
   let register = (user) => {
@@ -18,44 +16,35 @@ export const useAuthStore = defineStore('auth', () => {
         Cookies.set('email', user.email, { expires: 30 });
         localStorage.setItem('user', res.data.user.id)
         localStorage.setItem('token', res.data.token)
-        // resetForm();
         router.push('/')
       })
       .catch((err) => {
         errors.value = err.response.data
-        isSuccess.value = err.response.data.status
       })
   };
 
+  // Login 
   let login = (user) => {
-    // const user = {
-    //   email: email.value,
-    //   password: password.value
-    // }
     axios.post('/login', user)
       .then((res) => {
         Cookies.set('email', user.email, { expires: 30 });
         localStorage.setItem('user', res.data.user.id)
         localStorage.setItem('token', res.data.token)
-        // resetForm();
-        console.log(Cookies.get('email'));
         router.push('/');
       })
       .catch((err) => {
-        console.log(err.response.data);
-        errors.value = err.response.data.errors;
-        isSuccess.value = err.response.data.status
+        errors.value = err.response.data;
       })
     };
 
+    // Log out 
     const logout = () => {
       axios.post('/logout', null, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         Cookies.remove('email');
         localStorage.removeItem('user');
         localStorage.removeItem('token');
@@ -63,26 +52,10 @@ export const useAuthStore = defineStore('auth', () => {
       })
       .catch((err) => {
         errors.value = err.response.data.errors;
-        // isSuccess.value = err.response.data.status;
       });
-      console.log(Cookies.get('email'));
     };
-
-  // const resetForm= ()=>{
-  //   username.value=''
-  //   password.value=''
-  //   password_confirmation.value=''
-  //   phone_number.value=''
-  //   email.value=''
-  // };
   return {
-    // username,
-    // password,
-    // phone_number,
-    // email,
-    // password_confirmation,
     errors,
-    isSuccess,
     isValide,
     register,
     login,

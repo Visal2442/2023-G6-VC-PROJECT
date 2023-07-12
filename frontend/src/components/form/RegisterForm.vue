@@ -12,18 +12,22 @@
         <v-text-field clearable color="green-accent-4" label="Username" placeholder="Enter your username" v-model="username" :rules="rules.usernameRules"></v-text-field>
         <v-text-field type="tel" clearable color="green-accent-4" label="Phone Number" placeholder="Enter phone number" v-model="phone_number" :rules="rules.phoneRules"></v-text-field>
         <v-text-field type="email" clearable color="green-accent-4" label="Email" placeholder="Enter email address" v-model="email" :rules="rules.emailRules"></v-text-field>
+        <!-- display error message  -->
         <template v-if="errorMessage">
           <template v-if="errorMessage.errors.email">
             <span class="text-red-accent-4 text-left" >{{ errorMessage.errors.email[0] }}</span>
           </template>
         </template>
+        <!--  -->
         <v-text-field type="password" clearable name="password" color="green-accent-4" label="Password" placeholder="Enter password" v-model="password" :rules="rules.passwordRules"></v-text-field>
         <v-text-field type="password" clearable name="password_confirmation" color="green-accent-4" label="Confirm Password" placeholder="Confirm Password" v-model="password_confirmation" :rules="rules.confirmRules"></v-text-field>
+        <!-- display error message  -->
         <template v-if="errorMessage">
           <template v-if="errorMessage.errors.password">
             <span class="text-red-accent-4 text-left" >{{ errorMessage.errors.password[0] }}</span>
           </template>
         </template>
+        <!--  -->
         <v-btn type="button" :disabled="!isValide" @click="signUp()" block class="mt-2 mb-5 bg-green-accent-4 text-white pa-5">Register</v-btn>
         <div class=" d-flex flex-column align-center">
           <p class="">Or Register With</p>
@@ -81,7 +85,8 @@ const signUp=()=>{
   register(user);
   // console.log(errors.value.errors);
 }
-watch(errors, (newValue, oldValue) => {
+watch(errors
+, (newValue, oldValue) => {
       console.log(`Count changed from ${oldValue} to ${newValue}`);
       errorMessage.value = newValue;
       console.log(errorMessage.value);
@@ -96,7 +101,9 @@ const rules = ref({
                   value => (value && value.length >= 5) || 'Username at least 5 characters',],
   emailRules: [   value => !!value || 'Email is required',],
   phoneRules: [   value => !!value || 'Phone Number is required ',
-                  value => (value || '').length >= 8 || 'Phone at least 8 digits ',],
+                  value => (value || '').length >= 8 || 'Phone at least 8 digits ',
+                  value=> /^\+?[0]\d{1,20}$/.test(value) || 'Phone Number is invalid'
+              ],
   passwordRules:[ value => !!value || 'Password is required',
                   value => (value && value.length >= 8) || 'Password at least 8 characters'],
   confirmRules:[  value => !!value || 'Confirm Password is required',
