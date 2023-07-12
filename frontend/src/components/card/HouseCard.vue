@@ -13,7 +13,7 @@
         </v-card-actions>
         <v-card-actions>
             <div class="d-flex align-center">
-                <v-avatar :image="require('../../assets/pf.jpg')" class=" ml-2"></v-avatar>
+                <v-avatar @click="wishlist" :image="require('../../assets/pf.jpg')" class=" ml-2"></v-avatar>
                 <v-card-subtitle>Sal</v-card-subtitle>
             </div>
             <v-spacer></v-spacer>
@@ -25,8 +25,11 @@
 <script setup>
 import { defineProps } from 'vue';
 import BaseButton from '../widget/BaseButton.vue'
-
 defineProps(['property'])
+
+
+
+
 
 </script>
 
