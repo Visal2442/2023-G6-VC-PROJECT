@@ -36,7 +36,6 @@ import { decodeCredential } from 'vue3-google-login';
 // Pinia Store 
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
-import { storeToRefs } from 'pinia';
 const authStore = useAuthStore();
 const { errors, isSuccess, isValide} = storeToRefs(authStore);
 const { register } = authStore;

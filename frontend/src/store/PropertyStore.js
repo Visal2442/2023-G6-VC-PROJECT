@@ -4,6 +4,7 @@ import axios from "axios";
 
 export const usePropertyStore = defineStore('property', () => {
     const properties = ref([]);
+    const propertiesPerpage = ref([]);
     let currentLat = ref(0);
     let currentLng = ref(0);
 
@@ -43,6 +44,7 @@ export const usePropertyStore = defineStore('property', () => {
 
     return {
         properties,
+        propertiesPerpage,
         showLocation,
         currentLat,
         currentLng,
