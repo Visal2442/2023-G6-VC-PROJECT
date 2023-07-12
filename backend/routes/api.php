@@ -42,12 +42,8 @@ Route::post('/register', [AuthenticationController::class, 'register']);
 Route::group(['prefix'=>'properties'], function(){
     Route::get('/', [PropertyController::class, 'index']);
     Route::get('/pagination', [PropertyController::class, 'pagination']);
-<<<<<<< HEAD
-    Route::get('/users/{userId}/wishlist', [WishlistController::class, 'index']);
-=======
     Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
     Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
->>>>>>> main
 });
 Route::get('/users/wishlist/{userID}', [WishlistController::class, 'getDataWishlist']);
 

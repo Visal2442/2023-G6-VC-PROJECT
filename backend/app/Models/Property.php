@@ -34,11 +34,9 @@ class Property extends Model
     {
         return $this->belongsTo(District::class);
     }
-<<<<<<< HEAD
     public function propertyWishlist(){
         return $this->hasMany(Wishlist::class);
     }
-=======
     
     public function booking()
     {
@@ -55,5 +53,4 @@ class Property extends Model
         return $this->hasOne(RentalRoom::class);
     }
 
->>>>>>> main
 }
