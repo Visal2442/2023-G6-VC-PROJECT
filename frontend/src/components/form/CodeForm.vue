@@ -61,7 +61,6 @@ import axios from "axios";
 export default {
   data() {
     return {
-      // email: "",
       verificationCode: "",
       password: "",
       passwordConfirmation: "",
@@ -79,12 +78,6 @@ export default {
         this.passwordConfirmation
       );
     },
-    // emailRules() {
-    //   return [
-    //     (v) => !!v || "Email is required",
-    //     (v) => /.+@.+/.test(v) || "Email must be valid",
-    //   ];
-    // },
     verificationCodeRules() {
        return [
         (v) => !!v || "Verification code is required",
@@ -108,7 +101,6 @@ export default {
   methods: {
     resetPassword() {
       const data = {
-        // email: this.email,
         verification_code: this.verificationCode,
         password: this.password,
         password_confirmation: this.passwordConfirmation,

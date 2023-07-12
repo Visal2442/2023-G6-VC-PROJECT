@@ -1,5 +1,4 @@
 <template>
-  <!-- Resource: vuetify  -->
   <v-row justify="center" align="center">
     <img
     :src="require('../../assets/forgot_password.png')" 
@@ -28,7 +27,7 @@
           :to="{ name: 'Code' }"
           @click="submitForm()"
           block
-          class="mt-2 mb-5 bg-green-accent-4 text-white btn" 
+          class="mt-2 mb-5 bg-green-accent-4 text-white" 
          
           >Send</v-btn
           >
@@ -46,7 +45,7 @@
       </v-form>
     </v-sheet>
   </v-row>
-  <!-- <h1>{{ emailSend }}</h1> -->
+
 </template>
 
 <script>
