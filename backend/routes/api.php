@@ -3,6 +3,11 @@
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\DistrictControllr;
+use App\Http\Controllers\ProvinceController;
+use App\Models\Booking;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -29,13 +34,15 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/register', [AuthenticationController::class, 'register']);
 
+//search route 
+
 // Property 
 Route::group(['prefix'=>'properties'], function(){
     Route::get('/', [PropertyController::class, 'index']);
     Route::get('/pagination', [PropertyController::class, 'pagination']);
+    Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
+    Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
 });
-
-
 
 
 
