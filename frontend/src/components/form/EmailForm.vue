@@ -1,5 +1,7 @@
 <template>
 
+
+
   <v-row justify="center" align="center">
     <img
     :src="require('../../assets/forgot_password.png')" 
@@ -22,10 +24,10 @@
           placeholder="Enter email address"
           v-model="email"
           :rules="rules.email"
+          :error-messages="message"
         ></v-text-field> 
         <v-btn
           v-if="email"
-          :to="{ name: 'Code' }"
           @click="submitForm()"
           block
           class="mt-2 mb-5 bg-green-accent-4 text-white" 
@@ -51,10 +53,11 @@
 
 <script>
 import axios from "axios";
-
+// import { useRouter } from "vue-router";
 export default {
   data() {
     return {
+      message:'',
       email: "",
       rules: {
         email: [
@@ -73,14 +76,22 @@ export default {
             "http://127.0.0.1:8000/api/reset_password_request",
             { email: this.email }
           );
+          // this.showAlert = true
+          this.$router.push('/code');
           console.log(response.data);
+          // alert("Aleady sent to your email!");
+  
         } catch (error) {
-          console.error(error.response.data.error);
+          this.message= error.response.data.message;
           
-          // console.log(error.response.error);
         }
       }
     },
+    // isValidated() {
+    //   if(error.response.data.status !== false) {
+        
+    //   }
+    // }
   },
 };
 </script>
