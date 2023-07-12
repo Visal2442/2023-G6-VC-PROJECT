@@ -34,10 +34,6 @@ class Property extends Model
     {
         return $this->belongsTo(District::class);
     }
-    public function district()
-    {
-        return $this->belongsTo(District::class);
-    }
 
     public function rentalHouse()
     {
