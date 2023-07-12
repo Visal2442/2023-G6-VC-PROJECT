@@ -5,7 +5,9 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DistrictControllr;
+use App\Http\Controllers\GraphController;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\WishlistController;
 use App\Models\Booking;
 use App\Models\Province;
 use Illuminate\Http\Request;
@@ -36,13 +38,21 @@ Route::post('/register', [AuthenticationController::class, 'register']);
 Route::post('/reset_password', [ForgotPasswordController::class, 'resetPassword']);
 Route::post('/reset_password_request', [ForgotPasswordController::class, 'resetPasswordRequest']);
 //search route 
-Route::get('/locations/{name}', [PropertyController::class, 'searchLocation']);
-Route::get('/district/{id}', [PropertyController::class,'showProperty']);
+
 // Property 
 Route::group(['prefix'=>'properties'], function(){
     Route::get('/', [PropertyController::class, 'index']);
     Route::get('/pagination', [PropertyController::class, 'pagination']);
+    Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
+    Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
 });
+Route::get('/users/wishlist/{userID}', [WishlistController::class, 'getDataWishlist']);
+
+
+
+
+
+Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);
 
 
 
