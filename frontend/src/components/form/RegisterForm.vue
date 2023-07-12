@@ -37,10 +37,10 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-
 import { decodeCredential } from 'vue3-google-login';
-import { storeToRefs } from 'pinia';
+
 import { useAuthStore } from '../../store/AuthStore';
+import { storeToRefs } from 'pinia';
 const authStore = useAuthStore();
 const { username, password, phone_number, email, password_confirmation, errors, isSuccess, alert, isValide} = storeToRefs(authStore);
 const { register } = authStore;
