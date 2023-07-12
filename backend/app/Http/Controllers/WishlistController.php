@@ -12,12 +12,11 @@ class WishlistController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($userId)
+    public function getDataWishlist($userID)
     {
-        $user = User::findOrFail($userId);
-        $wishlistItems = $user->wishlistItems;
-
-        return WishlistResources::collection($wishlistItems);
+        $wishlist = Wishlist::where('user_id', $userID)->get();
+        $wishlistFormatted = WishlistResources::collection($wishlist);
+        return response()->json(['success' => true, 'data' => $wishlistFormatted]);
     }
 
     /**

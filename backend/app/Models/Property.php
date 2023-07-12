@@ -34,5 +34,7 @@ class Property extends Model
     {
         return $this->belongsTo(District::class);
     }
-
+    public function propertyWishlist(){
+        return $this->hasMany(Wishlist::class);
+    }
 }

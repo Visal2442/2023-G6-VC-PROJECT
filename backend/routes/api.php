@@ -6,6 +6,7 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DistrictControllr;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\WishlistController;
 use App\Models\Booking;
 use App\Models\Province;
 use Illuminate\Http\Request;
@@ -43,6 +44,11 @@ Route::group(['prefix'=>'properties'], function(){
     Route::get('/pagination', [PropertyController::class, 'pagination']);
     Route::get('/users/{userId}/wishlist', [WishlistController::class, 'index']);
 });
+Route::get('/users/wishlist/{userID}', [WishlistController::class, 'getDataWishlist']);
+
+
+
+
 
 
 
