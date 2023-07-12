@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Booking extends Model
+class Wishlist extends Model
 {
     use HasFactory;
     protected $fillable = 
@@ -13,9 +13,6 @@ class Booking extends Model
         'user_id',
         'propery_id'
     ];
-
-
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -25,5 +22,4 @@ class Booking extends Model
     {
         return $this->belongsTo(Property::class);
     }
-
 }

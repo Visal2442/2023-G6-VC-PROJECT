@@ -5,13 +5,15 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DistrictControllr;
+use App\Http\Controllers\GraphController;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\WishlistController;
 use App\Models\Booking;
 use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
-
+use App\Http\Controllers\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +35,8 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/register', [AuthenticationController::class, 'register']);
-
+Route::post('/reset_password', [ForgotPasswordController::class, 'resetPassword']);
+Route::post('/reset_password_request', [ForgotPasswordController::class, 'resetPasswordRequest']);
 //search route 
 
 // Property 
@@ -43,6 +46,14 @@ Route::group(['prefix'=>'properties'], function(){
     Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
     Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
 });
+Route::get('/users/wishlist/{userID}', [WishlistController::class, 'getDataWishlist']);
+
+
+
+
+
+Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);
+
 
 
 

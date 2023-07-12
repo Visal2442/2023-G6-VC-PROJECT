@@ -27,7 +27,7 @@
     <v-row class="mr-md-10">
       <template v-for="i in 4" :key="i">
         <v-col md="3">
-          <house-card></house-card>
+          <!-- <house-card></house-card> -->
           
           <!-- <house-card></house-card> -->
         </v-col>
@@ -77,15 +77,15 @@
       </v-col>
     </v-row>
 
-    <v-row class="mr-md-10">
+    <!-- <v-row class=""> -->
           <the-graph></the-graph>
-    </v-row>
+    <!-- </v-row> -->
 
   </v-container>
 </template>
 
 <script setup>
-import HouseCard from '../components/card/HouseCard.vue';
+// import HouseCard from '../components/card/HouseCard.vue';
 import BaseButton from '../components/widget/BaseButton.vue';
 import TheGraph from '../components/graph/TheGraph.vue';
 

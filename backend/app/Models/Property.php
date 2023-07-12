@@ -34,6 +34,14 @@ class Property extends Model
     {
         return $this->belongsTo(District::class);
     }
+    public function propertyWishlist(){
+        return $this->hasMany(Wishlist::class);
+    }
+    
+    public function booking()
+    {
+        return $this->hasOne(booking::class);
+    }
 
     public function rentalHouse()
     {

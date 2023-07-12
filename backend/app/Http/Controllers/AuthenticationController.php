@@ -32,7 +32,7 @@ class AuthenticationController extends Controller
                 ]);
                 $token = $user->createToken('API Token', ['select'])->plainTextToken;
                 return response()->json([
-                    'success' => 'true',
+                    'status' => true,
                     'user' => $user,
                     'token' => $token,
                 ], 200);
@@ -40,11 +40,10 @@ class AuthenticationController extends Controller
         }
             $validator = Validator::make($request->all(), [
                 'email' => ['unique:users', 'email'],
-                // 'password_confirmation' => ['required'],
                 'password' => ['confirmed'],
             ]);
             if ($validator->fails()) {
-                return response()->json(['success' => 'false', 'errors' => $validator->errors()], 401);
+                return response()->json(['status' =>false, 'errors' => $validator->errors()], 401);
             }
         $user = User::create([
             'username' => $request->username,
@@ -56,7 +55,7 @@ class AuthenticationController extends Controller
         $token = $user->createToken('API Token', ['select'])->plainTextToken;
 
         return response()->json([
-            'success' => 'true',
+            'status' => true,
             'user' => $user,
             'token' => $token,
         ], 200);
@@ -91,7 +90,7 @@ class AuthenticationController extends Controller
             return response()->json(["message" => "login success", "user" => $user, "token" => $token], 200);
         } else {
             // Authentication failed
-            return response()->json(['success' => 'false', 'errors' => 'Invalid email or password'], 401);
+            return response()->json(['status' => false, 'message' => 'Invalid email or password'], 401);
         }
     }
 }
