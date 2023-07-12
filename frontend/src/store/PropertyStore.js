@@ -1,17 +1,18 @@
 import { defineStore } from "pinia";
-import { ref } from 'vue';
-import axios from 'axios';
+import { ref } from "vue";
+import axios from "axios";
 
 export const usePropertyStore = defineStore('property', () => {
     const properties = ref([]);
-    const propertiesPerpage = ref({});
+    const propertiesPerpage = ref([]);
     let currentLat = ref(0);
     let currentLng = ref(0);
 
     // Get all properties
     axios.get('/properties').then(res=>{
+        console.log(res);   
         properties.value = res.data.data;
-        // console.log(properties.value);
+        console.log(properties.value);
     }).catch(err=>{
         console.log(err);
     }) 
@@ -21,7 +22,6 @@ export const usePropertyStore = defineStore('property', () => {
     }).catch(err=>{
         console.log(err);
     })
-
     // Callback function 
     const showLocation = (location)=>{
         currentLat.value = location.coords.latitude;
@@ -33,12 +33,21 @@ export const usePropertyStore = defineStore('property', () => {
     // Get current location 
     navigator.geolocation.getCurrentPosition(showLocation, showError);
 
+    axios.get('/getDataGrap').then(res=>{
+        console.log(res);   
+        // properties.value = res.data.data;
+        // console.log(properties.value);
+    }).catch(err=>{
+        console.log(err);
+    })
+
+
     return {
         properties,
         propertiesPerpage,
         showLocation,
         currentLat,
         currentLng,
-        showError,
+        showError
     }
 });

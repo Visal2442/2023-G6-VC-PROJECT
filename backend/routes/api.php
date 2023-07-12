@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DistrictControllr;
+use App\Http\Controllers\GraphController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\WishlistController;
 use App\Models\Booking;
@@ -36,19 +37,25 @@ Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/register', [AuthenticationController::class, 'register']);
 
 //search route 
-Route::get('/locations/{name}', [PropertyController::class, 'searchLocation']);
-Route::get('/district/{id}', [PropertyController::class,'showProperty']);
+
 // Property 
 Route::group(['prefix'=>'properties'], function(){
     Route::get('/', [PropertyController::class, 'index']);
     Route::get('/pagination', [PropertyController::class, 'pagination']);
+<<<<<<< HEAD
     Route::get('/users/{userId}/wishlist', [WishlistController::class, 'index']);
+=======
+    Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
+    Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
+>>>>>>> main
 });
 Route::get('/users/wishlist/{userID}', [WishlistController::class, 'getDataWishlist']);
 
 
 
 
+
+Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);
 
 
 

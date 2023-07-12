@@ -13,6 +13,9 @@ class Booking extends Model
         'user_id',
         'propery_id'
     ];
+
+
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -22,4 +25,5 @@ class Booking extends Model
     {
         return $this->belongsTo(Property::class);
     }
+
 }
