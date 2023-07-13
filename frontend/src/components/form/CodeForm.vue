@@ -106,8 +106,7 @@ export default {
         password_confirmation: this.passwordConfirmation,
       };
 
-      axios
-        .post("http://127.0.0.1:8000/api/reset_password", data)
+      axios.post("http://127.0.0.1:8000/api/reset_password", data)
         .then((response) => {
           // Handle success response
           console.log(response.data);

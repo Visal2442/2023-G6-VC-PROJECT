@@ -24,7 +24,6 @@ class ForgotPasswordController extends Controller
             return response()->json([
                 'message' => 'Validation failed',
                 'errors' => $validator->errors(),
-                'status' =>false,
             ], 422);
         }
     
@@ -34,9 +33,8 @@ class ForgotPasswordController extends Controller
         if (!$user) {
             // User not found, return a success response
             return response()->json([
-                'message' => 'Email address not found',
-                'status' => false,
-            ], 404);
+                'message' => 'We have sent a verification code to your email address',
+            ]);
         }
     
         // Generate a random verification code and save it to the user's record
@@ -56,19 +54,18 @@ class ForgotPasswordController extends Controller
                 // Error sending email, return an error response
                 return response()->json([
                     'message' => 'Failed to send email. Please try again later.',
-                ], 404);
+                ], 500);
             }
     
             // Email sent successfully, return a success response
             return response()->json([
                 'message' => 'We have sent a verification code to your email address',
-                'status' => true,
-            ], 200);
+            ]);
         } else {
             // Error saving user record, return an error response
             return response()->json([
                 'message' => 'Failed to save user record. Please try again later.',
-            ], 404);
+            ], 500);
         }
     }
     
@@ -79,12 +76,7 @@ class ForgotPasswordController extends Controller
             'password' => ['required|confirmed|min:8']
 
         ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors(),
-                'status' =>false,
-            ], 422);
-        }
+
         $user = User::where('verification_code', $request->verification_code)->first();
         if (!$user) {
             return response()->json([

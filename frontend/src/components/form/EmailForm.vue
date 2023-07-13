@@ -39,22 +39,15 @@ export default {
   },
 
   methods: {
-    async submitForm() {
+    submitForm() {
       if (this.$refs.form.validate()) {
-        try {
-          const response = await axios.post(
-            "http://127.0.0.1:8000/api/reset_password_request",
-            { email: this.email }
-          );
-          // this.showAlert = true
-          this.$router.push('/code');
-          console.log(response.data);
-          // alert("Aleady sent to your email!");
-
-        } catch (error) {
+         axios.post("http://127.0.0.1:8000/api/reset_password_request",{ email: this.email })
+          .then(()=>{
+            localStorage.setItem('email', this.email);
+            this.$router.push('/code');
+          }).catch(error=>{
           this.message = error.response.data.message;
-
-        }
+          })
       }
     },
   },
