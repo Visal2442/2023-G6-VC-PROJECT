@@ -13,7 +13,7 @@ use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
-
+use App\Http\Controllers\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +35,8 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/register', [AuthenticationController::class, 'register']);
-
+Route::post('/reset_password', [ForgotPasswordController::class, 'resetPassword']);
+Route::post('/reset_password_request', [ForgotPasswordController::class, 'resetPasswordRequest']);
 //search route 
 
 // Property 
@@ -53,7 +54,6 @@ Route::post('/wishlist', [WishlistController::class, 'createWishlist']);
 
 
 Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);
-
 
 
 

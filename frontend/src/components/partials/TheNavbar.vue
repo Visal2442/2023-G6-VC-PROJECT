@@ -45,13 +45,15 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import Cookies from 'js-cookie';
 
 // Pinia Store 
 import { useAuthStore } from '../../store/AuthStore';
+import { storeToRefs } from 'pinia';
 const authStore = useAuthStore();
 const { logout } = authStore;
+const { token} = storeToRefs(authStore);
 
 const navItems = ref([
   { title:'Home', name:'Home'},
@@ -63,11 +65,14 @@ const navItems = ref([
 ])
 
 const cookieEmail = ref('');
-const isLoggedIn = computed(()=>{
-  if(cookieEmail.value != undefined ){
-    return true;
+const isLoggedIn = ref(false);
+watch(token,(newValue)=>{
+  if(newValue!=null){
+    isLoggedIn.value = true;
   }
-  return false;
+  else{
+    isLoggedIn.value = false;
+  }
 })
 const signIn=()=>{
   cookieEmail.value=Cookies.get('email')
