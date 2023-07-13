@@ -32,8 +32,9 @@ export const useWishlistStore = defineStore('wishlist', () => {
      axios
      .get(`/wishlist/${user.value}`)
      .then((res) => {
+        
           getWishlist.value = res.data.data;
-          // console.log(dataWishlist.value);
+         
                })
                .catch((err) => {
                console.log(err);
