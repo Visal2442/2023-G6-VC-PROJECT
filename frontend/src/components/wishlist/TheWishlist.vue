@@ -14,7 +14,7 @@
         </div>
         <div class="card-center">
           <h3 class="title">{{ property.property.type }}</h3>
-          <p>{{ property.property.name }}</p>
+          <h4>{{ property.property.property_name }}</h4>
           <p> <v-icon icon="mdi mdi-star"></v-icon>{{ property.property.description }}</p>
           <p><img src="https://cdn-icons-png.flaticon.com/512/1865/1865269.png" alt="" class="location">{{
             property.property.district.name }}</p>
