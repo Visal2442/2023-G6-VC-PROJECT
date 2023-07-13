@@ -15,39 +15,24 @@ class WishlistController extends Controller
     public function getDataWishlist($userID)
     {
         $wishlist = Wishlist::where('user_id', $userID)->get();
+
         $wishlistFormatted = WishlistResources::collection($wishlist);
+        
         return response()->json(['success' => true, 'data' => $wishlistFormatted]);
+       
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+   
+    public function createWishlist(Request $request)
     {
-        //
+        $wishlist = Wishlist::create([
+            'user_id' => $request->user_id,
+            'property_id' => $request->property_id,
+            
+        ]);
+        return response()->json(['success' => true, 'data' => $wishlist],200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Wishlist $wishlist)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Wishlist $wishlist)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Wishlist $wishlist)
-    {
-        //
-    }
+    
+    
 }

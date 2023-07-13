@@ -11,7 +11,7 @@ class Wishlist extends Model
     protected $fillable = 
     [
         'user_id',
-        'propery_id'
+        'property_id'
     ];
     public function user()
     {

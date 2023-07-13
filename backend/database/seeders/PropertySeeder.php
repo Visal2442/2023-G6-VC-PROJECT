@@ -76,9 +76,9 @@ class PropertySeeder extends Seeder
                 'number_of_bathroom' => 3,
                 'number_of_kitchen' => 3,
                 'available'=>true,
-                'image' => 'https://lh5.googleusercontent.com/p/AF1QipMltzMAqugX9JfidiGhOgVgPEX4qa552IqVeokZ=w408-h905-k-no',
-                'latitude' => 11.578553894374926,  
-                'longitude' => 104.88560966564638,
+                'image' => 'https://dq5r178u4t83b.cloudfront.net/wp-content/uploads/sites/72/2018/01/24160505/Room_LuxuryClubking_12.jpg',
+                'latitude' => 11.554953174392393,
+                'longitude' =>  104.91107512683642,
                 'district_id'=>1,
                 'user_id' =>1
             ],

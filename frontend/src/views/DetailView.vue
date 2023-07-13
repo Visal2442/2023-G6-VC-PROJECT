@@ -104,6 +104,7 @@ let markerLat = ref(0);
 let markerLng = ref(0);
 
 const getLatlng = (coordinate) => {
+  console.log(coordinate.latlng.lat);
   markerLat.value = coordinate.latlng.lat
   markerLng.value = coordinate.latlng.lng
 }

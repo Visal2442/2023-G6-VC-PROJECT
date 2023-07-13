@@ -1,44 +1,29 @@
 <template>
   <div>
-    <TheWishlist></TheWishlist>
-  </div>
-</template>
-<script setup>
-import TheWishlist from "../components/wishlist/TheWishlist.vue"
-</script>
-<style scoped>
-</style>
-
-
-
-
-
-<!-- <template>
-  <div>
-    <TheNavbar></TheNavbar>
     <div>
       <v-btn class="ma-2" color="orange-darken-2">
         <v-icon start icon="mdi mdi-arrow-left"></v-icon>
         Back
       </v-btn>
     </div>
-    <div class="card" v-for="property of getWishlist" :key="property" >
-     
+    <div class="card" v-for="property of getWishlist" :key="property">
+
       <div class="d-flex mr-4">
         <div class="img">
           <img :src="property.property.image" alt="">
         </div>
         <div class="card-center">
-          <h3 class="title">{{ property.property.type}}</h3>
+          <h3 class="title">{{ property.property.type }}</h3>
           <p>{{ property.property.name }}</p>
-          <p> <v-icon icon="mdi mdi-star"></v-icon>{{ property.property.description}}</p>
-          <p><img src="https://cdn-icons-png.flaticon.com/512/1865/1865269.png" alt="" class="location">{{ property.property.district.name}}</p>
+          <p> <v-icon icon="mdi mdi-star"></v-icon>{{ property.property.description }}</p>
+          <p><img src="https://cdn-icons-png.flaticon.com/512/1865/1865269.png" alt="" class="location">{{
+            property.property.district.name }}</p>
           <div class="star d-flex">
             <div v-for="i in 5" :key="i" class="star">
               <v-icon size="" color="" icon="mdi mdi-star"></v-icon>
             </div>
           </div>
-          <p class="price">${{ property.property.price}}/Month</p>
+          <p class="price">${{ property.property.price }}/Month</p>
         </div>
       </div>
       <div class="button">
@@ -48,15 +33,16 @@ import TheWishlist from "../components/wishlist/TheWishlist.vue"
     </div>
   </div>
 </template>
-  
+     
 <script setup>
 import { storeToRefs } from 'pinia';
-import { useWishlistStore } from '../store/WishlistStore';
+import { useWishlistStore } from '../../store/WishlistStore';
+
 const wishlistStore = useWishlistStore();
-const {getWishlist} = storeToRefs(wishlistStore);
+const { getWishlist } = storeToRefs(wishlistStore);
 
 </script>
-  
+     
 <style scoped>
 .card {
   margin: 10px auto;
@@ -98,9 +84,12 @@ img {
   width: 90%;
   margin-top: -65px;
 }
-.card,.button{
+
+.card,
+.button {
   justify-content: end;
 }
+
 .button button {
   padding: 10px 20px;
   background-color: #3cb371;
@@ -108,7 +97,7 @@ img {
   border-radius: 5px;
   color: #fff;
   margin-right: 60px;
-  
+
 }
 
 .button button:hover {
@@ -152,5 +141,4 @@ img {
 
 .title {
   color: blue;
-}
-</style> -->
+}</style>
