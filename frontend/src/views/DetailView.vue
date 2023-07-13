@@ -104,6 +104,7 @@ let markerLat = ref(0);
 let markerLng = ref(0);
 
 const getLatlng = (coordinate) => {
+  console.log(coordinate.latlng.lat);
   markerLat.value = coordinate.latlng.lat
   markerLng.value = coordinate.latlng.lng
 }
@@ -147,7 +148,7 @@ function calculateDistance(lat1, lat2, lon1, lon2) {
     }
     center.value.splice(0, 1, property.value.latitude);
     center.value.splice(1,1 , property.value.longitude);
-    console.log(property.value.district.name);
+    console.log(center.value);
   })
 
 </script>

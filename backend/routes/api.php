@@ -45,10 +45,11 @@ Route::group(['prefix'=>'properties'], function(){
     Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
     Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
 });
-Route::get('/users/wishlist/{userID}', [WishlistController::class, 'getDataWishlist']);
 
 
+Route::get('/wishlist/{userID}', [WishlistController::class, 'getDataWishlist']);
 
+Route::post('/wishlist', [WishlistController::class, 'createWishlist']);
 
 
 Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);

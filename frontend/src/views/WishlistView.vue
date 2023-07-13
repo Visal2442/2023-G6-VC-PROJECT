@@ -1,5 +1,20 @@
 <template>
   <div>
+    <TheWishlist></TheWishlist>
+  </div>
+</template>
+<script setup>
+import TheWishlist from "../components/wishlist/TheWishlist.vue"
+</script>
+<style scoped>
+</style>
+
+
+
+
+
+<!-- <template>
+  <div>
     <TheNavbar></TheNavbar>
     <div>
       <v-btn class="ma-2" color="orange-darken-2">
@@ -7,23 +22,23 @@
         Back
       </v-btn>
     </div>
-    <div class="card">
+    <div class="card" v-for="property of getWishlist" :key="property" >
+     
       <div class="d-flex mr-4">
         <div class="img">
-          <img src="https://wakefitdev.gumlet.io/img/sofa-sets/lifestyle/WSFAFLPN2FOGR1.jpg?w=732" alt="">
+          <img :src="property.property.image" alt="">
         </div>
         <div class="card-center">
-          <h3 class="title">Home</h3>
-          <p>Home Family</p>
-          <p> <v-icon icon="mdi mdi-star"></v-icon>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, vel! Cum, ullam error. Ad fugit ratione necessitatibus tempora officiis impedit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ut
-            odit illum numquam quaerat. Dolores repudiandae neque architecto eos unde?</p>
-          <p><img src="https://cdn-icons-png.flaticon.com/512/1865/1865269.png" alt="" class="location"> PP,Sen Sok</p>
+          <h3 class="title">{{ property.property.type}}</h3>
+          <p>{{ property.property.name }}</p>
+          <p> <v-icon icon="mdi mdi-star"></v-icon>{{ property.property.description}}</p>
+          <p><img src="https://cdn-icons-png.flaticon.com/512/1865/1865269.png" alt="" class="location">{{ property.property.district.name}}</p>
           <div class="star d-flex">
             <div v-for="i in 5" :key="i" class="star">
               <v-icon size="" color="" icon="mdi mdi-star"></v-icon>
             </div>
           </div>
-          <p class="price">200$/Month</p>
+          <p class="price">${{ property.property.price}}/Month</p>
         </div>
       </div>
       <div class="button">
@@ -34,10 +49,12 @@
   </div>
 </template>
   
-<script>
-export default {
+<script setup>
+import { storeToRefs } from 'pinia';
+import { useWishlistStore } from '../store/WishlistStore';
+const wishlistStore = useWishlistStore();
+const {getWishlist} = storeToRefs(wishlistStore);
 
-}
 </script>
   
 <style scoped>
@@ -136,4 +153,4 @@ img {
 .title {
   color: blue;
 }
-</style>
+</style> -->

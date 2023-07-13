@@ -58,6 +58,7 @@ const navItems = ref([
   { title:'Property', name:'property'},
   { title:'About', name:'About'},
   { title:'Map', name:'Map'},
+  { title:'Wishlist', name:'Wishlist'},
   // { title:'Detail', name:'Detail'},
 ])
 

@@ -14,10 +14,12 @@ class WishlistResources extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        // $property = Wishlist::where('user_id', $userID)->get();
+        // $wishlistFormatted = WishlistResources::collection($wishlist);
         return [
             'wishlist_id' => $this->id,
             'user_id' => $this->user_id,
-            'property' => $this->property
+            'property' => new PropertyResource($this->property)
         ];
     }
     
