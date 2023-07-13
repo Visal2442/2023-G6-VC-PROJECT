@@ -1,7 +1,7 @@
 <template>
     <v-card id="house-card" class="pb-3">
-        <div>
-            <v-img :src="property?.image"></v-img>
+        <div> 
+            <v-img :src="property?.image" height="200"></v-img>
         </div>
         <v-card-title class="text-lg-h6">{{ property?.name }}</v-card-title>
         <div class="d-flex align-center">
