@@ -2,34 +2,34 @@
   <v-container fluid class="pa-11">
     <v-row>
         <v-col cols="7">
-            <v-img id="imgDetail" :src="property.image"></v-img>
+            <v-img id="imgDetail" :src="property?.image"></v-img>
         </v-col>
         <v-col cols="5">
             <v-card class=" pa-5">
                 <v-card-title class=" text-green-accent-4 text-h3 font-weight-bold mb-5">Luxury House</v-card-title>
                 <div class="d-flex justify-between">
                     <v-card-text class="">Type</v-card-text>
-                    <v-card-text class="text-end text-capitalize">{{property.type}} Rent</v-card-text>
+                    <v-card-text class="text-end text-capitalize">{{property?.type}} Rent</v-card-text>
                 </div>
                 <div class=" d-flex justify-between">
                     <v-card-text class="">Room</v-card-text>
-                    <v-card-text class="text-end">{{ property.number_of_room }}</v-card-text>
+                    <v-card-text class="text-end">{{ property?.number_of_room }}</v-card-text>
                 </div>
                 <div class=" d-flex justify-between">
                     <v-card-text class="">Floor</v-card-text>
-                    <v-card-text class="text-end">{{ property.number_of_floor }}</v-card-text>
+                    <v-card-text class="text-end">{{ property?.number_of_floor }}</v-card-text>
                 </div>
                 <div class=" d-flex justify-between">
                     <v-card-text class="">Bathroom</v-card-text>
-                    <v-card-text class="text-end">{{ property.number_of_bathroom }}</v-card-text>
+                    <v-card-text class="text-end">{{ property?.number_of_bathroom }}</v-card-text>
                 </div>
                 <div class=" d-flex justify-between">
                     <v-card-text class="">Kitchen</v-card-text>
-                    <v-card-text class="text-end">{{ property.number_of_kitchen }}</v-card-text>
+                    <v-card-text class="text-end">{{ property?.number_of_kitchen }}</v-card-text>
                 </div>
                 <div class=" d-flex justify-between">
                     <v-card-text class="">Price</v-card-text>
-                    <v-card-text class="text-end">${{property.price}}/Month</v-card-text>
+                    <v-card-text class="text-end">${{property?.price}}/Month</v-card-text>
                 </div>
                 <div class=" d-flex justify-center">
                     <base-button type="bg-green-accent-3" class="w-100 mt-5 mb-3">Book</base-button>
@@ -40,12 +40,13 @@
     <!-- Map  -->
     <v-row id="map" class="ma-auto my-10">
         <h1 class=" mb-5">Map</h1>
-        <l-map :zoom="zoom" :center="center" class="" style="height: 450px">
+        <l-map :zoom="zoom" v-if="property" :center='[property?.latitude, property?.longitude]' class="" style="height: 450px">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-          <l-marker :lat-lng="center" @click="getLatlng">
+          <!-- <l-marker  :lat-lng="center" @click="getLatlng"> -->
+          <l-marker  :lat-lng="[property?.latitude, property?.longitude]" @click="getLatlng">
             <LPopup>
               <v-card class="mx-auto" elevation='0'>
-                <v-img class="align-end text-white" :src="property.image">
+                <v-img class="align-end text-white" :src="property?.image">
                   <v-card-title>{{property?.property_name}}</v-card-title>
                 </v-img>
 
@@ -56,7 +57,7 @@
                     {{property.district?.name}}, {{property.district?.province?.name}}
                   </div>
                   <div>
-                    ${{property.price}}/Month
+                    ${{property?.price}}/Month
                   </div>
                 </v-card-text>
               </v-card>
@@ -86,8 +87,7 @@ import { LMap, LTileLayer, LMarker, LPopup, LIcon } from "@vue-leaflet/vue-leafl
 import HomeIcon from '../assets/marker/homeIcon.png'
 import axios from 'axios';
 // Map Configuration 
-const zoom = 9;
-const center = ref([12.768561493419046, 104.67705945739371]);
+const zoom = 12;
 const url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const attribution = '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors';
 // Marker Icon 
@@ -137,17 +137,15 @@ function calculateDistance(lat1, lat2, lon1, lon2) {
 }
 
 // Fetch data from database 
-  const property = ref([]);
+  const property = ref(null);
   axios.get(`/properties/detail/${route.params.id}`)
   .then(res=>{
+    // console.log(res.data.data);
     if(res.data.data.length>1){
       property.value = res.data.data[0];
     }else{
       property.value = res.data.data;
     }
-    center.value.splice(0, 1, property.value.latitude);
-    center.value.splice(1,1 , property.value.longitude);
-    console.log(property.value.district.name);
   })
 
 </script>

@@ -35,16 +35,16 @@ class PropertyController extends Controller
     {
         $properties= DB::table('properties');
         if($request->district_id != ''){
-            $properties = $properties->where('district_id',$request->district_id)->paginate(1);
+            $properties = $properties->where('district_id',$request->district_id)->paginate(12);
         }
         elseif($request->min && $request->max){
-            $properties = $properties->whereBetween('price',[$request->min, $request->max])->paginate(1);
+            $properties = $properties->whereBetween('price',[$request->min, $request->max])->paginate(12);
         }
         elseif($request->type){
-            $properties = $properties->where('type', $request->type)->paginate(1);
+            $properties = $properties->where('type', $request->type)->paginate(12);
         }
         else{
-            $properties=$properties->paginate(1);
+            $properties=$properties->paginate(12);
         }
         if($properties->total()>0){
             return response()->json(['success'=>true, 'data'=>$properties], 200);
