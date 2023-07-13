@@ -50,7 +50,6 @@ import { decodeCredential } from 'vue3-google-login';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
-// const { errors, isSuccess, isValide} = storeToRefs(authStore);
 const { isValide,errors} = storeToRefs(authStore);
 const { register } = authStore;
 
@@ -83,7 +82,6 @@ const signUp=()=>{
     email: email.value,
   }
   register(user);
-  // console.log(errors.value.errors);
 }
 watch(errors
 , (newValue, oldValue) => {
@@ -91,9 +89,7 @@ watch(errors
       errorMessage.value = newValue;
       console.log(errorMessage.value);
 })
-// const error = computed(()=>{
-//   return errorMessage.value
-// })
+
 
 // Validation rules 
 const rules = ref({

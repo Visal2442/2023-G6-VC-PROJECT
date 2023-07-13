@@ -9,7 +9,7 @@
             consequuntur, sapiente dolorem eius porro reiciendis eveniet fugiat quidem. Esse repudiandae expedita error
             hic! Perspiciatis, optio.</p>
           <div class="align-center mt-5">
-            <BaseButton type="bg-green-accent-3 mr-2">Contact Us</BaseButton>
+            <BaseButton type="primary-btn">Contact Us</BaseButton>
             <BaseButton type="seconday-btn">See More</BaseButton>
           </div>
         </div>
@@ -51,7 +51,7 @@
             consequuntur, sapiente dolorem eius porro reiciendis eveniet fugiat quidem. Esse repudiandae expedita error
             hic! Perspiciatis, optio.</p>
           <div class="align-center mt-5">
-            <BaseButton type="bg-green-accent-3 mr-2">Contact Us</BaseButton>
+            <BaseButton type="primary-btn">Contact Us</BaseButton>
             <BaseButton type="seconday-btn">See More</BaseButton>
           </div>
         </div>
@@ -66,7 +66,7 @@
             consequuntur, sapiente dolorem eius porro reiciendis eveniet fugiat quidem. Esse repudiandae expedita error
             hic! Perspiciatis, optio.</p>
           <div class="align-center mt-5">
-            <BaseButton type="bg-green-accent-3 mr-2">Contact Us</BaseButton>
+            <BaseButton type="primary-btn">Contact Us</BaseButton>
             <BaseButton type="seconday-btn">See More</BaseButton>
           </div>
         </div>
