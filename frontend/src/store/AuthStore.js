@@ -9,7 +9,14 @@ export const useAuthStore = defineStore('auth', () => {
   const router = useRouter();
   let isValide= ref(false);
   let token = ref(localStorage.getItem('token'));
-  // let token = ref('me');
+  const emailSend = ref('');
+  const message = ref('');
+
+  const verificationCode = ref('');
+  const password = ref('');
+  const passwordConfirmation = ref('');
+  const emailLocalStorage = ref('');
+
 
   // Register 
   let register = (user) => {
@@ -52,6 +59,7 @@ export const useAuthStore = defineStore('auth', () => {
         Cookies.remove('email');
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        localStorage.removeItem('email');
         token.value = localStorage.getItem('token');
         window.location.href ='/';
       })
@@ -59,12 +67,49 @@ export const useAuthStore = defineStore('auth', () => {
         errors.value = err.response.data.errors;
       });
     };
-  return {
-    errors,
-    isValide,
-    register,
-    login,
-    logout,
-    token
-  };
+
+    const sendEmail = () => {
+      axios.post("/reset_password_request",{ email: emailSend.value })
+          .then(()=>{
+            localStorage.setItem('email', emailSend.value);
+            router.push('/code');
+          }).catch(error=>{
+            message.value = error.response.data.message;
+          })
+    } 
+
+    const resetPassword = () => {
+      const data = {
+        verification_code: verificationCode.value,
+        password: password.value,
+        password_confirmation:passwordConfirmation.value,
+      };
+      emailLocalStorage.value = localStorage.getItem('email');
+      axios.post("/reset_password", data)
+        .then((response) => {
+          console.log(response.data);
+          let user ={
+            email : emailLocalStorage.value,
+            password: password.value
+          }
+          login(user);
+        })
+        .catch((error) => {
+          console.error(error.response.data);
+        });
+     }
+    return {
+      errors,
+      isValide,
+      register,
+      login,
+      logout,
+      token,
+      sendEmail,
+      emailSend,
+      resetPassword,
+      verificationCode,
+      password,
+      passwordConfirmation,
+    };
 });

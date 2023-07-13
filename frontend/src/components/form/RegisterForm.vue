@@ -106,16 +106,12 @@ const rules = ref({
                   value => (value && value.length >= 8) || 'Confirm Password at least 8 characters'],
 })
 
-// Reset cookie (testing)
-// const getCookie = () => {
-//   document.cookie = 'g_state=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT; secure';
-//   location.reload();
-// }
+
 </script>
 
 <style scoped>
 .v-text-field {
-  /* background: whitesmoke; */
+
   padding: 0;
   margin-bottom: 5px;
 }

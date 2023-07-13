@@ -12,35 +12,31 @@
        
         <v-text-field
           v-model="verificationCode"
-          :rules="verificationCodeRules"
-          clearable
           color="green-accent-4"
-          label="Code"
-          placeholder="Enter your code"
+          label="Code Number"
+          :rules="[v => !!v || 'Verification code is required', v => /^[0-9]{6}$/.test(v) || 'Verification code must be exactly 6 digits']"
         ></v-text-field>
         <v-text-field
           v-model="password"
-          :rules="passwordRules"
-          clearable
+
           color="green-accent-4"
           label="Password"
-          placeholder="Enter your password"
           type="password"
+          :rules="[v => !!v || 'Password is required', v => (v && v.length >= 8) || 'Password must be at least 8 characters long']"
         ></v-text-field>
         <v-text-field
           v-model="passwordConfirmation"
-          :rules="passwordConfirmationRules"
-          clearable
+
+          label="Password Confirm"
           color="green-accent-4"
-          label="Password Confirmation"
-          placeholder="Enter your password confirmation"
           type="password"
+          :rules="[v => !!v || 'Password confirmation is required', v => (v === password) || 'Passwords do not match', v => (v && v.length >= 8) || 'Password must be at least 8 characters long']"
         ></v-text-field>
         <v-btn
-          :disabled="!isFormValid"
+
           v-if="verificationCode && passwordConfirmation && password"
           @click="resetPassword()"
-          :to="{ name: 'Login' }"
+     
           class="mt-2 mb-5 bg-green-accent-4 text-white"
         >
           Send
@@ -55,73 +51,15 @@
 </v-container>
 </template>
 
-<script>
-import axios from "axios";
+<script setup>
+// import {  ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useAuthStore } from '../../store/AuthStore';
+const authStore = useAuthStore();
 
-export default {
-  data() {
-    return {
-      verificationCode: "",
-      password: "",
-      passwordConfirmation: "",
-      message: "",
-      statusCode: "",
-    };
-  },
-  computed: {
-    isFormValid() {
-      return (
-        this.$refs.form &&
-        this.$refs.form.validate() &&
-        this.verificationCode &&
-        this.password &&
-        this.passwordConfirmation
-      );
-    },
-    verificationCodeRules() {
-       return [
-        (v) => !!v || "Verification code is required",
-        (v) => v.length === 6 || "Verification code must be 6 digits",
-        (v) => /^\d+$/.test(v) || "Verification code must only contain digits",
-      ];
-    },
-    passwordRules() {
-      return [
-        (v) => !!v || "Password is required",
-        (v) => v && v.length >= 8 || "Password must be at least 8 characters",
-      ];
-    },
-    passwordConfirmationRules() {
-      return [
-        (v) => !!v || "Password confirmation is required",
-        (v) => v === this.password || "Passwords do not match",
-      ];
-    },
-  },
-  methods: {
-    resetPassword() {
-      const data = {
-        verification_code: this.verificationCode,
-        password: this.password,
-        password_confirmation: this.passwordConfirmation,
-      };
+const {verificationCode,password,passwordConfirmation} = storeToRefs(authStore);
+const { resetPassword } = authStore;
 
-      axios.post("http://127.0.0.1:8000/api/reset_password", data)
-        .then((response) => {
-          // Handle success response
-          console.log(response.data);
-          this.message = response.data.message;
-          this.statusCode = response.data.status_code;
-        })
-        .catch((error) => {
-          // Handle error response
-          console.error(error.response.data);
-          this.message = error.response.data.message;
-          this.statusCode = error.response.data.status_code;
-        });
-    },
-  },
-};
 </script>
 
 <style scpoed>
