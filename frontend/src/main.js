@@ -5,6 +5,7 @@ import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
 import './axios-http'
 
+import TheNavbar from './components/partials/TheNavbar.vue';
 
 // Pinia 
 import { createPinia } from 'pinia';
@@ -18,6 +19,7 @@ loadFonts()
 
 const app = createApp(App)
 app.use(vuetify)
+app.component("TheNavbar", TheNavbar)
 app.use(pinia)
 app.use(router)
 app.use(vue3GoogleLogin, {

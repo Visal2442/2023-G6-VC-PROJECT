@@ -9,6 +9,7 @@ export const useAuthStore = defineStore('auth', () => {
   const router = useRouter();
   let isValide= ref(false);
   let token = ref(localStorage.getItem('token'));
+  // let token = ref('me');
 
   // Register 
   let register = (user) => {
@@ -52,7 +53,7 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         token.value = localStorage.getItem('token');
-        router.push('/');
+        window.location.href ='/';
       })
       .catch((err) => {
         errors.value = err.response.data.errors;

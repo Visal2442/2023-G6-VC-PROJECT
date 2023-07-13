@@ -1,5 +1,7 @@
 <template>
   <div>
+  <the-navbar></the-navbar>
+
     <register-form></register-form>
   </div>
 </template>

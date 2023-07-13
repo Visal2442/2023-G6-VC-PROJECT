@@ -1,4 +1,6 @@
 <template>
+  <the-navbar></the-navbar>
+
   <v-container fluid class="ml-md-9">
     <!-- Banner  -->
     <v-row class="mt-7 mb-16" align="center" id="banner">

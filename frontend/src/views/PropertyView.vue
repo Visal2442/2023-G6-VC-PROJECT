@@ -1,4 +1,6 @@
 <template>
+  <the-navbar></the-navbar>
+
      <div :id="isFound ? '' : 'container'">
           <!-- <div class="banner"> -->
           <!-- <div class="banner-img"> -->

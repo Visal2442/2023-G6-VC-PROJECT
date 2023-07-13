@@ -1,5 +1,7 @@
 <template>
   <div>
+  <the-navbar></the-navbar>
+
     <TheWishlist></TheWishlist>
   </div>
 </template>

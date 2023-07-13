@@ -1,4 +1,6 @@
 <template>
+  <the-navbar></the-navbar>
+
   <code-form></code-form>
 </template>
 <script setup>

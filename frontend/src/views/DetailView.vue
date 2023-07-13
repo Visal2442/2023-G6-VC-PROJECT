@@ -1,4 +1,6 @@
 <template>
+  <the-navbar></the-navbar>
+
   <v-container fluid class="pa-11">
     <v-row>
         <v-col cols="7">

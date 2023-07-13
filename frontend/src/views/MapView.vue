@@ -1,10 +1,12 @@
 <template>
+  <the-navbar></the-navbar>
+
   <div>
 
     <!-- ** -->
     <!-- Resource : https://vue2-leaflet.netlify.app/components/LPopup.html#demo -->
     <!-- ** -->
-    <l-map :zoom="zoom" :center="center" class="w-75 ma-auto" style="height: 580px">
+    <l-map :zoom="zoom" :center="center" class="w-75 ma-auto my-10" id="map" style="height: 580px">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
 
       <div v-for="(property, index) of properties" :key="index">
@@ -110,4 +112,6 @@ function calculateDistance(lat1, lat2, lon1, lon2) {
 
 </script>
 
-<style></style>
+<style scoped>
+
+</style>
