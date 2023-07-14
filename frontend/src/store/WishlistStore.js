@@ -29,8 +29,7 @@ export const useWishlistStore = defineStore('wishlist', () => {
 
      
      user.value = parseInt(localStorage.getItem("user"));
-     axios
-     .get(`/wishlist/${user.value}`)
+     axios.get(`/wishlist/${user.value}`)
      .then((res) => {
         
           getWishlist.value = res.data.data;
