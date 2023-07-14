@@ -24,7 +24,8 @@ class ForgotPasswordController extends Controller
             return response()->json([
                 'message' => 'Validation failed',
                 'errors' => $validator->errors(),
-            ], 422);
+                'status' =>false,
+            ],401);
         }
     
         // Find user by email address
@@ -33,8 +34,9 @@ class ForgotPasswordController extends Controller
         if (!$user) {
             // User not found, return a success response
             return response()->json([
-                'message' => 'We have sent a verification code to your email address',
-            ]);
+                'message' => 'Email address not found',
+                'status' => false,
+            ], 404);
         }
     
         // Generate a random verification code and save it to the user's record
@@ -54,17 +56,20 @@ class ForgotPasswordController extends Controller
                 // Error sending email, return an error response
                 return response()->json([
                     'message' => 'Failed to send email. Please try again later.',
+                    'status' =>false,
                 ], 500);
             }
     
             // Email sent successfully, return a success response
             return response()->json([
                 'message' => 'We have sent a verification code to your email address',
-            ]);
+                'status' =>true,
+            ], 200);
         } else {
             // Error saving user record, return an error response
             return response()->json([
                 'message' => 'Failed to save user record. Please try again later.',
+                'status' =>false,
             ], 500);
         }
     }
