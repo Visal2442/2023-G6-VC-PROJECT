@@ -21,60 +21,42 @@
         </v-card-actions>
         <v-card-actions>
             <div class="d-flex align-center">
-                <!-- <v-avatar :image="require('../../assets/pf.jpg')" class="ml-2"></v-avatar> -->
-                <!-- <v-card-subtitle>Sal</v-card-subtitle> -->
-                <!-- <button >wishlist</button> -->
-                <v-icon @click="wishlist(property.id)" color="green" size = 'default' class="mr-4 boder" icon="mdi mdi-bookmark"></v-icon>
-                <v-icon @click="wishlist(property.id)" color="green" size = 'default' class="mr-4 boder" icon="mdi mdi-comment"></v-icon>
+                <v-icon @click="addToWishlist(property.id)" color="green" size = 'default' class="mr-4 boder" icon="mdi mdi-bookmark"></v-icon>
+                <!-- <v-icon @click="wishlist(property.id)" color="green" size = 'default' class="mr-4 boder" icon="mdi mdi-comment"></v-icon> -->
             </div>
             <v-spacer></v-spacer>
-            <BaseButton type="bg-green-accent-3" @click="getDetail(property.id)">More Detail</BaseButton>
+            <BaseButton type="primary-btn" @click="getDetail(property.id)">More Detail</BaseButton>
         </v-card-actions>
     </v-card>
 </template>
 
 <script setup>
-// import axios from "axios";
-import { defineProps } from "vue";
+import { defineProps, ref } from "vue";
 import BaseButton from "../widget/BaseButton.vue";
 import { useRouter } from "vue-router";
+import Cookies from 'js-cookie';
 
-
-// import { storeToRefs } from 'pinia';
+// Wishlist Store 
 import { useWishlistStore } from '../../store/WishlistStore';
 const wishlistStore = useWishlistStore();
-// const { property_id} = storeToRefs(wishlistStore);
 const { wishlist } = wishlistStore;
 
+const cookieEmail = ref(Cookies.get('email'));
 const router = useRouter();
 defineProps(["property"]);
+
+const addToWishlist=(property_id)=>{
+    if(cookieEmail.value){
+        wishlist(property_id);
+    }
+    else{
+        alert('Please Login to your account !');
+    }
+}
 
 const getDetail = (property_id) => {
     router.push(`/detail/${property_id}`);
 };
-
-
-
-
-// const wishlist = (property_id) => {
-
-//     let user = parseInt(localStorage.getItem("user"));
-//     console.log(user);
-//     const dataWishlist = {
-//         user_id: user,
-//         property_id: property_id,
-//     };
-//     axios.post('/wishlist', dataWishlist)
-//         .then((res) => {
-//             console.log(res.data.success);
-
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         });
-// }
-    
-
 
 </script>
 

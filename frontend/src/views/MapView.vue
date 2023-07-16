@@ -1,54 +1,34 @@
 <template>
-  <the-navbar></the-navbar>
-
   <div>
+        <v-container fluid class=" mr-md-9">
 
-    <!-- ** -->
-    <!-- Resource : https://vue2-leaflet.netlify.app/components/LPopup.html#demo -->
-    <!-- ** -->
-    <l-map :zoom="zoom" :center="center" class="w-75 ma-auto my-10" id="map" style="height: 580px">
-      <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+        <!-- ** -->
+        <!-- Resource : https://vue2-leaflet.netlify.app/components/LPopup.html#demo -->
+        <!-- ** -->
+        <l-map :zoom="zoom" :center="center" class=" ma-auto" id="map" style="height: 580px; width:95%">
+          <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
 
-      <div v-for="(property, index) of properties" :key="index">
-          <l-marker :lat-lng="[property.latitude, property.longitude]" @click="getLatlng">
-            <LPopup>
-              <v-card class="mx-auto" max-width="400" elevation='0'>
-                <v-img class="align-end text-white" height="200" :src=" property.image"
-                  cover>
-                  <v-card-title>{{ property.name }}</v-card-title>
-                </v-img>
+          <div v-for="(property, index) of properties" :key="index">
+            <l-marker :lat-lng="[property.latitude, property.longitude]" @click="getLatlng">
+              <LPopup>
+                <HouseCardOnMap :property="property" :distance="distance">
+                  <template #action>
+                    More Detail
+                  </template>
+                </HouseCardOnMap>
+              </LPopup>
+              <LIcon :icon-size="dynamicSize" :icon-url="homeIcon" :icon-anchor="dynamicAnchor"></LIcon>
+            </l-marker>
+          </div>
 
-                <v-card-subtitle class="pt-4">
-                  {{ distance }} KM
-                </v-card-subtitle>
-
-                <v-card-text>
-                  <div>{{ property.name }}</div>
-
-                  <div>{{ property.description }}</div>
-                </v-card-text>
-
-                <v-card-actions>
-                  <v-btn color="orange">
-                    Share
-                  </v-btn>
-
-                  <v-btn color="orange">
-                    Explore
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </LPopup>
-            <LIcon :icon-size="dynamicSize" :icon-url="homeIcon" :icon-anchor="dynamicAnchor"></LIcon>
-          </l-marker>
-      </div>
-
-    </l-map>
+        </l-map>
+    </v-container>
   </div>
 </template>
 
 <script setup>
 import { computed, ref } from "vue";
+import HouseCardOnMap from "@/components/card/HouseCardOnMap.vue";
 
 // Pinia Store
 import { storeToRefs } from "pinia";

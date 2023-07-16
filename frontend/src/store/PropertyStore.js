@@ -10,9 +10,7 @@ export const usePropertyStore = defineStore('property', () => {
 
     // Get all properties
     axios.get('/properties').then(res=>{
-        console.log(res);   
         properties.value = res.data.data;
-        console.log(properties.value);
     }).catch(err=>{
         console.log(err);
     }) 
@@ -32,15 +30,6 @@ export const usePropertyStore = defineStore('property', () => {
     }
     // Get current location 
     navigator.geolocation.getCurrentPosition(showLocation, showError);
-
-    axios.get('/getDataGrap').then(res=>{
-        console.log(res);   
-        // properties.value = res.data.data;
-        // console.log(properties.value);
-    }).catch(err=>{
-        console.log(err);
-    })
-
 
     return {
         properties,

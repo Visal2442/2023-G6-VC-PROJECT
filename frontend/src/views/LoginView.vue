@@ -1,8 +1,9 @@
 <template>
   <div>
-  <the-navbar></the-navbar>
-
-  <login-form></login-form>
+    <!-- <the-navbar></the-navbar> -->
+    <v-container fluid class="mr-md-9">
+      <login-form></login-form>
+    </v-container>
   </div>
 </template>
 

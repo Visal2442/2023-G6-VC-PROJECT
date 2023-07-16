@@ -1,5 +1,5 @@
 <template>
-  <div id="navbar" class="" elevation="2">
+  <div id="navbar" class="" >
     <!-- Small Screen  -->
     <!-- <v-layout>
     <v-navigation-drawer v-model="sidebar" temporary>
@@ -14,22 +14,20 @@
     </v-layout> -->
 
     <!-- Large Screen  -->
-    <v-toolbar class="pa-3 pr-10" :style="{ background: backgroundNavbar }">
+    <v-toolbar class="pa-4 px-12" :elevation="elevationNavbar" :style="{ background: backgroundNavbar }">
       <v-toolbar-items class="d-flex align-center">
 
-        <img :src="require('../../assets/logo.png')" alt="" width="200">
-        <!-- <v-img src="../../assets//dream-house-logo.png" width="400" height="400"></v-img> -->
+      <img :src="require('../../assets/logo.png')" alt="" width="200">
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items class=" d-flex align-center">
         <div class="text-black">
           <template v-for="item in navItems" :key="item.name">
-            <router-link :to="{ name: item.name }" class="text-button text-decoration-none text-black mr-7">{{ item.title }}</router-link>
+              <router-link :to="{ name: item.name }" class="text-button text-decoration-none text-black mr-7">{{ item.title }}</router-link>
           </template>
-          <router-link v-if="cookieEmail" :to="{ name: 'Wishlist' }" class="text-button text-decoration-none text-black mr-7">Wishlist</router-link>
+          <router-link :to="{ name: 'Wishlist' }" class="text-button text-decoration-none text-black mr-7">Wishlist</router-link>
         </div>
         <!-- After Logged in -->
-        <!-- <img id="logout" :src="require('../../assets/pf.jpg')" width="40" height="40" class="mr-3" v-if="cookieEmail"> -->
         <v-avatar id="logout" :image="require('../../assets/pf.jpg')" size="50" v-if="cookieEmail"></v-avatar>
 
         <!-- Before Login  -->
@@ -37,17 +35,18 @@
         <v-menu activator="#logged-in">
           <v-list>
             <v-list-item>
-              <v-btn variant="plain" :to="{ name: 'Register' }">Register</v-btn>
+              <v-btn variant="plain" :to="{ name: 'Register' }" prepend-icon="mdi mdi-login">Register</v-btn>
             </v-list-item>
             <v-list-item>
-              <v-btn variant="plain" :to="{ name: 'Login' }">Login</v-btn>
+              <v-btn variant="plain" :to="{ name: 'Login' }" prepend-icon="mdi mdi-account">Login</v-btn>
             </v-list-item>
           </v-list>
         </v-menu>
+        <!-- After Logged in -->
         <v-menu activator="#logout">
           <v-list>
           <v-list-item>
-            <v-btn variant="plain" @click="logout">Logout</v-btn>
+            <v-btn variant="plain" @click="logout" prepend-icon="mdi mdi-logout">Logout</v-btn>
           </v-list-item>
           </v-list>
         </v-menu>
@@ -58,42 +57,24 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed } from 'vue';
 import Cookies from 'js-cookie';
 
 // Pinia Store 
 import { useAuthStore } from '../../store/AuthStore';
-// import { storeToRefs } from 'pinia';
 const authStore = useAuthStore();
 const { logout } = authStore;
-// const { token } = storeToRefs(authStore);
 
 const navItems = ref([
   { title: 'Home', name: 'Home' },
   { title: 'Property', name: 'property' },
   { title: 'Map', name: 'Map' },
-  { title: 'About', name: 'About' },
+  // { title: 'About', name: 'About' },
 ])
-
-const isLoggedIn = ref(false);
 const cookieEmail = ref(Cookies.get('email'));
-// const newToken = ref(localStorage.getItem('token'));
-watch(cookieEmail, (newValue, oldValue) => {
-  console.log("New value :" , newValue);
-  console.log("Old value :" , oldValue);
-  if (newValue != null) {
-    isLoggedIn.value = true;
-  }
-  else {
-    isLoggedIn.value = false;
-  }
-})
-// const loggedIn = computed(()=>{
-//   console.log('computed');
-//   return isLoggedIn.value;
-// })
 
-let scrollY = ref(0);
+const scrollY = ref(0);
+const elevation = ref(4);
 const background = ref('white');
 const onScroll = (e) => {
   scrollY.value = e.currentTarget.scrollY;
@@ -106,6 +87,13 @@ const backgroundNavbar = computed(() => {
   }
   return 'none';
 })
+const elevationNavbar = computed(() => {
+  if (scrollY.value >= 60) {
+    return elevation.value;
+  }
+  return 0;
+})
+
 
 </script>
 

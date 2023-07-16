@@ -1,42 +1,37 @@
 <template>
-  <the-navbar></the-navbar>
+     <div>
+          <v-container fluid class="mr-md-9">
+               <div :id="isFound ? '' : 'container'">
+                    <div class=" w-75 ma-auto">
+                         <SearchLocation @onSearch="onSearch" @onInput="onInput"></SearchLocation>
+                         <v-row>
+                              <v-col>
+                                   <div class=" my-5 font-weight-black">Filter By Type</div>
+                                   <FilterType @onSelect="onSelect"></FilterType>
+                              </v-col>
+                              <v-col cols="7">
+                                   <div class=" text-center my-5 font-weight-black">Filter By Price</div>
+                                   <FilterByPrice @onPrice="onPrice"></FilterByPrice>
+                              </v-col>
+                         </v-row>
+                    </div>
 
-     <div :id="isFound ? '' : 'container'">
-          <!-- <div class="banner"> -->
-          <!-- <div class="banner-img"> -->
-          <!-- <img src="../assets/banner-property.jpg" alt="" width="1280" height="640"> -->
-          <!-- </div> -->
-          <!-- </div> -->
-          <div class=" w-75 ma-auto">
-               <SearchLocation @onSearch="onSearch" @onInput="onInput"></SearchLocation>
-               <v-row>
-                    <v-col>
-                         <div class=" my-5 font-weight-black">Filter By Type</div>
-                         <FilterType @onSelect="onSelect"></FilterType>
-                    </v-col>
-                    <v-col cols="7">
-                         <div class=" text-center my-5 font-weight-black">Filter By Price</div>
-                         <FilterByPrice @onPrice="onPrice"></FilterByPrice>
-                    </v-col>
-               </v-row>
-          </div>
-
-          <v-container fluid class="ml-md-9">
-               <v-row class="mr-md-10" v-if="isFound">
-                    <template v-for="(property, i) of properties" :key="i">
-                         <v-col md="3">
-                              <house-card :property="property"></house-card>
-                         </v-col>
-                    </template>
-               </v-row>
-               <v-row v-else class="h-50">
-                    <v-col class="text-center text-h4">
-                         <div>{{ notFoundMessage }}</div>
-                    </v-col>
-               </v-row>
+                    <v-container fluid class="ml-md-9">
+                         <v-row class="mr-md-10" v-if="isFound">
+                              <v-col md="3" v-for="(property, i) of properties" :key="i">
+                                   <house-card :property="property"></house-card>
+                              </v-col>
+                         </v-row>
+                         <v-row v-else class="h-50">
+                              <v-col class="text-center text-h4">
+                                   <div>{{ notFoundMessage }}</div>
+                              </v-col>
+                         </v-row>
+                    </v-container>
+                    <v-pagination v-if="isFound" v-model="pagination.current" :length="pagination.total" :total-visible="7"
+                         @click="onPageChange()"></v-pagination>
+               </div>
           </v-container>
-          <v-pagination v-if="isFound" v-model="pagination.current" :length="pagination.total" :total-visible="7"
-               @click="onPageChange()"></v-pagination>
      </div>
 </template>
 
@@ -48,6 +43,8 @@ import SearchLocation from '@/components/search/SearchLocation.vue';
 import FilterType from '@/components/search/FilterType.vue';
 import FilterByPrice from '@/components/search/FilterPrice.vue';
 import HouseCard from '@/components/card/HouseCard.vue';
+// import RegisterForm from "../compone nts/form/RegisterForm.vue"
+
 
 // PAGINATION 
 const properties = ref({});
@@ -70,12 +67,13 @@ const getProperties = () => {
      else if (type.value != '') {
           url.value = url.value + '&type=' + type.value;
      }
-     else if(price.value!=''){
+     else if (price.value != '') {
           url.value = url.value + '&min=' + price.value.min + '&max=' + price.value.max;
      }
      axios.get(url.value)
           .then(res => {
                properties.value = res.data.data.data;
+               console.log(properties.value);
                pagination.value.total = res.data.data.last_page;
                isFound.value = true;
           })
@@ -85,6 +83,11 @@ const getProperties = () => {
           })
 }
 const onPageChange = () => {
+     window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+     });
      getProperties();
 }
 computed(() => {
@@ -118,15 +121,24 @@ const onSelect = (value) => {
 // Filter house by price 
 const onPrice = (value) => {
      price.value = value;
-     // console.log(price.value);
      getProperties();
 }
-
 
 </script>
 
 <style scoped>
 #container {
      height: 100vh;
+}
+.slide-fade-enter-active {
+     transition: all 0.3s ease-out;
+}
+.slide-fade-leave-active {
+     transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+     transform: translateX(20px);
+     opacity: 0;
 }
 </style>

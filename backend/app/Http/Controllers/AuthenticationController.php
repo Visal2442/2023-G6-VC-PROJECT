@@ -18,11 +18,11 @@ class AuthenticationController extends Controller
         if ($request->isGoogle) {
             $user = User::where('email', $request->email)->get();
             // Attempt to authenticate the user
-            if (count($user)>0) {
+            if (count($user) > 0) {
                 // Authentication successful
                 // $user = Auth::user();
                 $token = $user->createToken('API Token')->plainTextToken;
-                return response()->json(["message" => "login success", "user" => $user, 'token'=>$token], 200);
+                return response()->json(["message" => "login success", "user" => $user, 'token' => $token], 200);
             } else {
                 // Authentication failed
                 $user = User::create([
@@ -38,13 +38,13 @@ class AuthenticationController extends Controller
                 ], 200);
             }
         }
-            $validator = Validator::make($request->all(), [
-                'email' => ['unique:users', 'email'],
-                'password' => ['confirmed'],
-            ]);
-            if ($validator->fails()) {
-                return response()->json(['status' =>false, 'errors' => $validator->errors()], 401);
-            }
+        $validator = Validator::make($request->all(), [
+            'email' => ['unique:users', 'email'],
+            'password' => ['confirmed'],
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'errors' => $validator->errors()], 401);
+        }
         $user = User::create([
             'username' => $request->username,
             'phone_number' => $request->phone_number,
@@ -61,24 +61,16 @@ class AuthenticationController extends Controller
         ], 200);
     }
 
-    public function logout(Request $request)
-    {
-        $user = $request->user();
-        $user->tokens()->delete();
-        return response()->json(['message' => 'your account has been logged out', 'user'=>$user], 200);
-    }
-
-
     public function login(Request $request)
     {
         $isForm = true;
-        if($request->isGoogle){
+        if ($request->isGoogle) {
             $user = User::where('email', $request->email)->get();
             $isForm = false;
             // $token = $user->createToken('API Token', ['select'])->plainTextToken;
             return response()->json(["message" => "login success", "user" => $user], 200);
         }
-        if($isForm){
+        if ($isForm) {
             // get email and password
             $credentials = $request->only('email', 'password');
         }
@@ -92,5 +84,12 @@ class AuthenticationController extends Controller
             // Authentication failed
             return response()->json(['status' => false, 'message' => 'Invalid email or password'], 401);
         }
+    }
+
+    public function logout(Request $request)
+    {
+        $user = $request->user();
+        $user->tokens()->delete();
+        return response()->json(['message' => 'your account has been logged out', 'user' => $user], 200);
     }
 }

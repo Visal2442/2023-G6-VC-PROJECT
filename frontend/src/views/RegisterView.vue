@@ -1,13 +1,12 @@
 <template>
-  <div>
-  <the-navbar></the-navbar>
+  <v-container fluid class="mr-md-9">
+    <!-- <the-navbar></the-navbar> -->
 
     <register-form></register-form>
-  </div>
+  </v-container>
 </template>
 <script setup>
 import RegisterForm from "../components/form/RegisterForm.vue"
 
 </script>
-<style scoped>
-</style>
+<style scoped></style>

@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class=" my-10">
+  <!-- <v-container fluid class=" my-10"> -->
   <!-- Resource: vuetify  -->
   <v-row justify="center" class="" align="center">
     <img :src="require('../../assets/register.jpg')" alt="" width="500" height="500" />
@@ -21,13 +21,6 @@
         <!--  -->
         <v-text-field type="password" clearable name="password" color="green-accent-4" label="Password" placeholder="Enter password" v-model="password" :rules="rules.passwordRules"></v-text-field>
         <v-text-field type="password" clearable name="password_confirmation" color="green-accent-4" label="Confirm Password" placeholder="Confirm Password" v-model="password_confirmation" :rules="rules.confirmRules"></v-text-field>
-        <!-- display error message  -->
-        <template v-if="errorMessage">
-          <template v-if="errorMessage.errors.password">
-            <span class="text-red-accent-4 text-left" >{{ errorMessage.errors.password[0] }}</span>
-          </template>
-        </template>
-        <!--  -->
         <v-btn type="button" :disabled="!isValide" @click="signUp()" block class="mt-2 mb-5 bg-green-accent-4 text-white pa-5">Register</v-btn>
         <div class=" d-flex flex-column align-center">
           <p class="">Or Register With</p>
@@ -38,7 +31,7 @@
 
     </v-sheet>
   </v-row>
-  </v-container>
+  <!-- </v-container> -->
 </template>
 
 
@@ -103,7 +96,7 @@ const rules = ref({
   passwordRules:[ value => !!value || 'Password is required',
                   value => (value && value.length >= 8) || 'Password at least 8 characters'],
   confirmRules:[  value => !!value || 'Confirm Password is required',
-                  value => (value && value.length >= 8) || 'Confirm Password at least 8 characters'],
+                  value => (value && value == password.value) || 'Password does not match!'],
 })
 
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-  <the-navbar></the-navbar>
+    <!-- <the-navbar></the-navbar> -->
 
     <TheWishlist></TheWishlist>
   </div>
@@ -8,7 +8,6 @@
 <script setup>
 import TheWishlist from "../components/wishlist/TheWishlist.vue"
 </script>
-<style scoped>
-</style>
+<style scoped></style>
 
 

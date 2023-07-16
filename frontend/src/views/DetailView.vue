@@ -1,72 +1,55 @@
 <template>
-  <the-navbar></the-navbar>
-
   <v-container fluid class="pa-11">
     <v-row>
-        <v-col cols="7">
-            <v-img id="imgDetail" :src="property?.image"></v-img>
-        </v-col>
-        <v-col cols="5">
-            <v-card class=" pa-5">
-                <v-card-title class=" text-green-accent-4 text-h3 font-weight-bold mb-5">Luxury House</v-card-title>
-                <div class="d-flex justify-between">
-                    <v-card-text class="">Type</v-card-text>
-                    <v-card-text class="text-end text-capitalize">{{property?.type}} Rent</v-card-text>
-                </div>
-                <div class=" d-flex justify-between">
-                    <v-card-text class="">Room</v-card-text>
-                    <v-card-text class="text-end">{{ property?.number_of_room }}</v-card-text>
-                </div>
-                <div class=" d-flex justify-between">
-                    <v-card-text class="">Floor</v-card-text>
-                    <v-card-text class="text-end">{{ property?.number_of_floor }}</v-card-text>
-                </div>
-                <div class=" d-flex justify-between">
-                    <v-card-text class="">Bathroom</v-card-text>
-                    <v-card-text class="text-end">{{ property?.number_of_bathroom }}</v-card-text>
-                </div>
-                <div class=" d-flex justify-between">
-                    <v-card-text class="">Kitchen</v-card-text>
-                    <v-card-text class="text-end">{{ property?.number_of_kitchen }}</v-card-text>
-                </div>
-                <div class=" d-flex justify-between">
-                    <v-card-text class="">Price</v-card-text>
-                    <v-card-text class="text-end">${{property?.price}}/Month</v-card-text>
-                </div>
-                <div class=" d-flex justify-center">
-                    <base-button type="bg-green-accent-3" class="w-100 mt-5 mb-3">Book</base-button>
-                </div>
-            </v-card>
-        </v-col>
+      <v-col cols="7">
+        <v-img id="imgDetail" :src="property?.image"></v-img>
+      </v-col>
+      <v-col cols="5">
+        <v-card class=" pa-5">
+          <v-card-title class=" text-green-accent-4 text-h3 font-weight-bold mb-5">Luxury House</v-card-title>
+          <div class="d-flex justify-between">
+            <v-card-text class="">Type</v-card-text>
+            <v-card-text class="text-end text-capitalize">{{ property?.type }} Rent</v-card-text>
+          </div>
+          <div class=" d-flex justify-between">
+            <v-card-text class="">Room</v-card-text>
+            <v-card-text class="text-end">{{ property?.number_of_room }}</v-card-text>
+          </div>
+          <div class=" d-flex justify-between">
+            <v-card-text class="">Floor</v-card-text>
+            <v-card-text class="text-end">{{ property?.number_of_floor }}</v-card-text>
+          </div>
+          <div class=" d-flex justify-between">
+            <v-card-text class="">Bathroom</v-card-text>
+            <v-card-text class="text-end">{{ property?.number_of_bathroom }}</v-card-text>
+          </div>
+          <div class=" d-flex justify-between">
+            <v-card-text class="">Kitchen</v-card-text>
+            <v-card-text class="text-end">{{ property?.number_of_kitchen }}</v-card-text>
+          </div>
+          <div class=" d-flex justify-between">
+            <v-card-text class="">Price</v-card-text>
+            <v-card-text class="text-end">${{ property?.price }}/Month</v-card-text>
+          </div>
+          <div class=" d-flex justify-center">
+            <base-button type="bg-green-accent-3" class="w-100 mt-5 mb-3">Book</base-button>
+          </div>
+        </v-card>
+      </v-col>
     </v-row>
     <!-- Map  -->
     <v-row id="map" class="ma-auto my-10">
-        <h1 class=" mb-5">Map</h1>
-        <l-map :zoom="zoom" v-if="property" :center='[property?.latitude, property?.longitude]' class="" style="height: 450px">
-      <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-          <!-- <l-marker  :lat-lng="center" @click="getLatlng"> -->
-          <l-marker  :lat-lng="[property?.latitude, property?.longitude]" @click="getLatlng">
-            <LPopup>
-              <v-card class="mx-auto" elevation='0'>
-                <v-img class="align-end text-white" :src="property?.image">
-                  <v-card-title>{{property?.property_name}}</v-card-title>
-                </v-img>
-
-                <v-card-subtitle class="pt-4">{{ distance }} KM</v-card-subtitle>
-
-                <v-card-text>
-                  <div>
-                    {{property.district?.name}}, {{property.district?.province?.name}}
-                  </div>
-                  <div>
-                    ${{property?.price}}/Month
-                  </div>
-                </v-card-text>
-              </v-card>
-            </LPopup>
-            <LIcon :icon-size="dynamicSize" :icon-url="homeIcon" :icon-anchor="dynamicAnchor"></LIcon>
-          </l-marker>
-    </l-map>
+      <h1 class=" mb-5">Map</h1>
+      <l-map :zoom="zoom" v-if="property" :center='[property?.latitude, property?.longitude]' class=""
+        style="height: 450px">
+        <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+        <l-marker :lat-lng="[property?.latitude, property?.longitude]" @click="getLatlng">
+          <LPopup>
+            <HouseCardOnMap :property="property" :distance="distance"> </HouseCardOnMap>
+          </LPopup>
+          <LIcon :icon-size="dynamicSize" :icon-url="homeIcon" :icon-anchor="dynamicAnchor"></LIcon>
+        </l-marker>
+      </l-map>
     </v-row>
   </v-container>
 </template>
@@ -76,8 +59,9 @@ import BaseButton from '@/components/widget/BaseButton.vue';
 import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 const route = useRoute();
+import HouseCardOnMap from '../components/card/HouseCardOnMap.vue';
 
-// Pinia Store
+// Property Store
 import { storeToRefs } from "pinia";
 import { usePropertyStore } from '../store/PropertyStore';
 const propertyStore = usePropertyStore();
@@ -140,13 +124,12 @@ function calculateDistance(lat1, lat2, lon1, lon2) {
 }
 
 // Fetch data from database 
-  const property = ref(null);
-  axios.get(`/properties/detail/${route.params.id}`)
-  .then(res=>{
-    // console.log(res.data.data);
-    if(res.data.data.length>1){
+const property = ref(null);
+axios.get(`/properties/detail/${route.params.id}`)
+  .then(res => {
+    if (res.data.data.length > 1) {
       property.value = res.data.data[0];
-    }else{
+    } else {
       property.value = res.data.data;
     }
   })
@@ -154,21 +137,7 @@ function calculateDistance(lat1, lat2, lon1, lon2) {
 </script>
 
 <style scoped>
-div .v-card-text:first-child{
-    font-size: medium;
-
-}
-div .v-card-text:last-child{
-    font-size: large;
-    font-weight: bold;
-}
-#imgDetail{
-    border-radius: 15px;
-}
-.v-card{
-    border-radius: 10px;
-}
-#map{
-    width: 100%;
+#map {
+  width: 100%;
 }
 </style>

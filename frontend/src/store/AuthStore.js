@@ -11,6 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
   let token = ref(localStorage.getItem('token'));
   const emailSend = ref('');
   const message = ref('');
+  const user = ref(localStorage.getItem('user_id'));
 
   const verificationCode = ref('');
   const password = ref('');
@@ -23,10 +24,10 @@ export const useAuthStore = defineStore('auth', () => {
     axios.post('/register', user)
     .then((res) => {
         Cookies.set('email', user.email, { expires: 30 });
-        localStorage.setItem('user', res.data.user.id);
+        user.value=localStorage.setItem('user_id', res.data.user.id);
         localStorage.setItem('token', res.data.token);
         token.value = localStorage.getItem('token');
-        router.push('/')
+        window.location.href ='/';
       })
       .catch((err) => {
         errors.value = err.response.data
@@ -38,13 +39,13 @@ export const useAuthStore = defineStore('auth', () => {
     axios.post('/login', user)
       .then((res) => {
         Cookies.set('email', user.email, { expires: 30 });
-        localStorage.setItem('user', res.data.user.id);
+        user.value=localStorage.setItem('user_id', res.data.user.id);
         localStorage.setItem('token', res.data.token);
         token.value = localStorage.getItem('token');
-        router.push('/');
+        window.location.href ='/';
       })
       .catch((err) => {
-        errors.value = err.response.data;
+        errors.value = err.response.data.message;
       })
     };
 
@@ -56,8 +57,9 @@ export const useAuthStore = defineStore('auth', () => {
         }
       })
       .then(() => {
+        user.value=null;
         Cookies.remove('email');
-        localStorage.removeItem('user');
+        localStorage.removeItem('user_id');
         localStorage.removeItem('token');
         localStorage.removeItem('email');
         token.value = localStorage.getItem('token');
@@ -99,6 +101,7 @@ export const useAuthStore = defineStore('auth', () => {
         });
      }
     return {
+      user,
       errors,
       isValide,
       register,
