@@ -40,7 +40,6 @@ class AuthenticationController extends Controller
         }
         $validator = Validator::make($request->all(), [
             'email' => ['unique:users', 'email'],
-            'password' => ['confirmed'],
         ]);
         if ($validator->fails()) {
             return response()->json(['status' => false, 'errors' => $validator->errors()], 401);
@@ -63,17 +62,8 @@ class AuthenticationController extends Controller
 
     public function login(Request $request)
     {
-        $isForm = true;
-        if ($request->isGoogle) {
-            $user = User::where('email', $request->email)->get();
-            $isForm = false;
-            // $token = $user->createToken('API Token', ['select'])->plainTextToken;
-            return response()->json(["message" => "login success", "user" => $user], 200);
-        }
-        if ($isForm) {
-            // get email and password
-            $credentials = $request->only('email', 'password');
-        }
+        // get email and password
+        $credentials = $request->only('email', 'password');
         // Attempt to authenticate the user
         if (Auth::attempt($credentials)) {
             // Authentication successful

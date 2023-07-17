@@ -20,9 +20,17 @@ class BookingSeeder extends Seeder
                 'property_id' => 1,
             ],
             [
-                'user_id' => 2,
+                'user_id' => 1,
                 'property_id' => 2,
-            ]
+            ],
+            [
+                'user_id' => 2,
+                'property_id' => 7,
+            ],
+            [
+                'user_id' => 1,
+                'property_id' => 11,
+            ],
         ];
         foreach ($booking as $book){
             Booking::create($book);

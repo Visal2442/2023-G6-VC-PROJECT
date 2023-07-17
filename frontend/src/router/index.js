@@ -91,8 +91,8 @@ router.beforeEach(async (to, from, next) => {
   if (!user.value && to.name == "Wishlist") {
     alert("Please Login your account!");
     next({name: from.name})
-  } else if (user.value && to.name == "Login") {
-    next({ name: "NotFound" });
+  } else if (user.value && (to.name == "Login" || to.name == "Register")) {
+    next({ name: "Home" });
   } else {
     next();
   }

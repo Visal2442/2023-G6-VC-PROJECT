@@ -1,6 +1,6 @@
 <template>
   <div>
-        <v-container fluid class=" mr-md-9">
+        <v-container fluid class="mr-md-9">
 
         <!-- ** -->
         <!-- Resource : https://vue2-leaflet.netlify.app/components/LPopup.html#demo -->

@@ -6,7 +6,7 @@
       </v-col>
       <v-col cols="5">
         <v-card class=" pa-5">
-          <v-card-title class=" text-green-accent-4 text-h3 font-weight-bold mb-5">Luxury House</v-card-title>
+          <v-card-title class=" text-green-accent-4 text-h3 font-weight-bold mb-5">{{ property?.name }}</v-card-title>
           <div class="d-flex justify-between">
             <v-card-text class="">Type</v-card-text>
             <v-card-text class="text-end text-capitalize">{{ property?.type }} Rent</v-card-text>

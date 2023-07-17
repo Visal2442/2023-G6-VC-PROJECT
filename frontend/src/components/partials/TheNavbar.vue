@@ -1,17 +1,5 @@
 <template>
   <div id="navbar" class="" >
-    <!-- Small Screen  -->
-    <!-- <v-layout>
-    <v-navigation-drawer v-model="sidebar" temporary>
-      <v-list>
-        <v-list-item v-for="item in menuItems" :key="item.title" :to="{ name: item.name }">
-          <v-list-item-title>
-            {{ item.title }}
-          </v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    </v-layout> -->
 
     <!-- Large Screen  -->
     <v-toolbar class="pa-4 px-12" :elevation="elevationNavbar" :style="{ background: backgroundNavbar }">

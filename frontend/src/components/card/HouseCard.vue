@@ -1,6 +1,6 @@
 <template>
     <v-card id="house-card" class="pb-3">
-        <div> 
+        <div>
             <v-img :src="property?.image" height="200"></v-img>
         </div>
         <v-card-title class="text-lg-h6">{{ property?.name }}</v-card-title>
@@ -17,12 +17,12 @@
         </div>
         <v-card-actions class="pa-0">
             <v-card-text class="text-green-accent-4 text-md-body-1">${{ property?.price }}/month</v-card-text>
-            <v-card-text class="text-green-accent-4 text-md-body-1 text-end">$400/month</v-card-text>
+            <v-rating v-model="rating" density="compact" bg-color="orange-lighten-1"></v-rating>
         </v-card-actions>
         <v-card-actions>
             <div class="d-flex align-center">
-                <v-icon @click="addToWishlist(property.id)" color="green" size = 'default' class="mr-4 boder" icon="mdi mdi-bookmark"></v-icon>
-                <!-- <v-icon @click="wishlist(property.id)" color="green" size = 'default' class="mr-4 boder" icon="mdi mdi-comment"></v-icon> -->
+                <v-icon @click="addToWishlist(property.id)" color="green" size='default' class="mr-4 boder"
+                    icon="mdi mdi-bookmark"></v-icon>
             </div>
             <v-spacer></v-spacer>
             <BaseButton type="primary-btn" @click="getDetail(property.id)">More Detail</BaseButton>
@@ -45,11 +45,12 @@ const cookieEmail = ref(Cookies.get('email'));
 const router = useRouter();
 defineProps(["property"]);
 
-const addToWishlist=(property_id)=>{
-    if(cookieEmail.value){
+const addToWishlist = (property_id) => {
+    if (cookieEmail.value) {
         wishlist(property_id);
+        alert('The House is added to your wishlist');
     }
-    else{
+    else {
         alert('Please Login to your account !');
     }
 }
@@ -57,6 +58,9 @@ const addToWishlist=(property_id)=>{
 const getDetail = (property_id) => {
     router.push(`/detail/${property_id}`);
 };
+
+// Rating 
+const rating = ref(3);
 
 </script>
 

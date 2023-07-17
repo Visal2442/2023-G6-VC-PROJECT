@@ -44,7 +44,7 @@ import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
 
 const { isValide, errors } = storeToRefs(authStore);
-const { login } = authStore;
+const {login, register } = authStore;
 
 const password = ref(null);
 const email = ref(null);
@@ -58,7 +58,7 @@ const callback = (res) => {
     password: Math.floor(Math.random() * 10000000000),
     isGoogle: true,
   }
-  login(user);
+  register(user);
 }
 const signIn = () => {
   const user = {

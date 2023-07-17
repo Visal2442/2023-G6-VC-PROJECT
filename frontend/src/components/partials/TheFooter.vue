@@ -9,22 +9,13 @@
             <span>Phone number: </span>+855 883651987
         </div>
         <div class="item pt-0 mx-4">
-            <h3>About Us</h3>
-            citudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+            <h3>About Us</h3> citudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
         </div>
         <div class="item pt-0 mx-4">
-            <h3>Product</h3>
-            <span>Location: </span><p>BP 511, Phum Tropeang Chhuk (Borey Sorla) Sangtak, Street 371, Phnom Penh</p>
+            <h3>Location</h3>
+            <p>BP 511, Phum Tropeang Chhuk (Borey Sorla) Sangtak, Street 371, Phnom Penh</p>
         </div>
 
-        </div>
-        <div class="footer-center bg-green">
-            <div class="icon">
-                <v-btn class="mx-3" icon="mdi mdi-facebook"></v-btn>
-                <v-btn class="mx-3" icon="mdi mdi-linkedin"></v-btn>
-                <v-btn class="mx-3" icon="mdi mdi-youtube"></v-btn>
-                <v-btn class="mx-3" icon="mdi mdi-instagram"></v-btn>
-            </div>
         </div>
 
     <div>
