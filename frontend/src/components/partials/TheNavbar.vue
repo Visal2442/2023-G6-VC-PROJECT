@@ -1,7 +1,7 @@
 <template>
   <div id="navbar" class="" >
 
-    <!-- Large Screen  -->
+    <!-- Large Screen -->
     <v-toolbar class="pa-4 px-12" :elevation="elevationNavbar" :style="{ background: backgroundNavbar }">
       <v-toolbar-items class="d-flex align-center">
 

@@ -16,7 +16,6 @@ import NotFoundView from "../views/NotFoundView.vue";
 import { useAuthStore } from "../store/AuthStore";
 import { storeToRefs } from "pinia";
 
-// import LoginForm from '../views/LoginView.vue'
 const routes = [
   {
     path: "/",
@@ -74,7 +73,7 @@ const routes = [
     component: NotFoundView,
   },
   {
-    path: "/not-found",
+    path: "/not_found",
     name: "NotFound",
     component: NotFoundView,
   },

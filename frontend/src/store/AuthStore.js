@@ -72,9 +72,10 @@ export const useAuthStore = defineStore('auth', () => {
 
     const sendEmail = () => {
       axios.post("/reset_password_request",{ email: emailSend.value })
-          .then(()=>{
+          .then((res)=>{
+            console.log(res);
             localStorage.setItem('email', emailSend.value);
-            router.push('/code');
+            router.push({name:'Code'});
           }).catch(error=>{
             message.value = error.response.data.message;
           })

@@ -1,5 +1,4 @@
 <template>
-  <!-- <the-navbar></the-navbar> -->
 
   <email-form></email-form>
 </template>
