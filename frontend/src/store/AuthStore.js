@@ -62,6 +62,7 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.removeItem('user_id');
         localStorage.removeItem('token');
         localStorage.removeItem('email');
+        localStorage.removeItem('wishListData');
         token.value = localStorage.getItem('token');
         window.location.href ='/';
       })

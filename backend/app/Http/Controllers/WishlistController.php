@@ -33,8 +33,10 @@ class WishlistController extends Controller
                 'user_id' => $request->user_id,
                 'property_id' => $request->property_id,
             ]);
+            return response()->json(['status' => true, 'data' => $wishlist],200);
         }
-        return response()->json(['success' => true, 'data' => $wishlist],200);
+        return response()->json(['status' => false, 'message'=> 'The House is already added !'],400);
+
     }
 
     

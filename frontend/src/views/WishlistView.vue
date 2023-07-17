@@ -5,7 +5,7 @@
       <v-row class=" d-flex justify-center mb-5">
         <h1>Your Wishlist</h1>
       </v-row>
-      <div v-for="property of getWishlist" :key="property">
+      <div v-for="property of userWishlist" :key="property">
         <the-wishlist :property="property"></the-wishlist>
       </div>
     </v-container>
@@ -13,14 +13,19 @@
 </template>
 <script setup>
 import TheWishlist from "../components/card/WishlistCard.vue";
+import { onMounted } from "vue";
 
-import { storeToRefs } from 'pinia';
+// Wishlist Store 
 import { useWishlistStore } from '../store/WishlistStore';
-
 const wishlistStore = useWishlistStore();
-const { getWishlist } = storeToRefs(wishlistStore);
+const { userWishlist} = wishlistStore;
+
+onMounted(()=>{
+    console.log(userWishlist);
+})
 
 </script>
+
 <style scoped>
 
 </style>

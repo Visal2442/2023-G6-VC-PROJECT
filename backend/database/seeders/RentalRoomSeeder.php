@@ -16,7 +16,7 @@ class RentalRoomSeeder extends Seeder
         //
         $rentalRoom=[
             [
-                'property_id'=>2 
+                'property_id'=>1 
             ],
         ];
 

@@ -32,13 +32,79 @@
             <v-card-text class="text-end">${{ property?.price }}/Month</v-card-text>
           </div>
           <div class=" d-flex justify-center">
-            <base-button type="bg-green-accent-3" class="w-100 mt-5 mb-3">Book</base-button>
+            <base-button type="primary-btn" class="w-100 mt-5 mb-3" :disabled="property?.type=='room'">Book</base-button>
           </div>
         </v-card>
       </v-col>
     </v-row>
+
+    <v-row class="d-flex align-start my-10">
+      <v-col>
+        <!-- RESOURCE : Vuetify 3  -->
+        <v-card>
+          <v-tabs fixed-tabs v-model="tab" class="bg-green-accent-4">
+            <v-tab value="Description">Description</v-tab>
+            <v-tab value="type" v-if="property?.type == 'room'">View Rooms</v-tab>
+            <v-tab value="overview">Property Overview</v-tab>
+          </v-tabs>
+          <v-card-text>
+            <v-window v-model="tab">
+              <v-window-item value="Description">
+                {{ property?.description }}
+              </v-window-item>
+              <v-window-item value="type">
+                <v-card class="my-5 pa-5" elevation="7" v-for="room of rooms" :key="room.id">
+                  <v-row class="">
+                    <v-col class=" d-flex justify-space-between" cols="12">
+                      <h3 class="">Room {{ room.id }}</h3>
+                      <h3 class=" font-weight-bold"> ${{ property?.price }}/month</h3>
+                    </v-col>
+                    <v-col class=" d-flex justify-space-between" cols="12">
+                      <div class=" d-flex">
+                        <div class=" d-flex align-center mr-3">
+                          <v-icon class="mdi mdi-shower mr-3" size="x-large"></v-icon>
+                          <span>{{ property?.number_of_bathroom }}</span>
+                        </div>
+                        <div class=" d-flex align-center mr-3">
+                          <v-icon class="mdi mdi-countertop-outline mr-3" size="x-large"></v-icon>
+                          <span>{{ property?.number_of_kitchen }}</span>
+                        </div>
+                        <div class=" d-flex align-center">
+                          <v-icon class="mdi mdi-texture-box mr-3" size="x-large"></v-icon>
+                          <span>{{ property?.size }}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <base-button type="primary-btn" @click="console.log(room.id)">Book Now</base-button>
+                      </div>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </v-window-item>
+              <v-window-item value="overview">
+                Three
+              </v-window-item>
+            </v-window>
+          </v-card-text>
+        </v-card>
+      </v-col>
+
+      <v-col class="ma-auto">
+        <l-map :zoom="zoom" v-if="property" :center='[property?.latitude, property?.longitude]' class=""
+          style="height: 450px">
+          <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+          <l-marker :lat-lng="[property?.latitude, property?.longitude]" @click="getLatlng">
+            <LPopup>
+              <HouseCardOnMap :property="property" :distance="distance"> </HouseCardOnMap>
+            </LPopup>
+            <LIcon :icon-size="dynamicSize" :icon-url="homeIcon" :icon-anchor="dynamicAnchor"></LIcon>
+          </l-marker>
+        </l-map>
+      </v-col>
+    </v-row>
+
     <!-- Map  -->
-    <v-row id="map" class="ma-auto my-10">
+    <!-- <v-row id="map" class="ma-auto my-10">
       <h1 class=" mb-5">Map</h1>
       <l-map :zoom="zoom" v-if="property" :center='[property?.latitude, property?.longitude]' class=""
         style="height: 450px">
@@ -50,7 +116,7 @@
           <LIcon :icon-size="dynamicSize" :icon-url="homeIcon" :icon-anchor="dynamicAnchor"></LIcon>
         </l-marker>
       </l-map>
-    </v-row>
+    </v-row> -->
   </v-container>
 </template>
 
@@ -60,7 +126,7 @@ import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 const route = useRoute();
 import HouseCardOnMap from '../components/card/HouseCardOnMap.vue';
-
+const tab = ref(null);
 // Property Store
 import { storeToRefs } from "pinia";
 import { usePropertyStore } from '../store/PropertyStore';
@@ -125,9 +191,12 @@ function calculateDistance(lat1, lat2, lon1, lon2) {
 
 // Fetch data from database 
 const property = ref(null);
+const rooms = ref([]);
 axios.get(`/properties/detail/${route.params.id}`)
   .then(res => {
+    console.log(res.data.data);
     if (res.data.data.length > 1) {
+      rooms.value = res.data.data[1]
       property.value = res.data.data[0];
     } else {
       property.value = res.data.data;

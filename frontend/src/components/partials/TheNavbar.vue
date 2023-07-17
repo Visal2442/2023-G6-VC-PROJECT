@@ -20,7 +20,7 @@
 
         <!-- Before Login  -->
         <v-icon icon="mdi-dots-vertical" id="logged-in" v-else></v-icon>
-        <v-menu activator="#logged-in">
+        <v-menu id="menu" activator="#logged-in">
           <v-list>
             <v-list-item>
               <v-btn variant="plain" :to="{ name: 'Register' }" prepend-icon="mdi mdi-login">Register</v-btn>
@@ -97,7 +97,7 @@ const elevationNavbar = computed(() => {
 #navbar {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 2000;
 }
 
 .router-link-active {
@@ -115,4 +115,5 @@ const elevationNavbar = computed(() => {
 
 .pf img {
   border-radius: 50%;
-}</style>
+}
+</style>
