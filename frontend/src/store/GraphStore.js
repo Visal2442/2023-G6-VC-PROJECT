@@ -4,6 +4,7 @@ import axios from 'axios';
 
 export const useGraphStore = defineStore('graph', () => {
   const url=ref('/getDataGrap');
+// RESOURCE GRAPH: https://www.chartjs.org/
   let chartData=ref( {
         labels: [],
         datasets: [{

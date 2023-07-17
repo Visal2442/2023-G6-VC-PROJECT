@@ -8,6 +8,7 @@
 
 
 <script setup>
+// RESOURCE GRAPH: https://www.chartjs.org/
 import { Bar } from 'vue-chartjs'
 import 'chartjs-plugin-datalabels';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
