@@ -26,7 +26,7 @@ export const useGraphStore = defineStore('graph', () => {
               labels: labels,
               datasets: [
                 {
-                  label: "Count of proterty",
+                  label: "Count of property",
                   backgroundColor: [
                       'green',
                       'red',
