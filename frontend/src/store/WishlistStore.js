@@ -17,7 +17,7 @@ export const useWishlistStore = defineStore("wishlist", () => {
     axios
       .post("/wishlist", dataWishlist.value)
       .then((res) => {
-        console.log(res.data.success);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
