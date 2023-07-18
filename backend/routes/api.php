@@ -55,6 +55,8 @@ Route::post('/wishlist', [WishlistController::class, 'createWishlist']);
 
 Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);
 
+Route::post('/booking', [BookingController::class, 'booking']);
+
 
 
 

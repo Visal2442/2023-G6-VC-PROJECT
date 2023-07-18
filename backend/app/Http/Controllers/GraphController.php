@@ -15,16 +15,12 @@ class GraphController extends Controller
      */
     public function dataGrap()
     {
-        // $booking = Booking::with(['property'])->get();
-        
-        // return $booking;
-        
+ 
         $districts = District::withCount(['property' => function ($query) {
             $query->whereHas('booking');
         }])->get();
         return $districts;
 
-        
     }
 
     /**
