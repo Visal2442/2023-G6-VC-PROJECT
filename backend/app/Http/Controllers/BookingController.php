@@ -33,21 +33,12 @@ class BookingController extends Controller
         'user_id' => 'required|exists:users,id',
         'property_id' => 'required|exists:properties,id',
     ]);
+
     if ($validator->fails()) {
         return response()->json(['status' => false, 'errors' => $validator->errors()], 400);
     }
-    $booking = Booking::create([
-        'first_name' => $request->first_name,
-        'last_name' => $request->last_name,
-        'email' => $request->email,
-        'phone_number' => $request->phone_number,
-        'check_in_date' => $request->check_in_date,
-        'check_out_date' => $request->check_out_date,
-        'room_id'=>$request->room_id,
-        'user_id' => $request->user_id,
-        'property_id' => $request->property_id,
-    ]);
-
+    
+    $booking = Booking::create($validator->validated());
     $property = Property::find($request->property_id);
     if($property['type'] == "room"){
         DB::table('rooms')
