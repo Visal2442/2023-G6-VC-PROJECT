@@ -102,21 +102,6 @@
         </l-map>
       </v-col>
     </v-row>
-
-    <!-- Map  -->
-    <!-- <v-row id="map" class="ma-auto my-10">
-      <h1 class=" mb-5">Map</h1>
-      <l-map :zoom="zoom" v-if="property" :center='[property?.latitude, property?.longitude]' class=""
-        style="height: 450px">
-        <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-        <l-marker :lat-lng="[property?.latitude, property?.longitude]" @click="getLatlng">
-          <LPopup>
-            <HouseCardOnMap :property="property" :distance="distance"> </HouseCardOnMap>
-          </LPopup>
-          <LIcon :icon-size="dynamicSize" :icon-url="homeIcon" :icon-anchor="dynamicAnchor"></LIcon>
-        </l-marker>
-      </l-map>
-    </v-row> -->
   </v-container>
 </template>
 
@@ -208,5 +193,9 @@ axios.get(`/properties/detail/${route.params.id}`)
 <style scoped>
 #map {
   width: 100%;
+}
+#imgDetail{
+  width: 100%;
+  height: 530px;
 }
 </style>
