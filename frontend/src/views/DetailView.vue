@@ -32,7 +32,7 @@
             <v-card-text class="text-end">${{ property?.price }}/Month</v-card-text>
           </div>
           <div class=" d-flex justify-center">
-            <base-button type="primary-btn" class="w-100 mt-5 mb-3" :disabled="property?.type=='room'">Book</base-button>
+            <base-button type="primary-btn" :to="{name:'Booking'}" class="w-100 mt-5 mb-3" :disabled="property?.type=='room'">Book</base-button>
           </div>
         </v-card>
       </v-col>

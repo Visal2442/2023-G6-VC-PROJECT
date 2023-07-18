@@ -11,7 +11,7 @@ import CodeView from "../views/CodeView.vue";
 import WishlistView from "../views/WishlistView.vue";
 import DetailView from "../views/DetailView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
-
+import BookingView from "../views/BookingView.vue";
 // AuthStore Pinia
 import { useAuthStore } from "../store/AuthStore";
 import { storeToRefs } from "pinia";
@@ -66,6 +66,11 @@ const routes = [
     path: "/code",
     name: "Code",
     component: CodeView,
+  },
+  {
+    path: "/booking",
+    name: "Booking",
+    component: BookingView,
   },
   {
     path: "/:catchAll(.*)",
