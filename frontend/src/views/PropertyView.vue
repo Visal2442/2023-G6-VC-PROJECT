@@ -149,6 +149,22 @@ const onPrice = (value) => {
      getProperties();
 }
 
+// average star of house 
+const avgOfStar = (property_id) => {
+  axios.get(`/properties/ratings/${property_id}`)
+  .then(response => {
+    const ratings = response.data.data;
+    const sum = ratings.reduce((star, ratings) => star + ratings.star, 0);
+    const avg = parseFloat(sum / ratings.length);
+    console.log(avg);
+  })
+  .catch(error => {
+     
+    console.log(error.response.data);
+  });
+};
+avgOfStar(4);
+
 </script>
 
 <style scoped>

@@ -39,7 +39,6 @@ import { defineProps,defineEmits, ref } from "vue";
 import BaseButton from "../widget/BaseButton.vue";
 import { useRouter } from "vue-router";
 
-
 const emits = defineEmits(['addToWishlist']);
 const router = useRouter();
 

@@ -13,6 +13,9 @@ class RatingController extends Controller
     public function index()
     {
         //
+        $ratings = Rating::all();
+        return response()->json(['message' => 'requested successfully','data' => $ratings]);
+
     }
 
     /**
@@ -50,11 +53,13 @@ class RatingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Rating $rating)
+    public function show($id)
     {
-        //
+        // show rating with the specified ID
+        $ratings = Rating::where('property_id', $id)->get();
+        // Return a JSON response with the rating data
+        return response()->json(['message' => 'requested successfully', 'data' => $ratings]);
     }
-
     /**
      * Update the specified resource in storage.
      */
