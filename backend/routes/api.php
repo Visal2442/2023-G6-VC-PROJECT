@@ -56,6 +56,7 @@ Route::post('/wishlist', [WishlistController::class, 'createWishlist']);
 Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);
 
 Route::post('/createProperty', [PropertyController::class, 'createProperty']);
+Route::put('/updateProperty/{id}', [PropertyController::class, 'updateProperty']);
 
 
 

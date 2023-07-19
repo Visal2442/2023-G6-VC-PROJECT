@@ -98,4 +98,34 @@ class PropertyController extends Controller
             return response()->json(['message'=>'created','data'=>$property],200);
         }
     }
+
+    public function updateProperty(Request $request, $id)
+    {
+        $property = Property::find($id);
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'type' => 'required',
+            'size' => 'required',
+            'number_of_floor' => 'required',
+            'number_of_room'=>'required',
+            'number_of_bathroom' => 'required',
+            'number_of_kitchen' => 'required',
+            'image' => 'required',
+            'latitude'=>'required',
+            'longitude'=>'required',
+            'district_id'=>'required',
+            'user_id'=>'required',
+        ]);
+        if($validator->fails()){
+            if ($validator->fails()) {
+                return response()->json(['status' => false, 'errors' => $validator->errors()], 401);
+            } 
+        }
+        $property->update($validator->validated());
+        return response()->json(['message' => 'successfully updated', 'data' => $property], 200);
+    
+
+    }
 }
