@@ -10,6 +10,7 @@ use App\Models\RentalHouse;
 use App\Models\RentalRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class PropertyController extends Controller
 {
@@ -69,5 +70,32 @@ class PropertyController extends Controller
         }
         return response()->json(['message' => 'Property not found'], 404);
 
+    }
+    public function createProperty(Request $request)
+    {
+        $validator=Validator::make($request->all(), [
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'type' => 'required',
+            'size' => 'required',
+            'number_of_floor' => 'required',
+            'number_of_room'=>'required',
+            'number_of_bathroom' => 'required',
+            'number_of_kitchen' => 'required',
+            'image' => 'required',
+            'latitude'=>'required',
+            'longitude'=>'required',
+            'district_id'=>'required',
+            'user_id'=>'required',
+        ]);
+        if($validator->fails()){
+            if ($validator->fails()) {
+                return response()->json(['status' => false, 'errors' => $validator->errors()], 401);
+            } 
+        }else{
+            $property=Property::create($validator->validated());
+            return response()->json(['message'=>'created','data'=>$property],200);
+        }
     }
 }
