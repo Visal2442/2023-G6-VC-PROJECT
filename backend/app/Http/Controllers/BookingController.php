@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendDetailBookingToCustomer;
 use App\Mail\SendDetailBookingToLandlord;
+use App\Mail\sendInformationCustomerHaveBooked;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -77,11 +78,15 @@ class BookingController extends Controller
             'customerPhoneNumber' => $booking['phone_number'],
             'landlordEmail' => $propertyDetail['user']['email'],
             'landlordName' => $propertyDetail['user']['username'],
-            'district' => $propertyDetail["district"]["name"]
+            'district' => $propertyDetail["district"]["name"],
+            'check_in_date'=>$booking['check_in_date'],
+            'check_out_date'=>$booking['check_out_date'],
         ];
 
         //   -----------------------------------------------------------------
-      
+
+
+
             if ($property['type'] == "room") {
                 DB::table('rooms')
                     ->join('rental_rooms', 'rental_rooms.id', '=', 'rooms.rental_room_id')
@@ -93,9 +98,12 @@ class BookingController extends Controller
                 // send email detail
                 Mail::to($booking['email'])->send(new SendDetailBookingToCustomer($send));
                 Mail::to($propertyDetail['user']['email'])->send(new SendDetailBookingToLandlord($send));
+                Mail::to($propertyDetail['user']['email'])->send(new sendInformationCustomerHaveBooked($send));
+
                 //    ----------------------------------------------------------------------------------------------- 
                 return response()->json(['status' => true, 'data' => $booking], 200);
             }
+
             if ($property['type'] == "house") {
                 $property['available'] = 0;
                 $property->save();
@@ -104,6 +112,8 @@ class BookingController extends Controller
                 // send email detail
                 Mail::to($booking['email'])->send(new SendDetailBookingToCustomer($send));
                 Mail::to($propertyDetail['user']['email'])->send(new SendDetailBookingToLandlord($send));
+                Mail::to($propertyDetail['user']['email'])->send(new sendInformationCustomerHaveBooked($send));
+
                 //    ----------------------------------------------------------------------------------------------- 
 
                 return response()->json(['status' => true, 'data' => $booking], 200);
