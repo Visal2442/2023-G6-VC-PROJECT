@@ -6,7 +6,7 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DistrictControllr;
 use App\Http\Controllers\GraphController;
-use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\WishlistController;
 use App\Models\Booking;
 use App\Models\Province;
@@ -47,13 +47,13 @@ Route::group(['prefix'=>'properties'], function(){
     Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
 });
 
-
+// Wishlist 
 Route::get('/wishlist/{userID}', [WishlistController::class, 'getDataWishlist']);
-
 Route::post('/wishlist', [WishlistController::class, 'createWishlist']);
-
-
+// Graph 
 Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);
+// Location 
+Route::resource('districts', DistrictController::class);
 
 Route::post('/createProperty', [PropertyController::class, 'createProperty']);
 Route::put('/updateProperty/{id}', [PropertyController::class, 'updateProperty']);

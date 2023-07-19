@@ -1,0 +1,49 @@
+<template>
+  <div>
+    <dashboard-header></dashboard-header>
+    <v-container fluid class=" my-5">
+      <h1 class=" my-5">Add New Property</h1>
+      <!-- TAB  -->
+      <v-card>
+        <v-tabs v-model="type" color="green-accent-4">
+          <v-tab value="house">House</v-tab>
+          <v-tab value="room">Room</v-tab>
+        </v-tabs>
+        <v-window v-model="type">
+          <v-window-item value="house">
+            <property-form :type="type"></property-form>
+          </v-window-item>
+          <v-window-item value="room">
+            <v-container fluid>
+              <v-row>
+                <h1>Add Room</h1>
+              </v-row>
+            </v-container>
+          </v-window-item>
+        </v-window>
+      </v-card>
+
+    </v-container>
+  </div>
+</template>
+
+<script setup>
+import PropertyForm from '../components/form/PropertyForm.vue'
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+const route = useRoute();
+
+const type = ref('');
+const post = () => {
+  console.log(route.path);
+}
+onMounted(() => {
+  post();
+
+})
+
+
+
+</script>
+
+<style scoped></style>

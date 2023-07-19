@@ -11,6 +11,8 @@ import CodeView from "../views/CodeView.vue";
 import WishlistView from "../views/WishlistView.vue";
 import DetailView from "../views/DetailView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
+import Dashboard from "../views/DashboardView.vue";
+import PostPropertyView from '../views/PostPropertyView.vue';
 
 // AuthStore Pinia
 import { useAuthStore } from "../store/AuthStore";
@@ -67,6 +69,18 @@ const routes = [
     name: "Code",
     component: CodeView,
   },
+  // Dashboard 
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Dashboard,
+  },
+  {
+    path: "/dashboard/post",
+    name: "Post",
+    component: PostPropertyView,
+  },
+  // 404 Not Found 
   {
     path: "/:catchAll(.*)",
     name: "404NotFound",
