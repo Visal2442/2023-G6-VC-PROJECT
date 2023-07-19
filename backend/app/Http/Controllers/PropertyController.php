@@ -70,4 +70,14 @@ class PropertyController extends Controller
         return response()->json(['message' => 'Property not found'], 404);
 
     }
+
+    // delete a property 
+    public function deleteHouse($id){
+        $house = Property::find($id);
+        if(!$house){
+            return response()->json(['message' =>'House not found'], 404);
+        }
+        $house->delete();
+        return response()->json(['message' =>'Delete house success!'], 200);
+    }
 }

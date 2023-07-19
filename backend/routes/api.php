@@ -45,6 +45,7 @@ Route::group(['prefix'=>'properties'], function(){
     Route::get('/pagination', [PropertyController::class, 'pagination']);
     Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
     Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
+    Route::delete('/delete/{id}', [PropertyController::class, 'deleteHouse']);
 });
 
 
