@@ -32,7 +32,7 @@
             <v-card-text class="text-end">${{ property?.price }}/Month</v-card-text>
           </div>
           <div class=" d-flex justify-center">
-            <base-button type="primary-btn" :to="{name:'Booking'}" class="w-100 mt-5 mb-3" :disabled="property?.type=='room'">Book</base-button>
+            <base-button type="primary-btn"  class="w-100 mt-5 mb-3" @click="book()"  :disabled="property?.type=='room'">Book</base-button>
           </div>
         </v-card>
       </v-col>
@@ -75,7 +75,7 @@
                         </div>
                       </div>
                       <div>
-                        <base-button type="primary-btn" @click="booking(property?.id, room.id)">Book Now</base-button>
+                        <base-button type="primary-btn" @click="booking(room.id)">Book Now</base-button>
                       </div>
                     </v-col>
                   </v-row>
@@ -109,6 +109,7 @@
 import BaseButton from '@/components/widget/BaseButton.vue';
 import { computed, ref } from 'vue';
 import { useRoute,useRouter } from 'vue-router';
+
 const route = useRoute();
 const router = useRouter();
 import HouseCardOnMap from '../components/card/HouseCardOnMap.vue';
@@ -141,12 +142,15 @@ const dynamicAnchor = computed(() => {
 
 let markerLat = ref(0);
 let markerLng = ref(0);
+// let emailCookies = ref(Cookies.get('email'));
 
 const getLatlng = (coordinate) => {
   console.log(coordinate.latlng.lat);
   markerLat.value = coordinate.latlng.lat
   markerLng.value = coordinate.latlng.lng
 }
+
+
 
 const distance = computed(() => {
   return calculateDistance(currentLat.value, markerLat.value, currentLng.value, markerLng.value).toFixed(2);
@@ -191,11 +195,8 @@ axios.get(`/properties/detail/${route.params.id}`)
   })
 
 // Booking 
-const booking = (property_id, room_id)=>{
+const booking = (room_id)=>{
   if(Cookies.get('email') !== undefined){
-
- 
-  localStorage.setItem('property_id', property_id);
   localStorage.setItem('room_id', room_id);
   router.push('/booking');
   // router.push({name:'Booking', param:{id:property_id, rid:room_id}});
@@ -204,7 +205,13 @@ const booking = (property_id, room_id)=>{
     alert("Please login your account");
   }
 }
-
+const book= () =>{
+  if(Cookies.get('email')){
+    router.push({name:'Booking'});
+  }else{
+    alert('Please login your account');
+  }
+}
 </script>
 
 <style scoped>

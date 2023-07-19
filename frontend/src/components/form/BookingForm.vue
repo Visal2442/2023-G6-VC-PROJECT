@@ -77,18 +77,21 @@ const bookProperty = () => {
       property_id: propertyId.value,
 
     }
+    console.log(dataBooking);
     booking(dataBooking);
   }
   // Reset the form data after the booking is successful
 
   firstName.value = null;
-  lastName.value = null;
-  email.value = null;
-  phoneNumber.value = null;
-  checkInDate.value = null;
-  checkOutDate.value = null;
-  localStorage.removeItem('room_id');
-  localStorage.removeItem('property_id');
+    lastName.value = null;
+    email.value = null;
+    phoneNumber.value = null;
+    checkInDate.value = null;
+    checkOutDate.value = null;
+    // localStorage.removeItem('room_id');
+    // localStorage.removeItem('property_id');
+
+
   
 
 
