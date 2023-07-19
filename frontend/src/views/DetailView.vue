@@ -75,7 +75,7 @@
                         </div>
                       </div>
                       <div>
-                        <base-button type="primary-btn" @click="console.log(room.id)">Book Now</base-button>
+                        <base-button type="primary-btn" @click="booking(property?.id, room.id)">Book Now</base-button>
                       </div>
                     </v-col>
                   </v-row>
@@ -108,8 +108,9 @@
 <script setup>
 import BaseButton from '@/components/widget/BaseButton.vue';
 import { computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute,useRouter } from 'vue-router';
 const route = useRoute();
+const router = useRouter();
 import HouseCardOnMap from '../components/card/HouseCardOnMap.vue';
 const tab = ref(null);
 // Property Store
@@ -187,6 +188,15 @@ axios.get(`/properties/detail/${route.params.id}`)
       property.value = res.data.data;
     }
   })
+
+// Booking 
+const booking = (property_id, room_id)=>{
+  localStorage.setItem('property_id', property_id);
+  localStorage.setItem('room_id', room_id);
+  router.push('/booking');
+  // router.push({name:'Booking', param:{id:property_id, rid:room_id}});
+  // router.push("{name:'Booking'}")
+}
 
 </script>
 

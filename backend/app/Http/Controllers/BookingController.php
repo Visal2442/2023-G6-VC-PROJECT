@@ -25,7 +25,7 @@ class BookingController extends Controller
     $validator = Validator::make($request->all(), [
         'first_name' => 'required',
         'last_name' => 'required',
-        'email' => 'required',
+        'email' => ['required', 'email'],
         'phone_number' => 'required',
         'check_in_date' => 'required|date_format:Y-m-d',
         'check_out_date' => 'required|date_format:Y-m-d|after:check_in_date',
