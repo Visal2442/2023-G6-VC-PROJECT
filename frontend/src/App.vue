@@ -13,8 +13,8 @@
     <the-footer v-if="!route.path.includes('dashboard')"></the-footer>
 
     <!-- FOR ADMIN PAGE  -->
-    <v-app>
-      <dashboard-navbar v-if="route.path.includes('dashboard')"></dashboard-navbar>
+    <v-app v-if="route.path.includes('dashboard')">
+      <dashboard-navbar></dashboard-navbar>
       <v-main>
         <!-- <dashboard-header></dashboard-header> -->
         <router-view />
