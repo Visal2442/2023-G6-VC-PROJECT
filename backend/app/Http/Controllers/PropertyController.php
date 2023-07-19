@@ -124,7 +124,7 @@ class PropertyController extends Controller
             } 
         }
         $property->update($validator->validated());
-        return response()->json(['message' => 'successfully updated', 'data' => $property], 200);
+        return response()->json(['message' => 'successfully updated property', 'data' => $property], 200);
     
 
     }
