@@ -88,8 +88,6 @@ const bookProperty = () => {
     phoneNumber.value = null;
     checkInDate.value = null;
     checkOutDate.value = null;
-    // localStorage.removeItem('room_id');
-    // localStorage.removeItem('property_id');
 
 
   
