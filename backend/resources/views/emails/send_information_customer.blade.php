@@ -9,13 +9,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
         }
 
         h3 {
-            color: #333333;
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 20px;
         }
 
         table {
@@ -26,16 +23,16 @@
         th,
         td {
             text-align: left;
-            padding: 8px;
+            padding: 7px;
             border-bottom: 1px solid #ddd;
-            border: 2px solid black;
-            background-color: rgba(177, 177, 177, 0.233);
+            border: 1px solid black;
+            background-color: rgba(235, 235, 235, 0.868);
             text-align: center;
         }
 
         th {
 
-            background-color: rgb(220, 167, 52);
+            background-color: rgb(247, 183, 46);
             color: white;
 
         }
@@ -45,7 +42,7 @@
 <body>
     <div>
         <h3>Hello, {{$detail['landlordName']}}</h3>
-        <p>Here are the details of the house you booked. You can contact me for more information.</p>
+        <p>Here is customer information who booked your house!</p>
     </div>
     <img src="<?php echo $detail['image']; ?>" alt="">
     <table>
