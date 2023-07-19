@@ -50,6 +50,7 @@ const addToWishlist = (property_id) => {
 }
 
 const getDetail = (property_id) => {
+    localStorage.setItem('property_id', property_id);
     router.push(`/detail/${property_id}`);
 };
 
