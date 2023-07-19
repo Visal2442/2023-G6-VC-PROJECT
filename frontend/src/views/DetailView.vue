@@ -194,10 +194,10 @@ axios.get(`/properties/detail/${route.params.id}`)
 const booking = (property_id, room_id)=>{
   if(Cookies.get('email') !== undefined){
 
- 
-  localStorage.setItem('property_id', property_id);
-  localStorage.setItem('room_id', room_id);
-  router.push('/booking');
+
+    localStorage.setItem('property_id', property_id);
+    localStorage.setItem('room_id', room_id);
+    router.push('/booking');
   // router.push({name:'Booking', param:{id:property_id, rid:room_id}});
   // router.push("{name:'Booking'}")
   }else{
