@@ -21,22 +21,20 @@
         </div>
         <v-card-actions class="pa-0">
             <v-card-text class="text-green-accent-4 text-md-body-1">${{ props.property?.price }}/month</v-card-text>
-            <v-card-text class="text-end cursor-pointer" @click="dialog = !dialog"><v-icon class="mdi mdi-star mr-1"
+            <v-card-text class="text-end cursor-pointer" @click="isVisible()"><v-icon class="mdi mdi-star mr-1"
                     color="amber-lighten-2"></v-icon>{{ avgRating }}</v-card-text>
 
             <v-dialog v-model="dialog" transition="dialog-top-transition" persistent width="auto">
-                <v-card title="Rate this house !" max-width="400">
+                <v-card title="Rate this house !" max-width="400" class="">
                     <v-card-text class=" text-center">
-                        <v-rating v-model="rating" density="compact" color="amber-lighten-2" size="x-large"></v-rating>
+                        <v-rating v-model="rating" density="compact" color="amber-lighten-2" size="70"></v-rating>
                     </v-card-text>
-                    <v-card-actions>
+                    <v-card-actions class="px-5 mb-2 d-flex justify-end">
                         <v-btn color="deep-orange-accent-3" @click="dialog = !dialog">Cancel</v-btn>
-                        <v-spacer></v-spacer>
                         <v-btn color="green-accent-3" @click="rateStar(rating, props.property.id)">Rate Now</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
-            <!-- <v-rating v-model="rating" @click="addStar(rating)" density="compact" color="amber-lighten-2" size="small" half-increments></v-rating> -->
         </v-card-actions>
         <v-card-actions>
             <div class="d-flex align-center">
@@ -52,6 +50,7 @@
 <script setup>
 import { defineProps, defineEmits, ref } from "vue";
 import BaseButton from "../widget/BaseButton.vue";
+import Cookies from 'js-cookie';
 import { useRouter } from "vue-router";
 const router = useRouter();
 import axios from "axios";
@@ -69,20 +68,19 @@ const getDetail = (property_id) => {
 
 
 // Rating
+const isCookieEmail = ref(Cookies.get('email'));
+const user_id = ref(localStorage.getItem("user_id"));
 const rating = ref(null);
 const dialog = ref(false)
 
-const rateStar = (rating, property_id) => {
-    const house = ref({
-        rating: rating,
-        property_id: property_id
-    })
-    if (rating < 1) {
-        alert('Please rate the house !');
+const isVisible = () => {
+    if (isCookieEmail.value) {
+        dialog.value = true;
+        rating.value = null;
     }
     else {
-        emits('rateStar', house.value)
         dialog.value = false;
+        alert('Please Login to your account !');
     }
 }
 
@@ -91,19 +89,34 @@ const rateStar = (rating, property_id) => {
 const avgRating = ref(null);
 axios.get(`/properties/ratings/${props.property.id}`)
     .then(response => {
+        avgRating.value = 0;
         const ratings = response.data.data;
+        console.log(ratings);
         const sum = ratings.reduce((star, ratings) => star + ratings.star, 0);
-        const avg = parseFloat(sum / ratings.length);
-        if (isNaN(avg)) {
-            avgRating.value = 0;
-        }
-        else {
-            avgRating.value = avg;
+        const avg = sum / ratings.length;
+        if (!isNaN(avg)) {
+            avgRating.value = avg.toFixed(1);
         }
     })
     .catch(error => {
         console.log(error.response.data);
     });
+
+// Rate the star 
+const rateStar = (rate, property_id) => {
+    const house = ref({
+        star: rate,
+        user_id: user_id.value,
+        property_id: property_id
+    })
+    if (rate < 1) {
+        alert('Please rate the house !');
+    }
+    else {
+        emits('rateStar', house.value)
+        dialog.value = false;
+    }
+}
 </script>
 
 <style scoped>

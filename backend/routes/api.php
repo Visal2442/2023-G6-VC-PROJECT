@@ -46,7 +46,7 @@ Route::group(['prefix'=>'properties'], function(){
     Route::get('/pagination', [PropertyController::class, 'pagination']);
     Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
     Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
-    Route::put('/ratings',[RatingController::class, 'store']);
+    Route::post('/ratings',[RatingController::class, 'store']);
     Route::get('/ratings',[RatingController::class, 'index']);
     Route::get('/ratings/{id}',[RatingController::class, 'show']);
 });

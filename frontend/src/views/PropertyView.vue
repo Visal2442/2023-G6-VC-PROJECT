@@ -151,7 +151,13 @@ const onPrice = (value) => {
 
 // Rating Star
 const rateStar = (property)=>{
+     getProperties();
      console.log(property);
+     axios.post('/properties/ratings', property)
+     .then(res=>{
+          console.log(res);
+     })
+     .catch(err=>err);
 }
 
 </script>
