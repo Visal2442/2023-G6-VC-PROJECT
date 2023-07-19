@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Models\Wishlist;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Authentication 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthenticationController::class, 'logout']);
+
 });
 Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/register', [AuthenticationController::class, 'register']);
@@ -47,14 +49,12 @@ Route::group(['prefix'=>'properties'], function(){
     Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
 });
 
-
+// Wishlist
 Route::get('/wishlist/{userID}', [WishlistController::class, 'getDataWishlist']);
-
 Route::post('/wishlist', [WishlistController::class, 'createWishlist']);
-
+//
 
 Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);
-
 Route::post('/booking', [BookingController::class, 'booking']);
 
 

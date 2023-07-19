@@ -46,6 +46,7 @@
 import { ref,computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useBookingStore } from '../../store/BookingStore';
+
 const BookingStore = useBookingStore();
 const { booking } = BookingStore;
 const { isValide} = storeToRefs(BookingStore);
@@ -63,20 +64,21 @@ const roomId = ref(localStorage.getItem('room_id'))
 
 const bookProperty = () => {
 
-  const dataBooking = {
-    first_name: firstName.value,
-    last_name: lastName.value,
-    email: email.value,
-    phone_number: phoneNumber.value,
-    check_in_date: checkInDate.value,
-    check_out_date: checkOutDate.value,
-    room_id: roomId.value,
-    user_id: userId.value,
-    property_id: propertyId.value,
 
+    const dataBooking = {
+      first_name: firstName.value,
+      last_name: lastName.value,
+      email: email.value,
+      phone_number: phoneNumber.value,
+      check_in_date: checkInDate.value,
+      check_out_date: checkOutDate.value,
+      room_id: roomId.value,
+      user_id: userId.value,
+      property_id: propertyId.value,
+
+    }
+    booking(dataBooking);
   }
-  booking(dataBooking);
-  
   // Reset the form data after the booking is successful
 
   firstName.value = null;
@@ -85,7 +87,11 @@ const bookProperty = () => {
   phoneNumber.value = null;
   checkInDate.value = null;
   checkOutDate.value = null;
-}
+  localStorage.removeItem('room_id');
+  localStorage.removeItem('property_id');
+  
+
+
 
 
 const isValidDate = computed(() => {

@@ -124,6 +124,7 @@ import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker, LPopup, LIcon } from "@vue-leaflet/vue-leaflet";
 import HomeIcon from '../assets/marker/homeIcon.png'
 import axios from 'axios';
+import Cookies from 'js-cookie';
 // Map Configuration 
 const zoom = 12;
 const url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -191,11 +192,17 @@ axios.get(`/properties/detail/${route.params.id}`)
 
 // Booking 
 const booking = (property_id, room_id)=>{
+  if(Cookies.get('email') !== undefined){
+
+ 
   localStorage.setItem('property_id', property_id);
   localStorage.setItem('room_id', room_id);
   router.push('/booking');
   // router.push({name:'Booking', param:{id:property_id, rid:room_id}});
   // router.push("{name:'Booking'}")
+  }else{
+    alert("Please login your account");
+  }
 }
 
 </script>
