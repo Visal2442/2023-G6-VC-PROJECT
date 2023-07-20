@@ -45,8 +45,8 @@ Route::group(['prefix'=>'properties'], function(){
     Route::get('/pagination', [PropertyController::class, 'pagination']);
     Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
     Route::delete('/delete/{id}', [PropertyController::class, 'deleteHouse']);
+    Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
 });
-Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
 
 // Wishlist 
 Route::get('/wishlist/{userID}', [WishlistController::class, 'getDataWishlist']);
@@ -56,8 +56,10 @@ Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);
 // Location 
 Route::resource('districts', DistrictController::class);
 
-Route::get('/getAllProperties/{id}', [PropertyController::class, 'getAllProperties']);
+Route::post('/createProperty', [PropertyController::class, 'createProperty']);
 Route::put('/updateProperty/{id}', [PropertyController::class, 'updateProperty']);
+Route::post('/image', [PropertyController::class, 'getImage']);
+Route::get('/getAllProperties/{id}', [PropertyController::class, 'getAllProperties']);
 Route::get('/getPropertyId/{id}', [PropertyController::class, 'getPropertyId']);
 
 
