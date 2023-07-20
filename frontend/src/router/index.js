@@ -13,6 +13,7 @@ import DetailView from "../views/DetailView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 import Dashboard from "../views/DashboardView.vue";
 import PostPropertyView from '../views/PostPropertyView.vue';
+import LandlordPropertyView from "../views/LandlordPropertyView.vue";
 
 // AuthStore Pinia
 import { useAuthStore } from "../store/AuthStore";
@@ -90,6 +91,11 @@ const routes = [
     path: "/not_found",
     name: "NotFound",
     component: NotFoundView,
+  },
+  {
+    path: "/landlordPropertyView",
+    name: "LandlordPropertyView",
+    component: LandlordPropertyView,
   },
 ];
 

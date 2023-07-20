@@ -43,9 +43,9 @@ Route::post('/reset_password_request', [ForgotPasswordController::class, 'resetP
 Route::group(['prefix'=>'properties'], function(){
     Route::get('/', [PropertyController::class, 'index']);
     Route::get('/pagination', [PropertyController::class, 'pagination']);
-    Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
     Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
 });
+Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
 
 // Wishlist 
 Route::get('/wishlist/{userID}', [WishlistController::class, 'getDataWishlist']);
@@ -55,7 +55,9 @@ Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);
 // Location 
 Route::resource('districts', DistrictController::class);
 
-
+Route::get('/getAllProperties/{id}', [PropertyController::class, 'getAllProperties']);
+Route::put('/updateProperty/{id}', [PropertyController::class, 'updateProperty']);
+Route::get('/getPropertyId/{id}', [PropertyController::class, 'getPropertyId']);
 
 
 
