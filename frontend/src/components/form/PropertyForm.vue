@@ -40,8 +40,8 @@
         </v-sheet>
     </v-container>
 </template>
-
 <script setup>
+
 import axios from 'axios';
 import { onMounted, ref, defineProps } from 'vue';
 
