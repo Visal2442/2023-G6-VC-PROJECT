@@ -109,6 +109,11 @@ const routes = [
     name: "NotFound",
     component: NotFoundView,
   },
+  {
+    path: "/landlordPropertyView",
+    name: "LandlordPropertyView",
+    component: LandlordPropertyView,
+  },
 ];
 
 const router = createRouter({
