@@ -7,7 +7,7 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-xs d-flex align-center pr-10">
-            <v-toolbar-title class="mr-5">visal@gmail.com</v-toolbar-title>
+            <v-toolbar-title class="mr-5">{{email}}</v-toolbar-title>
             <v-avatar id="logged-in">
                 <v-img :src="require('../../assets/profile2.jpeg')"></v-img>
             </v-avatar>
@@ -23,10 +23,14 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 // Pinia Store 
 import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
 const { logout } = authStore;
+import Cookies from 'js-cookie';
+const email = ref(Cookies.get('email'));
+
 </script>
 
 <style scoped>

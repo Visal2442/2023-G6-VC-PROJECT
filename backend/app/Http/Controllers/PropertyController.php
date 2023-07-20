@@ -24,6 +24,7 @@ class PropertyController extends Controller
     {
       
         $properties = Property::where('user_id', $userId)->get();
+        $properties = PropertyResource::collection($properties);
         return response()->json(['success' => true, 'data' => $properties], 200);
     }
 
