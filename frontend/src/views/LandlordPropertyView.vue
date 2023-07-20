@@ -43,7 +43,7 @@
                       class="mdi mdi-delete"
                       size="small"
                       color="red"
-                      @click="deleteDialogProperty()"
+                      @click="deleteDialogProperty(property.id)"
                     ></v-icon>
                   </div>
                 </td>
@@ -205,14 +205,12 @@
               Do you want to delete this property?
             </p>
             <v-card-actions class="button">
-              <v-btn
-                class="cancel text-button text-blue"
-                @click="cencel()"
+              <v-btn class="cancel text-button text-blue" @click="cencel()"
                 >Cancel</v-btn
               >
               <v-btn
                 class="deleteBtn bg-red text-overline text-white"
-                color="black"                
+                color="black"
                 @click="deleteProperty()"
               >
                 Delete
@@ -228,7 +226,7 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
-const user_id = ref(localStorage.getItem('user_id'));
+const user_id = ref(localStorage.getItem("user_id"));
 const properties = ref([]);
 const dialog = ref(false);
 const deleteDialog = ref(false);
@@ -244,14 +242,10 @@ const selected = ref("");
 const description = ref("");
 
 axios.get(`/getAllProperties/${user_id.value}`).then((res) => {
-    properties.value = res.data.data;
-    console.log(user_id.value);
-    return properties.value;
+  properties.value = res.data.data;
+  console.log(user_id.value);
+  return properties.value;
 });
-
-const deleteProperty = (property_id) => {
-  localStorage.setItem("property_id", property_id);
-};
 
 // const propertyDataId =ref([]);
 const editProperty = (property_id) => {
@@ -290,10 +284,6 @@ onMounted(() => {
   });
 });
 
-const closeDialog = () => {
-  dialog.value = false;
-};
-
 const saveChanges = () => {
   let id = localStorage.getItem("property_id");
   const data = {
@@ -327,12 +317,29 @@ const saveChanges = () => {
     });
 };
 
-const deleteDialogProperty = () => {
+const deleteDialogProperty = (property_id) => {
+  localStorage.setItem('property_id',property_id)
   deleteDialog.value = true;
 };
 
 const cencel = () => {
   deleteDialog.value = false;
+};
+
+const deleteProperty = () => {
+  let propertiesId = localStorage.getItem("property_id")
+
+  axios
+  .delete(`/properties/delete/${propertiesId}`)
+  .then((res) => {
+    properties.value = res.data.data;
+  })
+  .catch((errors) => {
+    console.log(errors);
+  });
+  console.log(localStorage.getItem('property_id'));
+
+  deleteDialog.value = false
 };
 </script>
 
