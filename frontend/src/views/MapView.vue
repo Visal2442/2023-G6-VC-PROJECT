@@ -1,27 +1,27 @@
 <template>
   <div>
-        <v-container fluid class="mr-md-9">
+    <v-container fluid class="mr-md-9">
 
-        <!-- ** -->
-        <!-- Resource : https://vue2-leaflet.netlify.app/components/LPopup.html#demo -->
-        <!-- ** -->
-        <l-map :zoom="zoom" :center="center" class=" ma-auto" id="map" style="height: 580px; width:95%">
-          <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+      <!-- ** -->
+      <!-- Resource : https://vue2-leaflet.netlify.app/components/LPopup.html#demo -->
+      <!-- ** -->
+      <l-map :zoom="zoom" :center="center" class=" ma-auto" id="map" style="height: 580px; width:95%">
+        <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
 
-          <div v-for="(property, index) of properties" :key="index">
-            <l-marker :lat-lng="[property.latitude, property.longitude]" @click="getLatlng">
-              <LPopup>
-                <HouseCardOnMap :property="property" :distance="distance">
-                  <template #action>
-                    More Detail
-                  </template>
-                </HouseCardOnMap>
-              </LPopup>
-              <LIcon :icon-size="dynamicSize" :icon-url="homeIcon" :icon-anchor="dynamicAnchor"></LIcon>
-            </l-marker>
-          </div>
+        <div v-for="(property, index) of properties" :key="index">
+          <l-marker :lat-lng="[property.latitude, property.longitude]" @click="getLatlng">
+            <LPopup>
+              <HouseCardOnMap :property="property" :distance="distance">
+                <template #action>
+                  More Detail
+                </template>
+              </HouseCardOnMap>
+            </LPopup>
+            <LIcon :icon-size="dynamicSize" :icon-url="homeIcon" :icon-anchor="dynamicAnchor"></LIcon>
+          </l-marker>
+        </div>
 
-        </l-map>
+      </l-map>
     </v-container>
   </div>
 </template>
@@ -92,6 +92,4 @@ function calculateDistance(lat1, lat2, lon1, lon2) {
 
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
