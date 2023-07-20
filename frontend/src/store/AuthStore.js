@@ -12,6 +12,7 @@ export const useAuthStore = defineStore('auth', () => {
   const emailSend = ref('');
   const message = ref('');
   const user = ref(localStorage.getItem('user_id'));
+  const role = ref( Cookies.get('role'));
 
   const verificationCode = ref('');
   const password = ref('');
@@ -38,11 +39,20 @@ export const useAuthStore = defineStore('auth', () => {
   let login = (user) => {
     axios.post('/login', user)
       .then((res) => {
+        Cookies.set('role', res.data.user.role, { expires: 30 });
         Cookies.set('email', user.email, { expires: 30 });
         user.value=localStorage.setItem('user_id', res.data.user.id);
         localStorage.setItem('token', res.data.token);
         token.value = localStorage.getItem('token');
-        window.location.href ='/';
+        if(res.data.user.role === 'admin'){
+          window.location.href ='/dashboard';
+        }
+        else if (res.data.user.role === 'landlord'){
+          window.location.href =`/dashboard/landlord/${user.value}`;
+        }
+        else{
+          window.location.href ='/';
+        }
       })
       .catch((err) => {
         errors.value = err.response.data.message;
@@ -59,6 +69,7 @@ export const useAuthStore = defineStore('auth', () => {
       .then(() => {
         user.value=null;
         Cookies.remove('email');
+        Cookies.remove('role');
         localStorage.removeItem('user_id');
         localStorage.removeItem('token');
         localStorage.removeItem('email');
@@ -104,6 +115,7 @@ export const useAuthStore = defineStore('auth', () => {
      }
     return {
       user,
+      role,
       errors,
       isValide,
       register,

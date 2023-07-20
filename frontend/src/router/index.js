@@ -13,6 +13,7 @@ import DetailView from "../views/DetailView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 import Dashboard from "../views/DashboardView.vue";
 import PostPropertyView from '../views/PostPropertyView.vue';
+import LandlordPropertyView from '../views/LandlordPropertyView.vue';
 
 // AuthStore Pinia
 import { useAuthStore } from "../store/AuthStore";
@@ -80,6 +81,23 @@ const routes = [
     name: "Post",
     component: PostPropertyView,
   },
+  {
+    path: "/dashboard/properties",
+    name: "Properties",
+    component: LandlordPropertyView,
+  },
+  // {
+  //   path: "/dashboard/landlord/:id",
+  //   name: "LandlordDashboard",
+  //   component: Dashboard,
+  //   children:[
+  //     {
+  //       path:'post',
+  //       name:'PostProperty',
+  //       component:PostPropertyView
+  //     }
+  //   ]
+  // },
   // 404 Not Found 
   {
     path: "/:catchAll(.*)",
@@ -99,15 +117,31 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const { user } = storeToRefs(useAuthStore());
+  const { user, role } = storeToRefs(useAuthStore());
 
-  if (!user.value && to.name == "Wishlist") {
-    alert("Please Login your account!");
-    next({name: from.name})
-  } else if (user.value && (to.name == "Login" || to.name == "Register")) {
-    next({ name: "Home" });
-  } else {
-    next();
+  if(!user.value){
+    if(to.name === 'Wishlist'){
+      alert("Please Login your account!");
+      next({name: from.name})
+    }
+    else if(to.path.includes('dashboard')){
+      next({name:'NotFound'})
+    }
+    else {
+      next();
+    }
+  }
+  else if (user.value){
+    if(role.value == 'customer' && to.path.includes('dashboard')){
+      next({name:'NotFound'})
+    }
+    else if(to.name === 'Login' || to.name === 'Register'){
+      console.log(from.name);
+      next({name:from.name});
+    }
+    else {
+      next();
+    }
   }
 });
 

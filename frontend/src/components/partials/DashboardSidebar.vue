@@ -8,7 +8,7 @@
             <v-list flat>
                 <v-list-item prepend-icon="mdi-home" title="Dashboard" router :to="{ name: 'Dashboard' }"></v-list-item>
                 <v-list-item prepend-icon="mdi-home-plus" title="Add Property" router :to="{ name: 'Post' }"></v-list-item>
-                <v-list-item prepend-icon="mdi-account-group-outline" title="Your Properties"></v-list-item>
+                <v-list-item prepend-icon="mdi-account-group-outline" title="Your Properties" router :to="{name:'Properties'}"></v-list-item>
             </v-list>
         </v-navigation-drawer>
     </nav>
