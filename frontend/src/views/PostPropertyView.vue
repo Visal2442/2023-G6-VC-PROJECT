@@ -29,18 +29,9 @@
 
 <script setup>
 import PropertyForm from '../components/form/PropertyForm.vue'
-import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
-const route = useRoute();
+import { ref } from 'vue';
 
 const type = ref('');
-const post = () => {
-  console.log(route.path);
-}
-onMounted(() => {
-  post();
-
-})
 
 
 

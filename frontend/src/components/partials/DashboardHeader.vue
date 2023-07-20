@@ -14,10 +14,7 @@
             <v-menu id="menu" activator="#logged-in">
                 <v-list>
                     <v-list-item>
-                        <v-btn variant="plain" :to="{ name: 'Post' }" prepend-icon="mdi mdi-login">Post</v-btn>
-                    </v-list-item>
-                    <v-list-item>
-                        <v-btn variant="plain" :to="{ name: 'Login' }" prepend-icon="mdi mdi-account">Login</v-btn>
+                        <v-btn variant="plain" @click="logout" prepend-icon="mdi mdi-logout">Logout</v-btn>
                     </v-list-item>
                 </v-list>
             </v-menu>
@@ -25,14 +22,17 @@
     </v-toolbar>
 </template>
 
-<script>
-
+<script setup>
+// Pinia Store 
+import { useAuthStore } from '../../store/AuthStore';
+const authStore = useAuthStore();
+const { logout } = authStore;
 </script>
 
 <style scoped>
 #navbar {
-  position: sticky;
-  top: 0;
-  z-index: 2000;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
 }
 </style>

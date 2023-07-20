@@ -101,7 +101,7 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
-const user_id = ref(localStorage.getItem('user_id'));
+
 const properties = ref([]);
 const dialog = ref(false);
 const houseName = ref("");
@@ -115,9 +115,8 @@ const numberOfBathrooms = ref(0);
 const selected = ref("");
 const description = ref("");
 
-axios.get(`/getAllProperties/${user_id.value}`).then((res) => {
+axios.get("/getAllProperties/2").then((res) => {
     properties.value = res.data.data;
-    console.log(user_id.value);
     return properties.value;
 });
 

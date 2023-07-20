@@ -11,7 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
   let token = ref(localStorage.getItem('token'));
   const emailSend = ref('');
   const message = ref('');
-  const user = ref(localStorage.getItem('user_id'));
+  const user_id = ref(localStorage.getItem('user_id'));
   const role = ref( Cookies.get('role'));
 
   const verificationCode = ref('');
@@ -25,7 +25,7 @@ export const useAuthStore = defineStore('auth', () => {
     axios.post('/register', user)
     .then((res) => {
         Cookies.set('email', user.email, { expires: 30 });
-        user.value=localStorage.setItem('user_id', res.data.user.id);
+        user_id.value=localStorage.setItem('user_id', res.data.user.id);
         localStorage.setItem('token', res.data.token);
         token.value = localStorage.getItem('token');
         window.location.href ='/';
@@ -41,14 +41,14 @@ export const useAuthStore = defineStore('auth', () => {
       .then((res) => {
         Cookies.set('role', res.data.user.role, { expires: 30 });
         Cookies.set('email', user.email, { expires: 30 });
-        user.value=localStorage.setItem('user_id', res.data.user.id);
+        user_id.value=localStorage.setItem('user_id', res.data.user.id);
         localStorage.setItem('token', res.data.token);
         token.value = localStorage.getItem('token');
         if(res.data.user.role === 'admin'){
-          window.location.href ='/dashboard';
+          window.location.href ='/dashboard/admin';
         }
         else if (res.data.user.role === 'landlord'){
-          window.location.href =`/dashboard/landlord/${user.value}`;
+          window.location.href ='/dashboard/landlord';
         }
         else{
           window.location.href ='/';
@@ -67,7 +67,7 @@ export const useAuthStore = defineStore('auth', () => {
         }
       })
       .then(() => {
-        user.value=null;
+        user_id.value=null;
         Cookies.remove('email');
         Cookies.remove('role');
         localStorage.removeItem('user_id');
@@ -114,7 +114,7 @@ export const useAuthStore = defineStore('auth', () => {
         });
      }
     return {
-      user,
+      user_id,
       role,
       errors,
       isValide,
