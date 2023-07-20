@@ -1,5 +1,9 @@
 <template>
     <v-card id="house-card" class="pb-3">
+        <!-- <TheTransition>
+            <v-alert type="error" v-if="isLoggedIn" closable class="text-red-accent-4 text-left mb-5" :text='errorMessage'>
+            </v-alert>
+        </TheTransition> -->
         <div>
             <v-img :src="property?.image" height="200"></v-img>
         </div>
@@ -31,33 +35,24 @@
 </template>
 
 <script setup>
-import { defineProps, ref } from "vue";
+import { defineProps,defineEmits, ref } from "vue";
 import BaseButton from "../widget/BaseButton.vue";
 import { useRouter } from "vue-router";
-import Cookies from 'js-cookie';
 
-// Wishlist Store 
-import { useWishlistStore } from '../../store/WishlistStore';
-const wishlistStore = useWishlistStore();
-const { wishlist } = wishlistStore;
 
-const cookieEmail = ref(Cookies.get('email'));
+const emits = defineEmits(['addToWishlist']);
 const router = useRouter();
+
 defineProps(["property"]);
 
 const addToWishlist = (property_id) => {
-    if (cookieEmail.value) {
-        wishlist(property_id);
-        alert('The House is added to your wishlist');
-    }
-    else {
-        alert('Please Login to your account !');
-    }
+    emits('addToWishlist', property_id);
 }
 
 const getDetail = (property_id) => {
     router.push(`/detail/${property_id}`);
 };
+
 
 // Rating 
 const rating = ref(3);

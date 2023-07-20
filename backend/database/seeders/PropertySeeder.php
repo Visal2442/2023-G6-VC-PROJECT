@@ -15,11 +15,11 @@ class PropertySeeder extends Seeder
         //
         $properties=[
             [
-                'name' => 'Rent house',
+                'name' => 'Rent Room',
                 'price' => 350,
                 'description' => 'This house is the perfect place to live and unwind. 10E Street 907, Phnom Penh',
-                'type' => 'house',
-                'size' => 200,
+                'type' => 'room',
+                'size' => "5m x 7m",
                 'number_of_floor' => 3,
                 'number_of_room' => 4,
                 'number_of_bathroom' => 3,

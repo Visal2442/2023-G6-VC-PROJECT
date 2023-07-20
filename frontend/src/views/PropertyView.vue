@@ -19,7 +19,7 @@
                     <v-container fluid class="ml-md-9">
                          <v-row class="mr-md-10" v-if="isFound">
                               <v-col md="3" v-for="(property, i) of properties" :key="i">
-                                   <house-card :property="property"></house-card>
+                                   <house-card :property="property" @addToWishlist="addToWishlist"></house-card>
                               </v-col>
                          </v-row>
                          <v-row v-else class="h-50">
@@ -38,13 +38,39 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 import SearchLocation from '@/components/search/SearchLocation.vue';
 import FilterType from '@/components/search/FilterType.vue';
 import FilterByPrice from '@/components/search/FilterPrice.vue';
 import HouseCard from '@/components/card/HouseCard.vue';
-// import RegisterForm from "../compone nts/form/RegisterForm.vue"
 
+// Wishlist Store 
+import { useWishlistStore } from '../store/WishlistStore';
+const wishlistStore = useWishlistStore();
+const { addWishlist, userWishlist } = wishlistStore;
+const cookieEmail = ref(Cookies.get('email'));
+
+// Add to wishlist 
+const addToWishlist = (property_id) => {
+     if (cookieEmail.value) {
+          const isNotAdded = ref(true);
+          for (const property of userWishlist) {
+               if (property_id == property.property.id) {
+                    alert('This house is exist in your Wishlist !');
+                    isNotAdded.value = false;
+                    break;
+               }
+          }
+          if (isNotAdded.value) {
+               addWishlist(property_id);
+               alert('The House is added to your Wishlist !');
+          }
+     }
+     else {
+          alert('Please Login to your account !');
+     }
+}
 
 // PAGINATION 
 const properties = ref({});
@@ -73,7 +99,6 @@ const getProperties = () => {
      axios.get(url.value)
           .then(res => {
                properties.value = res.data.data.data;
-               console.log(properties.value);
                pagination.value.total = res.data.data.last_page;
                isFound.value = true;
           })
@@ -130,12 +155,15 @@ const onPrice = (value) => {
 #container {
      height: 100vh;
 }
+
 .slide-fade-enter-active {
      transition: all 0.3s ease-out;
 }
+
 .slide-fade-leave-active {
      transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
+
 .slide-fade-enter-from,
 .slide-fade-leave-to {
      transform: translateX(20px);

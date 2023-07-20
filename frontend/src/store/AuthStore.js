@@ -11,7 +11,8 @@ export const useAuthStore = defineStore('auth', () => {
   let token = ref(localStorage.getItem('token'));
   const emailSend = ref('');
   const message = ref('');
-  const user = ref(localStorage.getItem('user_id'));
+  const user_id = ref(localStorage.getItem('user_id'));
+  const role = ref( Cookies.get('role'));
 
   const verificationCode = ref('');
   const password = ref('');
@@ -24,7 +25,7 @@ export const useAuthStore = defineStore('auth', () => {
     axios.post('/register', user)
     .then((res) => {
         Cookies.set('email', user.email, { expires: 30 });
-        user.value=localStorage.setItem('user_id', res.data.user.id);
+        user_id.value=localStorage.setItem('user_id', res.data.user.id);
         localStorage.setItem('token', res.data.token);
         token.value = localStorage.getItem('token');
         window.location.href ='/';
@@ -38,11 +39,20 @@ export const useAuthStore = defineStore('auth', () => {
   let login = (user) => {
     axios.post('/login', user)
       .then((res) => {
+        Cookies.set('role', res.data.user.role, { expires: 30 });
         Cookies.set('email', user.email, { expires: 30 });
-        user.value=localStorage.setItem('user_id', res.data.user.id);
+        user_id.value=localStorage.setItem('user_id', res.data.user.id);
         localStorage.setItem('token', res.data.token);
         token.value = localStorage.getItem('token');
-        window.location.href ='/';
+        if(res.data.user.role === 'admin'){
+          window.location.href ='/dashboard/admin';
+        }
+        else if (res.data.user.role === 'landlord'){
+          window.location.href ='/dashboard/landlord';
+        }
+        else{
+          window.location.href ='/';
+        }
       })
       .catch((err) => {
         errors.value = err.response.data.message;
@@ -57,11 +67,13 @@ export const useAuthStore = defineStore('auth', () => {
         }
       })
       .then(() => {
-        user.value=null;
+        user_id.value=null;
         Cookies.remove('email');
+        Cookies.remove('role');
         localStorage.removeItem('user_id');
         localStorage.removeItem('token');
         localStorage.removeItem('email');
+        localStorage.removeItem('wishListData');
         token.value = localStorage.getItem('token');
         window.location.href ='/';
       })
@@ -102,7 +114,8 @@ export const useAuthStore = defineStore('auth', () => {
         });
      }
     return {
-      user,
+      user_id,
+      role,
       errors,
       isValide,
       register,

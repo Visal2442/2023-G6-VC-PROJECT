@@ -25,12 +25,18 @@ class WishlistController extends Controller
    
     public function createWishlist(Request $request)
     {
-        $wishlist = Wishlist::create([
-            'user_id' => $request->user_id,
-            'property_id' => $request->property_id,
-            
-        ]);
-        return response()->json(['success' => true, 'data' => $wishlist],200);
+        $wishlist = Wishlist::where('user_id', $request->user_id)
+                            ->where('property_id', $request->property_id)
+                            ->get();
+        if(count($wishlist)<=0){
+            $wishlist = Wishlist::create([
+                'user_id' => $request->user_id,
+                'property_id' => $request->property_id,
+            ]);
+            return response()->json(['status' => true, 'data' => $wishlist],200);
+        }
+        return response()->json(['status' => false, 'message'=> 'The House is already added !'],400);
+
     }
 
     

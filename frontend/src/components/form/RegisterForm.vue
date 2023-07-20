@@ -90,8 +90,7 @@ const rules = ref({
                   value => (value && value.length >= 5) || 'Username at least 5 characters',],
   emailRules: [   value => !!value || 'Email is required',],
   phoneRules: [   value => !!value || 'Phone Number is required ',
-                  value => (value || '').length >= 8 || 'Phone at least 8 digits ',
-                  value=> /^\+?[0]\d{1,20}$/.test(value) || 'Phone Number is invalid'
+                  value=> /^\+?[0]\d{8,20}$/.test(value) || 'Phone Number is invalid'
               ],
   passwordRules:[ value => !!value || 'Password is required',
                   value => (value && value.length >= 8) || 'Password at least 8 characters'],

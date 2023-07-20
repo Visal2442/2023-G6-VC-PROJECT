@@ -110,4 +110,5 @@ const rules = ref({
 .error-enter-from,
 .error-leave-to {
   opacity: 0;
-}</style>
+}
+</style>
