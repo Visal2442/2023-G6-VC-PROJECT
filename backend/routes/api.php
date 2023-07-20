@@ -6,7 +6,7 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DistrictControllr;
 use App\Http\Controllers\GraphController;
-use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\WishlistController;
 use App\Models\Booking;
 use App\Models\Province;
@@ -43,20 +43,22 @@ Route::post('/reset_password_request', [ForgotPasswordController::class, 'resetP
 Route::group(['prefix'=>'properties'], function(){
     Route::get('/', [PropertyController::class, 'index']);
     Route::get('/pagination', [PropertyController::class, 'pagination']);
-    Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
     Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
     Route::delete('/delete/{id}', [PropertyController::class, 'deleteHouse']);
 });
+Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
 
-
+// Wishlist 
 Route::get('/wishlist/{userID}', [WishlistController::class, 'getDataWishlist']);
-
 Route::post('/wishlist', [WishlistController::class, 'createWishlist']);
-
-
+// Graph 
 Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);
+// Location 
+Route::resource('districts', DistrictController::class);
 
-
+Route::get('/getAllProperties/{id}', [PropertyController::class, 'getAllProperties']);
+Route::put('/updateProperty/{id}', [PropertyController::class, 'updateProperty']);
+Route::get('/getPropertyId/{id}', [PropertyController::class, 'getPropertyId']);
 
 
 

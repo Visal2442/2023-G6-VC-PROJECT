@@ -10,6 +10,7 @@ use App\Models\RentalHouse;
 use App\Models\RentalRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class PropertyController extends Controller
 {
@@ -17,6 +18,12 @@ class PropertyController extends Controller
     {
         $properties = Property::all();
         $properties = PropertyResource::collection($properties);
+        return response()->json(['success' => true, 'data' => $properties], 200);
+    }
+    public function getAllProperties($userId)
+    {
+      
+        $properties = Property::where('user_id', $userId)->get();
         return response()->json(['success' => true, 'data' => $properties], 200);
     }
 
@@ -68,6 +75,11 @@ class PropertyController extends Controller
                 return response()->json(['data' => $property ], 200);
         }
         return response()->json(['message' => 'Property not found'], 404);
+    }
+    public function getPropertyId($id)
+    {
+        $property = Property::find($id);
+        return response()->json(['success'=>true, 'data'=>$property], 200);
 
     }
 
@@ -79,5 +91,30 @@ class PropertyController extends Controller
         }
         $house->delete();
         return response()->json(['message' =>'Delete house success!'], 200);
+    }
+    public function updateProperty(Request $request, $id)
+    {
+        $property = Property::find($id);
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'type' => 'required',
+            'size' => 'required',
+            'number_of_floor' => 'required',
+            'number_of_room'=>'required',
+            'number_of_bathroom' => 'required',
+            'number_of_kitchen' => 'required',
+            'image' => 'required',
+            'district_id'=>'required',
+            'user_id'=>'required',
+        ]);
+        if($validator->fails()){
+            if ($validator->fails()) {
+                return response()->json(['status' => false, 'errors' => $validator->errors()], 401);
+            } 
+        }
+        $property->update($validator->validated());
+        return response()->json(['message' => 'successfully updated', 'data' => $property], 200);
     }
 }
