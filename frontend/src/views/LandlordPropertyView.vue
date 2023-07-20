@@ -205,15 +205,11 @@
               Do you want to delete this property?
             </p>
             <v-card-actions class="button">
-              <v-btn
-                class="cancel text-button text-blue"
-                @click="cencel()"
+              <v-btn class="cancel text-button text-blue" @click="cencel()"
                 >Cancel</v-btn
               >
               <v-btn
                 class="deleteBtn bg-red text-overline text-white"
-                color="black"                
-                @click="deleteProperty()"
               >
                 Delete
               </v-btn>
@@ -228,7 +224,7 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
-const user_id = ref(localStorage.getItem('user_id'));
+const user_id = ref(localStorage.getItem("user_id"));
 const properties = ref([]);
 const dialog = ref(false);
 const deleteDialog = ref(false);
@@ -244,14 +240,10 @@ const selected = ref("");
 const description = ref("");
 
 axios.get(`/getAllProperties/${user_id.value}`).then((res) => {
-    properties.value = res.data.data;
-    console.log(user_id.value);
-    return properties.value;
+  properties.value = res.data.data;
+  console.log(user_id.value);
+  return properties.value;
 });
-
-const deleteProperty = (property_id) => {
-  localStorage.setItem("property_id", property_id);
-};
 
 // const propertyDataId =ref([]);
 const editProperty = (property_id) => {
@@ -290,10 +282,6 @@ onMounted(() => {
   });
 });
 
-const closeDialog = () => {
-  dialog.value = false;
-};
-
 const saveChanges = () => {
   let id = localStorage.getItem("property_id");
   const data = {
@@ -327,13 +315,14 @@ const saveChanges = () => {
     });
 };
 
+const cencel = () => {
+  deleteDialog.value = false;
+};
+
 const deleteDialogProperty = () => {
   deleteDialog.value = true;
 };
 
-const cencel = () => {
-  deleteDialog.value = false;
-};
 </script>
 
 <style>
