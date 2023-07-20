@@ -1,11 +1,11 @@
 <template>
     <v-card class="mx-auto" elevation='0' max-width="400">
         <v-img class="align-end text-white" max-height="200" :src="property?.image">
-            <v-card-title>{{ property?.property_name }}</v-card-title>
+            <v-card-title>{{ property?.name }}</v-card-title>
         </v-img>
         <v-card-subtitle class="pt-4">{{ distance }} KM</v-card-subtitle>
         <v-card-text>
-            <div class=" mb-2">{{ property.district?.name }}, {{ property.district?.province?.name }} </div>
+            <div class=" mb-2">{{ property.district?.title }}, {{ property.district?.province?.name }} </div>
             <div> ${{ property?.price }}/Month</div>
         </v-card-text>
 
