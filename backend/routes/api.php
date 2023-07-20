@@ -57,6 +57,7 @@ Route::resource('districts', DistrictController::class);
 
 Route::post('/createProperty', [PropertyController::class, 'createProperty']);
 Route::put('/updateProperty/{id}', [PropertyController::class, 'updateProperty']);
+Route::post('/image', [PropertyController::class, 'getImage']);
 
 
 

@@ -90,13 +90,20 @@ class PropertyController extends Controller
             'user_id'=>'required',
         ]);
         if($validator->fails()){
-            if ($validator->fails()) {
-                return response()->json(['status' => false, 'errors' => $validator->errors()], 401);
-            } 
-        }else{
-            $property=Property::create($validator->validated());
-            return response()->json(['message'=>'created','data'=>$property],200);
+            return response()->json(['status' => false, 'errors' => $validator->errors()], 402);
         }
+        $property=Property::create($request->all());
+        return response()->json(['message'=>'created','data'=>$property],200);
+    }
+
+    public function getImage(Request $request)
+    {
+        $image = $request->file('propertyImage');
+        $new_name =  rand() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'),$new_name);
+        $path = asset('images/' . $new_name);
+        return $path;
+
     }
 
     public function updateProperty(Request $request, $id)
@@ -114,7 +121,7 @@ class PropertyController extends Controller
             'number_of_kitchen' => 'required',
             'image' => 'required',
             'latitude'=>'required',
-            'longitude'=>'required',
+            'longitude'=>'',
             'district_id'=>'required',
             'user_id'=>'required',
         ]);
