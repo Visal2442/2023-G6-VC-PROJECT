@@ -31,16 +31,15 @@ import { useRoute } from 'vue-router';
 const route = useRoute()
 
 // Callback function 
-const showLocation = (location)=>{
-    localStorage.setItem('currentLat', location.coords.latitude);
-    localStorage.setItem('currentLng', location.coords.longitude);
-    }
-    const showError = (error)=>{
-        console.log(error);
-    }
-    // Get current location 
-    navigator.geolocation.getCurrentPosition(showLocation, showError);
-
+const showLocation = (location) => {
+  localStorage.setItem('currentLat', location.coords.latitude);
+  localStorage.setItem('currentLng', location.coords.longitude);
+}
+const showError = (error) => {
+  console.log(error);
+}
+// Get current location 
+navigator.geolocation.getCurrentPosition(showLocation, showError);
 </script>
 
 <style scoped>

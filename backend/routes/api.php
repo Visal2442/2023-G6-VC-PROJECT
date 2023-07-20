@@ -44,8 +44,8 @@ Route::group(['prefix'=>'properties'], function(){
     Route::get('/', [PropertyController::class, 'index']);
     Route::get('/pagination', [PropertyController::class, 'pagination']);
     Route::get('/location/{name}', [PropertyController::class, 'searchLocation']);
+    Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
 });
-Route::get('/detail/{id}', [PropertyController::class, 'showDetail']);
 
 // Wishlist 
 Route::get('/wishlist/{userID}', [WishlistController::class, 'getDataWishlist']);

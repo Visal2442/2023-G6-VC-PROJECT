@@ -24,6 +24,7 @@ class PropertyController extends Controller
     {
       
         $properties = Property::where('user_id', $userId)->get();
+        $properties = PropertyResource::collection($properties);
         return response()->json(['success' => true, 'data' => $properties], 200);
     }
 
@@ -97,7 +98,6 @@ class PropertyController extends Controller
             'number_of_kitchen' => 'required',
             'image' => 'required',
             'district_id'=>'required',
-            'user_id'=>'required',
         ]);
         if($validator->fails()){
             if ($validator->fails()) {

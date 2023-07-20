@@ -14,6 +14,7 @@ import NotFoundView from "../views/NotFoundView.vue";
 import Dashboard from "../views/DashboardView.vue";
 import PostPropertyView from '../views/PostPropertyView.vue';
 import LandlordPropertyView from '../views/LandlordPropertyView.vue';
+import AdminPropertyView from '../views/AdminPropertView.vue';
 
 // AuthStore Pinia
 import { useAuthStore } from "../store/AuthStore";
@@ -70,34 +71,33 @@ const routes = [
     name: "Code",
     component: CodeView,
   },
-  // Dashboard 
+  // Admin Dashboard 
   {
-    path: "/dashboard",
+    path: "/dashboard/admin",
     name: "Dashboard",
     component: Dashboard,
   },
   {
-    path: "/dashboard/post",
-    name: "Post",
-    component: PostPropertyView,
+    path: "/dashboard/admin/properties",
+    name: "AdminProperties",
+    component: AdminPropertyView,
+  },
+  // Landlord Dashboard 
+  {
+    path: "/dashboard/landlord",
+    name: "LandlordDashboard",
+    component: Dashboard,
   },
   {
-    path: "/dashboard/properties",
-    name: "Properties",
-    component: LandlordPropertyView,
+    path:'/dashboard/landlord/post',
+    name:'Post',
+    component:PostPropertyView
   },
-  // {
-  //   path: "/dashboard/landlord/:id",
-  //   name: "LandlordDashboard",
-  //   component: Dashboard,
-  //   children:[
-  //     {
-  //       path:'post',
-  //       name:'PostProperty',
-  //       component:PostPropertyView
-  //     }
-  //   ]
-  // },
+  {
+    path:'/dashboard/landlord/properties',
+    name:'LandlordProperties',
+    component:LandlordPropertyView
+  },
   // 404 Not Found 
   {
     path: "/:catchAll(.*)",
@@ -118,9 +118,9 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const { user, role } = storeToRefs(useAuthStore());
+  const { user_id, role } = storeToRefs(useAuthStore());
 
-  if(!user.value){
+  if(!user_id.value){
     if(to.name === 'Wishlist'){
       alert("Please Login your account!");
       next({name: from.name})
@@ -132,17 +132,19 @@ router.beforeEach(async (to, from, next) => {
       next();
     }
   }
-  else if (user.value){
-    if(role.value == 'customer' && to.path.includes('dashboard')){
+  else if (user_id.value){
+    if((role.value == 'customer' && to.path.includes('dashboard')) || (role.value == 'landlord' && to.path.includes('admin'))){
       next({name:'NotFound'})
     }
     else if(to.name === 'Login' || to.name === 'Register'){
-      console.log(from.name);
-      next({name:from.name});
+      next({name: from.name});
     }
     else {
       next();
     }
+  }
+  else{
+    next();
   }
 });
 
