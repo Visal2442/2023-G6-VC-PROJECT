@@ -89,7 +89,7 @@ class PropertyController extends Controller
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'type' => 'required',
+            'type' => '',
             'size' => 'required',
             'number_of_floor' => 'required',
             'number_of_room'=>'required',
@@ -101,10 +101,20 @@ class PropertyController extends Controller
         ]);
         if($validator->fails()){
             if ($validator->fails()) {
-                return response()->json(['status' => false, 'errors' => $validator->errors()], 401);
+                return response()->json(['status' => false, 'errors' => $validator->errors()], 402);
             } 
         }
         $property->update($validator->validated());
         return response()->json(['message' => 'successfully updated', 'data' => $property], 200);
+    }
+
+    public function getImage(Request $request)
+    {
+        $image = $request->file('propertyImage');
+        $new_name =  rand() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'),$new_name);
+        $path = asset('images/' . $new_name);
+        return $path;
+
     }
 }
