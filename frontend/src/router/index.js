@@ -15,6 +15,7 @@ import Dashboard from "../views/DashboardView.vue";
 import PostPropertyView from '../views/PostPropertyView.vue';
 import LandlordPropertyView from '../views/LandlordPropertyView.vue';
 import AdminPropertyView from '../views/AdminPropertView.vue';
+import ContactUsView from '../views/ContactUsView.vue';
 
 // AuthStore Pinia
 import { useAuthStore } from "../store/AuthStore";
@@ -60,6 +61,11 @@ const routes = [
     path: "/wishlist",
     name: "Wishlist",
     component: WishlistView,
+  },
+  {
+    path: "/contact",
+    name: "contact",
+    component: ContactUsView,
   },
   {
     path: "/email",
