@@ -39,6 +39,7 @@ export const useAuthStore = defineStore('auth', () => {
   let login = (user) => {
     axios.post('/login', user)
       .then((res) => {
+        Cookies.set('username', res.data.user.username, { expires: 30 });
         Cookies.set('role', res.data.user.role, { expires: 30 });
         Cookies.set('email', user.email, { expires: 30 });
         user_id.value=localStorage.setItem('user_id', res.data.user.id);
@@ -70,9 +71,9 @@ export const useAuthStore = defineStore('auth', () => {
         user_id.value=null;
         Cookies.remove('email');
         Cookies.remove('role');
+        Cookies.remove('username');
         localStorage.removeItem('user_id');
         localStorage.removeItem('token');
-        localStorage.removeItem('email');
         localStorage.removeItem('wishListData');
         token.value = localStorage.getItem('token');
         window.location.href ='/';

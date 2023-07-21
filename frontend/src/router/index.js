@@ -15,6 +15,7 @@ import Dashboard from "../views/DashboardView.vue";
 import PostPropertyView from '../views/PostPropertyView.vue';
 import LandlordPropertyView from '../views/LandlordPropertyView.vue';
 import AdminPropertyView from '../views/AdminPropertView.vue';
+import UserView from '../views/UserView.vue';
 
 // AuthStore Pinia
 import { useAuthStore } from "../store/AuthStore";
@@ -81,6 +82,11 @@ const routes = [
     path: "/dashboard/admin/properties",
     name: "AdminProperties",
     component: AdminPropertyView,
+  },
+  {
+    path: "/dashboard/admin/users",
+    name: "Users",
+    component: UserView,
   },
   // Landlord Dashboard 
   {

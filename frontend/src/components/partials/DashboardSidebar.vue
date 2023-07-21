@@ -7,10 +7,9 @@
             <v-divider></v-divider>
             <v-list flat>
                 <v-list-item prepend-icon="mdi-home" title="Dashboard" router :to="role == 'admin' ? '/dashboard/admin' : '/dashboard/landlord'"></v-list-item>
-                <template v-if="role == 'landlord'">
-                    <v-list-item prepend-icon="mdi-home-plus" title="Add Property" router :to="{ name: 'Post' }"></v-list-item>
-                </template>
+                <v-list-item v-if="role == 'landlord'" prepend-icon="mdi-home-plus" title="Add Property" router :to="{ name: 'Post' }"></v-list-item>
                 <v-list-item prepend-icon="mdi-account-group-outline" title="Your Properties" router :to="{name: role == 'admin' ? 'AdminProperties' : 'LandlordProperties'}"></v-list-item>
+                <v-list-item v-if="role == 'admin'" prepend-icon="mdi-users" title="All Users" router :to="{ name: 'Users' }"></v-list-item>
             </v-list>
         </v-navigation-drawer>
     </nav>
