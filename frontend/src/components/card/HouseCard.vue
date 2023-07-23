@@ -1,25 +1,42 @@
 <template>
-    <v-card id="house-card" class="pb-3">
-        <!-- <TheTransition>
+  <v-card id="house-card" class="pb-3">
+    <!-- <TheTransition>
             <v-alert type="error" v-if="isLoggedIn" closable class="text-red-accent-4 text-left mb-5" :text='errorMessage'>
             </v-alert>
         </TheTransition> -->
-        <div>
-            <v-img :src="props.property?.image" height="200"></v-img>
-        </div>
-        <v-card-title class="text-lg-h6">{{ props.property?.name }}</v-card-title>
-        <div class="d-flex align-center">
-            <v-card-subtitle>{{ props.property?.number_of_kitchen }} kitchen{{
-                props.property?.number_of_kitchen > 1 ? "s" : ""
-            }}</v-card-subtitle>
-            <v-card-subtitle>{{ props.property?.number_of_bathroom }} bathroom{{
-                props.property?.number_of_bathroom > 1 ? "s" : ""
-            }}</v-card-subtitle>
-            <v-card-subtitle>{{ props.property?.number_of_room }} room{{
-                props.property?.number_of_room > 1 ? "s" : ""
-            }}</v-card-subtitle>
-        </div>
-        <v-card-actions class="pa-0">
+    <div>
+      <v-img :src="property?.image" height="200"></v-img>
+    </div>
+    <div class="d-flex align-center">
+      <v-card-title class="text-lg-h6 text-wrap">{{ property?.name }}</v-card-title>
+      <v-spacer></v-spacer>
+      <div class=" mr-3">
+        <p
+          class="title text-caption rounded-pill pl-2 pr-2"
+          :class="property?.available? 'text-blue bg-blue-lighten-4' : 'text-red bg-red-lighten-4'"
+        >
+          {{ property?.available? "Available" : "Unavailable" }}
+        </p>
+      </div>
+    </div>
+    <div class="d-flex align-center">
+      <v-card-subtitle
+        >{{ property?.number_of_kitchen }} kitchen{{
+          property?.number_of_kitchen > 1 ? "s" : ""
+        }}</v-card-subtitle
+      >
+      <v-card-subtitle
+        >{{ property?.number_of_bathroom }} bathroom{{
+          property?.number_of_bathroom > 1 ? "s" : ""
+        }}</v-card-subtitle
+      >
+      <v-card-subtitle
+        >{{ property?.number_of_room }} room{{
+          property?.number_of_room > 1 ? "s" : ""
+        }}</v-card-subtitle
+      >
+    </div>
+    <v-card-actions class="pa-0">
             <v-card-text class="text-green-accent-4 text-md-body-1">${{ props.property?.price }}/month</v-card-text>
             <v-card-text class="text-end cursor-pointer" @click="isVisible()"><v-icon class="mdi mdi-star mr-1"
                     color="amber-lighten-2"></v-icon>{{ avgRating }}</v-card-text>
@@ -36,15 +53,22 @@
                 </v-card>
             </v-dialog>
         </v-card-actions>
-        <v-card-actions>
-            <div class="d-flex align-center">
-                <v-icon @click="addToWishlist(props.property.id)" color="green" size='default' class="mr-4 boder"
-                    icon="mdi mdi-bookmark"></v-icon>
-            </div>
-            <v-spacer></v-spacer>
-            <BaseButton type="primary-btn" @click="getDetail(props.property.id)">More Detail</BaseButton>
-        </v-card-actions>
-    </v-card>
+    <v-card-actions>
+      <div class="d-flex align-center">
+        <v-icon
+          @click="addToWishlist(property.id)"
+          color="green"
+          size="default"
+          class="mr-4 boder"
+          icon="mdi mdi-bookmark"
+        ></v-icon>
+      </div>
+      <v-spacer></v-spacer>
+      <BaseButton type="primary-btn" @click="getDetail(property.id)"
+        >More Detail</BaseButton
+      >
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script setup>
@@ -59,11 +83,11 @@ const emits = defineEmits(['addToWishlist', 'rateStar']);
 const props = defineProps(["property"]);
 
 const addToWishlist = (property_id) => {
-    emits('addToWishlist', property_id);
-}
+  emits("addToWishlist", property_id);
+};
 
 const getDetail = (property_id) => {
-    router.push(`/detail/${property_id}`);
+  router.push(`/detail/${property_id}`);
 };
 
 
@@ -91,7 +115,6 @@ axios.get(`/properties/ratings/${props.property.id}`)
     .then(response => {
         avgRating.value = 0;
         const ratings = response.data.data;
-        console.log(ratings);
         const sum = ratings.reduce((star, ratings) => star + ratings.star, 0);
         const avg = sum / ratings.length;
         if (!isNaN(avg)) {
@@ -121,11 +144,11 @@ const rateStar = (rate, property_id) => {
 
 <style scoped>
 #house-card {
-    border-radius: 12px;
+  border-radius: 12px;
 }
 
 .seconday-btn {
-    border: 1px solid #00e676;
-    margin-left: 2px;
+  border: 1px solid #00e676;
+  margin-left: 2px;
 }
 </style>
