@@ -30,17 +30,13 @@
           property?.number_of_bathroom > 1 ? "s" : ""
         }}</v-card-subtitle
       >
-      <v-card-subtitle
-        >{{ property?.number_of_room }} room{{
-          property?.number_of_room > 1 ? "s" : ""
-        }}</v-card-subtitle
-      >
+      <v-card-subtitle>
+        {{ property?.number_of_room }} room{{ property?.number_of_room > 1 ? "s" : ""}}
+      </v-card-subtitle>
     </div>
     <v-card-actions class="pa-0">
             <v-card-text class="text-green-accent-4 text-md-body-1">${{ props.property?.price }}/month</v-card-text>
-            <v-card-text class="text-end cursor-pointer" @click="isVisible()"><v-icon class="mdi mdi-star mr-1"
-                    color="amber-lighten-2"></v-icon>{{ avgRating }}</v-card-text>
-
+            <v-card-text class="text-end cursor-pointer" @click="isVisible()"><v-icon class="mdi mdi-star mr-1" color="amber-lighten-2"></v-icon>{{ avgRating }} ({{ numberOfRating }})</v-card-text>
             <v-dialog v-model="dialog" transition="dialog-top-transition" persistent width="auto">
                 <v-card title="Rate this house !" max-width="400" class="">
                     <v-card-text class=" text-center">
@@ -53,20 +49,14 @@
                 </v-card>
             </v-dialog>
         </v-card-actions>
-    <v-card-actions>
-      <div class="d-flex align-center">
-        <v-icon
-          @click="addToWishlist(property.id)"
-          color="green"
-          size="default"
-          class="mr-4 boder"
-          icon="mdi mdi-bookmark"
-        ></v-icon>
-      </div>
+    <v-card-actions class="px-3">
+      <v-icon color="green" size="default" class="mdi mdi-bookmark-outline mr-4" @click="addToWishlist(property.id)">
+         <v-tooltip activator="parent" location="top"> Add To Wishlist</v-tooltip>
+      </v-icon>
       <v-spacer></v-spacer>
-      <BaseButton type="primary-btn" @click="getDetail(property.id)"
-        >More Detail</BaseButton
-      >
+      <BaseButton type="primary-btn" @click="getDetail(property.id)">
+        More Detail
+      </BaseButton>
     </v-card-actions>
   </v-card>
 </template>
@@ -79,23 +69,46 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 import axios from "axios";
 
-const emits = defineEmits(['addToWishlist', 'rateStar']);
+// Wishlist Store 
+import { useWishlistStore } from '../../store/WishlistStore';
+const wishlistStore = useWishlistStore();
+const { addWishlist,getWishlist } = wishlistStore;
+const cookieEmail = ref(Cookies.get('email'));
+
+
+const emits = defineEmits(['rateStar']);
 const props = defineProps(["property"]);
 
-const addToWishlist = (property_id) => {
-  emits("addToWishlist", property_id);
+const addToWishlist = (propertyId) => {
+  if (cookieEmail.value) {
+          const isNotAdded = ref(true);
+          for (const property of getWishlist) {
+               if (propertyId == property.property.id) {
+                    alert('This house is exist in your Wishlist !');
+                    isNotAdded.value = false;
+                    break;
+               }
+          }
+          if (isNotAdded.value) {
+               addWishlist(propertyId);
+               alert('The House is added to your Wishlist !');
+          }
+     }
+     else {
+          alert('Please Login to your account !');
+     }
 };
 
-const getDetail = (property_id) => {
-  router.push(`/detail/${property_id}`);
+const getDetail = (propertyId) => {
+  router.push(`/detail/${propertyId}`);
 };
 
 
 // Rating
 const isCookieEmail = ref(Cookies.get('email'));
-const user_id = ref(localStorage.getItem("user_id"));
+const userId = ref(localStorage.getItem("user_id"));
 const rating = ref(null);
-const dialog = ref(false)
+const dialog = ref(false);
 
 const isVisible = () => {
     if (isCookieEmail.value) {
@@ -111,10 +124,12 @@ const isVisible = () => {
 
 // average star of house 
 const avgRating = ref(null);
+const numberOfRating = ref(0);
 axios.get(`/properties/ratings/${props.property.id}`)
     .then(response => {
         avgRating.value = 0;
         const ratings = response.data.data;
+        numberOfRating.value = ratings.length;
         const sum = ratings.reduce((star, ratings) => star + ratings.star, 0);
         const avg = sum / ratings.length;
         if (!isNaN(avg)) {
@@ -126,11 +141,11 @@ axios.get(`/properties/ratings/${props.property.id}`)
     });
 
 // Rate the star 
-const rateStar = (rate, property_id) => {
+const rateStar = (rate, propertyId) => {
     const house = ref({
         star: rate,
-        user_id: user_id.value,
-        property_id: property_id
+        userId: userId.value,
+        propertyId: propertyId
     })
     if (rate < 1) {
         alert('Please rate the house !');
@@ -140,6 +155,7 @@ const rateStar = (rate, property_id) => {
         dialog.value = false;
     }
 }
+
 </script>
 
 <style scoped>

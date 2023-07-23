@@ -1,12 +1,12 @@
 <template>
   <div>
     <!-- FOR CUSTOMER PAGE  -->
-    <the-navbar v-if="!route.path.includes('dashboard')"></the-navbar>
+    <the-navbar v-if="!route.path.includes('dashboard') && !route.path.includes('not_found')"></the-navbar>
     <!-- RESOURCE : https://www.youtube.com/watch?v=X4I6zUEM40A -->
     <div v-if="!route.path.includes('dashboard')">
       <router-transition></router-transition>
     </div>
-    <the-footer v-if="!route.path.includes('dashboard')"></the-footer>
+    <the-footer v-if="!route.path.includes('dashboard') && !route.path.includes('not_found')"></the-footer>
 
     <!-- FOR ADMIN PAGE  -->
     <v-app v-if="route.path.includes('dashboard')">
@@ -24,7 +24,7 @@ import DashboardSidebar from './components/partials/DashboardSidebar.vue';
 import TheFooter from './components/partials/TheFooter.vue';
 import RouterTransition from './components/widget/RouterTransition.vue'
 import { useRoute } from 'vue-router';
-const route = useRoute()
+const route = useRoute();
 
 // Callback function 
 const showLocation = (location) => {

@@ -6,15 +6,10 @@
       </v-col>
       <v-col cols="5">
         <v-card class="pa-5">
-          <v-card-title
-            class="text-green-accent-4 text-h3 font-weight-bold mb-5"
-            >{{ property?.name }}</v-card-title
-          >
+          <v-card-title class="text-green-accent-4 text-h3 font-weight-bold mb-5">{{ property?.name }}</v-card-title>
           <div class="d-flex justify-between">
             <v-card-text class="">Type</v-card-text>
-            <v-card-text class="text-end text-capitalize"
-              >{{ property?.type }} Rent</v-card-text
-            >
+            <v-card-text class="text-end text-capitalize">{{ property?.type }} Rent</v-card-text>
           </div>
           <div class="d-flex justify-between">
             <v-card-text class="">Room</v-card-text>
@@ -42,17 +37,11 @@
           </div>
           <div class="d-flex justify-between">
             <v-card-text class="">Price</v-card-text>
-            <v-card-text class="text-end"
-              >${{ property?.price }}/Month</v-card-text
-            >
+            <v-card-text class="text-end">${{ property?.price }}/Month</v-card-text>
           </div>
           <div class="d-flex justify-center">
-            <base-button
-              type="primary-btn"
-              class="w-100 mt-5 mb-3"
-              :disabled= !property?.available
-              >Book</base-button
-            >
+            <base-button v-if="property?.type=='room'" type="primary-btn" class="w-100 mt-5 mb-3" disabled>Book</base-button>
+            <base-button v-else type="primary-btn" class="w-100 mt-5 mb-3" :disabled='!property?.available'>Book</base-button>
           </div>
         </v-card>
       </v-col>
@@ -64,9 +53,7 @@
         <v-card>
           <v-tabs fixed-tabs v-model="tab" class="bg-green-accent-4">
             <v-tab value="Description">Description</v-tab>
-            <v-tab value="type" v-if="property?.type == 'room'"
-              >View Rooms</v-tab
-            >
+            <v-tab value="type" v-if="property?.type == 'room'">View Rooms</v-tab>
             <v-tab value="overview">Property Overview</v-tab>
           </v-tabs>
           <v-card-text>
@@ -75,24 +62,15 @@
                 {{ property?.description }}
               </v-window-item>
               <v-window-item value="type">
-                <v-card
-                  class="my-5 pa-5"
-                  elevation="7"
-                  v-for="room of rooms"
-                  :key="room.id"
-                >
+                <v-card class="my-5 pa-5" elevation="7" v-for="room of rooms" :key="room.id">
                   <v-row class="">
                     <v-col class="d-flex justify-space-between" cols="12">
                       <h3 class="">Room {{ room.id }}</h3>
                       <div>
-                        <p
-                          class="title text-caption rounded-pill pl-2 pr-2 ml-4"
-                          :class="
-                            room?.available
-                              ? 'text-blue bg-blue-lighten-4'
-                              : 'text-red bg-red-lighten-4'
-                          "
-                        >
+                        <p class="title text-caption rounded-pill pl-2 pr-2 ml-4" :class="room?.available
+                          ? 'text-blue bg-blue-lighten-4'
+                          : 'text-red bg-red-lighten-4'
+                          ">
                           {{ room?.available ? "Available" : "Unavailable" }}
                         </p>
                       </div>
@@ -106,34 +84,21 @@
                     <v-col class="d-flex justify-space-between" cols="12">
                       <div class="d-flex">
                         <div class="d-flex align-center mr-3">
-                          <v-icon
-                            class="mdi mdi-shower mr-3"
-                            size="x-large"
-                          ></v-icon>
+                          <v-icon class="mdi mdi-shower mr-3" size="x-large"></v-icon>
                           <span>{{ property?.number_of_bathroom }}</span>
                         </div>
                         <div class="d-flex align-center mr-3">
-                          <v-icon
-                            class="mdi mdi-countertop-outline mr-3"
-                            size="x-large"
-                          ></v-icon>
+                          <v-icon class="mdi mdi-countertop-outline mr-3" size="x-large"></v-icon>
                           <span>{{ property?.number_of_kitchen }}</span>
                         </div>
                         <div class="d-flex align-center">
-                          <v-icon
-                            class="mdi mdi-texture-box mr-3"
-                            size="x-large"
-                          ></v-icon>
+                          <v-icon class="mdi mdi-texture-box mr-3" size="x-large"></v-icon>
                           <span>{{ property?.size }}</span>
                         </div>
                       </div>
                       <div>
-                        <base-button
-                          type="primary-btn"
-                          @click="console.log(room.id)"
-                          :disabled= !room?.available
-                          >Book Now</base-button
-                        >
+                        <base-button type="primary-btn" @click="console.log(room.id)" :disabled=!room?.available>Book
+                          Now</base-button>
                       </div>
                     </v-col>
                   </v-row>
@@ -146,27 +111,15 @@
       </v-col>
 
       <v-col class="ma-auto">
-        <l-map
-          :zoom="zoom"
-          v-if="property"
-          :center="[property?.latitude, property?.longitude]"
-          class=""
-          style="height: 450px"
-        >
+        <l-map :zoom="zoom" v-if="property" :center="[property?.latitude, property?.longitude]" class=""
+          style="height: 450px">
           <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-          <l-marker
-            :lat-lng="[property?.latitude, property?.longitude]"
-            @click="getLatlng"
-          >
+          <l-marker :lat-lng="[property?.latitude, property?.longitude]" @click="getLatlng">
             <LPopup>
               <HouseCardOnMap :property="property" :distance="distance">
               </HouseCardOnMap>
             </LPopup>
-            <LIcon
-              :icon-size="dynamicSize"
-              :icon-url="homeIcon"
-              :icon-anchor="dynamicAnchor"
-            ></LIcon>
+            <LIcon :icon-size="dynamicSize" :icon-url="homeIcon" :icon-anchor="dynamicAnchor"></LIcon>
           </l-marker>
         </l-map>
       </v-col>
@@ -181,11 +134,6 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 import HouseCardOnMap from "../components/card/HouseCardOnMap.vue";
 const tab = ref(null);
-// Property Store
-import { storeToRefs } from "pinia";
-import { usePropertyStore } from "../store/PropertyStore";
-const propertyStore = usePropertyStore();
-const { currentLat, currentLng } = storeToRefs(propertyStore);
 
 // RESOURCE: https://vue2-leaflet.netlify.app/components/LPopup.html#demo
 import "leaflet/dist/leaflet.css";
@@ -213,22 +161,18 @@ const dynamicAnchor = computed(() => {
   return [iconSize / 2, iconSize * 1.15];
 });
 
+const currentLat = ref(localStorage.getItem('currentLat'));
+const currentLng = ref(localStorage.getItem('currentLng'));
 let markerLat = ref(0);
 let markerLng = ref(0);
 
 const getLatlng = (coordinate) => {
-  console.log(coordinate.latlng.lat);
   markerLat.value = coordinate.latlng.lat;
   markerLng.value = coordinate.latlng.lng;
 };
 
 const distance = computed(() => {
-  return calculateDistance(
-    currentLat.value,
-    markerLat.value,
-    currentLng.value,
-    markerLng.value
-  ).toFixed(2);
+  return calculateDistance(currentLat.value, markerLat.value, currentLng.value, markerLng.value ).toFixed(2);
 });
 
 // RESOURCE : https://www.geeksforgeeks.org/program-distance-two-points-earth/
@@ -267,12 +211,14 @@ axios.get(`/properties/detail/${route.params.id}`).then((res) => {
     property.value = res.data.data;
   }
 });
+
 </script>
 
 <style scoped>
 #map {
   width: 100%;
 }
+
 #imgDetail {
   width: 100%;
   height: 530px;

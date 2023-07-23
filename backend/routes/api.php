@@ -53,8 +53,9 @@ Route::group(['prefix'=>'properties'], function(){
 });
 
 // Wishlist 
-Route::get('/wishlist/{userID}', [WishlistController::class, 'getDataWishlist']);
+Route::get('/wishlist/{userId}', [WishlistController::class, 'getDataWishlist']);
 Route::post('/wishlist', [WishlistController::class, 'createWishlist']);
+Route::delete('/wishlist/{wishListId}', [WishlistController::class, 'deleteItem']);
 // Graph 
 Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);
 // Location 
