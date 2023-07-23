@@ -8,9 +8,9 @@
       <v-img :src="property?.image" height="200"></v-img>
     </div>
     <div class="d-flex align-center">
-      <v-card-title class="text-lg-h6">{{ property?.name }}</v-card-title>
+      <v-card-title class="text-lg-h6 text-wrap">{{ property?.name }}</v-card-title>
       <v-spacer></v-spacer>
-      <div>
+      <div class=" mr-3">
         <p
           class="title text-caption rounded-pill pl-2 pr-2"
           :class="property?.available? 'text-blue bg-blue-lighten-4' : 'text-red bg-red-lighten-4'"
@@ -37,15 +37,22 @@
       >
     </div>
     <v-card-actions class="pa-0">
-      <v-card-text class="text-green-accent-4 text-md-body-1"
-        >${{ property?.price }}/month</v-card-text
-      >
-      <v-rating
-        v-model="rating"
-        density="compact"
-        bg-color="orange-lighten-1"
-      ></v-rating>
-    </v-card-actions>
+            <v-card-text class="text-green-accent-4 text-md-body-1">${{ props.property?.price }}/month</v-card-text>
+            <v-card-text class="text-end cursor-pointer" @click="isVisible()"><v-icon class="mdi mdi-star mr-1"
+                    color="amber-lighten-2"></v-icon>{{ avgRating }}</v-card-text>
+
+            <v-dialog v-model="dialog" transition="dialog-top-transition" persistent width="auto">
+                <v-card title="Rate this house !" max-width="400" class="">
+                    <v-card-text class=" text-center">
+                        <v-rating v-model="rating" density="compact" color="amber-lighten-2" size="70"></v-rating>
+                    </v-card-text>
+                    <v-card-actions class="px-5 mb-2 d-flex justify-end">
+                        <v-btn color="deep-orange-accent-3" @click="dialog = !dialog">Cancel</v-btn>
+                        <v-btn color="green-accent-3" @click="rateStar(rating, props.property.id)">Rate Now</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-card-actions>
     <v-card-actions>
       <div class="d-flex align-center">
         <v-icon
@@ -108,7 +115,6 @@ axios.get(`/properties/ratings/${props.property.id}`)
     .then(response => {
         avgRating.value = 0;
         const ratings = response.data.data;
-        console.log(ratings);
         const sum = ratings.reduce((star, ratings) => star + ratings.star, 0);
         const avg = sum / ratings.length;
         if (!isNaN(avg)) {
