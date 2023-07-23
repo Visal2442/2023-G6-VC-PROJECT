@@ -13,6 +13,9 @@ class RatingController extends Controller
     public function index()
     {
         //
+        $ratings = Rating::all();
+        return response()->json(['message' => 'requested successfully','data' => $ratings]);
+
     }
 
     /**
@@ -20,17 +23,43 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $star = $request->star;
+        $user_id = $request->user_id;
+        $property_id = $request->property_id;
+        
+        $rating = Rating::where('user_id', $user_id)
+                        ->where('property_id', $property_id)
+                        ->first();
+                        
+        //whether a new rating was created or an existing rating was updated
+        if ($rating) {
+            $rating->star = $star;
+            $rating->save();
+            $message = 'Rating updated successfully';
+        } else {
+            $rating = Rating::create([
+                'star' => $star,
+                'user_id' => $user_id,
+                'property_id' => $property_id,
+            ]);
+            $message = 'Rating created successfully';
+        }
+        //returns a JSON response with a success message and the rating data
+        return response()->json([
+            'message' => $message,
+            'rating' => $rating
+        ], 200);
     }
-
     /**
      * Display the specified resource.
      */
-    public function show(Rating $rating)
+    public function show($id)
     {
-        //
+        // show rating with the specified ID
+        $ratings = Rating::where('property_id', $id)->get();
+        // Return a JSON response with the rating data
+        return response()->json(['message' => 'requested successfully', 'data' => $ratings]);
     }
-
     /**
      * Update the specified resource in storage.
      */

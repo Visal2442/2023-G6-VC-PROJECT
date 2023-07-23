@@ -19,7 +19,7 @@
                     <v-container fluid class="ml-md-9">
                          <v-row class="mr-md-10" v-if="isFound">
                               <v-col md="3" v-for="(property, i) of properties" :key="i">
-                                   <house-card :property="property" @addToWishlist="addToWishlist"></house-card>
+                                   <house-card :property="property" @addToWishlist="addToWishlist" @rateStar="rateStar"></house-card>
                               </v-col>
                          </v-row>
                          <v-row v-else class="h-50">
@@ -147,6 +147,17 @@ const onSelect = (value) => {
 const onPrice = (value) => {
      price.value = value;
      getProperties();
+}
+
+// Rating Star
+const rateStar = (property)=>{
+     getProperties();
+     console.log(property);
+     axios.post('/properties/ratings', property)
+     .then(res=>{
+          console.log(res);
+     })
+     .catch(err=>err);
 }
 
 </script>

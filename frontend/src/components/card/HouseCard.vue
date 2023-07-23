@@ -67,12 +67,13 @@
 <script setup>
 import { defineProps, defineEmits, ref } from "vue";
 import BaseButton from "../widget/BaseButton.vue";
+import Cookies from 'js-cookie';
 import { useRouter } from "vue-router";
-
-const emits = defineEmits(["addToWishlist"]);
 const router = useRouter();
+import axios from "axios";
 
-defineProps(["property"]);
+const emits = defineEmits(['addToWishlist', 'rateStar']);
+const props = defineProps(["property"]);
 
 const addToWishlist = (property_id) => {
   emits("addToWishlist", property_id);
@@ -82,8 +83,57 @@ const getDetail = (property_id) => {
   router.push(`/detail/${property_id}`);
 };
 
+
 // Rating
-const rating = ref(3);
+const isCookieEmail = ref(Cookies.get('email'));
+const user_id = ref(localStorage.getItem("user_id"));
+const rating = ref(null);
+const dialog = ref(false)
+
+const isVisible = () => {
+    if (isCookieEmail.value) {
+        dialog.value = true;
+        rating.value = null;
+    }
+    else {
+        dialog.value = false;
+        alert('Please Login to your account !');
+    }
+}
+
+
+// average star of house 
+const avgRating = ref(null);
+axios.get(`/properties/ratings/${props.property.id}`)
+    .then(response => {
+        avgRating.value = 0;
+        const ratings = response.data.data;
+        console.log(ratings);
+        const sum = ratings.reduce((star, ratings) => star + ratings.star, 0);
+        const avg = sum / ratings.length;
+        if (!isNaN(avg)) {
+            avgRating.value = avg.toFixed(1);
+        }
+    })
+    .catch(error => {
+        console.log(error.response.data);
+    });
+
+// Rate the star 
+const rateStar = (rate, property_id) => {
+    const house = ref({
+        star: rate,
+        user_id: user_id.value,
+        property_id: property_id
+    })
+    if (rate < 1) {
+        alert('Please rate the house !');
+    }
+    else {
+        emits('rateStar', house.value)
+        dialog.value = false;
+    }
+}
 </script>
 
 <style scoped>

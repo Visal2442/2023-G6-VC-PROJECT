@@ -15,10 +15,12 @@ class RatingSeeder extends Seeder
         //
         $rating=[
             [
+                'star'=>2,
                 'user_id' => 1,
                 'property_id' => 1,
             ],
             [
+                'star'=>2,
                 'user_id' => 2,
                 'property_id' => 2,
             ]

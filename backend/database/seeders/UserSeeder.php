@@ -14,26 +14,33 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         //
-        
-       $users= [
+
+        $users = [
             [
-                'username' => 'john_doe',
+                'username' => 'visal',
                 'phone_number' => '0234567890',
-                'email' => 'john.doe@example.com',
+                'email' => 'visal@gmail.com',
+                'password' => bcrypt('password'),
+                'role' => 'landlord',
+            ],
+            [
+                'username' => 'darath',
+                'phone_number' => '0234567890',
+                'email' => 'darath@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
             ],
             [
-                'username' => 'jane_doe',
+                'username' => 'sreyrea',
                 'phone_number' => '0987654321',
-                'email' => 'jane.doe@example.com',
+                'email' => 'sreyrea@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'admin',
             ]
 
         ];
-    
-        foreach($users as $user){
+
+        foreach ($users as $user) {
             User::create($user);
         }
     }
