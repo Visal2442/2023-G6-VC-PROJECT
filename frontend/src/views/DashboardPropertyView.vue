@@ -29,15 +29,21 @@
                 <td>{{ property.number_of_bathroom }}</td>
                 <td>{{ property.number_of_kitchen }}</td>
                 <td>
-                  <p v-if="property.available == 1">Available</p>
-                  <p v-else>Unavailable</p>
+                  <div class="d-flex">
+                    <v-card-subtitle v-if="property.available"
+                      class="pa-0 bg-light-blue-lighten-4 text-light-blue-darken-1 px-2 py-1 rounded-xl font-weight-bold">Available</v-card-subtitle>
+                    <v-card-subtitle v-else
+                      class="pa-0 bg-red-lighten-4 text-red-darken-1 px-2 py-1 rounded-xl font-weight-bold">Unavailable</v-card-subtitle>
+                  </div>
                 </td>
                 <td>
                   <div class="d-flex align-center">
-                    <v-icon class="mdi mdi-pencil-outline mr-1" size="small" color="blue-accent-4" @click="editProperty(property.id)">
+                    <v-icon class="mdi mdi-pencil-outline mr-1" size="small" color="blue-accent-4"
+                      @click="editProperty(property.id)">
                       <v-tooltip activator="parent" location="top">Edit</v-tooltip>
                     </v-icon>
-                    <v-icon class="mdi mdi-trash-can-outline" size="small" color="red" @click="deleteDialogProperty(property.id)">
+                    <v-icon class="mdi mdi-trash-can-outline" size="small" color="red"
+                      @click="deleteDialogProperty(property.id)">
                       <v-tooltip activator="parent" location="top">Delete</v-tooltip>
                     </v-icon>
                   </div>
@@ -49,10 +55,10 @@
       </v-container>
     </v-container>
 
-    <v-dialog v-model="dialog" width="40%">
+    <v-dialog v-model="dialog">
       <v-card>
         <v-sheet class="m-10 w-100 bg-white pa-8" elevation="4">
-          <v-card-title align="center" class="text-green text-h4 mb-5 font-weight-bold">EDITE PROPERTY</v-card-title>
+          <v-card-title align="center" class="text-green text-h4 mb-5 font-weight-bold">EDIT PROPERTY</v-card-title>
           <v-form fast-fail x="d-flex flex-column">
             <div class="d-flex">
               <v-text-field type="text" clearable color="green-accent-4" label="House Name" class="mr-5"
@@ -86,15 +92,15 @@
                 variant="outlined" v-model="description"></v-textarea>
             </div>
             <v-card-actions class="button">
-              <v-btn class="cancel bg-blue-accent-3 text-white" color="black" text @click="closeDialog()">Cancel</v-btn>
-              <v-btn class="save bg-green-accent-3 text-white" color="black" text @click="saveChanges()">Save</v-btn>
+              <v-btn class="cancel text-red" color="black" text @click="closeDialog()">Cancel</v-btn>
+              <v-btn class="save bg-green-accent-3 text-white" color="black" text @click="saveChanges()">Update</v-btn>
             </v-card-actions>
           </v-form>
         </v-sheet>
       </v-card>
     </v-dialog>
 
-    <v-dialog v-model="deleteDialog" width="25%" height="60%">
+    <v-dialog v-model="deleteDialog" width="25%">
       <v-card>
         <v-sheet class="m-5 w-100 bg-white pa-5" elevation="4">
           <div class="cencelIcon">
@@ -105,7 +111,7 @@
               Do you want to delete this property?
             </p>
             <v-card-actions class="button">
-              <v-btn class="cancel text-button text-blue" @click="cencel()">Cancel</v-btn>
+              <v-btn class="cancel text-button text-blue mr-1" @click="cencel()">Cancel</v-btn>
               <v-btn class="deleteBtn bg-red text-overline text-white" color="black" @click="deleteProperty()">
                 Delete
               </v-btn>
@@ -148,12 +154,9 @@ const getImage = (event) => {
   });
 };
 
-// const propertyDataId =ref([]);
 const editProperty = (property_id) => {
-  // editeProperty = property_id;
   localStorage.setItem("property_id", property_id);
   axios.get(`/properties/detail/${property_id}`).then((response) => {
-    console.log(response.data.data);
     if (response.data.data.type == "house") {
       houseName.value = response.data.data.name;
       size.value = response.data.data.size;
@@ -211,13 +214,9 @@ const saveChanges = () => {
     district_id: selected.value,
 
   };
-  console.log(data);
   axios
     .put(`/updateProperty/${id}`, data)
     .then(() => {
-      //   axios.get("/getAllProperties/2").then((res) => {
-      //     properties.value = res.data.data;
-      //   });
       dialog.value = false;
     })
     .catch((errors) => {
@@ -271,14 +270,10 @@ tbody td {
 
 .button {
   display: flex;
-  flex-direction: row;
   justify-content: end;
   margin-top: -1%;
 }
 
-.cancel {
-  margin-right: 20px;
-}
 
 .cancel:hover {
   background: rgb(239, 239, 239);
@@ -296,6 +291,5 @@ tbody td {
 
 .deleteDialog {
   height: 50%;
-}
-</style>
+}</style>
   

@@ -38,10 +38,13 @@ const showError = (error) => {
 navigator.geolocation.getCurrentPosition(showLocation, showError);
 </script>
 
-<style scoped>
+<style>
 #app {
   background-color: #f9fcff;
   background-image: linear-gradient(147deg, #f9fcff 0%, #f6f6f6 74%);
   font-family: 'Signika Negative', sans-serif;
+}
+.v-icon {
+    cursor: pointer;
 }
 </style>
