@@ -14,6 +14,9 @@ import NotFoundView from "../views/NotFoundView.vue";
 import BookingView from "../views/BookingView.vue";
 import Dashboard from "../views/DashboardView.vue";
 import PostPropertyView from '../views/PostPropertyView.vue';
+import LandlordPropertyView from '../views/LandlordPropertyView.vue';
+import AdminPropertyView from '../views/AdminPropertView.vue';
+import UserView from '../views/UserView.vue';
 
 // AuthStore Pinia
 import { useAuthStore } from "../store/AuthStore";
@@ -70,16 +73,37 @@ const routes = [
     name: "Code",
     component: CodeView,
   },
-  // Dashboard 
+  // Admin Dashboard 
   {
-    path: "/dashboard",
+    path: "/dashboard/admin",
     name: "Dashboard",
     component: Dashboard,
   },
   {
-    path: "/dashboard/post",
-    name: "Post",
-    component: PostPropertyView,
+    path: "/dashboard/admin/properties",
+    name: "AdminProperties",
+    component: AdminPropertyView,
+  },
+  {
+    path: "/dashboard/admin/users",
+    name: "Users",
+    component: UserView,
+  },
+  // Landlord Dashboard 
+  {
+    path: "/dashboard/landlord",
+    name: "LandlordDashboard",
+    component: Dashboard,
+  },
+  {
+    path:'/dashboard/landlord/post',
+    name:'Post',
+    component:PostPropertyView
+  },
+  {
+    path:'/dashboard/landlord/properties',
+    name:'LandlordProperties',
+    component:LandlordPropertyView
   },
   // 404 Not Found 
   {
@@ -97,6 +121,7 @@ const routes = [
     name: "NotFound",
     component: NotFoundView,
   },
+
 ];
 
 const router = createRouter({
@@ -105,14 +130,32 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const { user } = storeToRefs(useAuthStore());
+  const { user_id, role } = storeToRefs(useAuthStore());
 
-  if (!user.value && to.name == "Wishlist") {
-    alert("Please Login your account!");
-    next({name: from.name})
-  } else if (user.value && (to.name == "Login" || to.name == "Register")) {
-    next({ name: "Home" });
-  } else {
+  if(!user_id.value){
+    if(to.name === 'Wishlist'){
+      alert("Please Login your account!");
+      next({name: from.name})
+    }
+    else if(to.path.includes('dashboard')){
+      next({name:'NotFound'})
+    }
+    else {
+      next();
+    }
+  }
+  else if (user_id.value){
+    if((role.value == 'customer' && to.path.includes('dashboard')) || (role.value == 'landlord' && to.path.includes('admin'))){
+      next({name:'NotFound'})
+    }
+    else if(to.name === 'Login' || to.name === 'Register'){
+      next({name: from.name});
+    }
+    else {
+      next();
+    }
+  }
+  else{
     next();
   }
 });

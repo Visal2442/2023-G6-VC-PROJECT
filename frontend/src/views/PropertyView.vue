@@ -19,7 +19,7 @@
                     <v-container fluid class="ml-md-9">
                          <v-row class="mr-md-10" v-if="isFound">
                               <v-col md="3" v-for="(property, i) of properties" :key="i">
-                                   <house-card :property="property" @addToWishlist="addToWishlist"></house-card>
+                                   <house-card :property="property" @rateStar="rateStar"></house-card>
                               </v-col>
                          </v-row>
                          <v-row v-else class="h-50">
@@ -38,39 +38,11 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 import SearchLocation from '@/components/search/SearchLocation.vue';
 import FilterType from '@/components/search/FilterType.vue';
 import FilterByPrice from '@/components/search/FilterPrice.vue';
 import HouseCard from '@/components/card/HouseCard.vue';
-
-// Wishlist Store 
-import { useWishlistStore } from '../store/WishlistStore';
-const wishlistStore = useWishlistStore();
-const { addWishlist, userWishlist } = wishlistStore;
-const cookieEmail = ref(Cookies.get('email'));
-
-// Add to wishlist 
-const addToWishlist = (property_id) => {
-     if (cookieEmail.value) {
-          const isNotAdded = ref(true);
-          for (const property of userWishlist) {
-               if (property_id == property.property.id) {
-                    alert('This house is exist in your Wishlist !');
-                    isNotAdded.value = false;
-                    break;
-               }
-          }
-          if (isNotAdded.value) {
-               addWishlist(property_id);
-               alert('The House is added to your Wishlist !');
-          }
-     }
-     else {
-          alert('Please Login to your account !');
-     }
-}
 
 // PAGINATION 
 const properties = ref({});
@@ -147,6 +119,18 @@ const onSelect = (value) => {
 const onPrice = (value) => {
      price.value = value;
      getProperties();
+}
+
+// Rating Star
+const rateStar = (property)=>{
+     // getProperties();
+     axios.post('/properties/ratings', property)
+     .then(res=>{
+          console.log(pagination.value.current);
+          getProperties();
+          console.log(res);
+     })
+     .catch(err=>err);
 }
 
 </script>

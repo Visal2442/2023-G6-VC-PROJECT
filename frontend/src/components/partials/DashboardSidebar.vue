@@ -6,9 +6,10 @@
             </v-list-item>
             <v-divider></v-divider>
             <v-list flat>
-                <v-list-item prepend-icon="mdi-home" title="Dashboard" router :to="{ name: 'Dashboard' }"></v-list-item>
-                <v-list-item prepend-icon="mdi-home-plus" title="Add Property" router :to="{ name: 'Post' }"></v-list-item>
-                <v-list-item prepend-icon="mdi-account-group-outline" title="Your Properties"></v-list-item>
+                <v-list-item prepend-icon="mdi-view-dashboard" title="Dashboard" router :to="role == 'admin' ? '/dashboard/admin' : '/dashboard/landlord'"></v-list-item>
+                <v-list-item v-if="role == 'landlord'" prepend-icon="mdi-home-plus" title="Add Property" router :to="{ name: 'Post' }"></v-list-item>
+                <v-list-item prepend-icon="mdi-home-group" title="Properties" router :to="{name: role == 'admin' ? 'AdminProperties' : 'LandlordProperties'}"></v-list-item>
+                <v-list-item v-if="role == 'admin'" prepend-icon="mdi-account-group" title="All Users" router :to="{ name: 'Users' }"></v-list-item>
             </v-list>
         </v-navigation-drawer>
     </nav>
@@ -18,7 +19,13 @@
 <script setup>
 import { ref } from 'vue';
 const drawer = ref(true);
+import Cookies from 'js-cookie';
 
+// import { useAuthStore } from '@/store/AuthStore';
+// import { storeToRefs } from 'pinia';
+// const { user_id } = storeToRefs(useAuthStore());
+
+const role = Cookies.get('role');
 </script>
 
 <style scoped>

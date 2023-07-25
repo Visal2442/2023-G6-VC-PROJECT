@@ -66,7 +66,7 @@ class PropertySeeder extends Seeder
                 'user_id' =>1
             ],
             [
-                'name' => 'The 1978 Home Room Service Rental',
+                'name' => 'The 1978 Home',
                 'price' => 300,
                 'description' => 'This house is the perfect place to live and unwind. Street 1978, Phnom Penh',
                 'type' => 'room',
@@ -83,7 +83,7 @@ class PropertySeeder extends Seeder
                 'user_id' =>1
             ],
             [
-                'name' => 'The 1978 Home Room Service Rental',
+                'name' => 'The 1978 Home',
                 'price' => 300,
                 'description' => 'This house is the perfect place to live and unwind. Street 1978, Phnom Penh',
                 'type' => 'room',
@@ -100,7 +100,7 @@ class PropertySeeder extends Seeder
                 'user_id' =>1
             ],
             [
-                'name' => 'Rental Room(012981196/086321439)',
+                'name' => 'Rental Room',
                 'price' => 300,
                 'description' => 'This house is the perfect place to live and unwind. HV8J+7GF, Phnom Penh',
                 'type' => 'room',
@@ -290,7 +290,7 @@ class PropertySeeder extends Seeder
                 'user_id' =>1
             ],
             [
-                'name' => 'Monorom Apartment Boueng Kang Keng 1',
+                'name' => 'Monorom Apartment',
                 'price' => 50,
                 'description' => 'This room is the perfect place to live and unwind. 228a St 146, Phnom Penh',
                 'type' => 'room',
@@ -426,7 +426,7 @@ class PropertySeeder extends Seeder
                 'user_id' =>2
             ],
             [
-                'name' => 'rent room den chanmuny',
+                'name' => 'den chanmuny',
                 'price' => 500,
                 'description' => 'This room is the perfect place to live and unwind. 228a St 146, Phnom Penh',
                 'type' => 'room',
@@ -443,7 +443,7 @@ class PropertySeeder extends Seeder
                 'user_id' =>2
             ],
             [
-                'name' => 'Rental Room(012981196/086321439)',
+                'name' => 'Rental Room',
                 'price' => 500,
                 'description' => 'This room is the perfect place to live and unwind. 228a St 146, Phnom Penh',
                 'type' => 'room',

@@ -39,6 +39,11 @@ class WishlistController extends Controller
 
     }
 
+    public function deleteItem($id)
+    {
+        Wishlist::where('id', $id)->delete();
+        return response()->json(['status'=>true, 'message'=> 'Item has been deleted !'], 202);
+    }
     
     
 }
