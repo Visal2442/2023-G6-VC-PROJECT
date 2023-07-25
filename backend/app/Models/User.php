@@ -48,6 +48,10 @@ class User extends Authenticatable
     public function userWishlist(){
         return $this->hasMany(Wishlist::class);
     }
+    public function image()
+    {
+        return $this->hasOne(Image::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

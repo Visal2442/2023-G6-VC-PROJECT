@@ -22,6 +22,8 @@ class UserSeeder extends Seeder
                 'email' => 'visal@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'landlord',
+                'image' => 'user.png',
+
             ],
             [
                 'username' => 'Darath Pum',
@@ -29,6 +31,7 @@ class UserSeeder extends Seeder
                 'email' => 'darathpum@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'landlord',
+                'image' => 'user.png',
             ],
             [
                 'username' => 'Srerea Han',
@@ -36,6 +39,8 @@ class UserSeeder extends Seeder
                 'email' => 'sreyrea@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'admin',
+                'image' => 'user.png',
+
             ],
             [
                 'username' => 'Sreyyoer Yoem',
@@ -43,6 +48,8 @@ class UserSeeder extends Seeder
                 'email' => 'sreyyoer@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'landlord',
+                'image' => 'user.png',
+
             ],
             [
                 'username' => 'Phally Hoeurng',
@@ -50,6 +57,8 @@ class UserSeeder extends Seeder
                 'email' => 'phally@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'landlord',
+                'image' => 'user.png',
+
             ],
             [
                 'username' => 'Net Se',
@@ -57,6 +66,8 @@ class UserSeeder extends Seeder
                 'email' => 'net@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
+                'image' => 'user.png',
+
             ],
             [
                 'username' => 'Doeur Diet',
@@ -64,6 +75,8 @@ class UserSeeder extends Seeder
                 'email' => 'doeur@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
+                'image' => 'user.png',
+
             ],
             [
                 'username' => 'Vibol Phoung',
@@ -71,6 +84,8 @@ class UserSeeder extends Seeder
                 'email' => 'vibol@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
+                'image' => 'user.png',
+
             ],
             [
                 'username' => 'Tanguy Signoret',
@@ -78,6 +93,8 @@ class UserSeeder extends Seeder
                 'email' => 'tanguy@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
+                'image' => 'user.png',
+
             ],
             [
                 'username' => 'Rady Y',
@@ -85,6 +102,8 @@ class UserSeeder extends Seeder
                 'email' => 'rady@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
+                'image' => 'user.png',
+
             ],
             [
                 'username' => 'Yon Yen',
@@ -92,6 +111,8 @@ class UserSeeder extends Seeder
                 'email' => 'yon@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
+                'image' => 'user.png',
+
             ],
             [
                 'username' => 'Ronan Ogor',
@@ -99,6 +120,8 @@ class UserSeeder extends Seeder
                 'email' => 'ronan@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
+                'image' => 'user.png',
+
             ],
             [
                 'username' => 'Gareth Poulton',
@@ -106,6 +129,8 @@ class UserSeeder extends Seeder
                 'email' => 'gareth@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
+                'image' => 'user.png',
+
             ],
             [
                 'username' => 'Him Hey',
@@ -113,6 +138,8 @@ class UserSeeder extends Seeder
                 'email' => 'him@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
+                'image' => 'user.png',
+
             ],
             [
                 'username' => 'Mengheang Pho',
@@ -120,6 +147,8 @@ class UserSeeder extends Seeder
                 'email' => 'mengheang@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
+                'image' => 'user.png',
+
             ]
 
         ];

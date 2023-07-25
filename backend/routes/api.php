@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\UserController;
@@ -86,6 +87,12 @@ Route::get('/customers', [UserController::class,'getCustomer']);
 // get landlords
 Route::get('/landlord', [UserController::class,'getlandlord']);
 Route::get('/userId/{id}', [UserController::class,'show']);
+
+//change profile
+Route::post('/imageProfile', [UserController::class,'getImage']);
+Route::post('/editProfile', [UserController::class,'updateImage']);
+
+
 
 
 // // Social Login (testing)

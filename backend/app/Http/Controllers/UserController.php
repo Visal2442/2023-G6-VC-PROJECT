@@ -78,4 +78,30 @@ class UserController extends Controller
         return response()->json(['message'=>'delete user successfully!','data'=>$user]);
 
     }
+
+    public function getImage(Request $request)
+    {
+        // $profile = ImageProfile::where('user_id',$request->user_id)->first();
+        $image = $request->file('profile');
+        $new_name =  rand() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'),$new_name);
+        $path = asset('images/' . $new_name);
+
+        return $path;
+
+    }
+
+   
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function updateImage(Request $request)
+    {
+        $profile = User::where('id',$request->id)->first();
+        $profile->image = $request->image;
+        $profile->save();
+   
+    }
+  
 }

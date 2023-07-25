@@ -40,10 +40,13 @@ export const useAuthStore = defineStore('auth', () => {
     axios.post('/login', user)
       .then((res) => {
         Cookies.set('username', res.data.user.username, { expires: 30 });
+        Cookies.set('image', res.data.user.image, { expires: 30 });
         Cookies.set('role', res.data.user.role, { expires: 30 });
         Cookies.set('email', user.email, { expires: 30 });
         user_id.value=localStorage.setItem('user_id', res.data.user.id);
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('username', res.data.user.username);
+        localStorage.setItem('email', res.data.user.email);
         token.value = localStorage.getItem('token');
         if(res.data.user.role === 'admin'){
           window.location.href ='/dashboard/admin';
@@ -72,6 +75,7 @@ export const useAuthStore = defineStore('auth', () => {
         Cookies.remove('email');
         Cookies.remove('role');
         Cookies.remove('username');
+        Cookies.remove('image');
         localStorage.removeItem('user_id');
         localStorage.removeItem('token');
         localStorage.removeItem('wishListData');
