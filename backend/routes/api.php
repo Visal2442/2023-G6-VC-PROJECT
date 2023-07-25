@@ -85,6 +85,7 @@ Route::get('/customers', [UserController::class,'getCustomer']);
 
 // get landlords
 Route::get('/landlord', [UserController::class,'getlandlord']);
+Route::get('/userId/{id}', [UserController::class,'show']);
 
 
 // // Social Login (testing)
