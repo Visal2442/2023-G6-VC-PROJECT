@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\LandlordRequestController;
 use App\Models\Wishlist;
 use App\Http\Controllers\RatingController;
 
@@ -68,6 +69,7 @@ Route::put('/updateProperty/{id}', [PropertyController::class, 'updateProperty']
 Route::post('/image', [PropertyController::class, 'getImage']);
 Route::get('/getAllProperties/{id}', [PropertyController::class, 'getAllProperties']);
 Route::get('/getPropertyId/{id}', [PropertyController::class, 'getPropertyId']);
+Route::post('/requestLandlord', [LandlordRequestController::class, 'sendRequest']);
 // Booking 
 Route::post('/booking', [BookingController::class,'booking']);
 
