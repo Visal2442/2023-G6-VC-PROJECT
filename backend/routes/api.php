@@ -58,6 +58,9 @@ Route::get('/getDataGrap', [GraphController::class, 'dataGrap']);
 Route::resource('districts', DistrictController::class);
 
 
+Route::post('booking', BookingController::class,'booking');
+
+
 
 
 
