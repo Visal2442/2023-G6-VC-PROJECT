@@ -8,7 +8,8 @@
       <v-img :src="property?.image" height="200"></v-img>
     </div>
     <div class="d-flex align-center">
-      <v-card-title class="text-lg-h6 text-wrap">{{ property?.name }}</v-card-title>
+      <v-card-title v-if="$route.name == 'Detail'" class="text-lg-h6 text-wrap">{{ property?.name }}</v-card-title>
+      <v-card-title v-else class="text-lg-h6 text-wrap">{{ property?.name.slice(0, 10) }}...</v-card-title>
       <v-spacer></v-spacer>
       <div class=" mr-3">
         <p
