@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +68,14 @@ Route::post('/image', [PropertyController::class, 'getImage']);
 Route::get('/getAllProperties/{id}', [PropertyController::class, 'getAllProperties']);
 Route::get('/getPropertyId/{id}', [PropertyController::class, 'getPropertyId']);
 
+// get user 
+Route::get('/user', [UserController::class, 'index']);
 
+// get customers
+Route::get('/customers', [UserController::class,'getCustomer']);
+
+// get landlords
+Route::get('/landlord', [UserController::class,'getlandlord']);
 
 
 // // Social Login (testing)
