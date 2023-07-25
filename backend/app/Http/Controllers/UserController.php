@@ -13,23 +13,23 @@ class UserController extends Controller
     public function index()
     {
         //
-        $user = User::all();
+        $user = User::all()->count();
         return response()->json(['message'=>'Requested user successfully!','data'=>$user]);
     }
 
     // get customers
     public function getCustomer()
     {
-        $customers = User::where('role', 'Customer')->get();
+        $customers = User::where('role', 'Customer')->get()->count();
         return $customers;
     }
     // get landlords
     public function getLandlord()
     {
-        $landlord = User::where('role', 'Landlord')->get();
+        $landlord = User::where('role', 'Landlord')->get()->count();
         return $landlord;
     }
-    
+
     /**
      * Store a newly created resource in storage.
      */
