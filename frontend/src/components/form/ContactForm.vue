@@ -1,8 +1,5 @@
 <template>
-    
-  
-
-    <v-container fluid class="d-flex ">
+    <div fluid class="d-flex">
         <v-seet class="d-flex flex-column flex-1 w-100 justify-center bg-green aling-center" elevation="4">
             <h2 class="text-center mb-8">OUR INFORMATION</h2>
             <div class="our-phone d-flex flex-column mb-9 ml-16" >
@@ -38,7 +35,7 @@
             text="Your request was successfully!"
             @click="clearAlert()"
         ></v-alert>
-            <h2 class="text-center mb-9">CONTAC US</h2>
+            <h2 class="text-center mb-9">CONTACT US</h2>
             <v-form fast-fail x="d-flex " v-model="isValide">
                 <div class=" d-flex">
                     <v-text-field type="text" clearable color="green-accent-4" label="Username" name="username" placeholder="username"
@@ -57,7 +54,7 @@
                 </div>
             </v-form>
         </v-sheet>
-    </v-container>
+    </div>
   
 </template>
 

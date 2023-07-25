@@ -1,6 +1,5 @@
 <template>
   <div>
-    <dashboard-header></dashboard-header>
     <dashboard-property-view :properties="properties"></dashboard-property-view>
   </div>
 </template>
@@ -9,7 +8,6 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import DashboardPropertyView from './DashboardPropertyView.vue';
-import DashboardHeader from '../components/partials/DashboardHeader.vue'
 
 const user_id = ref(localStorage.getItem('user_id'));
 const properties = ref([]);
