@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\UpdateUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,8 @@ Route::put('/updateProperty/{id}', [PropertyController::class, 'updateProperty']
 Route::post('/image', [PropertyController::class, 'getImage']);
 Route::get('/getAllProperties/{id}', [PropertyController::class, 'getAllProperties']);
 Route::get('/getPropertyId/{id}', [PropertyController::class, 'getPropertyId']);
+
+Route::put('/updateUser/{id}', [UpdateUserController::class, 'updateUser']);
 
 
 
