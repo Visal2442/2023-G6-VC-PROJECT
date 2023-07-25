@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class=" mr-mr-9" :class="getWishlist ? 'h-screen' : ''">
+  <v-container fluid class=" mr-mr-9" :class="getWishlist.length<= 0 ? 'h-screen' : 'h-auto'">
     <v-btn class="bg-orange-accent-3 ml-15" :to="{ name: 'property' }">Back</v-btn>
     <v-container>
       <v-row class=" d-flex justify-center mb-5">

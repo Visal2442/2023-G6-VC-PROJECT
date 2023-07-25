@@ -1,6 +1,5 @@
 <template>
   <div id="navbar" class="">
-
     <!-- Large Screen -->
     <v-toolbar class="pa-4 px-12" :elevation="elevationNavbar" :style="{ background: backgroundNavbar }">
       <v-toolbar-items class="d-flex align-center">
@@ -72,7 +71,7 @@ const navItems = ref([
   { title: 'Home', name: 'Home' },
   { title: 'Property', name: 'property' },
   { title: 'Map', name: 'Map' },
-  { title: 'Contact Us', name: 'contact' },
+  { title: 'Contact Us', name: 'Contact' },
   // { title: 'About', name: 'About' },
 ])
 const cookieEmail = ref(Cookies.get('email'));

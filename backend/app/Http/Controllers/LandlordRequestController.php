@@ -10,13 +10,6 @@ use App\Mail\LandlordRequestMail;
 
 class LandlordRequestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -42,29 +35,5 @@ class LandlordRequestController extends Controller
         ];
         Mail::to('rentalhouse.kh@gmail.com')->send(new LandlordRequestMail($sendData));
         
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

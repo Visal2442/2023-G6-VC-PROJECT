@@ -13,11 +13,11 @@ import DetailView from "../views/DetailView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 import BookingView from "../views/BookingView.vue";
 import Dashboard from "../views/DashboardView.vue";
-import PostPropertyView from '../views/PostPropertyView.vue';
-import LandlordPropertyView from '../views/LandlordPropertyView.vue';
-import AdminPropertyView from '../views/AdminPropertView.vue';
-import ContactUsView from '../views/ContactUsView.vue';
-import UserView from '../views/UserView.vue';
+import PostPropertyView from "../views/PostPropertyView.vue";
+import LandlordPropertyView from "../views/LandlordPropertyView.vue";
+import AdminPropertyView from "../views/AdminPropertView.vue";
+import ContactUsView from "../views/ContactUsView.vue";
+import UserView from "../views/UserView.vue";
 
 // AuthStore Pinia
 import { useAuthStore } from "../store/AuthStore";
@@ -28,62 +28,80 @@ const routes = [
     path: "/",
     name: "Home",
     component: HomeView,
+    meta: { title: "Home" },
   },
   {
     path: "/about",
     name: "About",
     component: AboutView,
+    meta: { title: "About-Us" },
   },
   {
     path: "/register",
     name: "Register",
     component: RegisterView,
+    meta: { title: "Register" },
   },
   {
     path: "/login",
     name: "Login",
     component: LoginView,
+    meta: { title: "Login" },
   },
   {
     path: "/map",
     name: "Map",
     component: MapView,
+    meta: { title: "Map" },
   },
   {
     path: "/property",
     name: "property",
     component: PropertyView,
+    meta: { title: "Properties" },
   },
   {
     path: "/detail/:id",
     name: "Detail",
     component: DetailView,
+    meta: { title: "Property-Detail" },
   },
   {
     path: "/wishlist",
     name: "Wishlist",
     component: WishlistView,
+    meta: { title: "Wishlist" },
   },
   {
     path: "/contact",
-    name: "contact",
+    name: "Contact",
     component: ContactUsView,
+    meta: { title: "Contact-Us" },
   },
   {
     path: "/email",
     name: "Email",
     component: EmailView,
+    meta: { title: "Email" },
   },
   {
     path: "/code",
     name: "Code",
     component: CodeView,
+    meta: { title: "Code" },
   },
-  // Admin Dashboard 
+  {
+    path: "/booking",
+    name: "Booking",
+    component: BookingView,
+    meta: { title: "Booking" },
+  },
+  // Admin Dashboard
   {
     path: "/dashboard/admin",
     name: "Dashboard",
     component: Dashboard,
+    meta: { title: "Dashboard" },
   },
   {
     path: "/dashboard/admin/properties",
@@ -95,39 +113,37 @@ const routes = [
     name: "Users",
     component: UserView,
   },
-  // Landlord Dashboard 
+  // Landlord Dashboard
   {
     path: "/dashboard/landlord",
     name: "LandlordDashboard",
     component: Dashboard,
   },
   {
-    path:'/dashboard/landlord/post',
-    name:'Post',
-    component:PostPropertyView
+    path: "/dashboard/landlord/post",
+    name: "Post",
+    component: PostPropertyView,
+    meta: { title: "Landlord-Dashboard" },
   },
   {
-    path:'/dashboard/landlord/properties',
-    name:'LandlordProperties',
-    component:LandlordPropertyView
+    path: "/dashboard/landlord/properties",
+    name: "LandlordProperties",
+    component: LandlordPropertyView,
+    meta: { title: "Landlord-Property" },
   },
-  // 404 Not Found 
-  {
-    path: "/booking",
-    name: "Booking",
-    component: BookingView,
-  },
+  // 404 Not Found
   {
     path: "/:catchAll(.*)",
     name: "404NotFound",
     component: NotFoundView,
+    meta: { title: "404 Not Found" },
   },
   {
     path: "/not_found",
     name: "NotFound",
     component: NotFoundView,
+    meta: { title: "404 Not Found" },
   },
-
 ];
 
 const router = createRouter({
@@ -135,33 +151,37 @@ const router = createRouter({
   routes: routes,
 });
 
+// Chage page title
+const pageTitle = (title) => {
+  document.title = title;
+};
 router.beforeEach(async (to, from, next) => {
   const { user_id, role } = storeToRefs(useAuthStore());
 
-  if(!user_id.value){
-    if(to.name === 'Wishlist'){
+  if (!user_id.value) {
+    if (to.name === "Wishlist") {
       alert("Please Login your account!");
-      next({name: from.name})
-    }
-    else if(to.path.includes('dashboard')){
-      next({name:'NotFound'})
-    }
-    else {
+      next({ name: from.name });
+    } else if (to.path.includes("dashboard")) {
+      pageTitle(to.meta.title);
+      next({ name: "NotFound" });
+    } else {
+      pageTitle(to.meta.title);
       next();
     }
-  }
-  else if (user_id.value){
-    if((role.value == 'customer' && to.path.includes('dashboard')) || (role.value == 'landlord' && to.path.includes('admin'))){
-      next({name:'NotFound'})
-    }
-    else if(to.name === 'Login' || to.name === 'Register'){
-      next({name: from.name});
-    }
-    else {
+  } else if (user_id.value) {
+    if ((role.value == "customer" && to.path.includes("dashboard")) || (role.value == "landlord" && to.path.includes("admin")) ) {
+      pageTitle(to.meta.title);
+      next({ name: "NotFound" });
+    } else if (to.name === "Login" || to.name === "Register") {
+      pageTitle(to.meta.title);
+      next({ name: from.name });
+    } else {
+      pageTitle(to.meta.title);
       next();
     }
-  }
-  else{
+  } else {
+    pageTitle(to.meta.title);
     next();
   }
 });

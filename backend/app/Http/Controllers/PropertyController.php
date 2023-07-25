@@ -33,7 +33,7 @@ class PropertyController extends Controller
         $name = $request->name;
         $districts = District::where('name', 'like', '%' . $name . '%')->get();
         if ($districts->isEmpty()) {
-            return response()->json(['message' => 'District Not Found'], 404);
+            return response()->json(['message' => 'No District Found'], 404);
         }
         return response()->json(['success' => true, 'data' => $districts], 200);
     }
@@ -53,7 +53,7 @@ class PropertyController extends Controller
         if ($properties->total() > 0) {
             return response()->json(['success' => true, 'data' => $properties], 200);
         }
-        return response()->json(['message' => 'Property Not Found'], 404);
+        return response()->json(['message' => 'No Property Found'], 404);
     }
 
     // show properties detail by ID

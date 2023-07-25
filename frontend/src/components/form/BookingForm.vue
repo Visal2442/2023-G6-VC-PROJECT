@@ -76,7 +76,7 @@ const bookProperty = () => {
   setTimeout(() => (
     loading.value = false,
     resetInput()
-    ), 10000)
+    ), 12000)
 }
 // Reset the form data after the booking is successful
 const resetInput = () => {

@@ -1,9 +1,5 @@
 <template>
   <v-card id="house-card" class="pb-3">
-    <!-- <TheTransition>
-            <v-alert type="error" v-if="isLoggedIn" closable class="text-red-accent-4 text-left mb-5" :text='errorMessage'>
-            </v-alert>
-        </TheTransition> -->
     <div>
       <v-img :src="property?.image" height="200"></v-img>
     </div>
@@ -77,7 +73,7 @@ const { addWishlist,getWishlist } = wishlistStore;
 const cookieEmail = ref(Cookies.get('email'));
 
 
-const emits = defineEmits(['rateStar']);
+const emits = defineEmits(['rateStar', 'alert']);
 const props = defineProps(["property"]);
 
 const addToWishlist = (propertyId) => {
@@ -85,18 +81,18 @@ const addToWishlist = (propertyId) => {
           const isNotAdded = ref(true);
           for (const property of getWishlist) {
                if (propertyId == property.property.id) {
-                    alert('This house is exist in your Wishlist !');
+                    emits('alert', 'This house is exist in your Wishlist !')
                     isNotAdded.value = false;
                     break;
-               }
-          }
-          if (isNotAdded.value) {
-               addWishlist(propertyId);
-               alert('The House is added to your Wishlist !');
-          }
-     }
-     else {
-          alert('Please Login to your account !');
+                  }
+                }
+                if (isNotAdded.value) {
+                  addWishlist(propertyId);
+                  emits('alert', 'The House is added to your Wishlist !')
+                }
+              }
+              else {
+                emits('alert', 'Please Login to your account !')
      }
 };
 

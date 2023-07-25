@@ -17,10 +17,6 @@ use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
 
     /**
      * Store a newly created resource in storage.
@@ -84,9 +80,6 @@ class BookingController extends Controller
         ];
 
         //   -----------------------------------------------------------------
-
-
-
             if ($property['type'] == "room") {
                 DB::table('rooms')
                     ->join('rental_rooms', 'rental_rooms.id', '=', 'rooms.rental_room_id')
@@ -108,7 +101,6 @@ class BookingController extends Controller
                 $property['available'] = 0;
                 $property->save();
 
-
                 // send email detail
                 Mail::to($booking['email'])->send(new SendDetailBookingToCustomer($send));
                 Mail::to($propertyDetail['user']['email'])->send(new SendDetailBookingToLandlord($send));
@@ -119,37 +111,4 @@ class BookingController extends Controller
                 return response()->json(['status' => true, 'data' => $booking], 200);
             };
         }
-    
-
-
-
-
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Booking $booking)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Booking $booking)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Booking $booking)
-    {
-        //
-    }
 }
