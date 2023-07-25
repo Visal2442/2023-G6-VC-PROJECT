@@ -8,7 +8,7 @@
                     <v-img :src="require('../assets/dashboard/group.png')" width="50"></v-img>
                     <div class="text-light-blue-darken-1 d-flex flex-column align-center">
                         <p class="font-weight-bold text-h6">Users</p>
-                        <p>20</p>
+                        <p>{{ userCount }}</p>
                     </div>
                 </v-col>
                 <v-col id="summary" rounded="lg"
@@ -16,7 +16,7 @@
                     <v-img :src="require('../assets/dashboard/profile.png')" width="50"></v-img>
                     <div class="text-purple-darken-1 d-flex flex-column align-center">
                         <p class="font-weight-bold text-h6">Customers</p>
-                        <p>20</p>
+                        <p>{{ customerCount }}</p>
                     </div>
                 </v-col>
                 <v-col id="summary" rounded="lg"
@@ -24,14 +24,14 @@
                     <v-img :src="require('../assets/dashboard/landlord.png')" width="50"></v-img>
                     <div class="text-green-accent-4 d-flex flex-column align-center">
                         <p class="font-weight-bold text-h6">Landlords</p>
-                        <p>20</p>
+                        <p>{{ landlordCount }}</p>
                     </div>
                 </v-col>
                 <v-col id="summary" class="bg-orange-lighten-4 d-flex flex-column justify-center align-center py-5">
                     <v-img :src="require('../assets/dashboard/home.png')" width="50"></v-img>
                     <div class="text-orange-darken-1 d-flex flex-column align-center">
                         <p class="font-weight-bold text-h6">Properties</p>
-                        <p>20</p>
+                        <p>{{ propertyCount }}</p>
                     </div>
                 </v-col>
             </v-row>
@@ -89,7 +89,51 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed } from 'vue';
+import axios from 'axios';
+
+const property = ref([]);
+const customers = ref([]);
+const landlord = ref([]);
+const users = ref([]);
+// property count
+axios.get(`/properties`).then((res) => {
+  property.value = res.data.data;
+});
+
+const propertyCount = computed(() => {
+  return property.value.length;
+});
+
+// user count
+axios.get(`/user`).then((res) => {
+    users.value = res.data.data;
+});
+
+const userCount = computed(() => {
+  return users;
+});
+
+// customer count
+axios.get(`/customers`).then((res) => {
+    customers.value = res.data;
+});
+
+const customerCount = computed(() => {
+  return customers;
+});
+
+// landlord count
+
+axios.get(`/landlord`).then((res) => {
+    landlord.value = res.data;
+});
+
+const landlordCount = computed(() => {
+  return landlord;
+});
+
 
 </script>
 

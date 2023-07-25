@@ -74,6 +74,12 @@ Route::put('/updateUser/{id}', [UpdateUserController::class, 'updateUser']);
 // get user 
 Route::get('/user', [UserController::class, 'index']);
 
+// get all users 
+Route::get('/users', [UserController::class, 'getAllUsers']);
+
+// delete users 
+Route::delete('/delete_user/{id}', [UserController::class, 'destroyUser']);
+
 // get customers
 Route::get('/customers', [UserController::class,'getCustomer']);
 
