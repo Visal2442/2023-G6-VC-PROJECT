@@ -291,5 +291,6 @@ tbody td {
 
 .deleteDialog {
   height: 50%;
-}</style>
+}
+</style>
   

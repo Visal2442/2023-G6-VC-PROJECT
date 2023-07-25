@@ -31,9 +31,10 @@ const removeItemFromWishlist = (wishlist_id) => {
   getAllData();
 }
 
-
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
 
 

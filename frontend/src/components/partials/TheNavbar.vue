@@ -39,7 +39,6 @@
             </v-list-item>
           </v-list>
         </v-menu>
-
       </v-toolbar-items>
     </v-toolbar>
 

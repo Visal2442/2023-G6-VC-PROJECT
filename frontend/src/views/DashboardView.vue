@@ -66,7 +66,7 @@
                                     <td>0929292</td>
                                     <td>
                                         <div class="d-flex">
-                                            <v-card-subtitle class="pa-0 bg-green-lighten-4 text-green-accent-4 px-2 py-1 rounded-lg font-weight-bold">Landlord</v-card-subtitle>
+                                            <v-card-subtitle class="pa-0 bg-green-lighten-4 text-green-accent-4 px-2 py-1 rounded-xl font-weight-bold">Landlord</v-card-subtitle>
                                         </div>
                                     </td>
                                     <td>
