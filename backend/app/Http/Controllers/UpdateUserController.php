@@ -40,7 +40,7 @@ class UpdateUserController extends Controller
         $user = User::find($id);
         $validator = Validator::make($request->all(), [
             'username' => 'required',
-            'phone_number' => 'required',
+            'password' => 'required',
             'email' => 'required',
             'role' => 'required',
            
