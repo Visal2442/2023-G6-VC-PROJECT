@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
             [
                 'username' => 'Sreyyoer Yoem',
                 'phone_number' => '0234567890',
-                'email' => 'darath@gmail.com',
+                'email' => 'sreyyoer@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'landlord',
             ],
@@ -69,6 +69,13 @@ class UserSeeder extends Seeder
                 'username' => 'Vibol Phoung',
                 'phone_number' => '0987654321',
                 'email' => 'vibol@gmail.com',
+                'password' => bcrypt('password'),
+                'role' => 'customer',
+            ],
+            [
+                'username' => 'Tanguy Signoret',
+                'phone_number' => '0987654321',
+                'email' => 'tanguy@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
             ],

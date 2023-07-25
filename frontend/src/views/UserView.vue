@@ -93,7 +93,7 @@
               Do you want to delete this user?
             </p>
             <v-card-actions class="button">
-              <v-btn class="cancel text-button text-blue mr-1" @click="cancel()">Cancel</v-btn>
+              <v-btn class="cancel text-button text-blue mr-1" @click="cancelDelete()">Cancel</v-btn>
               <v-btn class="deleteBtn bg-red text-overline text-white" @click="deleteUserAccount()" color="black">
                 Delete
               </v-btn>
@@ -164,15 +164,21 @@ const displayUsers = () => {
 const deleteUserAccountByAddmin = (userId, role) => {
   localStorage.setItem('userId', userId);
   localStorage.setItem('userRole', role);
-  deleteUser.value = true;
+  if(localStorage.getItem('userRole') !== 'admin') {
+      deleteUser.value = true;
+
+  }else{
+    alert("Can not delete admin account!");
+  }
 };
+const cancelDelete = () => {
+    deleteUser.value = false;
+}
 const cancel = () => {
     dialog.value = false;
 }
 const deleteUserAccount = () => {
   let Id = localStorage.getItem('userId');
-  let role = localStorage.getItem('userRole');
-    if(role !== 'admin'){
         axios
         .delete(`/delete_user/${Id}`)
         .then(() => {
@@ -184,9 +190,7 @@ const deleteUserAccount = () => {
 
         console.log(localStorage.getItem("user_id"));
         deleteUser.value = false;
-    }else {
-        alert("Can not delete admin account!");
-    } 
+    
 };
 
 onMounted(() => {
