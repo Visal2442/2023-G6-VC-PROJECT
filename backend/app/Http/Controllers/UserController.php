@@ -29,6 +29,12 @@ class UserController extends Controller
         $landlord = User::where('role', 'Landlord')->get()->count();
         return $landlord;
     }
+    // get getAllUsers
+    public function getAllUsers()
+    {
+        $users = User::all();
+        return $users;
+    }
 
     /**
      * Store a newly created resource in storage.

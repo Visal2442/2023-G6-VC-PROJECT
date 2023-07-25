@@ -15,24 +15,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>#1</td>
+                                <tr v-for="user of users" :key="user">
+                                    <td># {{ user.id }}</td>
                                     <td>
                                         <div class="d-flex align-center">
                                             <v-avatar>
                                                 <v-img :src="require('../assets/profile2.jpeg')" width="60"></v-img>
                                             </v-avatar>
                                             <div class=" ml-2">
-                                                <p class="font-weight-bold">Visal</p>
-                                                <v-card-subtitle class="pa-0">visal@gmail.com</v-card-subtitle>
+                                                <p class="font-weight-bold">{{ user.username }}</p>
+                                                <v-card-subtitle class="pa-0">{{user.email}}</v-card-subtitle>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>+855 929292</td>
+                                    <td>{{ user.phone_number }}</td>
                                     <td>
                                         <div class="d-flex">
                                             <v-card-subtitle
-                                                class="pa-0 bg-green-lighten-4 text-green-darken-1 px-2 py-1 rounded-xl font-weight-bold">Landlord</v-card-subtitle>
+                                                class="pa-0 bg-green-lighten-4 text-green-darken-1 px-2 py-1 rounded-xl font-weight-bold">{{user.role}}</v-card-subtitle>
                                         </div>
                                     </td>
                                     <td>
@@ -106,8 +106,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import BaseButton from '@/components/widget/BaseButton.vue';
+import axios from 'axios';
+
+const users = ref([]);
 
 const isEditDialog = ref(false);
 const isDeleteDialog = ref(false);
@@ -118,6 +121,17 @@ const items = ref([
      { title: 'Customer', value: 'customer' },
 ])
 
+const displayUsers = () => {
+    axios.get("/users")
+        .then(response =>{
+            users.value = response.data;
+            console.log(users.value);
+        })
+}
+
+onMounted(()=>{
+    displayUsers();
+})
 </script>
 
 <style scoped>
