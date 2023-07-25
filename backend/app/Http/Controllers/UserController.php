@@ -47,11 +47,19 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $user = User::select('username', 'password', 'email', 'role')->find($id);
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }    
+        return response()->json(['message' => 'success', 'data' => [
+            'username' => $user->username,
+            'password' => $user->password,
+            'email' => $user->email,
+            'role' => $user->role,
+        ]], 200);
     }
-
     /**
      * Update the specified resource in storage.
      */

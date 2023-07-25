@@ -38,7 +38,7 @@
                                     <td>
                                         <div class="d-flex align-center">
                                             <v-icon class="mdi mdi-pencil-outline mr-3" size="small" color="blue-accent-4"
-                                                @click="isEditDialog = !isEditDialog">
+                                                @click="getData(user.id)">
                                                 <v-tooltip activator="parent" location="top">Edit</v-tooltip>
                                             </v-icon>
                                             <v-icon class="mdi mdi-trash-can-outline" size="small" color="red">
@@ -54,35 +54,35 @@
             </v-row>
         </v-container>
         <!-- Edit user form  -->
-        <v-dialog v-model="isEditDialog" width="35%" class="" >
+        <v-dialog v-model="dialog" width="35%" class="" >
             <v-card rounded="lg" >
                 <v-card-title class="pa-0 pa-3 bg-green-accent-4 text-white">Edit User</v-card-title>
                 <div class=" w-100 bg-white pa-5">
                     <v-form fast-fail x="d-flex flex-column">
                         <div class="input-container d-flex">
-                            <v-text-field type="text" clearable color="green-accent-4" label="Username"
+                            <v-text-field type="text" clearable color="green-accent-4" label="Username" v-model="userName"
                                 placeholder="Enter Your Username" class="pa-0" density="compact" variant="outlined"
                                 rounded="lg"></v-text-field>
-                            <v-text-field type="email" clearable color="green-accent-4" label="Email" name="email"
+                            <v-text-field type="email" clearable color="green-accent-4" label="Email" name="email" v-model="email"
                                 placeholder="Enter Your Email" density="compact" variant="outlined"
                                 rounded="lg"></v-text-field>
                         </div>
                         <div class="input-container d-flex gap-5">
-                            <v-text-field type="text" clearable color="green-accent-4" label="Password"
+                            <v-text-field type="text" clearable color="green-accent-4" label="Password"  v-model="password"
                                 placeholder="Enter password" class="pa-0" density="compact" variant="outlined"
                                 rounded="lg"></v-text-field>
                             <v-select v-model="selected" :items="items" density="compact" variant="outlined" label="Role" placeholder="Role"></v-select>
                         </div>
                         <v-card-actions class="button">
-                            <v-btn class="cancel text-red" color="black" text @click="isEditDialog = !isEditDialog">Cancel</v-btn>
-                            <BaseButton type="primary-btn">Update</BaseButton>
+                            <v-btn class="cancel text-red" color="black" text @click="cancel()">Cancel</v-btn>
+                            <BaseButton type="primary-btn" @click="editUser()">Update</BaseButton>
                         </v-card-actions>
                     </v-form>
                 </div>
             </v-card>
         </v-dialog>
         <!-- Delete user dialog  -->
-        <v-dialog v-model="isDeleteDialog" width="35%">
+        <v-dialog  width="35%">
       <v-card>
         <v-sheet class="m-5 w-100 bg-white pa-5" elevation="4">
           <div class="cencelIcon">
@@ -93,7 +93,7 @@
               Do you want to delete this user?
             </p>
             <v-card-actions class="button">
-              <v-btn class="cancel text-button text-blue mr-1" @click="isDeleteDialog = !isDeleteDialog">Cancel</v-btn>
+              <v-btn class="cancel text-button text-blue mr-1" @click="cancel()">Cancel</v-btn>
               <v-btn class="deleteBtn bg-red text-overline text-white" color="black">
                 Delete
               </v-btn>
@@ -111,16 +111,48 @@ import BaseButton from '@/components/widget/BaseButton.vue';
 import axios from 'axios';
 
 const users = ref([]);
+const selected = ref('');
+const dialog = ref(false);
+const userName = ref('');
+const email = ref('');
+const password = ref('');
 
-const isEditDialog = ref(false);
-const isDeleteDialog = ref(false);
-const selected = ref('customer');
 
 const items = ref([
      { title: 'Landlord', value: 'landlord' },
      { title: 'Customer', value: 'customer' },
 ])
 
+const getData = (user_id) => {   
+    localStorage.setItem('userId', user_id);
+    axios.get(`/userId/${user_id}`)
+    .then(res => {
+        console.log(res.data.data);
+        userName.value = res.data.data.username;
+        email.value = res.data.data.email;
+        password.value = res.data.data.password;
+        selected.value = res.data.data.role;
+    })
+    dialog.value = true;
+}
+
+const editUser = () =>{
+    const id = localStorage.getItem('userId');
+    if(userName.value !=='' && email.value !=='' && password.value !==''  && selected.value !==''){
+        const userData = {
+        'username':userName.value,
+        'email':email.value,
+        'password':password.value,
+        'role':selected.value
+        }
+        axios.put(`/updateUser/${id}`, userData).then(res => {
+            console.log(res.data);
+            dialog.value = false;
+            displayUsers();
+        });
+    }
+    
+}
 const displayUsers = () => {
     axios.get("/users")
         .then(response =>{
@@ -132,6 +164,10 @@ const displayUsers = () => {
 onMounted(()=>{
     displayUsers();
 })
+
+const cancel = () => {
+    dialog.value = false;
+}
 </script>
 
 <style scoped>
