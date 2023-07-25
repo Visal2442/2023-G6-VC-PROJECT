@@ -41,7 +41,7 @@
                                                 @click="getData(user.id)">
                                                 <v-tooltip activator="parent" location="top">Edit</v-tooltip>
                                             </v-icon>
-                                            <v-icon class="mdi mdi-trash-can-outline" size="small" color="red">
+                                            <v-icon class="mdi mdi-trash-can-outline" size="small" color="red" @click="deleteUserAccountByAddmin(user.id, user.role)">
                                                 <v-tooltip activator="parent" location="top">Delete</v-tooltip>
                                             </v-icon>
                                         </div>
@@ -82,7 +82,7 @@
             </v-card>
         </v-dialog>
         <!-- Delete user dialog  -->
-        <v-dialog  width="35%">
+        <v-dialog v-model="deleteUser" width="35%">
       <v-card>
         <v-sheet class="m-5 w-100 bg-white pa-5" elevation="4">
           <div class="cencelIcon">
@@ -94,7 +94,7 @@
             </p>
             <v-card-actions class="button">
               <v-btn class="cancel text-button text-blue mr-1" @click="cancel()">Cancel</v-btn>
-              <v-btn class="deleteBtn bg-red text-overline text-white" color="black">
+              <v-btn class="deleteBtn bg-red text-overline text-white" @click="deleteUserAccount()" color="black">
                 Delete
               </v-btn>
             </v-card-actions>
@@ -102,13 +102,13 @@
         </v-sheet>
       </v-card>
     </v-dialog>
-    </div>
+  </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-import BaseButton from '@/components/widget/BaseButton.vue';
-import axios from 'axios';
+import { onMounted, ref } from "vue";
+import BaseButton from "@/components/widget/BaseButton.vue";
+import axios from "axios";
 
 const users = ref([]);
 const selected = ref('');
@@ -116,12 +116,13 @@ const dialog = ref(false);
 const userName = ref('');
 const email = ref('');
 const password = ref('');
-
-
 const items = ref([
      { title: 'Landlord', value: 'landlord' },
      { title: 'Customer', value: 'customer' },
 ])
+// const isEditDialog = ref(false);
+const deleteUser = ref(false);
+
 
 const getData = (user_id) => {   
     localStorage.setItem('userId', user_id);
@@ -154,40 +155,64 @@ const editUser = () =>{
     
 }
 const displayUsers = () => {
-    axios.get("/users")
-        .then(response =>{
-            users.value = response.data;
-            console.log(users.value);
-        })
-}
+  axios.get("/users").then((response) => {
+    users.value = response.data;
+    console.log(users.value);
+  });
+};
 
-onMounted(()=>{
-    displayUsers();
-})
-
+const deleteUserAccountByAddmin = (userId, role) => {
+  localStorage.setItem('userId', userId);
+  localStorage.setItem('userRole', role);
+  deleteUser.value = true;
+};
 const cancel = () => {
     dialog.value = false;
 }
+const deleteUserAccount = () => {
+  let Id = localStorage.getItem('userId');
+  let role = localStorage.getItem('userRole');
+    if(role !== 'admin'){
+        axios
+        .delete(`/delete_user/${Id}`)
+        .then(() => {
+             displayUsers();
+        })
+        .catch((errors) => {
+        console.log(errors);
+        });
+
+        console.log(localStorage.getItem("user_id"));
+        deleteUser.value = false;
+    }else {
+        alert("Can not delete admin account!");
+    } 
+};
+
+onMounted(() => {
+  displayUsers();
+});
 </script>
 
 <style scoped>
 table,
 th,
 td {
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
 
 thead th {
-    border-bottom: 1px solid #b8b2b2;
-    padding: 10px;
-    text-align: start;
+  border-bottom: 1px solid #b8b2b2;
+  padding: 10px;
+  text-align: start;
 }
 
 tbody td {
-    border-bottom: 1px solid #b8b2b2;
-    padding: 10px;
+  border-bottom: 1px solid #b8b2b2;
+  padding: 10px;
 }
 
 .input-container {
-    gap: 10px;
-}</style>
+  gap: 10px;
+}
+</style>
