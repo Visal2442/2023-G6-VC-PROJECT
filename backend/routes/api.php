@@ -69,7 +69,7 @@ Route::post('/image', [PropertyController::class, 'getImage']);
 Route::get('/getAllProperties/{id}', [PropertyController::class, 'getAllProperties']);
 Route::get('/getPropertyId/{id}', [PropertyController::class, 'getPropertyId']);
 // Booking 
-Route::post('booking', BookingController::class,'booking');
+Route::post('/booking', [BookingController::class,'booking']);
 
 
 

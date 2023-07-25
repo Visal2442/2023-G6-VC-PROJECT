@@ -49,7 +49,7 @@
     <table>
         <tr>
             <th>Type</th>
-            <th> <?php echo ($detail['type'] == 'room') ? 'Room ID' : 'Room Number'; ?></th>
+            <th> <?php echo ($detail['type'] == 'room') ? 'Room ID' : 'Number Of Rooms'; ?></th>
             <th>Floor</th>
             <th>Bathroom</th>
             <th>Kitchen</th>
@@ -59,11 +59,11 @@
         </tr>
         <tr>
             <td>{{$detail['type']}}</td>
-            <td><?php echo ($detail['type'] == 'room') ? $detail['numberOfRoom'] : $detail['room_id']; ?></td>
+            <td><?php echo ($detail['type'] == 'room') ?  $detail['room_id'] :$detail['numberOfRoom']; ?></td>
             <td>{{$detail['floor']}}</td>
             <td>{{$detail['bathroom']}}</td>
             <td>{{$detail['kitchen']}}</td>
-            <td>{{$detail['price']}}</td>
+            <td>${{$detail['price']}}/Month</td>
             <td>{{$detail['district']}}</td>
             <td>{{$detail['landlordPhoneNumber']}}</td>
         </tr>

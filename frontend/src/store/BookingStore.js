@@ -1,20 +1,15 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import axios from "axios";
-import { useRouter } from "vue-router";
 
 export const useBookingStore = defineStore("booking", () => {
-let isValide= ref(false);
-const errors = ref('');
-const router = useRouter();
+  let isValide = ref(false);
+  const errors = ref("");
   const booking = (booking) => {
-
     axios
-      .post('/booking', booking)
-      .then((res) => {
-        console.log(res);
-        router.push({name:'Home'});
-        
+      .post("/booking", booking)
+      .then(() => {
+        window.location.href='/';
       })
       .catch((err) => {
         errors.value = err.response.data;

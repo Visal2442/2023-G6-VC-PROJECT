@@ -16,20 +16,15 @@ class BookingSeeder extends Seeder
         //
         $booking=[
             [
-                'user_id' => 1,
+                'email' => 'darath@gmail.com',
+                'first_name' => 'Darath',
+                'last_name' => 'Pum',
+                'phone_number' => '0934222222',
+                'check_in_date' => '2023-08-02',
+                'check_out_date' => '2023-08-02',
+                'room_id' => '1',
+                'user_id' => '1',
                 'property_id' => 1,
-            ],
-            [
-                'user_id' => 1,
-                'property_id' => 2,
-            ],
-            [
-                'user_id' => 2,
-                'property_id' => 7,
-            ],
-            [
-                'user_id' => 1,
-                'property_id' => 11,
             ],
         ];
         foreach ($booking as $book){
