@@ -18,7 +18,7 @@ class GraphController extends Controller
         $districts = District::withCount(['property' => function ($query) {
             $query->whereHas('booking');
         }])->get();
-        return $districts;
+        return response()->json(['status' => true, 'data' => $districts], 200);
 
     }
 }
