@@ -6,9 +6,8 @@
         <v-col>
           <div class="pr-3">
             <h1 id="h1-banner" class="text-green-accent-3">Your House Is Here !</h1>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ab,magni voluptate a earum
-              consequuntur, sapiente dolorem eius porro reiciendis eveniet fugiat quidem. Esse repudiandae expedita error
-              hic! Perspiciatis, optio.</p>
+            <p>Welcome to our Rental House Website!</p>
+              <p>Finding the perfect rental property can be a daunting task, but our website makes the process easy and stress-free. We offer a wide range of rental properties to suit every need and budget, from cozy room to spacious family homes.</p>
             <div class="align-center mt-5">
               <BaseButton type="primary-btn" :to="{name:'Contact'}">Contact Us</BaseButton>
               <BaseButton type="seconday-btn">See More</BaseButton>
@@ -44,9 +43,9 @@
         <v-col>
           <div class="pl-4">
             <h1 class="text-green-accent-3">Our Mission</h1>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ab,magni voluptate a earum
-              consequuntur, sapiente dolorem eius porro reiciendis eveniet fugiat quidem. Esse repudiandae expedita error
-              hic! Perspiciatis, optio.</p>
+              <p>At our rental house website, our mission is to make the process of finding and renting a home easy, convenient, and stress-free.</p>
+              <br>
+              <p>We understand that finding the perfect rental property can be a daunting task, which is why we're committed to providing a wide range of properties to suit every need and budget. Our advanced search functionality and personalized recommendations ensure that you find the perfect rental property that meets your specific criteria.</p>
               <div class="align-center mt-5">
                 <BaseButton type="primary-btn" :to="{name:'Contact'}">Contact Us</BaseButton>
               </div>
@@ -58,16 +57,16 @@
         <v-col>
           <div class="pr-4">
             <h1 class="text-green-accent-3">Our Vision</h1>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ab,magni voluptate a earum
-              consequuntur, sapiente dolorem eius porro reiciendis eveniet fugiat quidem. Esse repudiandae expedita error
-              hic! Perspiciatis, optio.</p>
+              <p>At our rental house website, our vision is to be the leading provider of rental properties, offering a wide range of properties to suit every need and budget.</p>
+              <br>
+              <p>We strive to make the process of finding and renting a home easy, convenient, and stress-free for our customers. We believe that everyone deserves to live in a home they love, and we're committed to making that a reality.</p>
               <div class="align-center mt-5">
                 <BaseButton type="primary-btn" :to="{name:'Contact'}">Contact Us</BaseButton>
               </div>
           </div>
         </v-col>
         <v-col>
-          <v-img :src="require('../assets/home/mission3.jpeg')" width="640" class="home-img"></v-img>
+          <v-img :src="require('../assets/home/vision.jpeg')" width="640" class="home-img"></v-img>
         </v-col>
       </v-row>
 
