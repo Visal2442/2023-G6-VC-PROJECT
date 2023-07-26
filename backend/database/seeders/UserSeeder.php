@@ -22,7 +22,8 @@ class UserSeeder extends Seeder
                 'email' => 'visal@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'landlord',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+
 
             ],
             [
@@ -31,7 +32,8 @@ class UserSeeder extends Seeder
                 'email' => 'darathpum@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'landlord',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+
             ],
             [
                 'username' => 'Srerea Han',
@@ -39,7 +41,8 @@ class UserSeeder extends Seeder
                 'email' => 'sreyrea@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'admin',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+
 
             ],
             [
@@ -48,7 +51,8 @@ class UserSeeder extends Seeder
                 'email' => 'sreyyoer@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'landlord',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+
 
             ],
             [
@@ -57,7 +61,8 @@ class UserSeeder extends Seeder
                 'email' => 'phally@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'landlord',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+
 
             ],
             [
@@ -66,7 +71,8 @@ class UserSeeder extends Seeder
                 'email' => 'net@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+
 
             ],
             [
@@ -75,7 +81,8 @@ class UserSeeder extends Seeder
                 'email' => 'doeur@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+
 
             ],
             [
@@ -84,7 +91,8 @@ class UserSeeder extends Seeder
                 'email' => 'vibol@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+
 
             ],
             [
@@ -93,7 +101,8 @@ class UserSeeder extends Seeder
                 'email' => 'tanguy@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+
 
             ],
             [
@@ -102,7 +111,8 @@ class UserSeeder extends Seeder
                 'email' => 'rady@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+
 
             ],
             [
@@ -111,7 +121,8 @@ class UserSeeder extends Seeder
                 'email' => 'yon@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+
 
             ],
             [
@@ -120,7 +131,8 @@ class UserSeeder extends Seeder
                 'email' => 'ronan@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+
 
             ],
             [
@@ -129,7 +141,7 @@ class UserSeeder extends Seeder
                 'email' => 'gareth@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
 
             ],
             [
@@ -138,7 +150,7 @@ class UserSeeder extends Seeder
                 'email' => 'him@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
 
             ],
             [
@@ -147,7 +159,8 @@ class UserSeeder extends Seeder
                 'email' => 'mengheang@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'user.png',
+                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+
 
             ]
 

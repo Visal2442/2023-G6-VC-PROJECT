@@ -19,7 +19,7 @@ return new class extends Migration
                 $table->timestamp('email_verified_at')->nullable();
                 $table->string('password')->nullable();
                 $table->string('verification_code')->nullable();
-                $table->string('image')->nullable();
+                $table->string('image')->default('https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png');
                 $table->string('role')->default('customer');
                 $table->rememberToken();
                 $table->timestamps();

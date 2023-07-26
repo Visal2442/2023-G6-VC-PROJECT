@@ -90,8 +90,8 @@ const navItems = ref([
 ])
 const cookieEmail = ref(Cookies.get('email'));
 const profileCookie = ref(Cookies.get('image'));
-const email = localStorage.getItem('email');
-const username = localStorage.getItem('username');
+const email = ref(Cookies.get('email'));
+const username = ref(Cookies.get('username'));
 
 const scrollY = ref(0);
 const elevation = ref(4);
