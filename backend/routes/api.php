@@ -78,8 +78,6 @@ Route::post('/booking', [BookingController::class,'booking']);
 
 Route::put('/updateUser/{id}', [UpdateUserController::class, 'updateUser']);
 
-// get user 
-Route::get('/user', [UserController::class, 'index']);
 
 // get all users 
 Route::get('/users', [UserController::class, 'getAllUsers']);
@@ -91,7 +89,7 @@ Route::delete('/delete_user/{id}', [UserController::class, 'destroyUser']);
 Route::get('/customers', [UserController::class,'getCustomer']);
 
 // get landlords
-Route::get('/landlord', [UserController::class,'getlandlord']);
+Route::get('/landlords', [UserController::class,'getlandlord']);
 Route::get('/userId/{id}', [UserController::class,'show']);
 
 //change profile
