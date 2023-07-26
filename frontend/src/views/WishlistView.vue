@@ -9,8 +9,9 @@
         <wishlist-card :property="property" @removeItemFromWishlist="removeItemFromWishlist"></wishlist-card>
       </div>
       <v-row class="h-50 pa-15 d-flex justify-center align-center" v-if="getWishlist.length <= 0">
-        <div class="justify-center pa-2">
-          <v-img :src="require('../assets/home/EmptyCard.png')" width="400"></v-img>
+        <div class="justify-center mt-n16" >
+          <v-img :src="require('../assets/home/EmptyCard.png')" width="350"></v-img>
+          <h5 align="center" class="bg-green-accent-4 text-black">Your Wishlist is Empty</h5>
         </div>
       </v-row>
     </v-container>
