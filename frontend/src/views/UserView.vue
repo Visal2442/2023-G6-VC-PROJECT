@@ -32,7 +32,7 @@
                                     <td>
                                         <div class="d-flex">
                                             <v-card-subtitle
-                                                class="pa-0 bg-green-lighten-4 text-green-darken-1 px-2 py-1 rounded-xl font-weight-bold">{{user.role}}</v-card-subtitle>
+                                                class="pa-0 px-2 py-1 rounded-xl font-weight-bold" :class="[user.role === 'admin'?adminBackground:'', user.role==='landlord'?landloardBackground:'', user.role==='customer'?customerBackground:'']">{{user.role}}</v-card-subtitle>
                                         </div>
                                     </td>
                                     <td>
@@ -120,10 +120,12 @@ const items = ref([
      { title: 'Landlord', value: 'landlord' },
      { title: 'Customer', value: 'customer' },
 ])
+const adminBackground = ref('bg-light-blue-lighten-5 text-light-blue-darken-1');
+const landloardBackground = ref('bg-green-lighten-4 text-green-darken-1');
+const customerBackground = ref('bg-purple-lighten-5 text-purple-darken-1');
+
 // const isEditDialog = ref(false);
 const deleteUser = ref(false);
-
-
 const getData = (user_id) => {   
     localStorage.setItem('userId', user_id);
     axios.get(`/userId/${user_id}`)
