@@ -1,11 +1,12 @@
 <template>
      <div>
-          <!-- Warning Alert  -->
-          <Transition name="warning" id="warning" mode="out-in">
-               <v-alert v-model="isAlert" class=" bg-orange-accent-4 w-25" icon="$warning" :text="alertMessage" closable variant="outlined" >
-                    <v-progress-linear v-model="progress" absolute bottom></v-progress-linear>
+          <!-- Warning and Success Alert  -->
+          <TheTransition id="warning">
+               <v-alert v-model="isAlert" :class="alertBackground" width="30%" :icon="alertIcon" :text="alertMessage"
+                    closable>
+                    <v-progress-linear v-model="progress" bg-color="green" absolute bottom></v-progress-linear>
                </v-alert>
-          </Transition>
+          </TheTransition>
           <v-container fluid class="mr-md-9">
                <div :id="isFound ? '' : 'container'">
                     <div class=" w-75 ma-auto">
@@ -48,6 +49,7 @@ import axios from 'axios';
 import SearchLocation from '@/components/search/SearchLocation.vue';
 import FilterType from '@/components/search/FilterType.vue';
 import FilterByPrice from '@/components/search/FilterPrice.vue';
+import TheTransition from '../components/widget/TheTransition.vue';
 import HouseCard from '@/components/card/HouseCard.vue';
 
 // PAGINATION 
@@ -99,9 +101,6 @@ computed(() => {
      }
      return true;
 })
-onMounted(() => {
-     getProperties();
-});
 
 // Search district 
 const onSearch = (id) => {
@@ -129,24 +128,27 @@ const onPrice = (value) => {
 
 // Rating Star
 const rateStar = (property) => {
-     // getProperties();
-     axios.post('/properties/ratings', property)
-          .then(res => {
-               console.log(pagination.value.current);
-               getProperties();
-               console.log(res);
-          })
-          .catch(err => err);
+     axios.post('/properties/ratings', property).then(() => {}).catch(err => err);
 }
 
-// Warning Alert 
-const isAlert = ref(false)
+// Warning and Success Alert 
+const isAlert = ref(false);
 const progress = ref(0);
 const alertMessage = ref('');
-const alert = (value) => {
-     if (value) {
+const alertBackground = ref('');
+const alertIcon = ref('$success');
+const alert = (val) => {
+     if (val) {
+          if (val.type == 'warning') {
+               alertBackground.value = 'bg-orange-darken-2';
+               alertMessage.value = val.message;
+               alertIcon.value = '$warning';
+          }
+          else{
+               alertMessage.value = val.message;
+               alertBackground.value = 'bg-green-accent-3';
+          }
           isAlert.value = true;
-          alertMessage.value = value;
           const inProgress = setInterval(() => {
                progress.value = progress.value + 10;
           }, 100)
@@ -160,44 +162,22 @@ const alert = (value) => {
           isAlert.value = false;
      }
 }
+
+onMounted(() => {
+     getProperties();
+});
 </script>
 
 <style scoped>
 #container {
      height: 100vh;
 }
-
-.slide-fade-enter-active {
-     transition: all 0.3s ease-out;
-}
-
-.slide-fade-leave-active {
-     transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-     transform: translateX(20px);
-     opacity: 0;
-}
-.warning-enter-active{
-     transition: all 0.3s ease-out;
-}
-.warning-leave-active {
-     transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.warning-enter-from,
-.warning-leave-to {
-     transform: translateX(20px);
-     opacity: 0;
-}
 .v-progress-linear {
      transition: 2s;
 }
-
 #warning {
      position: sticky;
      top: 0;
      z-index: 100000;
-}</style>
+}
+</style>

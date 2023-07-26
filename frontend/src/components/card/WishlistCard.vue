@@ -32,7 +32,7 @@
             <v-card-text class="cursor-pointer pa-0"><v-icon class="mdi mdi-star mr-1" color="amber-lighten-2"></v-icon>{{ avgRating }} ({{ numberOfRating }})</v-card-text>
             <p class="price">${{ property.property.price }}/Month</p>
           </div>
-          <v-btn class=" bg-green-accent-3" @click="getDetail(property.property.id)">More Detail</v-btn>
+          <BaseButton type="primary-btn" @click="getDetail(property.property.id)">More Detail</BaseButton>
         </v-col>
       </v-row>
 </template>
@@ -41,6 +41,7 @@
 import { defineProps, defineEmits, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import BaseButton from '../widget/BaseButton.vue';
 
 const emits= defineEmits(['removeItemFromWishlist']);
 const props = defineProps(['property']);
@@ -114,35 +115,9 @@ img {
   justify-content: end;
 }
 
-.button button {
-  padding: 10px 20px;
-  background-color: #3cb371;
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  margin-right: 60px;
-
-}
-
-.button button:hover {
-  background-color: #2ecc71;
-}
-
 .price {
-  /* margin-top: 15px;
-  margin-bottom: 15px; */
   font-size: larger;
   color: #2ecc71;
-  transition: color 0.3s ease-in-out;
-}
-
-.card:hover button {
-  background-color: #d35400;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.card:hover v-icon {
-  color: #b4a2a2;
   transition: color 0.3s ease-in-out;
 }
 

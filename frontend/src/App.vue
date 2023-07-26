@@ -39,11 +39,11 @@ navigator.geolocation.getCurrentPosition(showLocation, showError);
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;400;500;600;700&family=Signika:wght@300&display=swap');
 #app {
   background-color: #f9fcff;
   background-image: linear-gradient(147deg, #f9fcff 0%, #f6f6f6 74%);
   font-family: 'Signika Negative', sans-serif;
-
 
 }
 .v-icon {

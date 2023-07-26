@@ -16,8 +16,7 @@
           
         </div>
         <!-- After Logged in -->
-        <!-- <v-avatar id="logout"  :image="require('../../assets/user.png')" size="50" v-if="cookieEmail"></v-avatar>  -->
-        <v-avatar id="logout"  :image="profileCookie" size="50" v-if="cookieEmail && profileCookie"></v-avatar>
+        <v-avatar id="logout" :image="profileCookie" size="50" v-if="cookieEmail && profileCookie"></v-avatar>
 
         <!-- Before Login  -->
         <v-icon icon="mdi-dots-vertical" id="logged-in" v-else></v-icon>
@@ -35,7 +34,10 @@
         <v-menu activator="#logout">
           <v-list>
             <v-list-item>
-              <h2>Your Profile</h2>
+              <div>
+              <h5>User Profile</h5>
+
+              </div>
               <div class="profile d-flex flex-row mt-5 mb-5">
                 <div class="file-input">
                     <v-avatar id="logout"  :image="profileCookie" size="50"></v-avatar>
@@ -44,6 +46,7 @@
 
                 <div class="email-username ml-5">
                   <h3> {{ username }} </h3>
+                  <h3> {{ role }} </h3>
                   <p>{{ email }} </p>
                 </div>
               </div>
@@ -78,8 +81,10 @@ import axios from 'axios';
 const isLoggedOut = ref(false);
 // Pinia Store 
 import { useAuthStore } from '../../store/AuthStore';
+import { storeToRefs } from 'pinia';
 const authStore = useAuthStore();
 const { logout } = authStore;
+const { role } = storeToRefs(authStore);
 
 const navItems = ref([
   { title: 'Home', name: 'Home' },
@@ -141,10 +146,6 @@ const update = () => {
       profileCookie.value= Cookies.get('image')
 }
 
-
-
-
-
 </script>
 
 <style scoped>
@@ -169,41 +170,6 @@ const update = () => {
 #login-btn {
   background: none;
 }
-
-.pf {
-  display: flex;
-  align-items: center;
-}
-
-.pf img {
-  border-radius: 50%;
-}
-
-.custom-file-input::-webkit-file-upload-button {
-  visibility: hidden;
-}
-.custom-file-input::before {
-  content: 'Select some files';
-  display: inline-block;
-  background: linear-gradient(top, #f9f9f9, #e3e3e3);
-  border: 1px solid #999;
-  border-radius: 3px;
-  padding: 5px 8px;
-  outline: none;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  cursor: pointer;
-  text-shadow: 1px 1px #fff;
-  font-weight: 700;
-  font-size: 10pt;
-}
-.custom-file-input:hover::before {
-  border-color: black;
-}
-.custom-file-input:active::before {
-  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-}
-
 .file-input {
   position: relative;
   display: inline-block;

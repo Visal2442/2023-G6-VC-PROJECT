@@ -1,11 +1,11 @@
 <template>
     <div>
-        <v-container fluid class="">
+        <v-container fluid>
             <!-- Summary  -->
             <v-row no-gutters>
                 <v-col id="summary" rounded="lg"
                     class=" bg-light-blue-lighten-5 d-flex flex-column justify-center align-center py-5">
-                    <v-img :src="require('../assets/dashboard/group.png')" width="50"></v-img>
+                    <v-img :src="require('../../assets/dashboard/group.png')" width="50"></v-img>
                     <div class="text-light-blue-darken-1 d-flex flex-column align-center">
                         <p class="font-weight-bold text-h6">Users</p>
                         <p>{{ userCount }}</p>
@@ -13,7 +13,7 @@
                 </v-col>
                 <v-col id="summary" rounded="lg"
                     class=" bg-purple-lighten-5 d-flex flex-column justify-center align-center py-5">
-                    <v-img :src="require('../assets/dashboard/profile.png')" width="50"></v-img>
+                    <v-img :src="require('../../assets/dashboard/profile.png')" width="50"></v-img>
                     <div class="text-purple-darken-1 d-flex flex-column align-center">
                         <p class="font-weight-bold text-h6">Customers</p>
                         <p>{{ customerCount }}</p>
@@ -21,14 +21,14 @@
                 </v-col>
                 <v-col id="summary" rounded="lg"
                     class=" bg-green-accent-1 d-flex flex-column justify-center align-center py-5">
-                    <v-img :src="require('../assets/dashboard/landlord.png')" width="50"></v-img>
+                    <v-img :src="require('../../assets/dashboard/landlord.png')" width="50"></v-img>
                     <div class="text-green-accent-4 d-flex flex-column align-center">
                         <p class="font-weight-bold text-h6">Landlords</p>
                         <p>{{ landlordCount }}</p>
                     </div>
                 </v-col>
                 <v-col id="summary" class="bg-orange-lighten-4 d-flex flex-column justify-center align-center py-5">
-                    <v-img :src="require('../assets/dashboard/home.png')" width="50"></v-img>
+                    <v-img :src="require('../../assets/dashboard/home.png')" width="50"></v-img>
                     <div class="text-orange-darken-1 d-flex flex-column align-center">
                         <p class="font-weight-bold text-h6">Properties</p>
                         <p>{{ propertyCount }}</p>
@@ -46,7 +46,7 @@
                                     <th>UserInfo</th>
                                     <th>Phone</th>
                                     <th>Role</th>
-                                    <th>Actions</th>
+                                    <th v-if="role == 'admin'">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,7 +55,7 @@
                                     <td>
                                         <div class="d-flex align-center">
                                             <v-avatar>
-                                                <v-img :src="require('../assets/profile2.jpeg')" width="60"></v-img>
+                                                <v-img :src="require('../../assets/profile2.jpeg')" width="60"></v-img>
                                             </v-avatar>
                                             <div class=" ml-2">
                                                 <p class="font-weight-bold">{{ landlord.username }}</p>
@@ -69,7 +69,7 @@
                                             <v-card-subtitle class="pa-0 bg-green-lighten-4 text-green-accent-4 px-2 py-1 rounded-xl font-weight-bold">{{ landlord.role }}</v-card-subtitle>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td v-if="role == 'admin'">
                                         <div class="d-flex align-center">
                                             <v-icon class="mdi mdi-pencil-outline mr-3" size="small" color="blue-accent-4" @click="getData(landlord.id)">
                                                 <v-tooltip activator="parent" location="top">Edit</v-tooltip>
@@ -92,20 +92,13 @@
                 <v-card-title class="pa-0 pa-3 bg-green-accent-4 text-white">Edit User</v-card-title>
                 <div class=" w-100 bg-white pa-5">
                     <v-form fast-fail x="d-flex flex-column">
-                        <div class="input-container d-flex">
                             <v-text-field type="text" clearable color="green-accent-4" label="Username" v-model="userName"
                                 placeholder="Enter Your Username" class="pa-0" density="compact" variant="outlined"
                                 rounded="lg"></v-text-field>
                             <v-text-field type="email" clearable color="green-accent-4" label="Email" name="email" v-model="email"
                                 placeholder="Enter Your Email" density="compact" variant="outlined"
                                 rounded="lg"></v-text-field>
-                        </div>
-                        <div class="input-container d-flex gap-5">
-                            <v-text-field type="text" clearable color="green-accent-4" label="Password"  v-model="password"
-                                placeholder="Enter password" class="pa-0" density="compact" variant="outlined"
-                                rounded="lg"></v-text-field>
                             <v-select v-model="selected" :items="items" density="compact" variant="outlined" label="Role" placeholder="Role"></v-select>
-                        </div>
                         <v-card-actions class="button">
                             <v-btn class="cancel text-red" color="black" text @click="cancel()">Cancel</v-btn>
                             <BaseButton type="primary-btn" @click="editUser()">Update</BaseButton>
@@ -141,13 +134,14 @@
 <script setup>
 import { ref, computed,onMounted } from 'vue';
 import axios from 'axios';
+import BaseButton from '@/components/widget/BaseButton.vue';
+import Cookies from 'js-cookie';
 
-
+const role = Cookies.get('role');
 const selected = ref('');
 const dialog = ref(false);
 const userName = ref('');
 const email = ref('');
-const password = ref('');
 const items = ref([
      { title: 'Landlord', value: 'landlord' },
      { title: 'Customer', value: 'customer' },
@@ -169,7 +163,6 @@ const getData = (user_id) => {
         console.log(res.data.data);
         userName.value = res.data.data.username;
         email.value = res.data.data.email;
-        password.value = res.data.data.password;
         selected.value = res.data.data.role;
     })
     dialog.value = true;
@@ -177,11 +170,10 @@ const getData = (user_id) => {
 
 const editUser = () =>{
     const id = localStorage.getItem('userId');
-    if(userName.value !=='' && email.value !=='' && password.value !==''  && selected.value !==''){
+    if(userName.value !=='' && email.value !=='' && selected.value !==''){
         const userData = {
         'username':userName.value,
         'email':email.value,
-        'password':password.value,
         'role':selected.value
         }
         axios.put(`/updateUser/${id}`, userData).then(res => {

@@ -113,6 +113,7 @@ class PropertyController extends Controller
         return response()->json(['message' => 'successfully updated', 'data' => $property], 200);
     }
 
+    // resource from https://www.youtube.com/watch?v=chCtrNGrQhk
     public function getImage(Request $request)
     {
         $image = $request->file('propertyImage');

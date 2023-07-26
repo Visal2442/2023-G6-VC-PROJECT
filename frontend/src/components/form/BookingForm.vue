@@ -17,20 +17,20 @@
           <v-row>
             <v-col>
               <p>Check in date:</p>
-              <input type="date" class="checkInDate w-100 bg-green-accent-1 pa-3 rounded-sm" id="select_date"
+              <input type="date" class="checkInDate w-100 bg-grey-lighten-4 pa-3 rounded-sm" id="select_date"
                 v-model="checkInDate" :rules="rules.checkInDateRules" :min="minDate" />
             </v-col>
 
             <p v-if="!isValidDate"></p>
             <v-col class="ma checkoutDate">
               <p>Check out date:</p>
-              <input type="date" class="bg-green-accent-1 pa-3 w-100 rounded-sm" v-model="checkOutDate"
+              <input type="date" class="pa-3 w-100 rounded-sm bg-grey-lighten-4" v-model="checkOutDate"
                 :rules="rules.checkOutDateRules" :min="minDate" />
             </v-col>
             <p v-if="!isValidDate"></p>
 
           </v-row>
-          <v-btn density="default" class="booking bg-green-accent-4 w-100" :disabled="!isValide" @click="bookProperty()" block :loading="loading">Book Now</v-btn>
+          <BaseButton class="booking" type="primary-btn" :disabled="!isValide" @click="bookProperty()" block :loading="loading">Book Now</BaseButton>
         </v-form>
       </v-card>
     </v-col>
@@ -42,6 +42,7 @@
 import { ref, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useBookingStore } from '../../store/BookingStore';
+import BaseButton from '../widget/BaseButton.vue';
 
 const BookingStore = useBookingStore();
 const { booking } = BookingStore;

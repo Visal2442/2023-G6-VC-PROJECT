@@ -1,5 +1,5 @@
 <template>
-   <Transition name="error" mode="out-in">
+   <Transition name="alert" mode="out-in">
       <slot></slot>
     </Transition>
 </template>
@@ -9,13 +9,15 @@
 </script>
 
 <style scoped>
-.error-enter-active,
-.error-leave-active {
-  transition: opacity 0.5s ease;
+.alert-enter-active {
+     transition: all 0.3s ease-out;
 }
-
-.error-enter-from,
-.error-leave-to {
-  opacity: 0;
+.alert-leave-active {
+     transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.alert-enter-from,
+.alert-leave-to {
+     transform: translateX(20px);
+     opacity: 0;
 }
 </style>

@@ -12,12 +12,12 @@ import WishlistView from "../views/WishlistView.vue";
 import DetailView from "../views/DetailView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 import BookingView from "../views/BookingView.vue";
-import Dashboard from "../views/DashboardView.vue";
-import PostPropertyView from "../views/PostPropertyView.vue";
-import LandlordPropertyView from "../views/LandlordPropertyView.vue";
-import AdminPropertyView from "../views/AdminPropertView.vue";
+import Dashboard from "../views/admin/DashboardView.vue";
+import PostPropertyView from "../views/landlord/PostPropertyView.vue";
+import LandlordPropertyView from "../views/landlord/LandlordPropertyView.vue";
+import AdminPropertyView from "../views/admin/AdminPropertView.vue";
 import ContactUsView from "../views/ContactUsView.vue";
-import UserView from "../views/UserView.vue";
+import UserView from "../views/admin/UserView.vue";
 
 // AuthStore Pinia
 import { useAuthStore } from "../store/AuthStore";
@@ -107,26 +107,26 @@ const routes = [
     path: "/dashboard/admin/properties",
     name: "AdminProperties",
     component: AdminPropertyView,
-    meta: { title: "Properties" },
+    meta: { title: "Dashboard-Properties" },
   },
   {
     path: "/dashboard/admin/users",
     name: "Users",
     component: UserView,
-    meta: { title: "Users" },
+    meta: { title: "Dashboard-Users" },
   },
   // Landlord Dashboard
   {
     path: "/dashboard/landlord",
     name: "LandlordDashboard",
     component: Dashboard,
-    meta: { title: "Landlord" },
+    meta: { title: "Dashboard-Landlord" },
   },
   {
     path: "/dashboard/landlord/post",
     name: "Post",
     component: PostPropertyView,
-    meta: { title: "Landlord-Dashboard" },
+    meta: { title: "Properties" },
   },
   {
     path: "/dashboard/landlord/properties",

@@ -1,111 +1,90 @@
 <template>
-    <v-toolbar id="navbar" class="bg-white py-5" elevation="3">
-        <v-toolbar-title>
-            <div class="d-flex align-center">
-                <h4 class="">DASHBOARD</h4>
+  <v-toolbar id="navbar" class="bg-white py-5" elevation="3">
+    <v-toolbar-title>
+      <div class="d-flex align-center">
+        <h4 class="">DASHBOARD</h4>
+      </div>
+    </v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-toolbar-items class=" d-flex align-center pr-10">
+      <div class="mr-4">
+        <v-toolbar-title class="font-weight-bold text-end">{{ username }}</v-toolbar-title>
+        <v-card-subtitle class="text-body-1 pa-0">{{ email }}</v-card-subtitle>
+      </div>
+      <v-avatar id="logged-in" :image="profileUser" size="50"></v-avatar>
+      <v-menu id="menu" activator="#logged-in">
+        <v-list>
+          <v-list-item class="pa-5">
+            <div class=" d-flex flex-column mb-10 justify-center">
+              <p class=" text-h6 mb-3">Your Profile</p>
+              <div class="profile d-flex flex-row mb-5">
+                <div class="file-input">
+                  <v-avatar id="logout" :image="profileUser" size="60"></v-avatar>
+                  <input type="file" v-on:change="getImage">
+                </div>
+                <div class="email-username ml-5">
+                  <h3> {{ username }} </h3>
+                  <v-card-subtitle class="pa-0"> {{ role }} </v-card-subtitle>
+                  <p class="pa-0">{{ email }} </p>
+                </div>
+              </div>
             </div>
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-toolbar-items class=" d-flex align-center pr-10">
-            <div class="mr-4">
-                <v-toolbar-title class="font-weight-bold text-end">{{ username }}</v-toolbar-title>
-                <v-card-subtitle class="text-body-1 pa-0">{{ email }}</v-card-subtitle>
-            </div>
-            <v-avatar id="logged-in">
-                <v-img :src="profileUser"></v-img>
-            </v-avatar>
-            <v-menu id="menu" activator="#logged-in">
-                <v-list>
-                    <v-list-item>
-                        <h2>Your Profile</h2>
-                        <div class="profile d-flex flex-row mt-5 mb-5">
-                            <div class="file-input">
-                                <v-avatar id="logout"  :image="profileUser" size="50"></v-avatar>
-                                <input type="file" v-on:change="getImage" >
-                            </div>
-
-                            <div class="email-username ml-5">
-                            <h3> {{ username }} </h3>
-                            <p>{{ email }} </p>
-                            </div>
-                        </div>
-                        <v-btn variant="plain" @click="logout" prepend-icon="mdi mdi-logout">Logout</v-btn>
-                    </v-list-item>
-                </v-list>
-            </v-menu>
-        </v-toolbar-items>
-    </v-toolbar>
+            <BaseButton type='seconday-btn' block class="ma-0" @click="logout">Logout</BaseButton>
+            <!-- <v-btn variant="plain" @click="logout" prepend-icon="mdi mdi-logout">Logout</v-btn> -->
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-toolbar-items>
+  </v-toolbar>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import axios from 'axios';
+import BaseButton from '../widget/BaseButton.vue';
 // Pinia Store 
+import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
 const { logout } = authStore;
+const { role } = storeToRefs(authStore);
 import Cookies from 'js-cookie';
-import axios from 'axios';
-
-
 
 const username = ref(Cookies.get('username'));
 const email = ref(Cookies.get('email'));
 const profileUser = ref(Cookies.get('image'));
 const profile = ref('');
 
-const getImage=(event)=> {
+const getImage = (event) => {
   var file = event.target.files[0];
   console.log(file);
-      var form = new FormData();
-      form.append('profile', file);
-      axios.post('/imageProfile', form).then((response) => {
-        profile.value = response.data;
-        update();
-      });
-
+  var form = new FormData();
+  form.append('profile', file);
+  axios.post('/imageProfile', form).then((response) => {
+    profile.value = response.data;
+    update();
+  });
 }
 const update = () => {
   let id = localStorage.getItem('user_id');
-      const picture = {
-        id: id,
-        image: profile.value
-      }
-      axios.post(`/editProfile`,picture).then(response =>{
-        console.log(response);
-      });
-      Cookies.set('image', profile.value);
-      profileUser.value= Cookies.get('image')
+  const picture = {
+    id: id,
+    image: profile.value
+  }
+  axios.post(`/editProfile`, picture).then(response => {
+    console.log(response);
+  });
+  Cookies.set('image', profile.value);
+  profileUser.value = Cookies.get('image')
 }
 
 </script>
 
 <style scoped>
 #navbar {
-    position: sticky;
-    top: 0;
-    z-index: 2000;
-}
-
-.custom-file-input::before {
-  content: 'Select some files';
-  display: inline-block;
-  background: linear-gradient(top, #f9f9f9, #e3e3e3);
-  border: 1px solid #999;
-  border-radius: 3px;
-  padding: 5px 8px;
-  outline: none;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  cursor: pointer;
-  text-shadow: 1px 1px #fff;
-  font-weight: 700;
-  font-size: 10pt;
-}
-.custom-file-input:hover::before {
-  border-color: black;
-}
-.custom-file-input:active::before {
-  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  position: sticky;
+  top: 0;
+  z-index: 2000;
 }
 
 .file-input {

@@ -7,7 +7,7 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
-import DashboardPropertyView from './DashboardPropertyView.vue';
+import DashboardPropertyView from '../DashboardPropertyView.vue';
 
 const user_id = ref(localStorage.getItem('user_id'));
 const properties = ref([]);
