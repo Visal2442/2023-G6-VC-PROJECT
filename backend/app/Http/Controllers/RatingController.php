@@ -60,19 +60,4 @@ class RatingController extends Controller
         // Return a JSON response with the rating data
         return response()->json(['message' => 'requested successfully', 'data' => $ratings], 200);
     }
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Rating $rating)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Rating $rating)
-    {
-        //
-    }
 }

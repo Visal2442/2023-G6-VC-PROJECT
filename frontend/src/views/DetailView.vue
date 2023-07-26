@@ -41,7 +41,7 @@
           </div>
           <div class="d-flex justify-center">
             <base-button v-if="property?.type=='room'" type="primary-btn" class="w-100 mt-5 mb-3" disabled>Book</base-button>
-            <base-button v-else type="primary-btn" class="w-100 mt-5 mb-3" :disabled='!property?.available'>Book</base-button>
+            <base-button v-else type="primary-btn" class="w-100 mt-5 mb-3" :disabled='!property?.available' @click="book()">Book</base-button>
           </div>
         </v-card>
       </v-col>
@@ -97,8 +97,7 @@
                         </div>
                       </div>
                       <div>
-                        <base-button type="primary-btn" @click="console.log(room.id)" :disabled=!room?.available>Book
-                          Now</base-button>
+                        <base-button type="primary-btn" @click="booking(room.id)">Book Now</base-button>
                       </div>
                     </v-col>
                   </v-row>
@@ -128,25 +127,22 @@
 </template>
 
 <script setup>
-import BaseButton from "@/components/widget/BaseButton.vue";
-import { computed, ref } from "vue";
-import { useRoute } from "vue-router";
+import BaseButton from '@/components/widget/BaseButton.vue';
+import { computed, ref } from 'vue';
+import { useRoute,useRouter } from 'vue-router';
+
 const route = useRoute();
-import HouseCardOnMap from "../components/card/HouseCardOnMap.vue";
+const router = useRouter();
+import HouseCardOnMap from '../components/card/HouseCardOnMap.vue';
 const tab = ref(null);
 
 // RESOURCE: https://vue2-leaflet.netlify.app/components/LPopup.html#demo
 import "leaflet/dist/leaflet.css";
-import {
-  LMap,
-  LTileLayer,
-  LMarker,
-  LPopup,
-  LIcon,
-} from "@vue-leaflet/vue-leaflet";
-import HomeIcon from "../assets/marker/homeIcon.png";
-import axios from "axios";
-// Map Configuration
+import { LMap, LTileLayer, LMarker, LPopup, LIcon } from "@vue-leaflet/vue-leaflet";
+import HomeIcon from '../assets/marker/homeIcon.png'
+import axios from 'axios';
+import Cookies from 'js-cookie';
+// Map Configuration 
 const zoom = 12;
 const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const attribution =
@@ -165,11 +161,14 @@ const currentLat = ref(localStorage.getItem('currentLat'));
 const currentLng = ref(localStorage.getItem('currentLng'));
 let markerLat = ref(0);
 let markerLng = ref(0);
+// let emailCookies = ref(Cookies.get('email'));
 
 const getLatlng = (coordinate) => {
   markerLat.value = coordinate.latlng.lat;
   markerLng.value = coordinate.latlng.lng;
 };
+
+
 
 const distance = computed(() => {
   return calculateDistance(currentLat.value, markerLat.value, currentLng.value, markerLng.value ).toFixed(2);
@@ -212,6 +211,24 @@ axios.get(`/properties/detail/${route.params.id}`).then((res) => {
   }
 });
 
+// Booking 
+const booking = (room_id)=>{
+  if(Cookies.get('email') !== undefined){
+  localStorage.setItem('room_id', room_id);
+  router.push('/booking');
+  // router.push({name:'Booking', param:{id:property_id, rid:room_id}});
+  // router.push("{name:'Booking'}")
+  }else{
+    alert("Please login your account");
+  }
+}
+const book= () =>{
+  if(Cookies.get('email')){
+    router.push({name:'Booking'});
+  }else{
+    alert('Please login your account');
+  }
+}
 </script>
 
 <style scoped>

@@ -15,14 +15,11 @@ class WishlistController extends Controller
     public function getDataWishlist($userID)
     {
         $wishlist = Wishlist::where('user_id', $userID)->get();
-
         $wishlistFormatted = WishlistResources::collection($wishlist);
-        
         return response()->json(['success' => true, 'data' => $wishlistFormatted]);
        
     }
 
-   
     public function createWishlist(Request $request)
     {
         $wishlist = Wishlist::where('user_id', $request->user_id)

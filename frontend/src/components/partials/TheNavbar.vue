@@ -1,6 +1,5 @@
 <template>
   <div id="navbar" class="">
-
     <!-- Large Screen -->
     <v-toolbar class="pa-4 px-12" :elevation="elevationNavbar" :style="{ background: backgroundNavbar }">
       <v-toolbar-items class="d-flex align-center">
@@ -13,8 +12,8 @@
             <router-link :to="{ name: item.name }" class="text-button text-decoration-none text-black mr-7">{{ item.title
             }}</router-link>
           </template>
-          <router-link :to="{ name: 'Wishlist' }"
-            class="text-button text-decoration-none text-black mr-7">Wishlist</router-link>
+          <router-link :to="{ name: 'Wishlist' }" class="text-button text-decoration-none text-black mr-7">Wishlist</router-link>
+          
         </div>
         <!-- After Logged in -->
         <!-- <v-avatar id="logout"  :image="require('../../assets/user.png')" size="50" v-if="cookieEmail"></v-avatar>  -->
@@ -86,6 +85,7 @@ const navItems = ref([
   { title: 'Home', name: 'Home' },
   { title: 'Property', name: 'property' },
   { title: 'Map', name: 'Map' },
+  { title: 'Contact Us', name: 'Contact' },
   // { title: 'About', name: 'About' },
 ])
 const cookieEmail = ref(Cookies.get('email'));

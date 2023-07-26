@@ -29,7 +29,7 @@
             }}</v-card-subtitle>
           </div>
           <div class="d-flex justify-space-between align-center mb-2">
-            <v-rating model-value="3" density="compact" size="small"></v-rating>
+            <v-card-text class="cursor-pointer pa-0"><v-icon class="mdi mdi-star mr-1" color="amber-lighten-2"></v-icon>{{ avgRating }} ({{ numberOfRating }})</v-card-text>
             <p class="price">${{ property.property.price }}/Month</p>
           </div>
           <v-btn class=" bg-green-accent-3" @click="getDetail(property.property.id)">More Detail</v-btn>
@@ -38,11 +38,12 @@
 </template>
      
 <script setup>
-import { defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
 
 const emits= defineEmits(['removeItemFromWishlist']);
-defineProps(['property']);
+const props = defineProps(['property']);
 
 const removeItem =(wishlist_id)=>{
   emits('removeItemFromWishlist', wishlist_id);
@@ -52,6 +53,25 @@ const router = useRouter();
 const getDetail = (property_id) => {
     router.push(`/detail/${property_id}`);
 };
+
+// average star of house 
+const avgRating = ref(null);
+const numberOfRating = ref(0);
+axios.get(`/properties/ratings/${props.property.property.id}`)
+    .then(response => {
+        avgRating.value = 0;
+        numberOfRating.value = 0;
+        const ratings = response.data.data;
+        numberOfRating.value = ratings.length;
+        const sum = ratings.reduce((star, ratings) => star + ratings.star, 0);
+        const avg = sum / ratings.length;
+        if (!isNaN(avg)) {
+            avgRating.value = avg.toFixed(1);
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    });
 
 </script>
      

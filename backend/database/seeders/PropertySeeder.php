@@ -118,23 +118,6 @@ class PropertySeeder extends Seeder
             ],
             [
                 'name' => 'Rooms for Rent',
-                'price' => 300,
-                'description' => 'This house is the perfect place to live and unwind. HV8J+7GF, 620, Phnom Penh 120802',
-                'type' => 'room',
-                'size' => 200,
-                'number_of_floor' => 3,
-                'number_of_room' => 4,
-                'number_of_bathroom' => 3,
-                'number_of_kitchen' => 3,
-                'available'=>true,
-                'image' => 'https://lh5.googleusercontent.com/p/AF1QipPrR3zqA4RsNuF9XELL99DUDInox6i4xnvHNvf4=w408-h635-k-no',
-                'latitude' => 11.566668341898673,   
-                'longitude' => 104.886928115038, 
-                'district_id'=>2,
-                'user_id' =>1
-            ],
-            [
-                'name' => 'Rooms for Rent',
                 'price' => 90,
                 'description' => 'This house is the perfect place to live and unwind. 1M 2M, St. 265, Samnong 12, Street 265, Phnom Penh',
                 'type' => 'room',
