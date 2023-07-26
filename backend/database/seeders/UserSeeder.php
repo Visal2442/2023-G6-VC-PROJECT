@@ -22,9 +22,7 @@ class UserSeeder extends Seeder
                 'email' => 'visal@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'landlord',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
-
-
+                'image' => 'https://cdn-icons-png.flaticon.com/128/1999/1999625.png',
             ],
             [
                 'username' => 'Darath Pum',
@@ -32,8 +30,7 @@ class UserSeeder extends Seeder
                 'email' => 'darathpum@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'landlord',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
-
+                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
             [
                 'username' => 'Srerea Han',
@@ -41,9 +38,7 @@ class UserSeeder extends Seeder
                 'email' => 'sreyrea@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'admin',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
-
-
+                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
             [
                 'username' => 'Sreyyoer Yoem',
@@ -51,9 +46,7 @@ class UserSeeder extends Seeder
                 'email' => 'sreyyoer@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'landlord',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
-
-
+                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
             [
                 'username' => 'Phally Hoeurng',
@@ -61,7 +54,7 @@ class UserSeeder extends Seeder
                 'email' => 'phally@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'landlord',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
 
 
             ],
@@ -71,7 +64,7 @@ class UserSeeder extends Seeder
                 'email' => 'net@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
 
 
             ],
@@ -81,9 +74,7 @@ class UserSeeder extends Seeder
                 'email' => 'doeur@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
-
-
+                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
             [
                 'username' => 'Vibol Phoung',
@@ -91,9 +82,7 @@ class UserSeeder extends Seeder
                 'email' => 'vibol@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
-
-
+                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
             [
                 'username' => 'Tanguy Signoret',
@@ -101,9 +90,7 @@ class UserSeeder extends Seeder
                 'email' => 'tanguy@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
-
-
+                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
             [
                 'username' => 'Rady Y',
@@ -111,9 +98,7 @@ class UserSeeder extends Seeder
                 'email' => 'rady@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
-
-
+                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
             [
                 'username' => 'Yon Yen',
@@ -121,9 +106,7 @@ class UserSeeder extends Seeder
                 'email' => 'yon@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
-
-
+                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
             [
                 'username' => 'Ronan Ogor',
@@ -131,9 +114,7 @@ class UserSeeder extends Seeder
                 'email' => 'ronan@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
-
-
+                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
             [
                 'username' => 'Gareth Poulton',
@@ -141,8 +122,7 @@ class UserSeeder extends Seeder
                 'email' => 'gareth@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
-
+                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
             [
                 'username' => 'Him Hey',
@@ -150,8 +130,7 @@ class UserSeeder extends Seeder
                 'email' => 'him@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
-
+                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
             [
                 'username' => 'Mengheang Pho',
@@ -159,9 +138,7 @@ class UserSeeder extends Seeder
                 'email' => 'mengheang@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'customer',
-                'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
-
-
+                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ]
 
         ];
