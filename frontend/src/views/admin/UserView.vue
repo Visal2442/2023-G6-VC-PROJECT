@@ -65,7 +65,7 @@
               rounded="lg"></v-text-field>
             <v-text-field type="email" clearable color="green-accent-4" label="Email" name="email" v-model="email"
               placeholder="Enter Your Email" density="compact" variant="outlined" rounded="lg"></v-text-field>
-            <v-select v-model="selected" :items="items" density="compact" variant="outlined" label="Role"
+            <v-select v-if="selected !== 'admin'" v-model="selected" :items="items" density="compact" variant="outlined" label="Role"
               placeholder="Role"></v-select>
             <v-card-actions class="button">
               <v-btn class="cancel text-red" color="black" text @click="cancel()">Cancel</v-btn>

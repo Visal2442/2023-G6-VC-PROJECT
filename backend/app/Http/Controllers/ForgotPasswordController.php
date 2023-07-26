@@ -51,6 +51,7 @@ class ForgotPasswordController extends Controller
             ];
     
             try {
+                // resource from https://www.itsolutionstuff.com/post/laravel-9-mail-laravel-9-send-email-tutorialexample.html
                 Mail::to($data['email'])->send(new ResetPasswordVerification($data));
             } catch (\Exception $e) {
                 // Error sending email, return an error response

@@ -16,8 +16,7 @@
           
         </div>
         <!-- After Logged in -->
-        <!-- <v-avatar id="logout"  :image="require('../../assets/user.png')" size="50" v-if="cookieEmail"></v-avatar>  -->
-        <v-avatar id="logout"  :image="profileCookie" size="50" v-if="cookieEmail && profileCookie"></v-avatar>
+        <v-avatar id="logout" :image="profileCookie" size="50" v-if="cookieEmail && profileCookie"></v-avatar>
 
         <!-- Before Login  -->
         <v-icon icon="mdi-dots-vertical" id="logged-in" v-else></v-icon>
@@ -35,7 +34,10 @@
         <v-menu activator="#logout">
           <v-list>
             <v-list-item>
-              <h2>Your Profile</h2>
+              <div>
+              <h5>User Profile</h5>
+
+              </div>
               <div class="profile d-flex flex-row mt-5 mb-5">
                 <div class="file-input">
                     <v-avatar id="logout"  :image="profileCookie" size="50"></v-avatar>
@@ -44,6 +46,7 @@
 
                 <div class="email-username ml-5">
                   <h3> {{ username }} </h3>
+                  <h3> {{ role }} </h3>
                   <p>{{ email }} </p>
                 </div>
               </div>
@@ -78,8 +81,10 @@ import axios from 'axios';
 const isLoggedOut = ref(false);
 // Pinia Store 
 import { useAuthStore } from '../../store/AuthStore';
+import { storeToRefs } from 'pinia';
 const authStore = useAuthStore();
 const { logout } = authStore;
+const { role } = storeToRefs(authStore);
 
 const navItems = ref([
   { title: 'Home', name: 'Home' },
@@ -165,11 +170,6 @@ const update = () => {
 #login-btn {
   background: none;
 }
-
-.custom-file-input:active::before {
-  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-}
-
 .file-input {
   position: relative;
   display: inline-block;
