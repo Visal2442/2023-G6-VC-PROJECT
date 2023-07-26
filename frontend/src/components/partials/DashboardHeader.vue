@@ -11,10 +11,8 @@
                 <v-toolbar-title class="font-weight-bold text-end">{{ username }}</v-toolbar-title>
                 <v-card-subtitle class="text-body-1 pa-0">{{ email }}</v-card-subtitle>
             </div>
-            <v-avatar id="logged-in">
-                <v-img :src="profileUser"></v-img>
-            </v-avatar>
-            <v-menu id="menu" activator="#logged-in">
+                <v-avatar id="logged-in"  :image="profileUser" size="50"></v-avatar>
+                <v-menu id="menu" activator="#logged-in">
                 <v-list>
                     <v-list-item>
                         <h2>Your Profile</h2>
@@ -23,7 +21,6 @@
                                 <v-avatar id="logout"  :image="profileUser" size="50"></v-avatar>
                                 <input type="file" v-on:change="getImage" >
                             </div>
-
                             <div class="email-username ml-5">
                             <h3> {{ username }} </h3>
                             <p>{{ email }} </p>
@@ -86,27 +83,6 @@ const update = () => {
     z-index: 2000;
 }
 
-.custom-file-input::before {
-  content: 'Select some files';
-  display: inline-block;
-  background: linear-gradient(top, #f9f9f9, #e3e3e3);
-  border: 1px solid #999;
-  border-radius: 3px;
-  padding: 5px 8px;
-  outline: none;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  cursor: pointer;
-  text-shadow: 1px 1px #fff;
-  font-weight: 700;
-  font-size: 10pt;
-}
-.custom-file-input:hover::before {
-  border-color: black;
-}
-.custom-file-input:active::before {
-  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-}
 
 .file-input {
   position: relative;
