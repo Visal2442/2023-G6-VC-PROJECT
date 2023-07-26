@@ -9,7 +9,7 @@
     <the-footer v-if="!route.path.includes('dashboard') && !route.path.includes('not_found')"></the-footer>
 
     <!-- FOR ADMIN PAGE  -->
-    <v-app v-if="route.path.includes('dashboard')">
+    <v-app v-if="route.path.includes('/dashboard/admin') || route.path.includes('/dashboard/landlord') ">
       <dashboard-sidebar></dashboard-sidebar>
       <v-main>
         <dashboard-header></dashboard-header>

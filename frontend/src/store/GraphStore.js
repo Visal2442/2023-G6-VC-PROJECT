@@ -14,7 +14,7 @@ export const useGraphStore = defineStore('graph', () => {
       });
 
       axios.get(url.value).then((response) =>{
-          const data = response.data;
+          const data = response.data.data;
           if (data) {
             const labels = [];
             const values = [];

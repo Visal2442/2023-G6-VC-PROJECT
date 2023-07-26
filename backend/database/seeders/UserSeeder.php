@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
                 'username' => 'Visal Sork',
                 'phone_number' => '0234567890',
                 'email' => 'visal@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'landlord',
                 'image' => 'https://cdn-icons-png.flaticon.com/128/1999/1999625.png',
             ],
@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
                 'username' => 'Darath Pum',
                 'phone_number' => '0234567890',
                 'email' => 'darathpum@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'landlord',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
                 'username' => 'Srerea Han',
                 'phone_number' => '0234567890',
                 'email' => 'sreyrea@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'admin',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
                 'username' => 'Sreyyoer Yoem',
                 'phone_number' => '0234567890',
                 'email' => 'sreyyoer@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'landlord',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
                 'username' => 'Phally Hoeurng',
                 'phone_number' => '0987654321',
                 'email' => 'phally@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'landlord',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
 
@@ -62,7 +62,7 @@ class UserSeeder extends Seeder
                 'username' => 'Net Se',
                 'phone_number' => '0987654321',
                 'email' => 'net@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'customer',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
 
@@ -72,7 +72,7 @@ class UserSeeder extends Seeder
                 'username' => 'Doeur Diet',
                 'phone_number' => '0987654321',
                 'email' => 'doeur@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'customer',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
@@ -80,7 +80,7 @@ class UserSeeder extends Seeder
                 'username' => 'Vibol Phoung',
                 'phone_number' => '0987654321',
                 'email' => 'vibol@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'customer',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
@@ -88,7 +88,7 @@ class UserSeeder extends Seeder
                 'username' => 'Tanguy Signoret',
                 'phone_number' => '0987654321',
                 'email' => 'tanguy@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'customer',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
@@ -96,7 +96,7 @@ class UserSeeder extends Seeder
                 'username' => 'Rady Y',
                 'phone_number' => '0987654321',
                 'email' => 'rady@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'customer',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
@@ -104,7 +104,7 @@ class UserSeeder extends Seeder
                 'username' => 'Yon Yen',
                 'phone_number' => '0987654321',
                 'email' => 'yon@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'customer',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
@@ -112,7 +112,7 @@ class UserSeeder extends Seeder
                 'username' => 'Ronan Ogor',
                 'phone_number' => '0987654321',
                 'email' => 'ronan@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'customer',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
@@ -120,7 +120,7 @@ class UserSeeder extends Seeder
                 'username' => 'Gareth Poulton',
                 'phone_number' => '0987654321',
                 'email' => 'gareth@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'customer',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
@@ -128,7 +128,7 @@ class UserSeeder extends Seeder
                 'username' => 'Him Hey',
                 'phone_number' => '0987654321',
                 'email' => 'him@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'customer',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
@@ -136,7 +136,7 @@ class UserSeeder extends Seeder
                 'username' => 'Mengheang Pho',
                 'phone_number' => '0987654321',
                 'email' => 'mengheang@gmail.com',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'role' => 'customer',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ]

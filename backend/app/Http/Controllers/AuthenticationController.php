@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+
 class AuthenticationController extends Controller
 {
     /**
@@ -30,7 +31,7 @@ class AuthenticationController extends Controller
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                 ]);
-                $token = $user->createToken('API Token', ['select'])->plainTextToken;
+                $token = $user->createToken('API Token')->plainTextToken;
                 return response()->json([
                     'status' => true,
                     'user' => $user,
