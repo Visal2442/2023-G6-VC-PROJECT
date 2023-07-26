@@ -50,7 +50,7 @@ class AuthenticationController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'customer',
-            'image' => 'https://o.remove.bg/downloads/dd420322-5eda-4f60-b39c-ce113599601e/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq-removebg-preview.png',
+            'image' => 'https://cdn-icons-png.flaticon.com/128/1999/1999625.png',
         ]);
 
         $token = $user->createToken('API Token', ['select'])->plainTextToken;

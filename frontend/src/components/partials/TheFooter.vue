@@ -12,7 +12,7 @@
                         <span>Phone number: </span>
                         <p> +855 883651987</p>
                     </div>
-                    <span>Be come a landlord: </span><v-btn class="bg-green">Request Now</v-btn>
+                    <span>Be come a landlord: </span><v-btn class="bg-green" :to="{name:'Contact'}">Request Now</v-btn>
                 </div>
                 <div class="item pt-0 mx-4">
                     <h3>About Us</h3> 
@@ -42,12 +42,8 @@
     </div>
 </template>
 
-<script >
-export default {
-    data: () => ({
+<script setup>
 
-    }),
-}
 </script>
 
 <style scoped>
@@ -60,36 +56,27 @@ export default {
     display: flex;
 
 }
-
 .item {
     margin: 20px;
     text-align: start;
     flex: 1;
 }
-
 .dream {
     flex:1 ;
     text-align: center;
     margin-top: 30px;
 
 }
-
-
 .footer-center {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .icon {
     margin: 10px;
     color: white;
 }
-
-h1{
-    font-family: 'Roboto', sans-serif;
-}
-h3 {
+h1,h3{
     font-family: 'Roboto', sans-serif;
 }
 v-btn{
