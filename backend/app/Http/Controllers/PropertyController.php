@@ -144,6 +144,19 @@ class PropertyController extends Controller
             return response()->json(['status' => false, 'errors' => $validator->errors()], 402);
         }
         $property = Property::create($request->all());
-        return response()->json(['message' => 'created', 'data' => $property], 200);
+        if($request->type === 'room'){
+            $newProperty = Property::orderBy('id', 'desc')->first();
+            // $id = $newProperty['id'];
+            RentalRoom::create([
+                'property_id'=> 1
+            ]);
+            $newRentalroom= RentalRoom::orderBy('id', 'desc')->first();
+            for($i=0; $i<$request->number_of_room; $i++){
+                Room::create([
+                    'rental_room_id'=> $newRentalroom['id'],
+                ]);
+            }
+        }
+        return response()->json(['message' => 'created', 'data' => $property, 'new' => $newProperty['id']], 200);
     }
 }

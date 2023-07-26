@@ -69,10 +69,12 @@
 
 import axios from 'axios';
 import { onMounted, ref, defineProps, computed } from 'vue';
+import { useRouter } from 'vue-router';
 const props = defineProps(['type']);
 const selected = ref('');
 const districts = ref([]);
 let isValide = ref(false);
+const router = useRouter();
 
 // RESOURCE: https://vue2-leaflet.netlify.app/components/LPopup.html#demo 
 import "leaflet/dist/leaflet.css";
@@ -140,15 +142,15 @@ const addProperty = () => {
     axios.post('/createProperty', property)
         .then(response => {
             console.log(response);
+            router.push({name:'LandlordProperties'});
         })
         .catch(error => {
             console.log(error);
         }
         );
-    refreshProperty();
-
+    resetInput();
 }
-const refreshProperty = () => {
+const resetInput = () => {
     nameHouse.value = '',
         price.value = '',
         description.value = '',
