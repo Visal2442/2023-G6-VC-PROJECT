@@ -1,22 +1,15 @@
 <?php
 
-use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\BookingController;
-use App\Http\Controllers\DistrictControllr;
 use App\Http\Controllers\GraphController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\WishlistController;
-use App\Models\Booking;
-use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LandlordRequestController;
-use App\Models\Wishlist;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\UserController;
@@ -98,11 +91,3 @@ Route::get('/userId/{id}', [UserController::class,'show']);
 Route::post('/imageProfile', [UserController::class,'getImage']);
 Route::post('/editProfile', [UserController::class,'updateImage']);
 
-
-
-
-// // Social Login (testing)
-// Route::middleware(['cors'])->group(function () {
-//     Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);
-//     Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback']);
-// });
