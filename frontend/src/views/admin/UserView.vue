@@ -20,7 +20,7 @@
                   <td>
                     <div class="d-flex align-center">
                       <v-avatar>
-                        <v-img :src="require('../assets/profile2.jpeg')" width="60"></v-img>
+                        <v-img :src="require('../../assets/profile2.jpeg')" width="60"></v-img>
                       </v-avatar>
                       <div class=" ml-2">
                         <p class="font-weight-bold">{{ user.username }}</p>

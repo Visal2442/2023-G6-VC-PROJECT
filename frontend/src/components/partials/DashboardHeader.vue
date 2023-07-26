@@ -62,7 +62,6 @@ const getImage=(event)=> {
         profile.value = response.data;
         update();
       });
-
 }
 const update = () => {
   let id = localStorage.getItem('user_id');
@@ -86,28 +85,6 @@ const update = () => {
     z-index: 2000;
 }
 
-.custom-file-input::before {
-  content: 'Select some files';
-  display: inline-block;
-  background: linear-gradient(top, #f9f9f9, #e3e3e3);
-  border: 1px solid #999;
-  border-radius: 3px;
-  padding: 5px 8px;
-  outline: none;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  cursor: pointer;
-  text-shadow: 1px 1px #fff;
-  font-weight: 700;
-  font-size: 10pt;
-}
-.custom-file-input:hover::before {
-  border-color: black;
-}
-.custom-file-input:active::before {
-  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-}
-
 .file-input {
   position: relative;
   display: inline-block;
@@ -120,7 +97,6 @@ const update = () => {
   border-radius: 50%;
   cursor: pointer;
 }
-
 .file-input input[type="file"] {
   position: absolute;
   top: 0;

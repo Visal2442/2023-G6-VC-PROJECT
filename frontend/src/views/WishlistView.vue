@@ -1,17 +1,16 @@
 <template>
   <v-container fluid class=" mr-mr-9" :class="getWishlist.length<= 0 ? 'h-screen' : 'h-auto'">
-    <v-btn class="bg-orange-accent-3 ml-15" :to="{ name: 'property' }">Back</v-btn>
     <v-container>
-      <v-row class=" d-flex justify-center mb-4">
+      <v-row class=" d-flex justify-center mb-4" v-if="getWishlist.length > 0">
         <h1>Your Wishlist</h1>
       </v-row>
       <div v-for="property of getWishlist" :key="property">
         <wishlist-card :property="property" @removeItemFromWishlist="removeItemFromWishlist"></wishlist-card>
       </div>
-      <v-row class="h-50 pa-15 d-flex justify-center align-center" v-if="getWishlist.length <= 0">
-        <div class="justify-center mt-n16" >
-          <v-img :src="require('../assets/home/EmptyCard.png')" width="350"></v-img>
-          <h5 align="center" class="bg-green-accent-4 text-black">Your Wishlist is Empty</h5>
+      <v-row class="d-flex justify-center align-center" v-if="getWishlist.length <= 0">
+        <div class="mb-10">
+          <v-img :src="require('../assets/home/EmptyCard.png')" class="ma-auto" width="40%"></v-img>
+          <h1 align="center" class="text-black">Wishlist is Empty</h1>
         </div>
       </v-row>
     </v-container>
@@ -24,12 +23,11 @@ import WishlistCard from "../components/card/WishlistCard.vue";
 import { useWishlistStore } from '../store/WishlistStore';
 import { storeToRefs } from "pinia";
 const wishlistStore = useWishlistStore();
-const { removeWishlist, getAllData } = wishlistStore;
+const { removeWishlist } = wishlistStore;
 const { getWishlist } = storeToRefs(wishlistStore);
 
 const removeItemFromWishlist = (wishlist_id) => {
   removeWishlist(wishlist_id);
-  getAllData();
 }
 
 </script>

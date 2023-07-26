@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import PropertyForm from '../components/form/PropertyForm.vue'
+import PropertyForm from '../../components/form/PropertyForm.vue'
 import { ref } from 'vue';
 
 const type = ref('');

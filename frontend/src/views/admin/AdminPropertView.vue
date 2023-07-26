@@ -7,7 +7,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
-import DashboardPropertyView from './DashboardPropertyView.vue';
+import DashboardPropertyView from '../DashboardPropertyView.vue';
 
 const properties = ref([]);
 

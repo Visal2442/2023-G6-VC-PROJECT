@@ -5,7 +5,7 @@
             <v-row no-gutters>
                 <v-col id="summary" rounded="lg"
                     class=" bg-light-blue-lighten-5 d-flex flex-column justify-center align-center py-5">
-                    <v-img :src="require('../assets/dashboard/group.png')" width="50"></v-img>
+                    <v-img :src="require('../../assets/dashboard/group.png')" width="50"></v-img>
                     <div class="text-light-blue-darken-1 d-flex flex-column align-center">
                         <p class="font-weight-bold text-h6">Users</p>
                         <p>{{ userCount }}</p>
@@ -13,7 +13,7 @@
                 </v-col>
                 <v-col id="summary" rounded="lg"
                     class=" bg-purple-lighten-5 d-flex flex-column justify-center align-center py-5">
-                    <v-img :src="require('../assets/dashboard/profile.png')" width="50"></v-img>
+                    <v-img :src="require('../../assets/dashboard/profile.png')" width="50"></v-img>
                     <div class="text-purple-darken-1 d-flex flex-column align-center">
                         <p class="font-weight-bold text-h6">Customers</p>
                         <p>{{ customerCount }}</p>
@@ -21,14 +21,14 @@
                 </v-col>
                 <v-col id="summary" rounded="lg"
                     class=" bg-green-accent-1 d-flex flex-column justify-center align-center py-5">
-                    <v-img :src="require('../assets/dashboard/landlord.png')" width="50"></v-img>
+                    <v-img :src="require('../../assets/dashboard/landlord.png')" width="50"></v-img>
                     <div class="text-green-accent-4 d-flex flex-column align-center">
                         <p class="font-weight-bold text-h6">Landlords</p>
                         <p>{{ landlordCount }}</p>
                     </div>
                 </v-col>
                 <v-col id="summary" class="bg-orange-lighten-4 d-flex flex-column justify-center align-center py-5">
-                    <v-img :src="require('../assets/dashboard/home.png')" width="50"></v-img>
+                    <v-img :src="require('../../assets/dashboard/home.png')" width="50"></v-img>
                     <div class="text-orange-darken-1 d-flex flex-column align-center">
                         <p class="font-weight-bold text-h6">Properties</p>
                         <p>{{ propertyCount }}</p>
@@ -55,7 +55,7 @@
                                     <td>
                                         <div class="d-flex align-center">
                                             <v-avatar>
-                                                <v-img :src="require('../assets/profile2.jpeg')" width="60"></v-img>
+                                                <v-img :src="require('../../assets/profile2.jpeg')" width="60"></v-img>
                                             </v-avatar>
                                             <div class=" ml-2">
                                                 <p class="font-weight-bold">{{ landlord.username }}</p>

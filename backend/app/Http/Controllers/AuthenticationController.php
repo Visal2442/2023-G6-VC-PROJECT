@@ -21,7 +21,6 @@ class AuthenticationController extends Controller
             // Attempt to authenticate the user
             if (count($user) > 0) {
                 // Authentication successful
-                // $user = Auth::user();
                 $token = $user->createToken('API Token')->plainTextToken;
                 return response()->json(["message" => "login success", "user" => $user, 'token' => $token], 200);
             } else {

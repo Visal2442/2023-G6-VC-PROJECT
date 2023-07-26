@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, ref } from "vue";
+import { defineProps, defineEmits, ref, onMounted, watch } from "vue";
 import BaseButton from "../widget/BaseButton.vue";
 import Cookies from 'js-cookie';
 import { useRouter } from "vue-router";
@@ -72,35 +72,46 @@ const wishlistStore = useWishlistStore();
 const { addWishlist,getWishlist } = wishlistStore;
 const cookieEmail = ref(Cookies.get('email'));
 
-
 const emits = defineEmits(['rateStar', 'alert']);
 const props = defineProps(["property"]);
 
 const addToWishlist = (propertyId) => {
   if (cookieEmail.value) {
           const isNotAdded = ref(true);
+          const alert = ref({});
           for (const property of getWishlist) {
                if (propertyId == property.property.id) {
-                    emits('alert', 'This house is exist in your Wishlist !')
+                    alert.value = {
+                      message:'This house is exist in your Wishlist !',
+                      type:'warning'
+                    }
+                    emits('alert', alert.value)
                     isNotAdded.value = false;
                     break;
                   }
                 }
                 if (isNotAdded.value) {
                   addWishlist(propertyId);
-                  emits('alert', 'The House is added to your Wishlist !')
+                  alert.value = {
+                      message:'The House is added to your Wishlist !',
+                      type:'success'
+                    }
+                  emits('alert', alert.value)
                 }
               }
               else {
-                emits('alert', 'Please Login to your account !')
-     }
+                alert.value = {
+                      message:'Please Login to your account !',
+                      type:'warning'
+                    }
+                  emits('alert', alert.value)
+              }
 };
 
 const getDetail = (property_id) => {
     localStorage.setItem('property_id', property_id);
     router.push(`/detail/${property_id}`);
 };
-
 
 // Rating
 const isCookieEmail = ref(Cookies.get('email'));
@@ -119,11 +130,16 @@ const isVisible = () => {
     }
 }
 
-
 // average star of house 
-const avgRating = ref(null);
+const avgRating = ref(0);
 const numberOfRating = ref(0);
-axios.get(`/properties/ratings/${props.property.id}`)
+
+watch(avgRating,(newValue )=>{
+  avgRating.value = newValue;
+})
+
+const getAvgRating=()=>{
+  axios.get(`/properties/ratings/${props.property.id}`)
     .then(response => {
         avgRating.value = 0;
         const ratings = response.data.data;
@@ -137,6 +153,7 @@ axios.get(`/properties/ratings/${props.property.id}`)
     .catch(error => {
         console.log(error.response.data);
     });
+}
 
 // Rate the star 
 const rateStar = (rate, propertyId) => {
@@ -149,10 +166,15 @@ const rateStar = (rate, propertyId) => {
         alert('Please rate the house !');
     }
     else {
+      getAvgRating();
         emits('rateStar', house.value)
         dialog.value = false;
     }
 }
+
+onMounted(()=>{
+  getAvgRating();
+})
 
 </script>
 
