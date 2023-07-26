@@ -14,9 +14,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LandlordRequestController;
 use App\Models\Wishlist;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\UpdateUserController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +75,28 @@ Route::get('/getPropertyId/{id}', [PropertyController::class, 'getPropertyId']);
 Route::post('/requestLandlord', [LandlordRequestController::class, 'sendRequest']);
 // Booking 
 Route::post('/booking', [BookingController::class,'booking']);
+
+Route::put('/updateUser/{id}', [UpdateUserController::class, 'updateUser']);
+
+// get user 
+Route::get('/user', [UserController::class, 'index']);
+
+// get all users 
+Route::get('/users', [UserController::class, 'getAllUsers']);
+
+// delete users 
+Route::delete('/delete_user/{id}', [UserController::class, 'destroyUser']);
+
+// get customers
+Route::get('/customers', [UserController::class,'getCustomer']);
+
+// get landlords
+Route::get('/landlord', [UserController::class,'getlandlord']);
+Route::get('/userId/{id}', [UserController::class,'show']);
+
+//change profile
+Route::post('/imageProfile', [UserController::class,'getImage']);
+Route::post('/editProfile', [UserController::class,'updateImage']);
 
 
 

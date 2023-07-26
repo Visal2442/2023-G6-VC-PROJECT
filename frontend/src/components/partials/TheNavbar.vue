@@ -16,7 +16,8 @@
           
         </div>
         <!-- After Logged in -->
-        <v-avatar id="logout" :image="require('../../assets/pf.jpg')" size="50" v-if="cookieEmail"></v-avatar>
+        <!-- <v-avatar id="logout"  :image="require('../../assets/user.png')" size="50" v-if="cookieEmail"></v-avatar>  -->
+        <v-avatar id="logout"  :image="profileCookie" size="50" v-if="cookieEmail && profileCookie"></v-avatar>
 
         <!-- Before Login  -->
         <v-icon icon="mdi-dots-vertical" id="logged-in" v-else></v-icon>
@@ -34,6 +35,18 @@
         <v-menu activator="#logout">
           <v-list>
             <v-list-item>
+              <h2>Your Profile</h2>
+              <div class="profile d-flex flex-row mt-5 mb-5">
+                <div class="file-input">
+                    <v-avatar id="logout"  :image="profileCookie" size="50"></v-avatar>
+                    <input type="file" v-on:change="getImage" >
+                </div>
+
+                <div class="email-username ml-5">
+                  <h3> {{ username }} </h3>
+                  <p>{{ email }} </p>
+                </div>
+              </div>
               <v-btn variant="plain" @click="isLoggedOut = !isLoggedOut" prepend-icon="mdi mdi-logout">Logout</v-btn>
             </v-list-item>
           </v-list>
@@ -61,6 +74,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 const isLoggedOut = ref(false);
 // Pinia Store 
 import { useAuthStore } from '../../store/AuthStore';
@@ -75,9 +89,14 @@ const navItems = ref([
   // { title: 'About', name: 'About' },
 ])
 const cookieEmail = ref(Cookies.get('email'));
+const profileCookie = ref(Cookies.get('image'));
+const email = localStorage.getItem('email');
+const username = localStorage.getItem('username');
 
 const scrollY = ref(0);
 const elevation = ref(4);
+const profile = ref('');
+
 const background = ref('white');
 const onScroll = (e) => {
   scrollY.value = e.currentTarget.scrollY;
@@ -96,6 +115,35 @@ const elevationNavbar = computed(() => {
   }
   return 0;
 })
+
+
+const getImage=(event)=> {
+  var file = event.target.files[0];
+  console.log(file);
+      var form = new FormData();
+      form.append('profile', file);
+      axios.post('/imageProfile', form).then((response) => {
+        profile.value = response.data;
+        update();
+      });
+
+}
+const update = () => {
+  let id = localStorage.getItem('user_id');
+      const picture = {
+        id: id,
+        image: profile.value
+      }
+      axios.post(`/editProfile`,picture).then(response =>{
+        console.log(response);
+      });
+      Cookies.set('image', profile.value);
+      profileCookie.value= Cookies.get('image')
+}
+
+
+
+
 
 </script>
 
@@ -129,5 +177,53 @@ const elevationNavbar = computed(() => {
 
 .pf img {
   border-radius: 50%;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: 'Select some files';
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.file-input {
+  position: relative;
+  display: inline-block;
+}
+
+.file-input img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.file-input input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
 }
 </style>
