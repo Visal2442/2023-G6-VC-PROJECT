@@ -1,5 +1,11 @@
 <template>
      <div>
+          <!-- Warning Alert  -->
+          <Transition name="warning" id="warning" mode="out-in">
+               <v-alert v-model="isAlert" class=" bg-orange-accent-4 w-25" icon="$warning" :text="alertMessage" closable variant="outlined" >
+                    <v-progress-linear v-model="progress" absolute bottom></v-progress-linear>
+               </v-alert>
+          </Transition>
           <v-container fluid class="mr-md-9">
                <div :id="isFound ? '' : 'container'">
                     <div class=" w-75 ma-auto">
@@ -19,7 +25,7 @@
                     <v-container fluid class="ml-md-9">
                          <v-row class="mr-md-10" v-if="isFound">
                               <v-col md="3" v-for="(property, i) of properties" :key="i">
-                                   <house-card :property="property" @addToWishlist="addToWishlist"></house-card>
+                                   <house-card :property="property" @rateStar="rateStar" @alert="alert"></house-card>
                               </v-col>
                          </v-row>
                          <v-row v-else class="h-50">
@@ -38,39 +44,11 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 import SearchLocation from '@/components/search/SearchLocation.vue';
 import FilterType from '@/components/search/FilterType.vue';
 import FilterByPrice from '@/components/search/FilterPrice.vue';
 import HouseCard from '@/components/card/HouseCard.vue';
-
-// Wishlist Store 
-import { useWishlistStore } from '../store/WishlistStore';
-const wishlistStore = useWishlistStore();
-const { addWishlist, userWishlist } = wishlistStore;
-const cookieEmail = ref(Cookies.get('email'));
-
-// Add to wishlist 
-const addToWishlist = (property_id) => {
-     if (cookieEmail.value) {
-          const isNotAdded = ref(true);
-          for (const property of userWishlist) {
-               if (property_id == property.property.id) {
-                    alert('This house is exist in your Wishlist !');
-                    isNotAdded.value = false;
-                    break;
-               }
-          }
-          if (isNotAdded.value) {
-               addWishlist(property_id);
-               alert('The House is added to your Wishlist !');
-          }
-     }
-     else {
-          alert('Please Login to your account !');
-     }
-}
 
 // PAGINATION 
 const properties = ref({});
@@ -85,7 +63,7 @@ const price = ref('');
 const isFound = ref(true);
 const notFoundMessage = ref('');
 
-const getProperties = () => {
+const getProperties = async () => {
      let url = ref('/properties/pagination?page=' + pagination.value.current);
      if (district_id.value !== '') {
           url.value = url.value + '&district_id=' + district_id.value;
@@ -96,16 +74,16 @@ const getProperties = () => {
      else if (price.value != '') {
           url.value = url.value + '&min=' + price.value.min + '&max=' + price.value.max;
      }
-     axios.get(url.value)
-          .then(res => {
-               properties.value = res.data.data.data;
-               pagination.value.total = res.data.data.last_page;
-               isFound.value = true;
-          })
-          .catch(err => {
-               notFoundMessage.value = err.response.data.message;
-               isFound.value = false;
-          })
+     try {
+          const response = await Promise.all([axios.get(url.value)]);
+          properties.value = response[0].data.data.data;
+          pagination.value.total = response[0].data.data.last_page;
+          isFound.value = true;
+     }
+     catch (err) {
+          notFoundMessage.value = err.response.data.message;
+          isFound.value = false;
+     }
 }
 const onPageChange = () => {
      window.scrollTo({
@@ -149,6 +127,39 @@ const onPrice = (value) => {
      getProperties();
 }
 
+// Rating Star
+const rateStar = (property) => {
+     // getProperties();
+     axios.post('/properties/ratings', property)
+          .then(res => {
+               console.log(pagination.value.current);
+               getProperties();
+               console.log(res);
+          })
+          .catch(err => err);
+}
+
+// Warning Alert 
+const isAlert = ref(false)
+const progress = ref(0);
+const alertMessage = ref('');
+const alert = (value) => {
+     if (value) {
+          isAlert.value = true;
+          alertMessage.value = value;
+          const inProgress = setInterval(() => {
+               progress.value = progress.value + 10;
+          }, 100)
+          setTimeout(() => {
+               isAlert.value = false;
+               progress.value = 0;
+               clearInterval(inProgress);
+          }, 3000)
+     }
+     else {
+          isAlert.value = false;
+     }
+}
 </script>
 
 <style scoped>
@@ -169,4 +180,24 @@ const onPrice = (value) => {
      transform: translateX(20px);
      opacity: 0;
 }
-</style>
+.warning-enter-active{
+     transition: all 0.3s ease-out;
+}
+.warning-leave-active {
+     transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.warning-enter-from,
+.warning-leave-to {
+     transform: translateX(20px);
+     opacity: 0;
+}
+.v-progress-linear {
+     transition: 2s;
+}
+
+#warning {
+     position: sticky;
+     top: 0;
+     z-index: 100000;
+}</style>

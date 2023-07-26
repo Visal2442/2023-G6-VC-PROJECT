@@ -27,7 +27,7 @@ const isNumber = ref(false)
 watch(price.value,(newValue)=>{
     price.value.min = newValue.min;
     price.value.max = newValue.max
-    if(newValue.min >= 0 && newValue.max > 0){
+    if(newValue.min > 0 && newValue.max > 0){
         isNumber.value = true;
     }
     else{

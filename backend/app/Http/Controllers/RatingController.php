@@ -13,6 +13,9 @@ class RatingController extends Controller
     public function index()
     {
         //
+        $ratings = Rating::all();
+        return response()->json(['message' => 'requested successfully','data' => $ratings]);
+
     }
 
     /**
@@ -20,30 +23,41 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $star = $request->star;
+        $userId = $request->userId;
+        $propertyId = $request->propertyId;
+        
+        $rating = Rating::where('user_id', $userId)
+                        ->where('property_id', $propertyId)
+                        ->first();
+                        
+        //whether a new rating was created or an existing rating was updated
+        if ($rating) {
+            $rating->star = $star;
+            $rating->save();
+            $message = 'Rating updated successfully';
+        } else {
+            $rating = Rating::create([
+                'star' => $star,
+                'user_id' => $userId,
+                'property_id' => $propertyId,
+            ]);
+            $message = 'Rating created successfully';
+        }
+        //returns a JSON response with a success message and the rating data
+        return response()->json([
+            'message' => $message,
+            'rating' => $rating
+        ], 200);
     }
-
     /**
      * Display the specified resource.
      */
-    public function show(Rating $rating)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Rating $rating)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Rating $rating)
-    {
-        //
+        // show rating with the specified ID
+        $ratings = Rating::where('property_id', $id)->get();
+        // Return a JSON response with the rating data
+        return response()->json(['message' => 'requested successfully', 'data' => $ratings], 200);
     }
 }

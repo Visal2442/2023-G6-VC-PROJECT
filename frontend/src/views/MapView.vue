@@ -34,7 +34,7 @@ import HouseCardOnMap from "@/components/card/HouseCardOnMap.vue";
 import { storeToRefs } from "pinia";
 import { usePropertyStore } from '../store/PropertyStore';
 const propertyStore = usePropertyStore();
-const { properties, currentLat, currentLng } = storeToRefs(propertyStore);
+const { properties } = storeToRefs(propertyStore);
 
 // RESOURCE: https://vue2-leaflet.netlify.app/components/LPopup.html#demo 
 import "leaflet/dist/leaflet.css";
@@ -54,7 +54,8 @@ const dynamicSize = computed(() => {
 const dynamicAnchor = computed(() => {
   return [iconSize / 2, iconSize * 1.15];
 })
-
+const currentLat = ref(localStorage.getItem('currentLat'));
+const currentLng = ref(localStorage.getItem('currentLng'));
 let markerLat = ref(0);
 let markerLng = ref(0);
 

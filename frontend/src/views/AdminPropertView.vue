@@ -1,6 +1,5 @@
 <template>
     <div>
-        <dashboard-header></dashboard-header>
         <dashboard-property-view :properties="properties"></dashboard-property-view>
     </div>
 </template>

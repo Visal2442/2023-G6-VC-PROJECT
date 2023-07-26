@@ -1,6 +1,5 @@
 <template>
   <div>
-    <dashboard-header></dashboard-header>
     <v-container fluid class=" my-5">
       <h1 class=" my-5">Add New Property</h1>
       <!-- TAB  -->

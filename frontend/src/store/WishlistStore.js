@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import axios from "axios";
 
 export const useWishlistStore = defineStore("wishlist", () => {
-  const dataWishlist = ref({});
+  const data_wish_list = ref({});
   const user_id = ref(parseInt(localStorage.getItem("user_id")));
   const property_id = ref(null);
   const getWishlist = ref(JSON.parse(localStorage.getItem("wishListData")));
@@ -21,12 +21,12 @@ export const useWishlistStore = defineStore("wishlist", () => {
   };
 
   const addWishlist = (property_id) => {
-    dataWishlist.value = {
+    data_wish_list.value = {
       user_id: user_id.value,
       property_id: property_id,
     };
     axios
-      .post("/wishlist", dataWishlist.value)
+      .post("/wishlist", data_wish_list.value)
       .then(() => {
         getAllData();
       })
@@ -34,17 +34,22 @@ export const useWishlistStore = defineStore("wishlist", () => {
         console.log(err.response.data.status);
       });
   };
+  const removeWishlist=(wishtList_id)=>{
+    axios.delete(`/wishlist/${wishtList_id}`)
+    .then(res=>{
+      getAllData();
+      console.log(res);
+    })
+    .catch(err=>console.log(err));
+  }
 
-  // Computed
-  const userWishlist = computed(() => {
-    return getWishlist.value;
-  });
   getAllData();
 
   return {
     addWishlist,
     property_id,
     getAllData,
-    userWishlist,
+    removeWishlist,
+    getWishlist
   };
 });

@@ -10,14 +10,13 @@
               consequuntur, sapiente dolorem eius porro reiciendis eveniet fugiat quidem. Esse repudiandae expedita error
               hic! Perspiciatis, optio.</p>
             <div class="align-center mt-5">
-              <BaseButton type="primary-btn">Contact Us</BaseButton>
+              <BaseButton type="primary-btn" :to="{name:'Contact'}">Contact Us</BaseButton>
               <BaseButton type="seconday-btn">See More</BaseButton>
             </div>
           </div>
         </v-col>
         <v-col class="">
           <v-img :src="require('../assets/home/living-room-2732939_1280.jpg')" width="640" class="home-img"></v-img>
-          <!-- <v-img :src="require('../assets/home/Build your home-amico.png')" width="640" id="img-banner-right"></v-img> -->
         </v-col>
       </v-row>
 
@@ -40,7 +39,6 @@
 
       <v-row class="mt-7 mb-16 mx-md-9" align="center">
         <v-col>
-          <!-- <v-img :src="require('../assets/home/Build your home-amico.png')" width="500"></v-img> -->
           <v-img :src="require('../assets/home/mission3.jpeg')" width="640" class="home-img"></v-img>
         </v-col>
         <v-col>
@@ -50,7 +48,7 @@
               consequuntur, sapiente dolorem eius porro reiciendis eveniet fugiat quidem. Esse repudiandae expedita error
               hic! Perspiciatis, optio.</p>
               <div class="align-center mt-5">
-                <BaseButton type="primary-btn">Contact Us</BaseButton>
+                <BaseButton type="primary-btn" :to="{name:'Contact'}">Contact Us</BaseButton>
               </div>
           </div>
         </v-col>
@@ -64,12 +62,11 @@
               consequuntur, sapiente dolorem eius porro reiciendis eveniet fugiat quidem. Esse repudiandae expedita error
               hic! Perspiciatis, optio.</p>
               <div class="align-center mt-5">
-                <BaseButton type="primary-btn">Contact Us</BaseButton>
+                <BaseButton type="primary-btn" :to="{name:'Contact'}">Contact Us</BaseButton>
               </div>
           </div>
         </v-col>
         <v-col>
-          <!-- <v-img :src="require('../assets/home/Build your home-amico.png')" width="500"></v-img> -->
           <v-img :src="require('../assets/home/mission3.jpeg')" width="640" class="home-img"></v-img>
         </v-col>
       </v-row>

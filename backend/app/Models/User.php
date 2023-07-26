@@ -23,7 +23,8 @@ class User extends Authenticatable
         'phone_number', 
         'email', 
         'password', 
-        'role'
+        'role',
+        'image'
     ];
 
     public function properties()
@@ -47,6 +48,10 @@ class User extends Authenticatable
 
     public function userWishlist(){
         return $this->hasMany(Wishlist::class);
+    }
+    public function image()
+    {
+        return $this->hasOne(Image::class);
     }
 
     /**

@@ -66,7 +66,7 @@ class PropertySeeder extends Seeder
                 'user_id' =>1
             ],
             [
-                'name' => 'The 1978 Home Room Service Rental',
+                'name' => 'The 1978 Home',
                 'price' => 300,
                 'description' => 'This house is the perfect place to live and unwind. Street 1978, Phnom Penh',
                 'type' => 'room',
@@ -83,7 +83,7 @@ class PropertySeeder extends Seeder
                 'user_id' =>1
             ],
             [
-                'name' => 'The 1978 Home Room Service Rental',
+                'name' => 'The 1978 Home',
                 'price' => 300,
                 'description' => 'This house is the perfect place to live and unwind. Street 1978, Phnom Penh',
                 'type' => 'room',
@@ -100,7 +100,7 @@ class PropertySeeder extends Seeder
                 'user_id' =>1
             ],
             [
-                'name' => 'Rental Room(012981196/086321439)',
+                'name' => 'Rental Room',
                 'price' => 300,
                 'description' => 'This house is the perfect place to live and unwind. HV8J+7GF, Phnom Penh',
                 'type' => 'room',
@@ -114,23 +114,6 @@ class PropertySeeder extends Seeder
                 'latitude' => 11.567235092130899,   
                 'longitude' => 104.88114758790451,
                 'district_id'=>1,
-                'user_id' =>1
-            ],
-            [
-                'name' => 'Rooms for Rent',
-                'price' => 300,
-                'description' => 'This house is the perfect place to live and unwind. HV8J+7GF, 620, Phnom Penh 120802',
-                'type' => 'room',
-                'size' => 200,
-                'number_of_floor' => 3,
-                'number_of_room' => 4,
-                'number_of_bathroom' => 3,
-                'number_of_kitchen' => 3,
-                'available'=>true,
-                'image' => 'https://lh5.googleusercontent.com/p/AF1QipPrR3zqA4RsNuF9XELL99DUDInox6i4xnvHNvf4=w408-h635-k-no',
-                'latitude' => 11.566668341898673,   
-                'longitude' => 104.886928115038, 
-                'district_id'=>2,
                 'user_id' =>1
             ],
             [
@@ -290,7 +273,7 @@ class PropertySeeder extends Seeder
                 'user_id' =>1
             ],
             [
-                'name' => 'Monorom Apartment Boueng Kang Keng 1',
+                'name' => 'Monorom Apartment',
                 'price' => 50,
                 'description' => 'This room is the perfect place to live and unwind. 228a St 146, Phnom Penh',
                 'type' => 'room',
@@ -426,7 +409,7 @@ class PropertySeeder extends Seeder
                 'user_id' =>2
             ],
             [
-                'name' => 'rent room den chanmuny',
+                'name' => 'den chanmuny',
                 'price' => 500,
                 'description' => 'This room is the perfect place to live and unwind. 228a St 146, Phnom Penh',
                 'type' => 'room',
@@ -443,7 +426,7 @@ class PropertySeeder extends Seeder
                 'user_id' =>2
             ],
             [
-                'name' => 'Rental Room(012981196/086321439)',
+                'name' => 'Rental Room',
                 'price' => 500,
                 'description' => 'This room is the perfect place to live and unwind. 228a St 146, Phnom Penh',
                 'type' => 'room',
