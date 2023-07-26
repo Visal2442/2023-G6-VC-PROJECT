@@ -83,10 +83,10 @@ const { logout } = authStore;
 
 const navItems = ref([
   { title: 'Home', name: 'Home' },
+  { title: 'About', name: 'About' },
   { title: 'Property', name: 'property' },
   { title: 'Map', name: 'Map' },
   { title: 'Contact Us', name: 'Contact' },
-  // { title: 'About', name: 'About' },
 ])
 const cookieEmail = ref(Cookies.get('email'));
 const profileCookie = ref(Cookies.get('image'));
