@@ -43,6 +43,8 @@ navigator.geolocation.getCurrentPosition(showLocation, showError);
   background-color: #f9fcff;
   background-image: linear-gradient(147deg, #f9fcff 0%, #f6f6f6 74%);
   font-family: 'Signika Negative', sans-serif;
+
+
 }
 .v-icon {
     cursor: pointer;

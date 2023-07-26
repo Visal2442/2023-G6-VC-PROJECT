@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LandlordRequestController;
+use App\Models\Wishlist;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\UserController;
@@ -36,6 +38,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Authentication 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthenticationController::class, 'logout']);
+
 });
 Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/register', [AuthenticationController::class, 'register']);
@@ -69,6 +72,9 @@ Route::put('/updateProperty/{id}', [PropertyController::class, 'updateProperty']
 Route::post('/image', [PropertyController::class, 'getImage']);
 Route::get('/getAllProperties/{id}', [PropertyController::class, 'getAllProperties']);
 Route::get('/getPropertyId/{id}', [PropertyController::class, 'getPropertyId']);
+Route::post('/requestLandlord', [LandlordRequestController::class, 'sendRequest']);
+// Booking 
+Route::post('/booking', [BookingController::class,'booking']);
 
 Route::put('/updateUser/{id}', [UpdateUserController::class, 'updateUser']);
 

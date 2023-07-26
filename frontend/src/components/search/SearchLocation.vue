@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="search"> -->
   <div class="search-location d-flex flex-column align-center">
     <v-text-field class=" w-100 position-relative" density="compact" variant="solo" label="Search District"
       append-inner-icon="mdi-magnify" single-line hide-details v-model="searchText"></v-text-field>
@@ -15,7 +14,6 @@
       </ul>
     </div>
   </div>
-  <!-- </div> -->
 </template>
 
 <script setup>
@@ -28,17 +26,18 @@ const districts = ref([]);
 const isClicked = ref(false)
 const isNotFound = ref(false)
 
-watch(searchText, (newValue) => {
+watch (searchText, async (newValue) => {
   emit('onInput', newValue);
   if (newValue != '' && !isClicked.value) {
-    axios.get(`/properties/location/${newValue}`)
-      .then(res => {
-        isNotFound.value = false;
-        districts.value = res.data.data;
-      }).catch(err => {
-        isNotFound.value = true;
-        districts.value = err.response.data;
-      });
+    try{
+      const response = await axios.get(`/properties/location/${newValue}`);
+      isNotFound.value = false;
+      districts.value = response.data.data;
+    }
+    catch (err){
+      isNotFound.value = true;
+      districts.value = err.response.data;
+    }
   }
   else {
     isClicked.value = false;
