@@ -13,11 +13,7 @@
             <property-form :type="type"></property-form>
           </v-window-item>
           <v-window-item value="room">
-            <v-container fluid>
-              <v-row>
-                <h1>Add Room</h1>
-              </v-row>
-            </v-container>
+            <property-form :type="type"></property-form>
           </v-window-item>
         </v-window>
       </v-card>
@@ -31,6 +27,7 @@ import PropertyForm from '../../components/form/PropertyForm.vue'
 import { ref } from 'vue';
 
 const type = ref('');
+
 
 
 

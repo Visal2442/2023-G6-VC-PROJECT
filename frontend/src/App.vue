@@ -24,14 +24,21 @@ import DashboardSidebar from './components/partials/DashboardSidebar.vue';
 import TheFooter from './components/partials/TheFooter.vue';
 import RouterTransition from './components/widget/RouterTransition.vue'
 import { useRoute } from 'vue-router';
+import axios from 'axios';
 const route = useRoute();
 
 // Callback function 
+// Get current location 
+axios.get('https://api.geoapify.com/v1/ipinfo?apiKey=a194a08645c34558b344958fc6aff70c')
+  .then(res=>console.log(res))
+  .catch(err=>console.log(err))
+
 const showLocation = (location) => {
   localStorage.setItem('currentLat', location.coords.latitude);
   localStorage.setItem('currentLng', location.coords.longitude);
 }
 const showError = (error) => {
+  
   console.log(error);
 }
 // Get current location 

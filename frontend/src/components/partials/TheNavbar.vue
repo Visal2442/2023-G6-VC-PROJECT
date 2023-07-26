@@ -33,25 +33,23 @@
         <!-- After Logged in -->
         <v-menu activator="#logout">
           <v-list>
-            <v-list-item>
-              <div>
-              <h5>User Profile</h5>
-
-              </div>
-              <div class="profile d-flex flex-row mt-5 mb-5">
+            <v-list-item class="pa-5">
+            <div class=" d-flex flex-column mb-10 justify-center">
+              <p class=" text-h6 mb-3">Your Profile</p>
+              <div class="profile d-flex flex-row mb-5">
                 <div class="file-input">
-                    <v-avatar id="logout"  :image="profileCookie" size="50"></v-avatar>
-                    <input type="file" v-on:change="getImage" >
+                  <v-avatar id="logout" :image="profileCookie" size="60"></v-avatar>
+                  <input type="file" v-on:change="getImage">
                 </div>
-
                 <div class="email-username ml-5">
                   <h3> {{ username }} </h3>
-                  <h3> {{ role }} </h3>
-                  <p>{{ email }} </p>
+                  <v-card-subtitle class="pa-0"> {{ role }} </v-card-subtitle>
+                  <p class="pa-0">{{ email }} </p>
                 </div>
               </div>
-              <v-btn variant="plain" @click="isLoggedOut = !isLoggedOut" prepend-icon="mdi mdi-logout">Logout</v-btn>
-            </v-list-item>
+            </div>
+            <BaseButton type='seconday-btn' block class="ma-0" @click="isLoggedOut=!isLoggedOut">Logout</BaseButton>
+          </v-list-item>
           </v-list>
         </v-menu>
       </v-toolbar-items>
@@ -78,6 +76,7 @@
 import { ref, computed } from 'vue';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import BaseButton from '../widget/BaseButton.vue';
 const isLoggedOut = ref(false);
 // Pinia Store 
 import { useAuthStore } from '../../store/AuthStore';
@@ -88,7 +87,7 @@ const { role } = storeToRefs(authStore);
 
 const navItems = ref([
   { title: 'Home', name: 'Home' },
-  { title: 'About', name: 'About' },
+  { title: 'About US', name: 'About' },
   { title: 'Property', name: 'property' },
   { title: 'Map', name: 'Map' },
   { title: 'Contact Us', name: 'Contact' },

@@ -30,7 +30,6 @@
               </div>
             </div>
             <BaseButton type='seconday-btn' block class="ma-0" @click="logout">Logout</BaseButton>
-            <!-- <v-btn variant="plain" @click="logout" prepend-icon="mdi mdi-logout">Logout</v-btn> -->
           </v-list-item>
         </v-list>
       </v-menu>
