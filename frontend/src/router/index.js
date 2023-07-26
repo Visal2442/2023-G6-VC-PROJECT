@@ -107,17 +107,20 @@ const routes = [
     path: "/dashboard/admin/properties",
     name: "AdminProperties",
     component: AdminPropertyView,
+    meta: { title: "Properties" },
   },
   {
     path: "/dashboard/admin/users",
     name: "Users",
     component: UserView,
+    meta: { title: "Users" },
   },
   // Landlord Dashboard
   {
     path: "/dashboard/landlord",
     name: "LandlordDashboard",
     component: Dashboard,
+    meta: { title: "Landlord" },
   },
   {
     path: "/dashboard/landlord/post",
