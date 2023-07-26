@@ -50,31 +50,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>#1</td>
+                                <tr v-for="(landlord,index) of landlords" :key="index">
+                                    <td>#{{ landlord.id }}</td>
                                     <td>
                                         <div class="d-flex align-center">
                                             <v-avatar>
                                                 <v-img :src="require('../assets/profile2.jpeg')" width="60"></v-img>
                                             </v-avatar>
                                             <div class=" ml-2">
-                                                <p class="font-weight-bold">Visal</p>
-                                                <v-card-subtitle class="pa-0">visal@gmail.com</v-card-subtitle>
+                                                <p class="font-weight-bold">{{ landlord.username }}</p>
+                                                <v-card-subtitle class="pa-0">{{ landlord.email }}</v-card-subtitle>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>0929292</td>
+                                    <td>{{ landlord.phone_number }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <v-card-subtitle class="pa-0 bg-green-lighten-4 text-green-accent-4 px-2 py-1 rounded-xl font-weight-bold">Landlord</v-card-subtitle>
+                                            <v-card-subtitle class="pa-0 bg-green-lighten-4 text-green-accent-4 px-2 py-1 rounded-xl font-weight-bold">{{ landlord.role }}</v-card-subtitle>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="d-flex align-center">
-                                            <v-icon class="mdi mdi-pencil-outline mr-3" size="small" color="blue-accent-4">
+                                            <v-icon class="mdi mdi-pencil-outline mr-3" size="small" color="blue-accent-4" @click="getData(landlord.id)">
                                                 <v-tooltip activator="parent" location="top">Edit</v-tooltip>
                                             </v-icon>
-                                            <v-icon class="mdi mdi-trash-can-outline" size="small" color="red">
+                                            <v-icon class="mdi mdi-trash-can-outline" size="small" color="red" @click="deleteUserAccountByAddmin(landlord.id)">
                                                 <v-tooltip activator="parent" location="top">Delete</v-tooltip>
                                             </v-icon>
                                         </div>
@@ -86,33 +86,124 @@
                 </v-col>
             </v-row>
         </v-container>
+           <!-- Edit user form  -->
+           <v-dialog v-model="dialog" width="35%" class="" >
+            <v-card rounded="lg" >
+                <v-card-title class="pa-0 pa-3 bg-green-accent-4 text-white">Edit User</v-card-title>
+                <div class=" w-100 bg-white pa-5">
+                    <v-form fast-fail x="d-flex flex-column">
+                        <div class="input-container d-flex">
+                            <v-text-field type="text" clearable color="green-accent-4" label="Username" v-model="userName"
+                                placeholder="Enter Your Username" class="pa-0" density="compact" variant="outlined"
+                                rounded="lg"></v-text-field>
+                            <v-text-field type="email" clearable color="green-accent-4" label="Email" name="email" v-model="email"
+                                placeholder="Enter Your Email" density="compact" variant="outlined"
+                                rounded="lg"></v-text-field>
+                        </div>
+                        <div class="input-container d-flex gap-5">
+                            <v-text-field type="text" clearable color="green-accent-4" label="Password"  v-model="password"
+                                placeholder="Enter password" class="pa-0" density="compact" variant="outlined"
+                                rounded="lg"></v-text-field>
+                            <v-select v-model="selected" :items="items" density="compact" variant="outlined" label="Role" placeholder="Role"></v-select>
+                        </div>
+                        <v-card-actions class="button">
+                            <v-btn class="cancel text-red" color="black" text @click="cancel()">Cancel</v-btn>
+                            <BaseButton type="primary-btn" @click="editUser()">Update</BaseButton>
+                        </v-card-actions>
+                    </v-form>
+                </div>
+            </v-card>
+        </v-dialog>
+        <!-- Delete user dialog  -->
+        <v-dialog v-model="deleteUser" width="35%">
+      <v-card>
+        <v-sheet class="m-5 w-100 bg-white pa-5" elevation="4">
+          <div class="cencelIcon">
+            <v-icon class="mdi mdi-alert text-red"></v-icon>
+          </div>
+          <v-form fast-fail x="d-flex flex-column">
+            <p align="center" class="mb-5 mt-5">
+              Do you want to delete this user?
+            </p>
+            <v-card-actions class="button">
+              <v-btn class="cancel text-button text-blue mr-1" @click="cancelDelete()">Cancel</v-btn>
+              <v-btn class="deleteBtn bg-red text-overline text-white" @click="deleteUserAccount()" color="black">
+                Delete
+              </v-btn>
+            </v-card-actions>
+          </v-form>
+        </v-sheet>
+      </v-card>
+    </v-dialog>
     </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed,onMounted } from 'vue';
 import axios from 'axios';
 
+
+const selected = ref('');
+const dialog = ref(false);
+const userName = ref('');
+const email = ref('');
+const password = ref('');
+const items = ref([
+     { title: 'Landlord', value: 'landlord' },
+     { title: 'Customer', value: 'customer' },
+]);
 const property = ref([]);
 const customers = ref([]);
-const landlord = ref([]);
+const landlords = ref([]);
 const users = ref([]);
+const deleteUser = ref(false);
 // property count
 axios.get(`/properties`).then((res) => {
   property.value = res.data.data;
 });
+
+const getData = (user_id) => {   
+    localStorage.setItem('userId', user_id);
+    axios.get(`/userId/${user_id}`)
+    .then(res => {
+        console.log(res.data.data);
+        userName.value = res.data.data.username;
+        email.value = res.data.data.email;
+        password.value = res.data.data.password;
+        selected.value = res.data.data.role;
+    })
+    dialog.value = true;
+}
+
+const editUser = () =>{
+    const id = localStorage.getItem('userId');
+    if(userName.value !=='' && email.value !=='' && password.value !==''  && selected.value !==''){
+        const userData = {
+        'username':userName.value,
+        'email':email.value,
+        'password':password.value,
+        'role':selected.value
+        }
+        axios.put(`/updateUser/${id}`, userData).then(res => {
+            console.log(res.data);
+            dialog.value = false;
+            displayUsers();
+        });
+    }
+    
+}
 
 const propertyCount = computed(() => {
   return property.value.length;
 });
 
 // user count
-axios.get(`/user`).then((res) => {
-    users.value = res.data.data;
+axios.get(`/users`).then((res) => {
+    users.value = res.data;
 });
 
 const userCount = computed(() => {
-  return users;
+  return users.value.length;
 });
 
 // customer count
@@ -121,19 +212,56 @@ axios.get(`/customers`).then((res) => {
 });
 
 const customerCount = computed(() => {
-  return customers;
+  return customers.value.length;
 });
 
 // landlord count
+const displayUsers = () => {
+    axios.get(`/landlords`).then((res) => {
+        landlords.value = res.data;
+    });
+};
 
-axios.get(`/landlord`).then((res) => {
-    landlord.value = res.data;
-});
+
 
 const landlordCount = computed(() => {
-  return landlord;
+  return landlords.value.length;
 });
 
+const deleteUserAccountByAddmin = (userId, role) => {
+  localStorage.setItem('userId', userId);
+  localStorage.setItem('userRole', role);
+  if(localStorage.getItem('userRole') !== 'admin') {
+      deleteUser.value = true;
+
+  }else{
+    alert("Can not delete admin account!");
+  }
+};
+const cancelDelete = () => {
+    deleteUser.value = false;
+}
+const cancel = () => {
+    dialog.value = false;
+}
+const deleteUserAccount = () => {
+  let Id = localStorage.getItem('userId');
+        axios
+        .delete(`/delete_user/${Id}`)
+        .then(() => {
+             displayUsers();
+        })
+        .catch((errors) => {
+        console.log(errors);
+        });
+
+        console.log(localStorage.getItem("user_id"));
+        deleteUser.value = false;
+    
+};
+onMounted(() => {
+  displayUsers();
+});
 
 </script>
 

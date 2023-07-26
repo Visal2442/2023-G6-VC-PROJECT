@@ -8,25 +8,16 @@ use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $user = User::all()->count();
-        return response()->json(['message'=>'Requested user successfully!','data'=>$user]);
-    }
-
     // get customers
     public function getCustomer()
     {
-        $customers = User::where('role', 'Customer')->get()->count();
+        $customers = User::where('role', 'Customer')->get();
         return $customers;
     }
     // get landlords
     public function getLandlord()
     {
-        $landlord = User::where('role', 'Landlord')->get()->count();
+        $landlord = User::where('role', 'Landlord')->get();
         return $landlord;
     }
     // get getAllUsers
