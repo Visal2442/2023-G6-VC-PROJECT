@@ -4,22 +4,28 @@
             <!-- Summary  -->
             <v-row no-gutters>
                 <v-col id="summary" rounded="lg"
-                    class=" bg-light-blue-lighten-5 d-flex flex-column justify-center align-center py-5">
-                    <v-img :src="require('../../assets/dashboard/group.png')" width="50"></v-img>
+                    class=" bg-light-green-lighten-4 d-flex flex-column justify-center align-center py-5">
+                    <v-img v-if="role == 'admin'" :src="require('../../assets/dashboard/group.png')" width="50"></v-img>
+                    <v-img v-if="role == 'landlord'" :src="require('../../assets/dashboard/booking.png')" width="50"></v-img>
                     <div class="text-light-blue-darken-1 d-flex flex-column align-center">
-                        <p class="font-weight-bold text-h6">Users</p>
-                        <p>{{ userCount }}</p>
+                        <p v-if="role == 'admin'" class="font-weight-bold text-h6">Users</p>
+                        <p v-else class="font-weight-bold text-h6">Bookings</p>
+                        <p v-if="role == 'admin'">{{ userCount }}</p>
+                        <p v-else>{{ booking }}</p>
                     </div>
                 </v-col>
                 <v-col id="summary" rounded="lg"
-                    class=" bg-purple-lighten-5 d-flex flex-column justify-center align-center py-5">
-                    <v-img :src="require('../../assets/dashboard/profile.png')" width="50"></v-img>
+                    class=" bg-orange-lighten-4 d-flex flex-column justify-center align-center py-5">
+                    <v-img v-if="role == 'admin'" :src="require('../../assets/dashboard/profile.png')" width="50"></v-img>
+                    <v-img v-else :src="require('../../assets/dashboard/dollar.png')" width="50"></v-img>
                     <div class="text-purple-darken-1 d-flex flex-column align-center">
-                        <p class="font-weight-bold text-h6">Customers</p>
-                        <p>{{ customerCount }}</p>
+                        <p v-if="role == 'admin'" class="font-weight-bold text-h6">Customers</p>
+                        <p v-else class="font-weight-bold text-h6">Price</p>
+                        <p v-if="role == 'admin'">{{ customerCount }}</p>
+                        <p v-else>${{ price }}</p>
                     </div>
                 </v-col>
-                <v-col id="summary" rounded="lg"
+                <v-col v-if="role == 'admin'" id="summary" rounded="lg"
                     class=" bg-green-accent-1 d-flex flex-column justify-center align-center py-5">
                     <v-img :src="require('../../assets/dashboard/landlord.png')" width="50"></v-img>
                     <div class="text-green-accent-4 d-flex flex-column align-center">
@@ -27,11 +33,12 @@
                         <p>{{ landlordCount }}</p>
                     </div>
                 </v-col>
-                <v-col id="summary" class="bg-orange-lighten-4 d-flex flex-column justify-center align-center py-5">
+                <v-col id="summary" class="bg-green-lighten-4 d-flex flex-column justify-center align-center py-5">
                     <v-img :src="require('../../assets/dashboard/home.png')" width="50"></v-img>
                     <div class="text-orange-darken-1 d-flex flex-column align-center">
                         <p class="font-weight-bold text-h6">Properties</p>
-                        <p>{{ propertyCount }}</p>
+                        <p v-if="role == 'admin'">{{ propertyCount }}</p>
+                        <p v-else>{{ landlordPropties }}</p>
                     </div>
                 </v-col>
             </v-row>
@@ -146,11 +153,14 @@ const items = ref([
      { title: 'Landlord', value: 'landlord' },
      { title: 'Customer', value: 'customer' },
 ]);
+const price = ref(0);
 const property = ref([]);
 const customers = ref([]);
 const landlords = ref([]);
 const users = ref([]);
 const deleteUser = ref(false);
+const booking = ref([]);
+const landlordPropties = ref([]);
 
 // property count
 axios.get(`/properties`).then((res) => {
@@ -168,6 +178,31 @@ const getData = (user_id) => {
     })
     dialog.value = true;
 }
+const getNumberOfBooking = () => {   
+    const id = localStorage.getItem('user_id');
+    axios.get(`/numberOfBooking/`,{params:{'user_id':id}})
+    .then(res => {
+        booking.value =(res.data.data).length;
+        for(let item of res.data.data) {
+            price.value += item['price'];
+            console.log(price.value);
+        }
+        // console.log(booking.value);
+    })
+}
+const getAllProperties = () => {   
+    const id = localStorage.getItem('user_id');
+    axios.get(`/getAllProperties/${id}`)
+    .then(res => {
+        landlordPropties.value =(res.data.data).length;
+        console.log(landlordPropties.value);
+    })
+}
+
+onMounted(() =>{
+    getAllProperties();
+    getNumberOfBooking();
+})
 
 const editUser = () =>{
     const id = localStorage.getItem('userId');
@@ -185,6 +220,7 @@ const editUser = () =>{
     }
     
 }
+
 
 const propertyCount = computed(() => {
   return property.value.length;

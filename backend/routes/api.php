@@ -89,3 +89,6 @@ Route::get('/userId/{id}', [UserController::class,'show']);
 Route::post('/imageProfile', [UserController::class,'getImage']);
 Route::post('/editProfile', [UserController::class,'updateImage']);
 
+//get number of booking
+Route::get('/numberOfBooking', [BookingController::class,'getBooking']);
+
