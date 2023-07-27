@@ -157,6 +157,6 @@ class PropertyController extends Controller
                 ]);
             }
         }
-        return response()->json(['message' => 'created', 'data' => $property, 'new' => $newProperty['id']], 200);
+        return response()->json(['message' => 'created', 'data' => $property], 200);
     }
 }
