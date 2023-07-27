@@ -103,7 +103,23 @@
                   </v-row>
                 </v-card>
               </v-window-item>
-              <v-window-item value="overview"> Three </v-window-item>
+              <v-window-item value="overview" class="d-flex text-center"> 
+                <div class="propertyOverview mt-2 ma-5 pa-2 d-flex">
+                  <v-icon class="mdi mdi-id-card text-center"></v-icon>
+                     <h4>Room Id:</h4>
+                      <h3>{{ property?.id }}</h3>
+                   </div>
+                  <div class="propertyOverview mt-2 ma-5 pa-2  d-flex">
+                    <v-icon class="mdi mdi-home-search-outline"></v-icon>
+                      <h4>Name:</h4>
+                      <h3>{{ property?.name }}</h3>
+                    </div>
+                  <div class="propertyOverview mt-2 ma-5 pa-2  d-flex">
+                    <v-icon class="mdi mdi-home-analytics">T:</v-icon>
+                      <h4>Type:</h4>
+                      <h3>{{ property?.type }}</h3>
+                </div>
+              </v-window-item>
             </v-window>
           </v-card-text>
         </v-card>
