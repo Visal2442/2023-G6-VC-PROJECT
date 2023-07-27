@@ -29,12 +29,27 @@
                 </div>
               </div>
             </div>
-            <BaseButton type='seconday-btn' block class="ma-0" @click="logout">Logout</BaseButton>
+            <BaseButton type='primary-btn' block class="ma-0 mb-5" :to="{name:'Home'}">Visit Site</BaseButton>
+            <BaseButton type='seconday-btn' block class="ma-0" @click="isLoggedOut = !isLoggedOut">Logout</BaseButton>
           </v-list-item>
         </v-list>
       </v-menu>
     </v-toolbar-items>
   </v-toolbar>
+  <v-dialog v-model="isLoggedOut" width="25%">
+      <v-card class="m-5 w-100 bg-white pa-5" elevation="4">
+        <div class="mb-5 mt-5 d-flex align-center">
+          <v-icon class="mdi mdi-alert text-red mr-2"></v-icon>
+          <p>Do you want to log out your account?</p>
+        </div>
+        <v-card-actions class="button">
+          <v-btn class="cancel text-button text-blue mr-1" @click="isLoggedOut = !isLoggedOut">Cancel</v-btn>
+          <v-btn class="deleteBtn bg-red text-button px-10" @click="logout">
+            Log Out
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 </template>
 
 <script setup>
@@ -47,6 +62,7 @@ import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
 const { logout } = authStore;
 const { role } = storeToRefs(authStore);
+const isLoggedOut = ref(false);
 import Cookies from 'js-cookie';
 
 const username = ref(Cookies.get('username'));

@@ -48,6 +48,8 @@
                 </div>
               </div>
             </div>
+            <BaseButton type='primary-btn' block class="ma-0 mb-5" v-if="roleUser == 'landlord'" :to="{name:'LandlordDashboard'}">Dashboard</BaseButton>
+            <BaseButton type='primary-btn' block class="ma-0 mb-5" v-if="roleUser == 'admin'" :to="{name:'Dashboard'}">Dashboard</BaseButton>
             <BaseButton type='seconday-btn' block class="ma-0" @click="isLoggedOut=!isLoggedOut">Logout</BaseButton>
           </v-list-item>
           </v-list>
@@ -94,6 +96,7 @@ const navItems = ref([
 ])
 const cookieEmail = ref(Cookies.get('email'));
 const profileCookie = ref(Cookies.get('image'));
+const roleUser = ref(Cookies.get('role'));
 const email = ref(Cookies.get('email'));
 const username = ref(Cookies.get('username'));
 

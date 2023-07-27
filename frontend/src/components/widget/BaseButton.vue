@@ -22,7 +22,7 @@ defineProps({
 .primary-btn {
     background: #00E676;
     margin-right: 2px;
-    color: #ffffff;
+    color: #0f0e0e;
 }
 
 </style>

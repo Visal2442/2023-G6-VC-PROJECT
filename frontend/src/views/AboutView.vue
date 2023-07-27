@@ -23,7 +23,7 @@
           </div>
           <div class="info d-flex flex-column">
             <h3 class="text-green-accent-3 mb-5 mt-5">SCRUM MASTER</h3>
-            <p>Hello! My name is <strong>Visal Sork</strong>. I can manage something in this website. I want to make evry featur that can help you. If you have any problem contact to me please. Thanks </p>
+            <p>Hello! My name is <strong>Visal Sork</strong>. I can manage something on this site. I want to create every feature that can help you. If you have any problems, please contact me. Thank you </p>
             <div class="contact mt-5">
               <v-icon class="mdi mdi-facebook " color="grey darken-3 mr-4"></v-icon>
               <v-icon class="mdi mdi-email " color="grey darken-3 mr-4"></v-icon>
@@ -38,7 +38,7 @@
               </div>
               <div class="info d-flex flex-column">
                 <h3 class="text-green-accent-3 mb-3 mt-2">DEVOPS</h3>
-                <p>Hello! My name is <strong>Sreyyoer Yoem</strong>. I am so happy that have an appourty to buil this app for to make you easy to find rental house. If you want give feedback and want to update plase contact to me. Thanks</p>
+                <p>Hello! My name is <strong>Sreyyoer Yoem</strong>. I am very happy to have the opportunity to create this program to easily find a house to rent. If you have any suggestions and would like to update, please contact me. Thank you</p>
                 <div class="contact mt-3">
                   <v-icon class="mdi mdi-facebook " color="grey darken-3 mr-4"></v-icon>
                   <v-icon class="mdi mdi-email " color="grey darken-3 mr-4"></v-icon>
@@ -52,7 +52,7 @@
               </div>
               <div class="info d-flex flex-column">
                 <h3 class="text-green-accent-3 mb-5 mt-5">CODE QUALITY</h3>
-                <p>Hello! My name is <strong>Darath Poum</strong>. I am so exsicted for make you easy to find rental house. If you have any question contact to me please.Thanks </p>
+                <p>Hello! My name is <strong>Darath Poum</strong>. I'm so excited to make it easy for you to find a rental home. If you have any questions, please contact me, thank you </p>
                 <div class="contact mt-5">
                   <v-icon class="mdi mdi-facebook " color="grey darken-3 mr-4"></v-icon>
                   <v-icon class="mdi mdi-email " color="grey darken-3 mr-4"></v-icon>
@@ -69,7 +69,7 @@
               </div>
               <div class="info d-flex flex-column">
                 <h3 class="text-green-accent-3 mb-5 mt-5">QA MANAGER</h3>
-                <p>Hello! My name is <strong>Phally Hoeurng</strong> . I am here to help you for find house if you have any problem or question you can contact to me. Thanks </p>
+                <p>Hello! My name is <strong>Phally Hoeurng</strong> . I am here to help you find a rental house or rental room, if you have any problems or questions you can contact me. Thank you </p>
                 <div class="contact mt-3">
                   <v-icon class="mdi mdi-facebook " color="grey darken-3 mr-4"></v-icon>
                   <v-icon class="mdi mdi-email " color="grey darken-3 mr-4"></v-icon>
@@ -83,7 +83,7 @@
               </div>
               <div class="info d-flex flex-column">
                 <h3 class="text-green-accent-3 mb-5 mt-5">UX/UI  MANAGER</h3>
-                <p>Hello! My name is <strong>Sreyrea Han</strong>. I am very happy because I can make featurs in this website to help you save time to use this website. If you have any problem or questions please contact to me. Thanks  </p>
+                <p>Hello! My name is <strong>Sreyrea Han</strong>. I'm very happy because I can create features in this site to help you save time using this site. If you have any problems or questions, please contact me. Thank you</p>
                 <div class="contact mt-3 mb-5">
                   <v-icon class="mdi mdi-facebook " color="grey darken-3 mr-4"></v-icon>
                   <v-icon class="mdi mdi-email " color="grey darken-3 mr-4"></v-icon>

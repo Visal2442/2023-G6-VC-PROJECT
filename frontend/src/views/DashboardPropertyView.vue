@@ -8,7 +8,7 @@
           <table class="w-100">
             <thead class="bg-green-accent-4">
               <tr class="">
-                <th class="text-start">Name</th>
+                <th class="text-start">Image</th>
                 <th class="text-start">Price</th>
                 <th class="text-start">Size</th>
                 <th class="text-start">Floor</th>
@@ -21,7 +21,7 @@
             </thead>
             <tbody>
               <tr class="" v-for="property of props.properties" :key="property.id">
-                <td>{{ property.name }}</td>
+                <td><v-img :src="property.image" width="100"></v-img></td>
                 <td>${{ property.price }}/Month</td>
                 <td>{{ property.size }}</td>
                 <td>{{ property.number_of_floor }}</td>
