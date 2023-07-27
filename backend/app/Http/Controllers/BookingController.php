@@ -111,4 +111,15 @@ class BookingController extends Controller
                 return response()->json(['status' => true, 'data' => $booking], 200);
             };
         }
+
+        public function getBooking(Request $request)
+        {
+            $user = DB::table('bookings')
+                ->join('properties', 'properties.id', '=', 'bookings.property_id')
+                ->join('users', 'users.id', '=', 'properties.user_id')
+                ->where('properties.user_id', '=', $request->user_id)
+                ->get();
+            return response()->json(['status' => true, 'data' => $user], 200); 
+        }
+        
 }
