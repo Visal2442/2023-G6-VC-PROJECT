@@ -64,14 +64,15 @@ class PropertyController extends Controller
             $property = new PropertyResource($property);
             if ($property->type == 'room') {
                 $rental_room = [];
-                $rooms = Room::where('rental_room_id', $id)->get();
+                $rentalRoom = RentalRoom::where('property_id', $id)->first();
+                $rooms = Room::where('rental_room_id', $rentalRoom['id'])->get();
                 array_push($rental_room, $property);
                 array_push($rental_room, $rooms);
                 return response()->json(['data' => $rental_room], 200);
             }
             return response()->json(['data' => $property], 200);
         }
-        return response()->json(['message' => 'Property not found'], 404);
+        return response()->json(['message' => 'No Property Found'], 404);
     }
     public function getPropertyId($id)
     {
@@ -122,6 +123,7 @@ class PropertyController extends Controller
         $path = asset('images/' . $new_name);
         return $path;
     }
+
     public function createProperty(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -146,17 +148,20 @@ class PropertyController extends Controller
         $property = Property::create($request->all());
         if($request->type === 'room'){
             $newProperty = Property::orderBy('id', 'desc')->first();
-            // $id = $newProperty['id'];
-            RentalRoom::create([
-                'property_id'=> 1
+            $newRentalroom=RentalRoom::create([
+                'property_id'=> $newProperty['id']
             ]);
             $newRentalroom= RentalRoom::orderBy('id', 'desc')->first();
-            for($i=0; $i<$request->number_of_room; $i++){
+            for($i=0; $i < $request->number_of_room; $i++){
                 Room::create([
                     'rental_room_id'=> $newRentalroom['id'],
                 ]);
             }
         }
         return response()->json(['message' => 'created', 'data' => $property], 200);
+    }
+    public function createRoom()
+    {
+
     }
 }

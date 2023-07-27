@@ -1,4 +1,5 @@
 <template>
+  <div>
   <v-toolbar id="navbar" class="bg-white py-5" elevation="3">
     <v-toolbar-title>
       <div class="d-flex align-center">
@@ -13,7 +14,7 @@
       </div>
       <v-avatar id="logged-in" :image="profileUser" size="50"></v-avatar>
       <v-menu id="menu" activator="#logged-in">
-        <v-list>
+        <v-list rounded="lg">
           <v-list-item class="pa-5">
             <div class=" d-flex flex-column mb-10 justify-center">
               <p class=" text-h6 mb-3">Your Profile</p>
@@ -50,6 +51,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+  </div>
 </template>
 
 <script setup>

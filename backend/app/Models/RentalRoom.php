@@ -9,7 +9,7 @@ class RentalRoom extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'propery_id'
+        'property_id'
     ];
 
     public function property()

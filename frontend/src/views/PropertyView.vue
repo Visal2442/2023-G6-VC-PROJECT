@@ -1,5 +1,5 @@
 <template>
-     <div>
+     <div :class="[isFound ? '' : 'no-result']">
           <!-- Warning and Success Alert  -->
           <TheTransition id="warning">
                <v-alert v-model="isAlert" :class="alertBackground" width="30%" :icon="alertIcon" :text="alertMessage"
@@ -29,9 +29,10 @@
                                    <house-card :property="property" @rateStar="rateStar" @alert="alert"></house-card>
                               </v-col>
                          </v-row>
-                         <v-row v-else class="h-50">
-                              <v-col class="text-center text-h4">
-                                   <div>{{ notFoundMessage }}</div>
+                         <v-row v-else>
+                              <v-col class="text-center d-flex flex-column justify-center align-center">
+                                   <h1 align="center" class="text-black">{{ notFoundMessage }}</h1>
+                                   <v-img :src="require('../assets/no_result.gif')" width="460"></v-img>
                               </v-col>
                          </v-row>
                     </v-container>
@@ -179,5 +180,8 @@ onMounted(() => {
      position: sticky;
      top: 0;
      z-index: 100000;
+}
+.no-result{
+     background: white;
 }
 </style>

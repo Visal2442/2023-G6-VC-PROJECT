@@ -31,9 +31,9 @@
                 <td>
                   <div class="d-flex">
                     <v-card-subtitle v-if="property.available"
-                      class="pa-0 bg-light-blue-lighten-4 text-light-blue-darken-1 px-2 py-1 rounded-xl font-weight-bold">Available</v-card-subtitle>
+                      class="pa-0 bg-light-blue-lighten-4 text-light-blue-darken-1 px-2 py-1 rounded-lg font-weight-bold">Available</v-card-subtitle>
                     <v-card-subtitle v-else
-                      class="pa-0 bg-red-lighten-4 text-red-darken-1 px-2 py-1 rounded-xl font-weight-bold">Unavailable</v-card-subtitle>
+                      class="pa-0 bg-red-lighten-4 text-red-darken-1 px-2 py-1 rounded-lg font-weight-bold">Unavailable</v-card-subtitle>
                   </div>
                 </td>
                 <td>
@@ -264,7 +264,7 @@ thead th {
 }
 
 tbody td {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #e7e7e7;
   padding: 10px;
 }
 
@@ -273,7 +273,6 @@ tbody td {
   justify-content: end;
   margin-top: -1%;
 }
-
 
 .cancel:hover {
   background: rgb(239, 239, 239);
@@ -288,9 +287,11 @@ tbody td {
   justify-content: center;
   font-size: 30px;
 }
-
 .deleteDialog {
   height: 50%;
+}
+.v-img{ 
+  border-radius: 5px;
 }
 </style>
   

@@ -31,7 +31,7 @@
                   <td>{{ user.phone_number }}</td>
                   <td>
                     <div class="d-flex">
-                      <v-card-subtitle class="pa-0 px-2 py-1 rounded-xl font-weight-bold"
+                      <v-card-subtitle class="pa-0 px-2 py-1 rounded-lg font-weight-bold"
                         :class="[user.role === 'admin' ? adminBackground : '', user.role === 'landlord' ? landloardBackground : '', user.role === 'customer' ? customerBackground : '']">{{ user.role }}</v-card-subtitle>
                     </div>
                   </td>

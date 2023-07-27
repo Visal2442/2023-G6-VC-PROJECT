@@ -17,12 +17,10 @@ defineProps({
 .seconday-btn {
   border: 1px solid #00E676;
   margin-left: 2px;
-  color: #000;
 }
 .primary-btn {
     background: #00E676;
     margin-right: 2px;
-    color: #0f0e0e;
 }
 
 </style>
