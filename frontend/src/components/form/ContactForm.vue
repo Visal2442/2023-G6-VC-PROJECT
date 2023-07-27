@@ -50,7 +50,8 @@
                     :rules="rules.messageRules" v-model="message" variant="outlined"></v-textarea>
                 </div>
                 <div class="d-flex justify-end">
-                    <v-btn type="button" class=" mb-5 bg-green-accent-4 text-white px-15"  :disabled="!isValide" @click="userContact()">Submit</v-btn>
+                    <BaseButton type="primary-btn" :disabled="!isValide" @click="userContact()" >Submit</BaseButton>
+                    <!-- <v-btn type="button" class=" mb-5 bg-green-accent-4 text-white px-15"  :disabled="!isValide" @click="userContact()">Submit</v-btn> -->
                 </div>
             </v-form>
         </v-sheet>
@@ -61,6 +62,7 @@
 <script setup>
 import axios from 'axios';
 import { ref } from 'vue';
+import BaseButton from '../widget/BaseButton.vue';
 let isValide = ref(false);
 const username = ref(null);
 const message = ref(null);

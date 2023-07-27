@@ -10,7 +10,7 @@
               <p>Finding the perfect rental property can be a daunting task, but our website makes the process easy and stress-free. We offer a wide range of rental properties to suit every need and budget, from cozy room to spacious family homes.</p>
             <div class="align-center mt-5">
               <BaseButton type="primary-btn" :to="{name:'Contact'}">Contact Us</BaseButton>
-              <BaseButton type="seconday-btn">See More</BaseButton>
+              <BaseButton type="seconday-btn" :to="{name:'About'}">See More</BaseButton>
             </div>
           </div>
         </v-col>

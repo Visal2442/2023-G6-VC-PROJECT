@@ -1,5 +1,5 @@
 <template>
-  <div id="navbar" class="">
+  <div id="navbar">
     <!-- Large Screen -->
     <v-toolbar class="pa-4 px-12" :elevation="elevationNavbar" :style="{ background: backgroundNavbar }">
       <v-toolbar-items class="d-flex align-center">
@@ -21,7 +21,7 @@
         <!-- Before Login  -->
         <v-icon icon="mdi-dots-vertical" id="logged-in" v-else></v-icon>
         <v-menu id="menu" activator="#logged-in">
-          <v-list>
+          <v-list rounded="lg">
             <v-list-item>
               <v-btn variant="plain" :to="{ name: 'Register' }" prepend-icon="mdi mdi-login">Register</v-btn>
             </v-list-item>
