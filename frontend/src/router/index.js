@@ -160,7 +160,9 @@ const pageTitle = (title) => {
 };
 router.beforeEach(async (to, from, next) => {
   const { user_id, role } = storeToRefs(useAuthStore());
-
+  if (to.name === "404NotFound") {
+    next({ name: "NotFound" });
+  }
   if (!user_id.value) {
     if (to.name === "Wishlist") {
       alert("Please Login your account!");
@@ -173,7 +175,10 @@ router.beforeEach(async (to, from, next) => {
       next();
     }
   } else if (user_id.value) {
-    if ((role.value == "customer" && to.path.includes("dashboard")) || (role.value == "landlord" && to.path.includes("admin")) ) {
+    if (
+      (role.value == "customer" && to.path.includes("dashboard")) ||
+      (role.value == "landlord" && to.path.includes("admin"))
+    ) {
       pageTitle(to.meta.title);
       next({ name: "NotFound" });
     } else if (to.name === "Login" || to.name === "Register") {
