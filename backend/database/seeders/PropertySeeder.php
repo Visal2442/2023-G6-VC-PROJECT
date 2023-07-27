@@ -86,7 +86,7 @@ class PropertySeeder extends Seeder
                 'name' => 'Rooms for Rent',
                 'price' => 90,
                 'description' => 'This house is the perfect place to live and unwind. 1M 2M, St. 265, Samnong 12, Street 265, Phnom Penh',
-                'type' => 'room',
+                'type' => 'house',
                 'size' => '5m x 5m',
                 'number_of_floor' => 3,
                 'number_of_room' => 4,

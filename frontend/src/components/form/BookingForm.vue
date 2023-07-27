@@ -3,6 +3,11 @@
   <v-row justify="center" align="center" class=" mb-5">
     <img :src="require('../../assets/home/booking.png')" alt="" width="400" height="400" />
     <v-col xss="8" xs="10" sm="6" md="4" lg="5">
+      <!-- Success Alert  -->
+      <TheTransition id="warning">
+        <v-alert v-model="isAlert" width="30%" icon="$success" title="Successful !" text="Please Check Your Email" class="bg-green-accent-3"
+          closable></v-alert>
+      </TheTransition>
       <v-card ref="form" class="pa-8">
         <h2 class="text-center text-green-accent-4">Booking Form</h2>
         <v-form fast-fail class="d-flex flex-column" v-model="isValide">
@@ -30,7 +35,8 @@
             <p v-if="!isValidDate"></p>
 
           </v-row>
-          <BaseButton class="booking" type="primary-btn" :disabled="!isValide" @click="bookProperty()" block :loading="loading">Book Now</BaseButton>
+          <BaseButton class="booking" type="primary-btn" :disabled="!isValide" @click="bookProperty()" block
+            :loading="loading">Book Now</BaseButton>
         </v-form>
       </v-card>
     </v-col>
@@ -40,14 +46,17 @@
 <script setup>
 
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useBookingStore } from '../../store/BookingStore';
 import BaseButton from '../widget/BaseButton.vue';
+import TheTransition from '../widget/TheTransition.vue';
 
 const BookingStore = useBookingStore();
 const { booking } = BookingStore;
 const { isValide } = storeToRefs(BookingStore);
 const loading = ref(false);
+const router = useRouter();
 
 const firstName = ref(null);
 const lastName = ref(null);
@@ -58,7 +67,7 @@ const checkOutDate = ref(null);
 const userId = ref(localStorage.getItem('user_id'))
 const propertyId = ref(localStorage.getItem('property_id'))
 const roomId = ref(localStorage.getItem('room_id'))
-
+const isAlert = ref(false);
 
 const bookProperty = () => {
   const dataBooking = {
@@ -73,11 +82,18 @@ const bookProperty = () => {
     property_id: propertyId.value,
   }
   booking(dataBooking);
-  loading.value = true
+  loading.value = true;
   setTimeout(() => (
     loading.value = false,
-    resetInput()
-    ), 12000)
+    resetInput(),
+    isAlert.value = true
+  ), 12000)
+  setTimeout(() => (
+    isAlert.value = false,
+    setTimeout(()=>(
+      router.push('/')
+    ), 1000)
+  ), 13500)
 }
 // Reset the form data after the booking is successful
 const resetInput = () => {
@@ -104,11 +120,11 @@ const minDate = computed(() => {
 // Validation rules 
 const rules = ref({
   firstRules: [value => !!value || 'First name is required'],
-  lastRules: [value => !!value || 'First name is required'],
+  lastRules: [value => !!value || 'Last name is required'],
   emailRules: [value => !!value || 'Email is required',
-              value => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'Email must be valid',],
+  value => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'Email must be valid',],
   phoneRules: [value => !!value || 'Phone Number is required ',
-              value => /^\+?[0]\d{8,20}$/.test(value) || 'Phone Number is invalid'],
+  value => /^\+?[0]\d{8,20}$/.test(value) || 'Phone Number is invalid'],
   checkInDateRules: [value => !!value || 'check in date is required'],
   checkOutDateRules: [value => !!value || 'check out date is required'],
 })
@@ -123,4 +139,10 @@ const rules = ref({
 .booking {
   margin-top: 20px;
 }
-</style>
+
+#warning {
+  position: absolute;
+  top: 1;
+  right: 0;
+  z-index: 100000;
+}</style>

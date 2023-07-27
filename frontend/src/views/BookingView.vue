@@ -1,8 +1,12 @@
 <template>
-  <BookIng></BookIng>
+  <div>
+  <BookingForm></BookingForm>
+  </div>
 </template>
 <script setup>
 
-import BookIng from "../components/form/BookingForm.vue";
+import BookingForm from "../components/form/BookingForm.vue";
 </script>
-<style></style>
+<style>
+
+</style>

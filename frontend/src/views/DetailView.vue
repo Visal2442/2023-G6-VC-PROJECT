@@ -97,7 +97,7 @@
                         </div>
                       </div>
                       <div>
-                        <base-button type="primary-btn" @click="booking(room.id)">Book Now</base-button>
+                        <base-button type="primary-btn" @click="booking(room.id)" :disabled="!room?.available">Book Now</base-button>
                       </div>
                     </v-col>
                   </v-row>
