@@ -102,15 +102,28 @@ class PropertyController extends Controller
             'number_of_room' => 'required',
             'number_of_bathroom' => 'required',
             'number_of_kitchen' => 'required',
-            'image' => 'required',
+            'image' => '',
             'district_id' => 'required',
         ]);
-        if ($validator->fails()) {
             if ($validator->fails()) {
                 return response()->json(['status' => false, 'errors' => $validator->errors()], 402);
             }
+        if($request->image != null){
+            $property->update($validator->validated());
         }
-        $property->update($validator->validated());
+        else{
+            $property->update([
+                'name'=> $request->name,
+                'size'=> $request->size,
+                'price'=> $request->price,
+                'number_of_floor'=> $request->number_of_floor,
+                'number_of_room'=> $request->number_of_room,
+                'number_of_kitchen'=> $request->number_of_kitchen,
+                'number_of_bathroom'=> $request->number_of_bathroom,
+                'description'=> $request->description,
+                'district_id'=> $request->district_id,
+            ]);
+        }
         return response()->json(['message' => 'successfully updated', 'data' => $property], 200);
     }
 
@@ -159,9 +172,5 @@ class PropertyController extends Controller
             }
         }
         return response()->json(['message' => 'created', 'data' => $property], 200);
-    }
-    public function createRoom()
-    {
-
     }
 }

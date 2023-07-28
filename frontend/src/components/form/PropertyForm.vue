@@ -167,14 +167,13 @@ const resetInput = () => {
 const rules = ref({
     nameHouse: [value => !!value || 'Housename is required'],
     size: [value => !!value || 'size is required',],
-    price: [value => !!value || 'Price is required ',
-    ],
+    price: [value => !!value || 'Price is required '],
     numberFloor: [value => !!value || 'number of floor is required'],
     numberRoom: [value => !!value || 'number of room  is required'],
     numberKitchen: [value => !!value || 'number of kitchen  is required'],
     numberBathroom: [value => !!value || 'number of bathroom  is required'],
     description: [value => !!value || ' description is required'],
-    propertyImage: [value => !!value || ' Image property is required'],
+    // propertyImage: [value => !!value || ' Image property is required'],
     district: [value => !!value || ' districts of property is required'],
 })
 onMounted(() => {

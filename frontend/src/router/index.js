@@ -14,8 +14,6 @@ import NotFoundView from "../views/NotFoundView.vue";
 import BookingView from "../views/BookingView.vue";
 import Dashboard from "../views/admin/DashboardView.vue";
 import PostPropertyView from "../views/landlord/PostPropertyView.vue";
-// import LandlordPropertyView from "../views/landlord/LandlordPropertyView.vue";
-// import AdminPropertyView from "../views/admin/AdminPropertView.vue";
 import DashboardPropertyView from "@/views/DashboardPropertyView.vue";
 import ContactUsView from "../views/ContactUsView.vue";
 import UserView from "../views/admin/UserView.vue";
@@ -159,6 +157,8 @@ const router = createRouter({
 const pageTitle = (title) => {
   document.title = title;
 };
+
+// Protection Routes 
 router.beforeEach(async (to, from, next) => {
   const { user_id, role } = storeToRefs(useAuthStore());
   if (to.name === "404NotFound") {

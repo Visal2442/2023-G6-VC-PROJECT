@@ -144,7 +144,7 @@ const deleteDialog = ref(false);
 const houseName = ref("");
 const size = ref("");
 const pricePerMonth = ref(0);
-const image = ref(null);
+const image = ref('');
 const floor = ref(0);
 const numberOfRooms = ref(0);
 const numberOfKitchens = ref(0);
@@ -174,29 +174,30 @@ const getImage = (event) => {
 const editProperty = (propertyId) => {
     localStorage.setItem("property_id", propertyId);
     axios.get(`/properties/detail/${propertyId}`).then((response) => {
-        if (response.data.data.type == "house") {
-            houseName.value = response.data.data.name;
-            size.value = response.data.data.size;
-            pricePerMonth.value = response.data.data.price;
-            image.value = response.data.data.image;
-            floor.value = response.data.data.number_of_floor;
-            numberOfBathrooms.value = response.data.data.number_of_bathroom;
-            numberOfKitchens.value = response.data.data.number_of_kitchen;
-            numberOfRooms.value = response.data.data.number_of_room;
-            description.value = response.data.data.description;
-            selected.value = response.data.data.district.value;
+        const property = response.data.data;
+        if (property.type == "house") {
+            houseName.value = property.name;
+            size.value = property.size;
+            pricePerMonth.value = property.price;
+            image.value = property.image;
+            floor.value = property.number_of_floor;
+            numberOfBathrooms.value = property.number_of_bathroom;
+            numberOfKitchens.value = property.number_of_kitchen;
+            numberOfRooms.value = property.number_of_room;
+            description.value = property.description;
+            selected.value = property.district.value;
         } else {
-            houseName.value = response.data.data[0]["name"];
-            size.value = response.data.data[0]["size"];
-            pricePerMonth.value = response.data.data[0]["price"];
-            image.value = response.data.data[0]["image"];
+            houseName.value = property[0]["name"];
+            size.value = property[0]["size"];
+            pricePerMonth.value = property[0]["price"];
+            image.value = property[0]["image"];
             console.log(image.value);
-            floor.value = response.data.data[0]["number_of_floor"];
-            numberOfBathrooms.value = response.data.data[0]["number_of_bathroom"];
-            numberOfKitchens.value = response.data.data[0]["number_of_kitchen"];
-            numberOfRooms.value = response.data.data[0]["number_of_room"];
-            description.value = response.data.data[0]["description"];
-            selected.value = response.data.data[0]["district"]["value"];
+            floor.value = property[0]["number_of_floor"];
+            numberOfBathrooms.value = property[0]["number_of_bathroom"];
+            numberOfKitchens.value = property[0]["number_of_kitchen"];
+            numberOfRooms.value = property[0]["number_of_room"];
+            description.value = property[0]["description"];
+            selected.value = property[0]["district"]["value"];
         }
     });
     localStorage.setItem("property_id", propertyId);

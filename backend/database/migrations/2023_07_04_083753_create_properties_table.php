@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('number_of_room');
             $table->integer('number_of_bathroom');
             $table->integer('number_of_kitchen');
-            $table->string('image');
+            $table->string('image')->nullable(true);
             $table->decimal('latitude', 18,9);
             $table->decimal('longitude', 18,9);
             $table->boolean('available')->default(true);
