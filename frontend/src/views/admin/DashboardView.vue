@@ -4,10 +4,10 @@
             <!-- Summary  -->
             <v-row no-gutters>
                 <v-col id="summary" rounded="lg"
-                    class=" bg-light-green-lighten-4 d-flex flex-column justify-center align-center py-5">
+                    class="d-flex flex-column justify-center align-center py-5" :class="role == 'admin'?'bg-blue-lighten-4': 'bg-red-lighten-4'">
                     <v-img v-if="role == 'admin'" :src="require('../../assets/dashboard/group.png')" width="50"></v-img>
                     <v-img v-if="role == 'landlord'" :src="require('../../assets/dashboard/booking.png')" width="50"></v-img>
-                    <div class="text-light-blue-darken-1 d-flex flex-column align-center">
+                    <div class=" d-flex flex-column align-center" :class="role == 'admin'?'text-light-blue-darken-1': 'text-red-darken-1'">
                         <p v-if="role == 'admin'" class="font-weight-bold text-h6">Users</p>
                         <p v-else class="font-weight-bold text-h6">Bookings</p>
                         <p v-if="role == 'admin'">{{ userCount }}</p>
@@ -15,12 +15,12 @@
                     </div>
                 </v-col>
                 <v-col id="summary" rounded="lg"
-                    class=" bg-orange-lighten-4 d-flex flex-column justify-center align-center py-5">
+                    class=" d-flex flex-column justify-center align-center py-5" :class="role == 'admin'?'bg-purple-lighten-4': 'bg-orange-lighten-4' ">
                     <v-img v-if="role == 'admin'" :src="require('../../assets/dashboard/profile.png')" width="50"></v-img>
                     <v-img v-else :src="require('../../assets/dashboard/dollar.png')" width="50"></v-img>
-                    <div class="text-purple-darken-1 d-flex flex-column align-center">
+                    <div class=" d-flex flex-column align-center" :class="role == 'admin'?'text-purple-darken-1': 'text-orange-darken-1'">
                         <p v-if="role == 'admin'" class="font-weight-bold text-h6">Customers</p>
-                        <p v-else class="font-weight-bold text-h6">Price</p>
+                        <p v-else class="font-weight-bold text-h6 ">Price</p>
                         <p v-if="role == 'admin'">{{ customerCount }}</p>
                         <p v-else>${{ price }}</p>
                     </div>
@@ -33,9 +33,10 @@
                         <p>{{ landlordCount }}</p>
                     </div>
                 </v-col>
-                <v-col id="summary" class="bg-green-lighten-4 d-flex flex-column justify-center align-center py-5">
-                    <v-img :src="require('../../assets/dashboard/home.png')" width="50"></v-img>
-                    <div class="text-orange-darken-1 d-flex flex-column align-center">
+                <v-col id="summary" class=" d-flex flex-column justify-center align-center py-5" :class="role == 'admin'?'bg-orange-lighten-4': 'bg-blue-lighten-4'">
+                    <v-img v-if="role == 'admin'" :src="require('../../assets/dashboard/home2.png')" width="50"></v-img>
+                    <v-img v-else :src="require('../../assets/dashboard/home.png')" width="50"></v-img>
+                    <div class=" d-flex flex-column align-center" :class="role == 'admin'?'text-orange-darken-1': 'text-blue-darken-1'">
                         <p class="font-weight-bold text-h6">Properties</p>
                         <p v-if="role == 'admin'">{{ propertyCount }}</p>
                         <p v-else>{{ landlordPropties }}</p>
