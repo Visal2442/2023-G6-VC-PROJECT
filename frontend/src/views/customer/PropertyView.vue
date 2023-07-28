@@ -1,9 +1,9 @@
 <template>
      <div :class="[isFound ? '' : 'no-result']">
           <!-- Warning and Success Alert  -->
-          <TheTransition id="warning">
-               <v-alert v-model="isAlert" :class="alertBackground" width="30%" :icon="alertIcon" :text="alertMessage"
-                    closable>
+          <TheTransition>
+               <v-alert id="transition" v-model="isAlert" :class="alertBackground" width="30%" :icon="alertIcon"
+                    :text="alertMessage" closable>
                     <v-progress-linear v-model="progress" bg-color="green" absolute bottom></v-progress-linear>
                </v-alert>
           </TheTransition>
@@ -32,7 +32,7 @@
                          <v-row v-else>
                               <v-col class="text-center d-flex flex-column justify-center align-center">
                                    <h1 align="center" class="text-black">{{ notFoundMessage }}</h1>
-                                   <v-img :src="require('../assets/not_found/no_result.gif')" width="500"></v-img>
+                                   <v-img :src="require('../../assets/not_found/no_result.gif')" width="500"></v-img>
                               </v-col>
                          </v-row>
                     </v-container>
@@ -50,7 +50,7 @@ import axios from 'axios';
 import SearchLocation from '@/components/search/SearchLocation.vue';
 import FilterType from '@/components/search/FilterType.vue';
 import FilterByPrice from '@/components/search/FilterPrice.vue';
-import TheTransition from '../components/widget/TheTransition.vue';
+import TheTransition from '../../components/widget/TheTransition.vue';
 import HouseCard from '@/components/card/HouseCard.vue';
 
 // PAGINATION 
@@ -129,7 +129,7 @@ const onPrice = (value) => {
 
 // Rating Star
 const rateStar = (property) => {
-     axios.post('/properties/ratings', property).then(() => {}).catch(err => err);
+     axios.post('/properties/ratings', property).then(() => { }).catch(err => err);
 }
 
 // Warning and Success Alert 
@@ -145,7 +145,7 @@ const alert = (val) => {
                alertMessage.value = val.message;
                alertIcon.value = '$warning';
           }
-          else{
+          else {
                alertMessage.value = val.message;
                alertBackground.value = 'bg-green-accent-3';
           }
@@ -173,15 +173,18 @@ onMounted(() => {
 #container {
      height: 100vh;
 }
+
 .v-progress-linear {
      transition: 2s;
 }
-#warning {
+
+#transition {
      position: sticky;
      top: 0;
      z-index: 100000;
 }
-.no-result{
+
+.no-result {
      background: white;
 }
 </style>

@@ -5,7 +5,7 @@
 </div>
 </template>
 <script setup>
-import EmailForm from "../components/form/EmailForm.vue"
+import EmailForm from "../../components/form/EmailForm.vue"
 
 </script>
 <style></style>

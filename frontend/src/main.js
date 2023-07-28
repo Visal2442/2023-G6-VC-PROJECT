@@ -6,7 +6,7 @@ import { loadFonts } from './plugins/webfontloader'
 import './axios-http'
 
 import TheNavbar from './components/partials/TheNavbar.vue';
-import DashboardHeader from './components/partials/DashboardHeader.vue'
+import TheDashboardHeader from './components/partials/TheDashboardHeader.vue'
 
 // Pinia 
 import { createPinia } from 'pinia';
@@ -22,7 +22,7 @@ loadFonts()
 const app = createApp(App)
 app.use(vuetify)
 app.component("TheNavbar", TheNavbar),
-app.component("DashboardHeader", DashboardHeader),
+app.component("DashboardHeader", TheDashboardHeader),
 app.use(router)
 app.use(pinia)
 app.use(vue3GoogleLogin, {

@@ -5,7 +5,7 @@
   </div>
 </template>
 <script setup>
-import CodeForm from "../components/form/CodeForm.vue"
+import CodeForm from "../../components/form/CodeForm.vue"
 
 
 </script>

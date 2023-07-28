@@ -4,7 +4,7 @@
    </v-container>
 </template>
 <script setup>
-   import ContactForm from "../components/form/ContactForm.vue"
+   import ContactForm from "../../components/form/ContactForm.vue"
    
    
 </script>

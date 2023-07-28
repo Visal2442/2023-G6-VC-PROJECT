@@ -1,21 +1,21 @@
 import { createRouter, createWebHistory } from "vue-router";
 // Components
-import HomeView from "../views/HomeView.vue";
-import AboutView from "../views/AboutView.vue";
-import RegisterView from "../views/RegisterView.vue";
-import MapView from "../views/MapView.vue";
-import PropertyView from "../views/PropertyView.vue";
-import LoginView from "../views/LoginView.vue";
-import EmailView from "../views/EmailView.vue";
-import CodeView from "../views/CodeView.vue";
-import WishlistView from "../views/WishlistView.vue";
-import DetailView from "../views/DetailView.vue";
-import NotFoundView from "../views/NotFoundView.vue";
-import BookingView from "../views/BookingView.vue";
+import HomeView from "../views/customer/HomeView.vue";
+import AboutView from "../views/customer/AboutView.vue";
+import MapView from "../views/map/MapView.vue";
+import PropertyView from "../views/customer/PropertyView.vue";
+import RegisterView from "../views/auth/RegisterView.vue";
+import LoginView from "../views/auth/LoginView.vue";
+import EmailView from "../views/email/EmailView.vue";
+import CodeView from "../views/email/CodeView.vue";
+import WishlistView from "../views/customer/WishlistView.vue";
+import DetailView from "../views/customer/DetailView.vue";
+import NotFoundView from "../views/404/NotFoundView.vue";
+import BookingView from "../views/booking/BookingView.vue";
 import Dashboard from "../views/admin/DashboardView.vue";
 import PostPropertyView from "../views/landlord/PostPropertyView.vue";
-import DashboardPropertyView from "@/views/DashboardPropertyView.vue";
-import ContactUsView from "../views/ContactUsView.vue";
+import DashboardPropertyView from "@/views/landlord/DashboardPropertyView.vue";
+import ContactUsView from "../views/customer/ContactUsView.vue";
 import UserView from "../views/admin/UserView.vue";
 
 // AuthStore Pinia

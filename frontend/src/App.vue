@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import DashboardSidebar from './components/partials/DashboardSidebar.vue';
+import DashboardSidebar from './components/partials/TheDashboardSidebar.vue';
 import TheFooter from './components/partials/TheFooter.vue';
 import RouterTransition from './components/widget/RouterTransition.vue'
 import { useRoute } from 'vue-router';
@@ -38,7 +38,6 @@ const showLocation = (location) => {
   localStorage.setItem('currentLng', location.coords.longitude);
 }
 const showError = (error) => {
-  
   console.log(error);
 }
 // Get current location 

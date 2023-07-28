@@ -9,7 +9,7 @@
       </div>
       <v-row class="d-flex justify-center align-center" v-if="getWishlist.length <= 0">
         <div class="mb-10">
-          <v-img :src="require('../assets/home/EmptyCard.png')" class="ma-auto" width="40%"></v-img>
+          <v-img :src="require('../../assets/home/EmptyCard.png')" class="ma-auto" width="40%"></v-img>
           <h1 align="center" class="text-black">Wishlist is Empty</h1>
         </div>
       </v-row>
@@ -17,10 +17,10 @@
   </v-container>
 </template>
 <script setup>
-import WishlistCard from "../components/card/WishlistCard.vue";
+import WishlistCard from "../../components/card/WishlistCard.vue";
 
 // Wishlist Store 
-import { useWishlistStore } from '../store/WishlistStore';
+import { useWishlistStore } from '../../store/WishlistStore';
 import { storeToRefs } from "pinia";
 const wishlistStore = useWishlistStore();
 const { removeWishlist } = wishlistStore;

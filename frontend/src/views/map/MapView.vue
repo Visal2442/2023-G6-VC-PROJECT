@@ -32,14 +32,14 @@ import HouseCardOnMap from "@/components/card/HouseCardOnMap.vue";
 
 // Pinia Store
 import { storeToRefs } from "pinia";
-import { usePropertyStore } from '../store/PropertyStore';
+import { usePropertyStore } from '../../store/PropertyStore';
 const propertyStore = usePropertyStore();
 const { properties } = storeToRefs(propertyStore);
 
 // RESOURCE: https://vue2-leaflet.netlify.app/components/LPopup.html#demo 
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker, LPopup, LIcon } from "@vue-leaflet/vue-leaflet";
-import HomeIcon from '../assets/marker/homeIcon.png'
+import HomeIcon from '../../assets/marker/homeIcon.png'
 // Map Configuration 
 const zoom = 12;
 const center = [11.556576059366401, 104.92850555373343];

@@ -1,4 +1,9 @@
 <template>
+  <div>
+    <TheTransition id="transition">
+      <v-alert v-model="isAlert" width="30%" icon="$warning" text="Please Login to Your Account !"
+        class="bg-orange-accent-3" closable></v-alert>
+    </TheTransition>
   <v-container fluid class="pa-11">
     <v-row>
       <v-col cols="7">
@@ -40,8 +45,10 @@
             <v-card-text class="text-end">${{ property?.price }}/Month</v-card-text>
           </div>
           <div class="d-flex justify-center">
-            <base-button v-if="property?.type=='room'" type="primary-btn" class="w-100 mt-5 mb-3" disabled>Book</base-button>
-            <base-button v-else type="primary-btn" class="w-100 mt-5 mb-3" :disabled='!property?.available' @click="book()">Book</base-button>
+            <base-button v-if="property?.type == 'room'" type="primary-btn" class="w-100 mt-5 mb-3"
+              disabled>Book</base-button>
+            <base-button v-else type="primary-btn" class="w-100 mt-5 mb-3" :disabled='!property?.available'
+              @click="book()">Book</base-button>
           </div>
         </v-card>
       </v-col>
@@ -97,27 +104,28 @@
                         </div>
                       </div>
                       <div>
-                        <base-button type="primary-btn" @click="booking(room.id)" :disabled="!room?.available">Book Now</base-button>
+                        <base-button type="primary-btn" @click="booking(room.id)" :disabled="!room?.available">Book
+                          Now</base-button>
                       </div>
                     </v-col>
                   </v-row>
                 </v-card>
               </v-window-item>
-              <v-window-item value="overview" class="d-flex text-center"> 
+              <v-window-item value="overview" class="d-flex text-center">
                 <div class="propertyOverview mt-2 ma-5 pa-2 d-flex">
                   <v-icon class="mdi mdi-id-card text-center"></v-icon>
-                     <h4>Room Id:</h4>
-                      <h3>{{ property?.id }}</h3>
-                   </div>
-                  <div class="propertyOverview mt-2 ma-5 pa-2  d-flex">
-                    <v-icon class="mdi mdi-home-search-outline"></v-icon>
-                      <h4>Name:</h4>
-                      <h3>{{ property?.name }}</h3>
-                    </div>
-                  <div class="propertyOverview mt-2 ma-5 pa-2  d-flex">
-                    <v-icon class="mdi mdi-home-analytics">T:</v-icon>
-                      <h4>Type:</h4>
-                      <h3>{{ property?.type }}</h3>
+                  <h4>Room Id:</h4>
+                  <h3>{{ property?.id }}</h3>
+                </div>
+                <div class="propertyOverview mt-2 ma-5 pa-2  d-flex">
+                  <v-icon class="mdi mdi-home-search-outline"></v-icon>
+                  <h4>Name:</h4>
+                  <h3>{{ property?.name }}</h3>
+                </div>
+                <div class="propertyOverview mt-2 ma-5 pa-2  d-flex">
+                  <v-icon class="mdi mdi-home-analytics">T:</v-icon>
+                  <h4>Type:</h4>
+                  <h3>{{ property?.type }}</h3>
                 </div>
               </v-window-item>
             </v-window>
@@ -140,22 +148,25 @@
       </v-col>
     </v-row>
   </v-container>
+</div>
 </template>
 
 <script setup>
 import BaseButton from '@/components/widget/BaseButton.vue';
+import TheTransition from '@/components/widget/TheTransition.vue';
 import { computed, ref } from 'vue';
-import { useRoute,useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
-import HouseCardOnMap from '../components/card/HouseCardOnMap.vue';
+import HouseCardOnMap from '../../components/card/HouseCardOnMap.vue';
 const tab = ref(null);
+const isAlert = ref(false);
 
 // RESOURCE: https://vue2-leaflet.netlify.app/components/LPopup.html#demo
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker, LPopup, LIcon } from "@vue-leaflet/vue-leaflet";
-import HomeIcon from '../assets/marker/homeIcon.png'
+import HomeIcon from '../../assets/marker/homeIcon.png'
 import axios from 'axios';
 import Cookies from 'js-cookie';
 // Map Configuration 
@@ -177,7 +188,6 @@ const currentLat = ref(localStorage.getItem('currentLat'));
 const currentLng = ref(localStorage.getItem('currentLng'));
 let markerLat = ref(0);
 let markerLng = ref(0);
-// let emailCookies = ref(Cookies.get('email'));
 
 const getLatlng = (coordinate) => {
   markerLat.value = coordinate.latlng.lat;
@@ -185,9 +195,8 @@ const getLatlng = (coordinate) => {
 };
 
 
-
 const distance = computed(() => {
-  return calculateDistance(currentLat.value, markerLat.value, currentLng.value, markerLng.value ).toFixed(2);
+  return calculateDistance(currentLat.value, markerLat.value, currentLng.value, markerLng.value).toFixed(2);
 });
 
 // RESOURCE : https://www.geeksforgeeks.org/program-distance-two-points-earth/
@@ -218,7 +227,6 @@ function calculateDistance(lat1, lat2, lon1, lon2) {
 const property = ref(null);
 const rooms = ref([]);
 axios.get(`/properties/detail/${route.params.id}`).then((res) => {
-  console.log(res.data.data);
   if (res.data.data.length > 1) {
     rooms.value = res.data.data[1];
     property.value = res.data.data[0];
@@ -228,21 +236,25 @@ axios.get(`/properties/detail/${route.params.id}`).then((res) => {
 });
 
 // Booking 
-const booking = (room_id)=>{
-  if(Cookies.get('email') !== undefined){
-  localStorage.setItem('room_id', room_id);
-  router.push('/booking');
-  // router.push({name:'Booking', param:{id:property_id, rid:room_id}});
-  // router.push("{name:'Booking'}")
-  }else{
-    alert("Please login your account");
+const booking = (room_id) => {
+  if (Cookies.get('email') !== undefined) {
+    localStorage.setItem('room_id', room_id);
+    router.push('/booking');
+  } else {
+    isAlert.value = true;
+    setTimeout(()=>{
+      isAlert.value = false;
+    }, 2000);
   }
 }
-const book= () =>{
-  if(Cookies.get('email')){
-    router.push({name:'Booking'});
-  }else{
-    alert('Please login your account');
+const book = () => {
+  if (Cookies.get('email')) {
+    router.push({ name: 'Booking' });
+  } else {
+    isAlert.value = true;
+    setTimeout(()=>{
+      isAlert.value = false;
+    }, 2000);
   }
 }
 </script>
@@ -255,5 +267,8 @@ const book= () =>{
 #imgDetail {
   width: 100%;
   height: 530px;
+}
+#transition {
+     position: sticky;
 }
 </style>

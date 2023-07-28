@@ -4,9 +4,9 @@
     <img :src="require('../../assets/home/booking.png')" alt="" width="400" height="400" />
     <v-col xss="8" xs="10" sm="6" md="4" lg="5">
       <!-- Success Alert  -->
-      <TheTransition id="warning">
-        <v-alert v-model="isAlert" width="30%" icon="$success" title="Successful !" text="Please Check Your Email" class="bg-green-accent-3"
-          closable></v-alert>
+      <TheTransition id="transition">
+        <v-alert v-model="isAlert" width="30%" icon="$success" title="Successful !" text="Please Check Your Email"
+          class="bg-green-accent-3" closable></v-alert>
       </TheTransition>
       <v-card ref="form" class="pa-8">
         <h2 class="text-center text-green-accent-4">Booking Form</h2>
@@ -33,7 +33,6 @@
                 :rules="rules.checkOutDateRules" :min="minDate" />
             </v-col>
             <p v-if="!isValidDate"></p>
-
           </v-row>
           <BaseButton class="booking" type="primary-btn" :disabled="!isValide" @click="bookProperty()" block
             :loading="loading">Book Now</BaseButton>
@@ -90,7 +89,7 @@ const bookProperty = () => {
   ), 12000)
   setTimeout(() => (
     isAlert.value = false,
-    setTimeout(()=>(
+    setTimeout(() => (
       router.push('/')
     ), 1000)
   ), 13500)
@@ -110,7 +109,6 @@ const isValidDate = computed(() => {
   const today = new Date();
   return selected >= today;
 });
-
 const minDate = computed(() => {
   const today = new Date().toISOString().split('T')[0];
   return today;
@@ -128,7 +126,6 @@ const rules = ref({
   checkInDateRules: [value => !!value || 'check in date is required'],
   checkOutDateRules: [value => !!value || 'check out date is required'],
 })
-
 </script>
 
 <style scoped>
@@ -140,9 +137,6 @@ const rules = ref({
   margin-top: 20px;
 }
 
-#warning {
-  position: absolute;
-  top: 1;
+#transition {
   right: 0;
-  z-index: 100000;
 }</style>

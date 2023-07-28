@@ -10,7 +10,7 @@
           </div>
         </v-col>
         <v-col class="">
-          <v-img :src="require('../assets/home/about.png')" width="600" class="home-img"></v-img>
+          <v-img :src="require('../../assets/home/about.png')" width="600" class="home-img"></v-img>
         </v-col>
       </v-row>
       <v-row class="my-16 d-flex flex-column" align="center">
@@ -19,7 +19,7 @@
       <v-row class="my-16 d-flex flex-column justify-center" align="center">
         <v-card class="card d-flex">
           <div class="img">
-            <v-img :src="require('../assets/about/sal.jpg')" class="about-img"></v-img>
+            <v-img :src="require('../../assets/about/sal.jpg')" class="about-img"></v-img>
           </div>
           <div class="info d-flex flex-column">
             <h3 class="text-green-accent-3 mb-5 mt-5">SCRUM MASTER</h3>
@@ -34,7 +34,7 @@
         <div class="cards d-flex mt-16 ">
             <v-card class="card d-flex mr-5">
               <div class="img">
-                <v-img :src="require('../assets/about/yoer.jpg')" class="about-img"></v-img>
+                <v-img :src="require('../../assets/about/yoer.jpg')" class="about-img"></v-img>
               </div>
               <div class="info d-flex flex-column">
                 <h3 class="text-green-accent-3 mb-3 mt-2">DEVOPS</h3>
@@ -48,7 +48,7 @@
           </v-card>
           <v-card class="card d-flex">
               <div class="img">
-                <v-img :src="require('../assets/about/darath.jpg')" class="about-img"></v-img>
+                <v-img :src="require('../../assets/about/darath.jpg')" class="about-img"></v-img>
               </div>
               <div class="info d-flex flex-column">
                 <h3 class="text-green-accent-3 mb-5 mt-5">CODE QUALITY</h3>
@@ -65,7 +65,7 @@
         <div class="cards d-flex mt-16">
             <v-card class="card d-flex mr-5">
               <div class="img">
-                <v-img :src="require('../assets/about/phally.jpg')" class="about-img"></v-img>
+                <v-img :src="require('../../assets/about/phally.jpg')" class="about-img"></v-img>
               </div>
               <div class="info d-flex flex-column">
                 <h3 class="text-green-accent-3 mb-5 mt-5">QA MANAGER</h3>
@@ -79,7 +79,7 @@
           </v-card>
           <v-card class="card d-flex">
               <div class="img">
-                <v-img :src="require('../assets/about/sreyrea.jpg')" class="about-img"></v-img>
+                <v-img :src="require('../../assets/about/sreyrea.jpg')" class="about-img"></v-img>
               </div>
               <div class="info d-flex flex-column">
                 <h3 class="text-green-accent-3 mb-5 mt-5">UX/UI  MANAGER</h3>

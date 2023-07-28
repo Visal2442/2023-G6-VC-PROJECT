@@ -5,7 +5,7 @@
 </template>
 <script setup>
 
-import BookingForm from "../components/form/BookingForm.vue";
+import BookingForm from "../../components/form/BookingForm.vue";
 </script>
 <style>
 

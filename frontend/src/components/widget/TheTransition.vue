@@ -1,5 +1,5 @@
 <template>
-   <Transition name="alert" mode="out-in">
+   <Transition id="transition" name="alert" mode="out-in">
       <slot></slot>
     </Transition>
 </template>
@@ -19,5 +19,10 @@
 .alert-leave-to {
      transform: translateX(20px);
      opacity: 0;
+}
+#transition{
+  position: absolute;
+  top: 0;
+  z-index: 100000;
 }
 </style>

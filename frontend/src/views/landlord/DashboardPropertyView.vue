@@ -6,7 +6,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import DashboardProperty from '../components/dashboard/DashboardProperty.vue';
+import DashboardProperty from '../../components/dashboard/DashboardProperty.vue';
 import Cookies from 'js-cookie';
 
 // Property Store 

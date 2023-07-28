@@ -15,7 +15,7 @@
           </div>
         </v-col>
         <v-col class="">
-          <v-img :src="require('../assets/home/living-room-2732939_1280.jpg')" width="640" class="home-img"></v-img>
+          <v-img :src="require('../../assets/home/living-room-2732939_1280.jpg')" width="640" class="home-img"></v-img>
         </v-col>
       </v-row>
 
@@ -38,7 +38,7 @@
 
       <v-row class="mt-7 mb-16 mx-md-9" align="center">
         <v-col>
-          <v-img :src="require('../assets/home/mission3.jpeg')" width="640" class="home-img"></v-img>
+          <v-img :src="require('../../assets/home/mission3.jpeg')" width="640" class="home-img"></v-img>
         </v-col>
         <v-col>
           <div class="pl-4">
@@ -66,7 +66,7 @@
           </div>
         </v-col>
         <v-col>
-          <v-img :src="require('../assets/home/vision.jpeg')" width="640" class="home-img"></v-img>
+          <v-img :src="require('../../assets/home/vision.jpeg')" width="640" class="home-img"></v-img>
         </v-col>
       </v-row>
 
@@ -79,12 +79,12 @@
 </template>
 
 <script setup>
-import BaseButton from '../components/widget/BaseButton.vue';
-import TheGraph from '../components/graph/TheGraph.vue';
+import BaseButton from '../../components/widget/BaseButton.vue';
+import TheGraph from '../../components/graph/TheGraph.vue';
 import HouseCard from '@/components/card/HouseCard.vue';
 
 // Property store 
-import { usePropertyStore } from '../store/PropertyStore';
+import { usePropertyStore } from '../../store/PropertyStore';
 import { storeToRefs } from 'pinia';
 const { properties } = storeToRefs(usePropertyStore());
 
