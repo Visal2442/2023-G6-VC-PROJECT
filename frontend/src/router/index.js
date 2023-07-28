@@ -14,8 +14,9 @@ import NotFoundView from "../views/NotFoundView.vue";
 import BookingView from "../views/BookingView.vue";
 import Dashboard from "../views/admin/DashboardView.vue";
 import PostPropertyView from "../views/landlord/PostPropertyView.vue";
-import LandlordPropertyView from "../views/landlord/LandlordPropertyView.vue";
-import AdminPropertyView from "../views/admin/AdminPropertView.vue";
+// import LandlordPropertyView from "../views/landlord/LandlordPropertyView.vue";
+// import AdminPropertyView from "../views/admin/AdminPropertView.vue";
+import DashboardPropertyView from "@/views/DashboardPropertyView.vue";
 import ContactUsView from "../views/ContactUsView.vue";
 import UserView from "../views/admin/UserView.vue";
 
@@ -106,7 +107,7 @@ const routes = [
   {
     path: "/dashboard/admin/properties",
     name: "AdminProperties",
-    component: AdminPropertyView,
+    component: DashboardPropertyView,
     meta: { title: "Dashboard-Properties" },
   },
   {
@@ -131,7 +132,7 @@ const routes = [
   {
     path: "/dashboard/landlord/properties",
     name: "LandlordProperties",
-    component: LandlordPropertyView,
+    component: DashboardPropertyView,
     meta: { title: "Landlord-Property" },
   },
   // 404 Not Found
