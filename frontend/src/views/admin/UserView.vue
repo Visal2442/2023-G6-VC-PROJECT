@@ -4,7 +4,11 @@
       <v-row class="pa-1">
         <v-col>
           <v-sheet elevation="5" class=" pa-5 w-100" rounded="lg">
-            <table class=" w-100">
+            <div id="search" class=" d-flex flex-column">
+              <h2 class="pa-0 mb-8">Users</h2>
+              <v-text-field type="search" v-model="searchText" @input="searchUser(searchText)" label="Search" variant="outlined" density="compact" color="green-accent-4"></v-text-field>
+            </div>
+            <table class="w-100">
               <thead>
                 <tr>
                   <th>#ID</th>
@@ -31,7 +35,7 @@
                   <td>{{ user.phone_number }}</td>
                   <td>
                     <div class="d-flex">
-                      <v-card-subtitle class="pa-0 px-2 py-1 rounded-lg font-weight-bold"
+                      <v-card-subtitle class="pa-0 px-2 py-1 rounded-lg font-weight-bold text-capitalize"
                         :class="[user.role === 'admin' ? adminBackground : '', user.role === 'landlord' ? landloardBackground : '', user.role === 'customer' ? customerBackground : '']">{{ user.role }}</v-card-subtitle>
                     </div>
                   </td>
@@ -50,6 +54,12 @@
                 </tr>
               </tbody>
             </table>
+              <div class=" d-flex flex-column align-center justify-center">
+                <template v-if="users.length<=0">
+                  <v-img :src="require('../../assets/not_found/no_user.svg')"></v-img>
+                  <h2>No User Found</h2>
+                </template>
+              </div>
           </v-sheet>
         </v-col>
       </v-row>
@@ -110,13 +120,14 @@ const selected = ref('');
 const dialog = ref(false);
 const userName = ref('');
 const email = ref('');
+const searchText= ref('');
 
 const items = ref([
   { title: 'Landlord', value: 'landlord' },
   { title: 'Customer', value: 'customer' },
 ])
 const adminBackground = ref('bg-light-blue-lighten-5 text-light-blue-darken-1');
-const landloardBackground = ref('bg-green-lighten-4 text-green-darken-1');
+const landloardBackground = ref('bg-green-lighten-5 text-green-accent-4');
 const customerBackground = ref('bg-purple-lighten-5 text-purple-darken-1');
 
 const deleteUser = ref(false);
@@ -146,14 +157,23 @@ const editUser = () => {
       displayUsers();
     });
   }
-
 }
-const displayUsers = () => {
-  axios.get("/users").then((response) => {
-    users.value = response.data;
+
+const displayUsers = async () => {
+  let url = ref('/users');
+  if(searchText.value != ''){
+    url.value = url.value + '?name=' + searchText.value;
+  }
+  await axios.get(url.value).then((response) => {
+    users.value = response.data.data;
     console.log(users.value);
   });
 };
+
+const searchUser=(text)=>{
+  searchText.value = text;
+  displayUsers();
+}
 
 const deleteUserAccountByAddmin = (userId, role) => {
   localStorage.setItem('userId', userId);
@@ -208,5 +228,8 @@ tbody td {
 
 .input-container {
   gap: 10px;
+}
+#search .v-text-field{
+  width: 30%;
 }
 </style>
