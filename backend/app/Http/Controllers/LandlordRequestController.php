@@ -33,7 +33,7 @@ class LandlordRequestController extends Controller
             'message_request'=>$request->message_request,
 
         ];
-        Mail::to('rentalhouse.kh@gmail.com')->send(new LandlordRequestMail($sendData));
+        Mail::to('rentalhouse.org@gmail.com')->send(new LandlordRequestMail($sendData));
         
     }
 }

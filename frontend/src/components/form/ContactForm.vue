@@ -1,5 +1,15 @@
-<template>
+<template>  
+      
+        <TheTransition id="warning" >
+             <v-alert 
+            class="mr-5" v-model="alert"  width="40%"
+            type="success"
+            icon="$success" title="Successful !"
+            text="Your request was successfully!" closable
+        ></v-alert>
+        </TheTransition>
     <div fluid class="d-flex">
+      
         <v-seet class="d-flex flex-column flex-1 w-100 justify-center bg-green aling-center" elevation="4">
             <h2 class="text-center mb-8">OUR INFORMATION</h2>
             <div class="our-phone d-flex flex-column mb-9 ml-16" >
@@ -28,13 +38,7 @@
 
         </v-seet>
         <v-sheet class="m-10 w-100 bg-white pa-8 " elevation="4">
-            <v-alert v-if="alert"
-            class="mb-10"
-            type="success"
-            title="Alert title"
-            text="Your request was successfully!"
-            @click="clearAlert()"
-        ></v-alert>
+            
             <h2 class="text-center mb-9">CONTACT US</h2>
             <v-form fast-fail x="d-flex " v-model="isValide">
                 <div class=" d-flex">
@@ -50,7 +54,7 @@
                     :rules="rules.messageRules" v-model="message" variant="outlined"></v-textarea>
                 </div>
                 <div class="d-flex justify-end">
-                    <BaseButton type="primary-btn" :disabled="!isValide" @click="userContact()" >Submit</BaseButton>
+                    <BaseButton type="primary-btn" :disabled="!isValide" @click="userContact()" :loading="loading" >Submit</BaseButton>
                     <!-- <v-btn type="button" class=" mb-5 bg-green-accent-4 text-white px-15"  :disabled="!isValide" @click="userContact()">Submit</v-btn> -->
                 </div>
             </v-form>
@@ -60,6 +64,7 @@
 </template>
 
 <script setup>
+import TheTransition from '../widget/TheTransition.vue';
 import axios from 'axios';
 import { ref } from 'vue';
 import BaseButton from '../widget/BaseButton.vue';
@@ -69,17 +74,13 @@ const message = ref(null);
 const email = ref(null);
 const phone_number = ref(null);
 const alert = ref(false);
-
+const loading = ref(false);
 const remove = ()=>{
-        username.value ="",
-        phone_number.value ="",
-        email.value ="",
-        message.value =""
+        username.value =null,
+        phone_number.value =null,
+        email.value =null,
+        message.value =null
 }
-const clearAlert = ()=>{
-       alert.value = false
-}
-
 const userContact = () => {
     const user = {
         username: username.value,
@@ -87,16 +88,24 @@ const userContact = () => {
         email: email.value,
         message_request: message.value,
     }
+    loading.value = true;
     axios.post('/requestLandlord', user)
         .then(response => {
+        loading.value = false,
+        remove(),
+        alert.value = true
+        isValide.value = false
+        setTimeout(() => (
+        alert.value = false
+        ), 2000)
             console.log(response.data);
-            alert.value  = true;
-            remove()
         })
         .catch(error => {
             console.log(error);
         }
         );
+      
+       
     console.log(user);
 }
 // Validation rules 
@@ -113,6 +122,14 @@ const rules = ref({
 
 </script>
 
-<style>
-
+<style  scoped>
+#warning {
+  position: absolute;
+  top: 1;
+  right: 0;
+  z-index: 100000;
+  margin-top: -2%;
+  width: 30%;
+  margin-right: 2.5%;
+}
 </style>

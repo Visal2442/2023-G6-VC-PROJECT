@@ -17,8 +17,9 @@
         <v-form fast-fail x="d-flex flex-column" v-model="isValide">
           <v-text-field type="email" clearable color="green-accent-4" label="Email" placeholder="Enter email address"
             v-model="email" :rules="rules.emailRules"></v-text-field>
-          <v-text-field type="password" clearable color="green-accent-4" label="Password" name="password"
-            placeholder="Enter password" v-model="password" :rules="rules.passwordRules"></v-text-field>
+          <v-text-field color="green-accent-4"  :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" label="Password" name="password" 
+            placeholder="Enter password" v-model="password" :rules="rules.passwordRules"  
+            @click:append-inner="showPassword = !showPassword" :type="showPassword ? 'text' : 'password'"></v-text-field>
           <v-card-actions>
             <v-col cols="auto pa-0" class="forgotPassword">
               <router-link :to="{ name: 'Email' }">Forgot Password?</router-link>
@@ -45,7 +46,7 @@ const authStore = useAuthStore();
 
 const { isValide, errors } = storeToRefs(authStore);
 const {login, register } = authStore;
-
+const showPassword = ref(false);
 const password = ref(null);
 const email = ref(null);
 const errorMessage = ref(false);

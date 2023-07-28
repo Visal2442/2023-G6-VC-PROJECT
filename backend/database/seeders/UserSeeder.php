@@ -144,7 +144,7 @@ class UserSeeder extends Seeder
             [
                 'username' => 'Rental House',
                 'phone_number' => '079126481',
-                'email' => 'rentalhouse.kh@gmail.com',
+                'email' => 'rentalhouse.org@gmail.com',
                 'password' => Hash::make('password'),
                 'role' => 'admin',
                 'image'=>'http://127.0.0.1:8000/images/1043821798.png'
