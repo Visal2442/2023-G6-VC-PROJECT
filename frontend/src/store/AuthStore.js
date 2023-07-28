@@ -18,6 +18,7 @@ export const useAuthStore = defineStore('auth', () => {
   const password = ref('');
   const passwordConfirmation = ref('');
   const emailLocalStorage = ref('');
+  const alert = ref(false);
 
 
   // Register 
@@ -93,6 +94,12 @@ export const useAuthStore = defineStore('auth', () => {
           .then((res)=>{
             console.log(res);
             localStorage.setItem('email', emailSend.value);
+            setTimeout(()=>{
+              alert.value = true;
+              setTimeout(()=>{
+                alert.value = false;
+              },3000)
+            },1000);
             router.push({name:'Code'});
           }).catch(error=>{
             message.value = error.response.data.message;
@@ -135,5 +142,6 @@ export const useAuthStore = defineStore('auth', () => {
       verificationCode,
       password,
       passwordConfirmation,
+      alert
     };
 });

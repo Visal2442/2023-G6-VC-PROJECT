@@ -1,4 +1,5 @@
 <template>
+  
   <v-container fluid class=" my-10">
   <v-row justify="center" align="center">
     <img :src="require('../../assets/forgot_password.png')" alt="" width="500" height="500" />
@@ -29,7 +30,7 @@ import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
 const authStore = useAuthStore();
-const { emailSend, message } = storeToRefs(authStore);
+const { emailSend, message, } = storeToRefs(authStore);
 const { sendEmail } = authStore;
 
 const loading = ref(false);
@@ -37,6 +38,7 @@ const sendMail = ()=>{
   sendEmail();
   loading.value = true;
   setTimeout(()=>(loading.value = false), 4000);
+  
 }
 const rules = ref({
   emailRules: [(value) => !!value || "Email is required"],

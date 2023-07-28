@@ -53,25 +53,29 @@
           </template>
         </template>
         <!--  -->
+
         <v-text-field
-          type="password"
-          clearable
-          name="password"
           color="green-accent-4"
           label="Password"
+          name="password"
           placeholder="Enter password"
           v-model="password"
           :rules="rules.passwordRules"
+          :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append-inner="showPassword = !showPassword"
+          :type="showPassword ? 'text' : 'password'"
         ></v-text-field>
         <v-text-field
-          type="password"
-          clearable
+       
           name="password_confirmation"
           color="green-accent-4"
           label="Confirm Password"
           placeholder="Confirm Password"
           v-model="password_confirmation"
           :rules="rules.confirmRules"
+          :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append-inner="showPassword = !showPassword"
+          :type="showPassword ? 'text' : 'password'"
         ></v-text-field>
         <v-btn
           type="button"
@@ -107,6 +111,7 @@ const authStore = useAuthStore();
 const { isValide, errors } = storeToRefs(authStore);
 const { register } = authStore;
 
+const showPassword = ref(false);
 const username = ref(null);
 const password = ref(null);
 const email = ref(null);
