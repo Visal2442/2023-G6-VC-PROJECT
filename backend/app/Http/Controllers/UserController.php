@@ -17,14 +17,17 @@ class UserController extends Controller
     // get landlords
     public function getLandlord()
     {
-        $landlord = User::where('role', 'Landlord')->get();
-        return $landlord;
+        $landlords = User::where('role', 'Landlord')->get();
+        return response()->json(['message' => 'success', 'data' => $landlords], 200);
     }
     // get getAllUsers
-    public function getAllUsers()
+    public function getAllUsers(Request $request)
     {
         $users = User::all();
-        return $users;
+        if($request->name!=''){
+            $users = User::where('username', 'like', '%'.$request->name. '%')->get();
+        }
+        return response()->json(['message' => 'success', 'data' => $users], 200);
     }
 
     /**
