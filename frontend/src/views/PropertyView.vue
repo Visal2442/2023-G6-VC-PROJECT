@@ -8,7 +8,7 @@
                </v-alert>
           </TheTransition>
           <v-container fluid class="mr-md-9">
-               <div :id="isFound ? '' : 'container'">
+               <div>
                     <div class=" w-75 ma-auto">
                          <SearchLocation @onSearch="onSearch" @onInput="onInput"></SearchLocation>
                          <v-row>
@@ -32,7 +32,7 @@
                          <v-row v-else>
                               <v-col class="text-center d-flex flex-column justify-center align-center">
                                    <h1 align="center" class="text-black">{{ notFoundMessage }}</h1>
-                                   <v-img :src="require('../assets/no_result.gif')" width="460"></v-img>
+                                   <v-img :src="require('../assets/not_found/no_result.gif')" width="500"></v-img>
                               </v-col>
                          </v-row>
                     </v-container>

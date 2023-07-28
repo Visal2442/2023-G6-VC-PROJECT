@@ -47,6 +47,9 @@
             <v-row class="pa-1">
                 <v-col>
                     <v-sheet elevation="5" class=" pa-5 w-100" rounded="lg">
+                        <div class="d-flex flex-column">
+                            <h2 class="pa-0 mb-8">Landlords</h2>
+                        </div>
                         <table class=" w-100">
                             <thead>
                                 <tr>
@@ -58,7 +61,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(landlord,index) of landlords" :key="index">
+                                <tr v-for="(landlord, index) of landlords" :key="index">
                                     <td>#{{ landlord.id }}</td>
                                     <td>
                                         <div class="d-flex align-center">
@@ -74,15 +77,19 @@
                                     <td>{{ landlord.phone_number }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <v-card-subtitle class="pa-0 bg-green-lighten-4 text-green-accent-4 px-2 py-1 rounded-xl font-weight-bold">{{ landlord.role }}</v-card-subtitle>
+                                            <v-card-subtitle
+                                                class="pa-0 bg-green-lighten-5 rounded-lg text-green-accent-4 text-capitalize px-2 py-1 font-weight-bold">{{
+                                                    landlord.role }}</v-card-subtitle>
                                         </div>
                                     </td>
                                     <td v-if="role == 'admin'">
                                         <div class="d-flex align-center">
-                                            <v-icon class="mdi mdi-pencil-outline mr-3" size="small" color="blue-accent-4" @click="getData(landlord.id)">
+                                            <v-icon class="mdi mdi-pencil-outline mr-3" size="small" color="blue-accent-4"
+                                                @click="getData(landlord.id)">
                                                 <v-tooltip activator="parent" location="top">Edit</v-tooltip>
                                             </v-icon>
-                                            <v-icon class="mdi mdi-trash-can-outline" size="small" color="red" @click="deleteUserAccountByAddmin(landlord.id)">
+                                            <v-icon class="mdi mdi-trash-can-outline" size="small" color="red"
+                                                @click="deleteUserAccountByAddmin(landlord.id)">
                                                 <v-tooltip activator="parent" location="top">Delete</v-tooltip>
                                             </v-icon>
                                         </div>
@@ -94,21 +101,22 @@
                 </v-col>
             </v-row>
         </v-container>
-           <!-- Edit user form  -->
-           <v-dialog v-model="dialog" width="35%" class="" >
-            <v-card rounded="lg" >
+        <!-- Edit user form  -->
+        <v-dialog v-model="dialog" width="35%" class="">
+            <v-card rounded="lg">
                 <v-card-title class="pa-0 pa-3 bg-green-accent-4 text-white">Edit User</v-card-title>
                 <div class=" w-100 bg-white pa-5">
                     <v-form fast-fail x="d-flex flex-column">
-                            <v-text-field type="text" clearable color="green-accent-4" label="Username" v-model="userName"
-                                placeholder="Enter Your Username" class="pa-0" density="compact" variant="outlined"
-                                rounded="lg"></v-text-field>
-                            <v-text-field type="email" clearable color="green-accent-4" label="Email" name="email" v-model="email"
-                                placeholder="Enter Your Email" density="compact" variant="outlined"
-                                rounded="lg"></v-text-field>
-                            <v-select v-model="selected" :items="items" density="compact" variant="outlined" label="Role" placeholder="Role"></v-select>
+                        <v-text-field type="text" clearable color="green-accent-4" label="Username" v-model="userName"
+                            placeholder="Enter Your Username" class="pa-0" density="compact" variant="outlined"
+                            rounded="lg"></v-text-field>
+                        <v-text-field type="email" clearable color="green-accent-4" label="Email" name="email"
+                            v-model="email" placeholder="Enter Your Email" density="compact" variant="outlined"
+                            rounded="lg"></v-text-field>
+                        <v-select v-model="selected" :items="items" density="compact" variant="outlined" label="Role"
+                            placeholder="Role"></v-select>
                         <v-card-actions class="button">
-                            <v-btn class="cancel text-red" color="black" text @click="cancel()">Cancel</v-btn>
+                            <v-btn class="cancel text-red" color="black" text @click="dialog = !dialog">Cancel</v-btn>
                             <BaseButton type="primary-btn" @click="editUser()">Update</BaseButton>
                         </v-card-actions>
                     </v-form>
@@ -117,30 +125,32 @@
         </v-dialog>
         <!-- Delete user dialog  -->
         <v-dialog v-model="deleteUser" width="35%">
-      <v-card>
-        <v-sheet class="m-5 w-100 bg-white pa-5" elevation="4">
-          <div class="cencelIcon">
-            <v-icon class="mdi mdi-alert text-red"></v-icon>
-          </div>
-          <v-form fast-fail x="d-flex flex-column">
-            <p align="center" class="mb-5 mt-5">
-              Do you want to delete this user?
-            </p>
-            <v-card-actions class="button">
-              <v-btn class="cancel text-button text-blue mr-1" @click="cancelDelete()">Cancel</v-btn>
-              <v-btn class="deleteBtn bg-red text-overline text-white" @click="deleteUserAccount()" color="black">
-                Delete
-              </v-btn>
-            </v-card-actions>
-          </v-form>
-        </v-sheet>
-      </v-card>
-    </v-dialog>
+            <v-card>
+                <v-sheet class="m-5 w-100 bg-white pa-5" elevation="4">
+                    <div class="cencelIcon">
+                        <v-icon class="mdi mdi-alert text-red"></v-icon>
+                    </div>
+                    <v-form fast-fail x="d-flex flex-column">
+                        <p align="center" class="mb-5 mt-5">
+                            Do you want to delete this user?
+                        </p>
+                        <v-card-actions class="button">
+                            <v-btn class="cancel text-button text-blue mr-1"
+                                @click="deleteUser = !deleteUser">Cancel</v-btn>
+                            <v-btn class="deleteBtn bg-red text-overline text-white" @click="deleteUserAccount()"
+                                color="black">
+                                Delete
+                            </v-btn>
+                        </v-card-actions>
+                    </v-form>
+                </v-sheet>
+            </v-card>
+        </v-dialog>
     </div>
 </template>
 
 <script setup>
-import { ref, computed,onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import BaseButton from '@/components/widget/BaseButton.vue';
 import Cookies from 'js-cookie';
@@ -151,8 +161,8 @@ const dialog = ref(false);
 const userName = ref('');
 const email = ref('');
 const items = ref([
-     { title: 'Landlord', value: 'landlord' },
-     { title: 'Customer', value: 'customer' },
+    { title: 'Landlord', value: 'landlord' },
+    { title: 'Customer', value: 'customer' },
 ]);
 const price = ref(0);
 const property = ref([]);
@@ -165,134 +175,108 @@ const landlordPropties = ref([]);
 
 // property count
 axios.get(`/properties`).then((res) => {
-  property.value = res.data.data;
+    property.value = res.data.data;
 });
 
-const getData = (user_id) => {   
+const getData = (user_id) => {
     localStorage.setItem('userId', user_id);
     axios.get(`/userId/${user_id}`)
-    .then(res => {
-        console.log(res.data.data);
-        userName.value = res.data.data.username;
-        email.value = res.data.data.email;
-        selected.value = res.data.data.role;
-    })
+        .then(res => {
+            console.log(res.data.data);
+            userName.value = res.data.data.username;
+            email.value = res.data.data.email;
+            selected.value = res.data.data.role;
+        })
     dialog.value = true;
 }
-const getNumberOfBooking = () => {   
+const getNumberOfBooking = () => {
     const id = localStorage.getItem('user_id');
-    axios.get(`/numberOfBooking/`,{params:{'user_id':id}})
-    .then(res => {
-        booking.value =(res.data.data).length;
-        for(let item of res.data.data) {
-            price.value += item['price'];
-            console.log(price.value);
-        }
-        // console.log(booking.value);
-    })
+    axios.get(`/numberOfBooking/`, { params: { 'user_id': id } })
+        .then(res => {
+            booking.value = (res.data.data).length;
+            for (let item of res.data.data) {
+                price.value += item['price'];
+            }
+        })
 }
-const getAllProperties = () => {   
+const getAllProperties = () => {
     const id = localStorage.getItem('user_id');
     axios.get(`/getAllProperties/${id}`)
-    .then(res => {
-        landlordPropties.value =(res.data.data).length;
-        console.log(landlordPropties.value);
-    })
+        .then(res => {
+            landlordPropties.value = (res.data.data).length;
+        })
 }
 
-onMounted(() =>{
-    getAllProperties();
-    getNumberOfBooking();
-})
-
-const editUser = () =>{
+const editUser = () => {
     const id = localStorage.getItem('userId');
-    if(userName.value !=='' && email.value !=='' && selected.value !==''){
+    if (userName.value !== '' && email.value !== '' && selected.value !== '') {
         const userData = {
-        'username':userName.value,
-        'email':email.value,
-        'role':selected.value
+            'username': userName.value,
+            'email': email.value,
+            'role': selected.value
         }
-        axios.put(`/updateUser/${id}`, userData).then(res => {
-            console.log(res.data);
+        axios.put(`/updateUser/${id}`, userData).then(() => {
             dialog.value = false;
             displayUsers();
         });
     }
-    
+
 }
-
-
 const propertyCount = computed(() => {
-  return property.value.length;
+    return property.value.length;
 });
 
 // user count
 axios.get(`/users`).then((res) => {
-    users.value = res.data;
+    users.value = res.data.data;
 });
-
 const userCount = computed(() => {
-  return users.value.length;
+    return users.value.length;
 });
-
 // customer count
 axios.get(`/customers`).then((res) => {
     customers.value = res.data;
 });
-
 const customerCount = computed(() => {
-  return customers.value.length;
+    return customers.value.length;
 });
-
 // landlord count
 const displayUsers = () => {
     axios.get(`/landlords`).then((res) => {
-        landlords.value = res.data;
+        landlords.value = res.data.data;
     });
 };
-
-
-
 const landlordCount = computed(() => {
-  return landlords.value.length;
+    return landlords.value.length;
 });
 
 const deleteUserAccountByAddmin = (userId, role) => {
-  localStorage.setItem('userId', userId);
-  localStorage.setItem('userRole', role);
-  if(localStorage.getItem('userRole') !== 'admin') {
-      deleteUser.value = true;
-
-  }else{
-    alert("Can not delete admin account!");
-  }
+    localStorage.setItem('userId', userId);
+    localStorage.setItem('userRole', role);
+    if (localStorage.getItem('userRole') !== 'admin') {
+        deleteUser.value = true;
+    } else {
+        alert("Can not delete admin account!");
+    }
 };
-const cancelDelete = () => {
-    deleteUser.value = false;
-}
-const cancel = () => {
-    dialog.value = false;
-}
 const deleteUserAccount = () => {
-  let Id = localStorage.getItem('userId');
-        axios
-        .delete(`/delete_user/${Id}`)
+    let id = localStorage.getItem('userId');
+    axios
+        .delete(`/delete_user/${id}`)
         .then(() => {
-             displayUsers();
+            displayUsers();
         })
         .catch((errors) => {
-        console.log(errors);
+            console.log(errors);
         });
+    deleteUser.value = false;
 
-        console.log(localStorage.getItem("user_id"));
-        deleteUser.value = false;
-    
 };
 onMounted(() => {
-  displayUsers();
+    displayUsers();
+    getAllProperties();
+    getNumberOfBooking();
 });
-
 </script>
 
 <style scoped>
@@ -318,6 +302,4 @@ tbody td {
     border-bottom: 1px solid #b8b2b2;
     padding: 10px;
 }
-
-
 </style>
