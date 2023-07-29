@@ -121,12 +121,11 @@ const errorMessage = ref(null);
 
 // Login with google
 const callback = (res) => {
-  console.log(decodeCredential(res.credential));
   const userDetail = decodeCredential(res.credential);
   const user = {
-    username: userDetail.given_name + " " + userDetail.family_name,
+    username: userDetail.given_name + ' ' + userDetail.family_name,
     email: userDetail.email,
-    password: Math.floor(Math.random() * 10000000000),
+    image:userDetail.picture,
     isGoogle: true,
   };
   register(user);

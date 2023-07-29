@@ -28,7 +28,8 @@ class AuthenticationController extends Controller
                 $user = User::create([
                     'username' => $request->username,
                     'email' => $request->email,
-                    'password' => Hash::make($request->password),
+                    'image' => $request->image,
+                    'role' => 'customer'
                 ]);
                 $token = $user->createToken('API Token')->plainTextToken;
                 return response()->json([

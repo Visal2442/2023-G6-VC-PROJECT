@@ -56,7 +56,7 @@ const callback = (res) => {
   const user = {
     username: userDetail.given_name + ' ' + userDetail.family_name,
     email: userDetail.email,
-    password: Math.floor(Math.random() * 10000000000),
+    image:userDetail.picture,
     isGoogle: true,
   }
   register(user);
