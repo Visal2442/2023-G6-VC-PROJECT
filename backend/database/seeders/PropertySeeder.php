@@ -147,7 +147,7 @@ class PropertySeeder extends Seeder
                 'image' => 'https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=4woFU7Gel0T9PU9iNQp_3A&cb_client=search.gws-prod.gps&w=408&h=240&yaw=252.94035&pitch=0&thumbfov=100',
                 'latitude' => 11.552419850052758,  
                 'longitude' =>104.91804893988257, 
-                'district_id'=>14,
+                'district_id'=>11,
                 'user_id' =>2
             ],
             [
@@ -164,7 +164,7 @@ class PropertySeeder extends Seeder
                 'image' => 'https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=tIW9lPZIEshSf_IUd2QgOw&cb_client=search.gws-prod.gps&w=408&h=240&yaw=241.30049&pitch=0&thumbfov=100',
                 'latitude' => 11.555849586394775,  
                 'longitude' => 104.9174774011904, 
-                'district_id'=>14,
+                'district_id'=>9,
                 'user_id' =>2
             ],
             [
@@ -198,8 +198,8 @@ class PropertySeeder extends Seeder
                 'image' => 'https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=HLdnn8-WAAwtABRu5TaXyA&cb_client=search.gws-prod.gps&w=408&h=240&yaw=221.04066&pitch=0&thumbfov=100',
                 'latitude' => 11.564709015943269,   
                 'longitude' => 104.89195704523705,
-                'district_id'=>14,
-                'user_id' =>1
+                'district_id'=>4,
+                'user_id' =>2
             ],
             [
                 'name' => 'The Loft Apartment',
@@ -216,7 +216,7 @@ class PropertySeeder extends Seeder
                 'latitude' => 11.548097331630432,  
                 'longitude' => 104.91386617142261,
                 'district_id'=>14,
-                'user_id' =>1
+                'user_id' =>2
             ],
             [
                 'name' => 'Monorom Apartment',
@@ -233,7 +233,7 @@ class PropertySeeder extends Seeder
                 'latitude' => 11.553070399377502,   
                 'longitude' => 104.92300272433401,
                 'district_id'=>14,
-                'user_id' =>1
+                'user_id' =>2
             ],
             [
                 'name' => 'House Rent',
@@ -249,7 +249,7 @@ class PropertySeeder extends Seeder
                 'image' => 'https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=ApUWf1_ZjHktNjUhlgnXoQ&cb_client=search.gws-prod.gps&w=408&h=240&yaw=353.38065&pitch=0&thumbfov=100',
                 'latitude' => 11.57034812635234,   
                 'longitude' => 104.88358855403156,
-                'district_id'=>13,
+                'district_id'=>8,
                 'user_id' =>2
             ],
             [
@@ -266,7 +266,7 @@ class PropertySeeder extends Seeder
                 'image' => 'https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=KpTNUAdDVTdg7X-GsZ_rFg&cb_client=search.gws-prod.gps&w=408&h=240&yaw=149.11296&pitch=0&thumbfov=100',
                 'latitude' => 11.55504395836901,  
                 'longitude' => 104.89405989820152,  
-                'district_id'=>13,
+                'district_id'=>6,
                 'user_id' =>2
             ],
             [
@@ -283,7 +283,7 @@ class PropertySeeder extends Seeder
                 'image' => 'https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=KpTNUAdDVTdg7X-GsZ_rFg&cb_client=search.gws-prod.gps&w=408&h=240&yaw=149.11296&pitch=0&thumbfov=100',
                 'latitude' => 11.55504395836901,  
                 'longitude' => 104.89405989820152,  
-                'district_id'=>13,
+                'district_id'=>7,
                 'user_id' =>2
             ],
             [
@@ -300,7 +300,7 @@ class PropertySeeder extends Seeder
                 'image' => 'https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=86y4JyN8Pj_JU8-wmpYX9w&cb_client=search.gws-prod.gps&w=408&h=240&yaw=124.16608&pitch=0&thumbfov=100',
                 'latitude' => 11.548484773308328,
                 'longitude' =>  104.89938140097644,  
-                'district_id'=>13,
+                'district_id'=>10,
                 'user_id' =>2
             ],
             [
@@ -439,25 +439,6 @@ class PropertySeeder extends Seeder
                 'district_id'=>1,
                 'user_id'=>2
             ],
-            [
-                'name' => 'Beach House',
-                'price' => 2500,
-                'description' => 'This cozy beach house is just steps away from the ocean.',
-                'type' => 'house',
-                'size' => '16m x 18m',
-                'number_of_floor' => 2,
-                'number_of_room' => 20,
-                'number_of_bathroom' => 3,
-                'number_of_kitchen' => 1,
-                'available'=>true,
-                'image' => 'https://impacthomes.co.in/wp-content/uploads/2023/04/luxury-home.jpg',
-                'latitude' => 16.087255235965642,
-                'longitude' => 106.18163954869556,
-                'district_id'=>1,
-                'user_id'=>2
-            ],
-            
-            
         ];
         foreach($properties as $property){
             Property::create($property);

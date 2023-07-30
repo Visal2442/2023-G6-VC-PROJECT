@@ -118,14 +118,6 @@ class UserSeeder extends Seeder
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
             [
-                'username' => 'Gareth Poulton',
-                'phone_number' => '0987654321',
-                'email' => 'gareth.poulton@passerellesnumeriques.org',
-                'password' => Hash::make('password'),
-                'role' => 'customer',
-                'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
-            ],
-            [
                 'username' => 'Him Hey',
                 'phone_number' => '0987654321',
                 'email' => 'him.hey@passerellesnumeriques.org',
@@ -134,9 +126,9 @@ class UserSeeder extends Seeder
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
             ],
             [
-                'username' => 'Mengheang Pho',
+                'username' => 'Visal',
                 'phone_number' => '0987654321',
-                'email' => 'mengheang.pho@passerellesnumeriques.org',
+                'email' => 'visal123@gmail.com',
                 'password' => Hash::make('password'),
                 'role' => 'customer',
                 'image'=>'https://cdn-icons-png.flaticon.com/128/1999/1999625.png'
