@@ -73,15 +73,6 @@ watch(errors, (newValue) => {
   errorMessage.value = newValue;
 })
 
-
-
-// Validation rules 
-const rules = ref({
-  emailRules: [value => !!value || 'Email is required',],
-  passwordRules: [value => !!value || 'Password is required',
-  value => (value && value.length >= 8) || 'Password at least 8 characters'],
-})
-
 </script>
 
 <style scoped>
