@@ -9,8 +9,8 @@ export const usePropertyStore = defineStore("property", () => {
     const userId = ref(localStorage.getItem('user_id'));
 
     // Get all properties
-    const getAllProperties = () => {
-        axios.get("/properties")
+    const getAllProperties = async() => {
+        await axios.get("/properties")
             .then((res) => {
                 properties.value = res.data.data;
             })
@@ -20,8 +20,8 @@ export const usePropertyStore = defineStore("property", () => {
     };
 
     // Get 12 properties per page
-    const getPropertiesPerPage = () => {
-        axios.get("/properties/pagination")
+    const getPropertiesPerPage = async() => {
+        await axios.get("/properties/pagination")
             .then((res) => {
                 propertiesPerpage.value = res.data;
             })
@@ -31,8 +31,8 @@ export const usePropertyStore = defineStore("property", () => {
     };
 
     // Get properties by user id 
-    const getPropertiesByUserId = () => {
-        axios.get(`/getAllProperties/${userId.value}`)
+    const getPropertiesByUserId = async() => {
+        await axios.get(`/getAllProperties/${userId.value}`)
             .then((res) => {
                 userProperties.value = res.data.data;
             })
@@ -40,8 +40,8 @@ export const usePropertyStore = defineStore("property", () => {
     }
 
     // Delete property by id
-    const deletePropertyById = (propertyId) => {
-        axios.delete(`/properties/delete/${propertyId}`)
+    const deletePropertyById = async(propertyId) => {
+       await axios.delete(`/properties/delete/${propertyId}`)
             .then(() => {
                 getPropertiesByUserId();
                 getAllProperties();
@@ -52,8 +52,8 @@ export const usePropertyStore = defineStore("property", () => {
     };
 
     // Update property by id
-    const updatePropertyById = (propertyId, data) => {
-        axios.put(`/updateProperty/${propertyId}`, data)
+    const updatePropertyById = async(propertyId, data) => {
+        await axios.put(`/updateProperty/${propertyId}`, data)
         .then(() => {
             getPropertiesByUserId();
             getAllProperties();

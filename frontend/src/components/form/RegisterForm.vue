@@ -109,7 +109,7 @@ import { storeToRefs } from "pinia";
 import { useAuthStore } from "../../store/AuthStore";
 const authStore = useAuthStore();
 const { isValide, errors } = storeToRefs(authStore);
-const { register } = authStore;
+const { register, token } = authStore;
 
 const showPassword = ref(false);
 const username = ref(null);
@@ -131,7 +131,7 @@ const callback = (res) => {
   register(user);
 };
 // Login with form
-const signUp = () => {
+const signUp = async() => {
   const user = {
     username: username.value,
     password: password.value,
@@ -139,7 +139,10 @@ const signUp = () => {
     phone_number: phone_number.value,
     email: email.value,
   };
-  register(user);
+  await register(user);
+  if(token){
+    this.$router.push('/')
+  }
 };
 watch(errors, (newValue, oldValue) => {
   console.log(`Count changed from ${oldValue} to ${newValue}`);

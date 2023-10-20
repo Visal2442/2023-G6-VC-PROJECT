@@ -104,9 +104,9 @@ computed(() => {
 })
 
 // Search district 
-const onSearch = (id) => {
+const onSearch = async(id) => {
      district_id.value = id;
-     getProperties();
+     await getProperties();
 }
 const onInput = (value) => {
      if (value == '') {
@@ -128,8 +128,8 @@ const onPrice = (value) => {
 }
 
 // Rating Star
-const rateStar = (property) => {
-     axios.post('/properties/ratings', property).then(() => { }).catch(err => err);
+const rateStar = async(property) => {
+     await axios.post('/properties/ratings', property).then(() => { }).catch(err => err);
 }
 
 // Warning and Success Alert 

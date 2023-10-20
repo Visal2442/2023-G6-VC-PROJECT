@@ -16,7 +16,7 @@
           
         </div>
         <!-- After Logged in -->
-        <v-avatar id="logout" :image="profileCookie" size="50" v-if="cookieEmail && profileCookie"></v-avatar>
+        <v-avatar id="logout" :image="profileCookie" size="50" v-if="token"></v-avatar>
 
         <!-- Before Login  -->
         <v-icon icon="mdi-dots-vertical" id="logged-in" v-else></v-icon>
@@ -85,7 +85,7 @@ import { useAuthStore } from '../../store/AuthStore';
 import { storeToRefs } from 'pinia';
 const authStore = useAuthStore();
 const { logout } = authStore;
-const { role } = storeToRefs(authStore);
+const { role,token } = storeToRefs(authStore);
 
 const navItems = ref([
   { title: 'Home', name: 'Home' },
@@ -94,7 +94,7 @@ const navItems = ref([
   { title: 'Map', name: 'Map' },
   { title: 'Contact Us', name: 'Contact' },
 ])
-const cookieEmail = ref(Cookies.get('email'));
+// const cookieEmail = ref(Cookies.get('email'));
 const profileCookie = ref(Cookies.get('image'));
 const roleUser = ref(Cookies.get('role'));
 const email = ref(Cookies.get('email'));
