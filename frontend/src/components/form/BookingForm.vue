@@ -12,25 +12,25 @@
         <h2 class="text-center text-green-accent-4">Booking Form</h2>
         <v-form fast-fail class="d-flex flex-column" v-model="isValide">
           <v-text-field color="green-accent-4" ref="Your First Name" label="First Name"
-            placeholder="Enter your first name" v-model="firstName" :rules="rules.firstRules"></v-text-field>
+            placeholder="Enter your first name" v-model="firstName" :rules="rule.firstRules"></v-text-field>
           <v-text-field color="green-accent-4" ref="Your Last Name" label="Last Name" placeholder="Enter your Last Name"
-            v-model="lastName" :rules="rules.lastRules"></v-text-field>
+            v-model="lastName" :rules="rule.lastRules"></v-text-field>
           <v-text-field color="green-accent-4" ref="Phone Number" label="Phone Number"
-            placeholder="Enter your phone number" v-model="phoneNumber" :rules="rules.phoneRules"></v-text-field>
+            placeholder="Enter your phone number" v-model="phoneNumber" :rules="rule.phoneRules"></v-text-field>
           <v-text-field color="green-accent-4" ref="Email" label="Enter your email" placeholder="Enter your email"
-            v-model="email" :rules="rules.emailRules"></v-text-field>
+            v-model="email" :rules="rule.emailRules"></v-text-field>
           <v-row>
             <v-col>
               <p>Check in date:</p>
               <input type="date" class="checkInDate w-100 bg-grey-lighten-4 pa-3 rounded-sm" id="select_date"
-                v-model="checkInDate" :rules="rules.checkInDateRules" :min="minDate" />
+                v-model="checkInDate" :rules="rule.checkInDateRules" :min="minDate" />
             </v-col>
 
             <p v-if="!isValidDate"></p>
             <v-col class="ma checkoutDate">
               <p>Check out date:</p>
               <input type="date" class="pa-3 w-100 rounded-sm bg-grey-lighten-4" v-model="checkOutDate"
-                :rules="rules.checkOutDateRules" :min="minDate" />
+                :rules="rule.checkOutDateRules" :min="minDate" />
             </v-col>
             <p v-if="!isValidDate"></p>
           </v-row>
@@ -113,19 +113,6 @@ const minDate = computed(() => {
   const today = new Date().toISOString().split('T')[0];
   return today;
 });
-
-
-// Validation rules 
-const rules = ref({
-  firstRules: [value => !!value || 'First name is required'],
-  lastRules: [value => !!value || 'Last name is required'],
-  emailRules: [value => !!value || 'Email is required',
-  value => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'Email must be valid',],
-  phoneRules: [value => !!value || 'Phone Number is required ',
-  value => /^\+?[0]\d{8,20}$/.test(value) || 'Phone Number is invalid'],
-  checkInDateRules: [value => !!value || 'check in date is required'],
-  checkOutDateRules: [value => !!value || 'check out date is required'],
-})
 </script>
 
 <style scoped>

@@ -10,6 +10,7 @@
           <v-container fluid class="mr-md-9">
                <div>
                     <div class=" w-75 ma-auto">
+                         <h1>{{ emoji }}</h1>
                          <SearchLocation @onSearch="onSearch" @onInput="onInput"></SearchLocation>
                          <v-row>
                               <v-col>
@@ -22,11 +23,12 @@
                               </v-col>
                          </v-row>
                     </div>
-
                     <v-container fluid class="ml-md-9">
                          <v-row class="mr-md-10" v-if="isFound">
                               <v-col md="3" v-for="(property, i) of properties" :key="i">
-                                   <house-card :property="property" @rateStar="rateStar" @alert="alert"></house-card>
+                                   <v-skeleton-loader type="card" :loading="loading">
+                                        <house-card :property="property" @rateStar="rateStar" @alert="alert"></house-card>
+                                   </v-skeleton-loader>
                               </v-col>
                          </v-row>
                          <v-row v-else>
@@ -65,6 +67,8 @@ const type = ref('');
 const price = ref('');
 const isFound = ref(true);
 const notFoundMessage = ref('');
+let loading = ref(true);
+const emoji = ref('');
 
 const getProperties = async () => {
      let url = ref('/properties/pagination?page=' + pagination.value.current);
@@ -79,6 +83,8 @@ const getProperties = async () => {
      }
      try {
           const response = await Promise.all([axios.get(url.value)]);
+          console.log(response[0].data)
+          emoji.value = response[0].data.emoji
           properties.value = response[0].data.data.data;
           pagination.value.total = response[0].data.data.last_page;
           isFound.value = true;
@@ -88,13 +94,15 @@ const getProperties = async () => {
           isFound.value = false;
      }
 }
-const onPageChange = () => {
+const onPageChange = async () => {
+     loading.value = true;
      window.scrollTo({
           top: 0,
           left: 0,
           behavior: 'smooth'
      });
-     getProperties();
+     await getProperties();
+     loading.value = false
 }
 computed(() => {
      if (district_id.value != '') {
@@ -108,17 +116,19 @@ const onSearch = async(id) => {
      district_id.value = id;
      await getProperties();
 }
-const onInput = (value) => {
+const onInput = async(value) => {
      if (value == '') {
           district_id.value = '';
-          getProperties();
+          await getProperties();
      }
 }
 
 // Select type house or room 
-const onSelect = (value) => {
+const onSelect = async(value) => {
+     loading.value = true
      type.value = value;
-     getProperties();
+     await getProperties();
+     loading.value = false
 }
 
 // Filter house by price 
@@ -164,8 +174,9 @@ const alert = (val) => {
      }
 }
 
-onMounted(() => {
-     getProperties();
+onMounted(async() => {
+     await getProperties();
+     loading.value = false;
 });
 </script>
 

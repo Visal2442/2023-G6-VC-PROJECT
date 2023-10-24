@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <div fluid class="d-flex">
             <v-seet class="d-flex flex-column flex-1 w-100 justify-center bg-green aling-center" elevation="4">
                 <h2 class="text-center mb-8">OUR INFORMATION</h2>
@@ -36,18 +35,18 @@
                 <v-form fast-fail x="d-flex " v-model="isValide">
                     <div class=" d-flex">
                         <v-text-field type="text" clearable color="green-accent-4" label="Username" name="username"
-                            placeholder="username" variant="outlined" class="mr-3" :rules="rules.usernameRules"
+                            placeholder="username" variant="outlined" class="mr-3" :rules="rule.usernameRules"
                             v-model="username"></v-text-field>
                         <v-text-field type="text" clearable color="green-accent-4" label="Phone" name="phoneNumber"
-                            placeholder="Phone Number" variant="outlined" :rules="rules.phoneRules"
+                            placeholder="Phone Number" variant="outlined" :rules="rule.phoneRules"
                             v-model="phone_number"></v-text-field>
                     </div>
                     <v-text-field type="Email" clearable color="green-accent-4" label="Email" name="email"
-                        placeholder="Your Email Address" :rules="rules.emailRules" v-model="email"
+                        placeholder="Your Email Address" :rules="rule.emailRules" v-model="email"
                         variant="outlined"></v-text-field>
                     <div class="d-flex">
                         <v-textarea clearable label="Your Message" placeholder="Message" color="green-accent-4"
-                            :rules="rules.messageRules" v-model="message" variant="outlined"></v-textarea>
+                            :rules="rule.messageRules" v-model="message" variant="outlined"></v-textarea>
                     </div>
                     <div class="d-flex justify-end">
                         <BaseButton type="primary-btn" :disabled="!isValide" @click="userContact()" :loading="loading">
@@ -101,18 +100,6 @@ const userContact = () => {
         }
         );
 }
-// Validation rules 
-const rules = ref({
-    usernameRules: [value => !!value || 'Username is required'],
-    emailRules: [value => !!value || 'Email is required'],
-    phoneRules: [value => !!value || 'Phone Number is required ',
-    value => /^\+?[0]\d{8,20}$/.test(value) || 'Phone Number is invalid'],
-    messageRules: [value => !!value || 'message is required']
-
-});
-
-
-
 </script>
 
 <style scoped>

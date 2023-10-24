@@ -8,10 +8,11 @@ export const useAuthStore = defineStore("auth", {
   state: () => ({
     errors: "",
     // router : useRouter(),
-    isValide: false,
+    isValid: false,
     token: localStorage.getItem("token"),
     emailSend: "",
     message: "",
+    profile:"",
     user_id: localStorage.getItem("user_id"),
     role: Cookies.get("role"),
 
@@ -22,18 +23,35 @@ export const useAuthStore = defineStore("auth", {
     alert: false,
   }),
   actions: {
+    setUserData(username, image, role, email, user_id, token){
+      Cookies.set("username", username, { expires: 30 });
+      Cookies.set("profile", image, { expires: 30 });
+      Cookies.set("role", role, { expires: 30 });
+      Cookies.set("email", email, { expires: 30 });
+      localStorage.setItem("user_id", user_id);
+      localStorage.setItem("token", token);
+    },
+    resetUserData(){
+      Cookies.remove("email");
+      Cookies.remove("role");
+      Cookies.remove("username");
+      Cookies.remove("profile");
+      localStorage.removeItem("user_id");
+      localStorage.removeItem("token");
+      localStorage.removeItem("wishListData");
+      this.user_id = null;
+      this.token = null;
+      this.profile = null;
+    },
     // Register
     async register(user) {
       await axios
         .post("/register", user)
         .then((res) => {
-          Cookies.set("username", res.data.user.username, { expires: 30 });
-          Cookies.set("image", res.data.user.image, { expires: 30 });
-          Cookies.set("role", res.data.user.role, { expires: 30 });
-          Cookies.set("email", user.email, { expires: 30 });
-          this.user_id = localStorage.setItem("user_id", res.data.user.id);
-          localStorage.setItem("token", res.data.token);
-          this.token = localStorage.getItem("token");
+          this.setUserData(res.data.user.username,res.data.user.image,res.data.user.role,user.email,res.data.user.id,res.data.token)
+          this.user_id = res.data.user.id;
+          this.token = res.data.token;
+          this.profile = res.data.user.image
           // this.router.push('/')
         })
         .catch((err) => {
@@ -47,13 +65,9 @@ export const useAuthStore = defineStore("auth", {
       await axios
         .post("/login", user)
         .then((res) => {
-          Cookies.set("username", res.data.user.username, { expires: 30 });
-          Cookies.set("image", res.data.user.image, { expires: 30 });
-          Cookies.set("role", res.data.user.role, { expires: 30 });
-          Cookies.set("email", user.email, { expires: 30 });
-          this.user_id = localStorage.setItem("user_id", res.data.user.id);
-          localStorage.setItem("token", res.data.token);
-          this.token.value = localStorage.getItem("token");
+          this.setUserData(res.data.user.username,res.data.user.image,res.data.user.role,user.email,res.data.user.id,res.data.token)
+          this.user_id = localStorage.getItem("user_id");
+          this.token = localStorage.getItem("token");
           if (res.data.user.role === "admin") {
             // this.router.push('/dashboard/admin')
           } else if (res.data.user.role === "landlord") {
@@ -76,15 +90,7 @@ export const useAuthStore = defineStore("auth", {
           },
         })
         .then(() => {
-          this.user_id = null;
-          Cookies.remove("email");
-          Cookies.remove("role");
-          Cookies.remove("username");
-          Cookies.remove("image");
-          localStorage.removeItem("user_id");
-          localStorage.removeItem("token");
-          localStorage.removeItem("wishListData");
-          this.token = localStorage.getItem("token");
+          this.resetUserData()
           window.location.href = "/";
         })
         .catch((err) => {
@@ -132,5 +138,8 @@ export const useAuthStore = defineStore("auth", {
           console.error(error.response.data);
         });
     },
+  },
+  getters:{
+    isLoggedIn:(state) => state.token && state.user_id
   }
 });

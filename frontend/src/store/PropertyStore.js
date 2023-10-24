@@ -12,7 +12,7 @@ export const usePropertyStore = defineStore("property", () => {
     const getAllProperties = async() => {
         await axios.get("/properties")
             .then((res) => {
-                properties.value = res.data.data;
+                properties.value = res.data.data
             })
             .catch((err) => {
                 console.log(err);

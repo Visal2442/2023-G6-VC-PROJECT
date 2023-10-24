@@ -16,9 +16,9 @@
         </Transition>
         <v-form fast-fail x="d-flex flex-column" v-model="isValide">
           <v-text-field type="email" clearable color="green-accent-4" label="Email" placeholder="Enter email address"
-            v-model="email" :rules="rules.emailRules"></v-text-field>
+            v-model="email" :rules="rule.emailRules"></v-text-field>
           <v-text-field color="green-accent-4"  :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" label="Password" name="password" 
-            placeholder="Enter password" v-model="password" :rules="rules.passwordRules"  
+            placeholder="Enter password" v-model="password" :rules="rule.passwordRules"  
             @click:append-inner="showPassword = !showPassword" :type="showPassword ? 'text' : 'password'"></v-text-field>
           <v-card-actions>
             <v-col cols="auto pa-0" class="forgotPassword">

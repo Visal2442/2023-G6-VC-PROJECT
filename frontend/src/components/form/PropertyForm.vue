@@ -5,44 +5,44 @@
                 <div class=" d-flex">
                     <v-text-field type="text" clearable color="green-accent-4" label="House Name" class="mr-5"
                         placeholder="House Name" variant="outlined" v-model="nameHouse"
-                        :rules="rules.nameHouse"></v-text-field>
+                        :rules="rule.nameHouse"></v-text-field>
                     <v-text-field type="text" clearable color="green-accent-4" label="Size" name="size" placeholder="Size"
-                        variant="outlined" v-model="size" :rules="rules.size"></v-text-field>
+                        variant="outlined" v-model="size" :rules="rule.size"></v-text-field>
                 </div>
                 <div class=" d-flex">
                     <v-text-field type="number" clearable color="green-accent-4" label="Price Per Month" class="mr-5"
                         placeholder="Price Per Month" variant="outlined" v-model="price"
-                        :rules="rules.price"></v-text-field>
+                        :rules="rule.price"></v-text-field>
                     <v-text-field type="file" clearable color="green-accent-4" label="Image" name="image"
                         placeholder="Image" variant="outlined" ref="image" @change="getImage"
-                        :rules="rules.propertyImage"></v-text-field>
+                        :rules="rule.propertyImage"></v-text-field>
                 </div>
                 <div class="d-flex">
                     <v-text-field type="number" clearable color="green-accent-4" label="Floor" class="mr-5" name="floor"
                         placeholder="Floor" variant="outlined" v-model="numberFloor"
-                        :rules="rules.numberFloor"></v-text-field>
+                        :rules="rule.numberFloor"></v-text-field>
                     <v-text-field v-if="type !== 'room'" type="number" clearable color="green-accent-4"
                         label="Number Of Room" class="mr-5" name="room" placeholder="Number Of Room" variant="outlined"
-                        v-model="numberRoom" :rules="rules.numberRoom"></v-text-field>
+                        v-model="numberRoom" :rules="rule.numberRoom"></v-text-field>
                     <v-text-field type="number" clearable color="green-accent-4" label="Number Of Kitchen" class="mr-5"
                         name="kitchen" placeholder="Number Of Kitchen" variant="outlined" v-model="numberKitchen"
-                        :rules="rules.numberKitchen"></v-text-field>
+                        :rules="rule.numberKitchen"></v-text-field>
                     <v-text-field type="number" clearable color="green-accent-4" label="Number Of Bathroom" name="bathroom"
                         placeholder="Number Of Bathroom" variant="outlined" v-model="numberBathroom"
-                        :rules="rules.numberBathroom"></v-text-field>
+                        :rules="rule.numberBathroom"></v-text-field>
                 </div>
                 <div class="d-flex">
                     <v-text-field v-if="type == 'room'" type="number" clearable color="green-accent-4"
                         label="Number Of Room" class="mr-5" name="room" placeholder="Number Of Room You Want To Rent" variant="outlined"
-                        v-model="numberRoom" :rules="rules.numberRoom"></v-text-field>
+                        v-model="numberRoom" :rules="rule.numberRoom"></v-text-field>
                 </div>
                 <div class="d-flex">
                     <v-select v-model="selected" placeholder="districts" label="Select District" :items="districts"
-                        density="compact" color="green-accent-4" variant="outlined" :rules="rules.district"></v-select>
+                        density="compact" color="green-accent-4" variant="outlined" :rules="rule.district"></v-select>
                 </div>
                 <div class="d-flex">
                     <v-textarea clearable label="Description" placeholder="Discription" color="green-accent-4"
-                        variant="outlined" v-model="description" :rules="rules.description"></v-textarea>
+                        variant="outlined" v-model="description" :rules="rule.description"></v-textarea>
                 </div>
                 <div class="d-flex flex-column mb-10">
                     <!-- ** -->
@@ -162,20 +162,6 @@ const resetInput = () => {
         propertyImage.value = null,
         selected.value = ''
 };
-
-// Validation rules 
-const rules = ref({
-    nameHouse: [value => !!value || 'Housename is required'],
-    size: [value => !!value || 'size is required',],
-    price: [value => !!value || 'Price is required '],
-    numberFloor: [value => !!value || 'number of floor is required'],
-    numberRoom: [value => !!value || 'number of room  is required'],
-    numberKitchen: [value => !!value || 'number of kitchen  is required'],
-    numberBathroom: [value => !!value || 'number of bathroom  is required'],
-    description: [value => !!value || ' description is required'],
-    // propertyImage: [value => !!value || ' Image property is required'],
-    district: [value => !!value || ' districts of property is required'],
-})
 onMounted(() => {
     axios.get('/districts').then(res => {
         districts.value = res.data.data;

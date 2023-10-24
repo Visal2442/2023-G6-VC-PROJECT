@@ -12,7 +12,7 @@
       </div>
       <v-form ref="form" fast-fail class="d-flex flex-column">
         <v-text-field class="mb-5" ref="Email" color="green-accent-4" label="Email" placeholder="Enter email address"
-          v-model="emailSend" :rules="rules.emailRules" :error-messages="message"></v-text-field>
+          v-model="emailSend" :rules="rule.emailRules" :error-messages="message"></v-text-field>
         <v-btn v-if="emailSend" @click="sendMail()" block class="mt-2 mb-5 bg-green-accent-4 text-white" :loading="loading">Send</v-btn>
         <div class="button">
           <v-btn :to="{ name: 'Login' }" block class="mt-2 mb-5 bg-green-accent-4 text-white">Back</v-btn>
@@ -40,9 +40,6 @@ const sendMail = ()=>{
   setTimeout(()=>(loading.value = false), 4000);
   
 }
-const rules = ref({
-  emailRules: [(value) => !!value || "Email is required"],
-});
 </script>
 
 <style scoped>

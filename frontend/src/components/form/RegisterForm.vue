@@ -17,14 +17,14 @@
         />
         <p class="text-lg-h5 mb-5 text-green-accent-4">Register Account</p>
       </div>
-      <v-form fast-fail class="d-flex flex-column" v-model="isValide">
+      <v-form fast-fail class="d-flex flex-column" v-model="validForm">
         <v-text-field
           clearable
           color="green-accent-4"
           label="Username"
           placeholder="Enter your username"
           v-model="username"
-          :rules="rules.usernameRules"
+          :rules="rule.usernameRules"
         ></v-text-field>
         <v-text-field
           type="tel"
@@ -33,7 +33,7 @@
           label="Phone Number"
           placeholder="Enter phone number"
           v-model="phone_number"
-          :rules="rules.phoneRules"
+          :rules="rule.phoneRules"
         ></v-text-field>
         <v-text-field
           type="email"
@@ -42,7 +42,7 @@
           label="Email"
           placeholder="Enter email address"
           v-model="email"
-          :rules="rules.emailRules"
+          :rules="rule.emailRules"
         ></v-text-field>
         <!-- display error message  -->
         <template v-if="errorMessage">
@@ -60,26 +60,25 @@
           name="password"
           placeholder="Enter password"
           v-model="password"
-          :rules="rules.passwordRules"
+          :rules="rule.passwordRules"
           :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append-inner="showPassword = !showPassword"
           :type="showPassword ? 'text' : 'password'"
         ></v-text-field>
         <v-text-field
-       
           name="password_confirmation"
           color="green-accent-4"
           label="Confirm Password"
           placeholder="Confirm Password"
           v-model="password_confirmation"
-          :rules="rules.confirmRules"
+          :rules="rule.confirmRules"
           :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append-inner="showPassword = !showPassword"
           :type="showPassword ? 'text' : 'password'"
         ></v-text-field>
         <v-btn
           type="button"
-          :disabled="!isValide"
+          :disabled="!validForm"
           @click="signUp()"
           block
           class="mt-2 mb-5 bg-green-accent-4 text-white pa-5"
@@ -100,76 +99,64 @@
 </template>
 
 
-<script setup>
-import { ref, watch } from "vue";
-
+<script> 
 import { decodeCredential } from "vue3-google-login";
 // Pinia Store
-import { storeToRefs } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { useAuthStore } from "../../store/AuthStore";
-const authStore = useAuthStore();
-const { isValide, errors } = storeToRefs(authStore);
-const { register, token } = authStore;
-
-const showPassword = ref(false);
-const username = ref(null);
-const password = ref(null);
-const email = ref(null);
-const phone_number = ref(null);
-const password_confirmation = ref(null);
-const errorMessage = ref(null);
-
-// Login with google
-const callback = (res) => {
-  const userDetail = decodeCredential(res.credential);
-  const user = {
-    username: userDetail.given_name + ' ' + userDetail.family_name,
-    email: userDetail.email,
-    image:userDetail.picture,
-    isGoogle: true,
-  };
-  register(user);
-};
-// Login with form
-const signUp = async() => {
-  const user = {
-    username: username.value,
-    password: password.value,
-    password_confirmation: password_confirmation.value,
-    phone_number: phone_number.value,
-    email: email.value,
-  };
-  await register(user);
-  if(token){
-    this.$router.push('/')
+export default {
+  data(){
+    return {
+      validForm:false,
+      showPassword :false,
+      username :null,
+      password :null,
+      email :null,
+      phone_number :null,
+      password_confirmation :null,
+      errorMessage :null,
+    }
+  },
+  methods:{
+    ...mapActions(useAuthStore, ['register']),
+    // Login with google
+    async callback(res){
+      const userDetail = decodeCredential(res.credential);
+      const user = {
+        username: userDetail.given_name + ' ' + userDetail.family_name,
+        email: userDetail.email,
+        image:userDetail.picture,
+        isGoogle: true,
+      };
+      this.register(user);
+    },
+    // Login with form
+    async signUp(){
+      const user = {
+        username: this.username,
+        password: this.password,
+        password_confirmation: this.password_confirmation,
+        phone_number: this.phone_number,
+        email: this.email,
+      };
+      await this.register(user);
+      if(this.isLoggedIn){
+        this.$router.push('/')
+      }
+    }
+  },
+  computed:{
+    ...mapState(useAuthStore, ['isLoggedIn', 'errors', 'isValid'])
+  },
+  watch:{
+    errors(newValue, oldValue){
+      console.log(`Count changed from ${oldValue} to ${newValue}`);
+      this.errorMessage = newValue;
+      console.log(this.errorMessage);
+    }
   }
-};
-watch(errors, (newValue, oldValue) => {
-  console.log(`Count changed from ${oldValue} to ${newValue}`);
-  errorMessage.value = newValue;
-  console.log(errorMessage.value);
-});
+}
 
-// Validation rules
-const rules = ref({
-  usernameRules: [
-    (value) => !!value || "Username is required",
-    (value) => (value && value.length >= 5) || "Username at least 5 characters",
-  ],
-  emailRules: [(value) => !!value || "Email is required"],
-  phoneRules: [
-    (value) => !!value || "Phone Number is required ",
-    (value) => /^\+?[0]\d{8,20}$/.test(value) || "Phone Number is invalid",
-  ],
-  passwordRules: [
-    (value) => !!value || "Password is required",
-    (value) => (value && value.length >= 8) || "Password at least 8 characters",
-  ],
-  confirmRules: [
-    (value) => !!value || "Confirm Password is required",
-    (value) => (value && value == password.value) || "Password does not match!",
-  ],
-});
 </script>
 
 <style scoped>

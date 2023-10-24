@@ -9,14 +9,12 @@
       <v-toolbar-items class=" d-flex align-center">
         <div class="text-black">
           <template v-for="item in navItems" :key="item.name">
-            <router-link :to="{ name: item.name }" class="text-button text-decoration-none text-black mr-7">{{ item.title
-            }}</router-link>
+            <router-link :to="{ name: item.name }" class="text-button text-decoration-none text-black mr-7">{{ item.title}}</router-link>
           </template>
           <router-link :to="{ name: 'Wishlist' }" class="text-button text-decoration-none text-black mr-7">Wishlist</router-link>
-          
         </div>
         <!-- After Logged in -->
-        <v-avatar id="logout" :image="profileCookie" size="50" v-if="token"></v-avatar>
+        <v-avatar id="logout" :image="profile" size="50" v-if="isLoggedIn"></v-avatar>
 
         <!-- Before Login  -->
         <v-icon icon="mdi-dots-vertical" id="logged-in" v-else></v-icon>
@@ -65,7 +63,7 @@
         </div>
         <v-card-actions class="button">
           <v-btn class="cancel text-button text-blue mr-1" @click="isLoggedOut = !isLoggedOut">Cancel</v-btn>
-          <v-btn class="deleteBtn bg-red text-button px-10" @click="logout">
+          <v-btn class="deleteBtn bg-red text-button px-10" @click="singOut">
             Log Out
           </v-btn>
         </v-card-actions>
@@ -74,80 +72,86 @@
   </div>
 </template>
 
-<script setup>
-import { ref, computed } from 'vue';
+<script>
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import BaseButton from '../widget/BaseButton.vue';
-const isLoggedOut = ref(false);
-// Pinia Store 
+import { mapActions, mapState } from 'pinia';
 import { useAuthStore } from '../../store/AuthStore';
-import { storeToRefs } from 'pinia';
-const authStore = useAuthStore();
-const { logout } = authStore;
-const { role,token } = storeToRefs(authStore);
 
-const navItems = ref([
-  { title: 'Home', name: 'Home' },
-  { title: 'About US', name: 'About' },
-  { title: 'Property', name: 'property' },
-  { title: 'Map', name: 'Map' },
-  { title: 'Contact Us', name: 'Contact' },
-])
-// const cookieEmail = ref(Cookies.get('email'));
-const profileCookie = ref(Cookies.get('image'));
-const roleUser = ref(Cookies.get('role'));
-const email = ref(Cookies.get('email'));
-const username = ref(Cookies.get('username'));
-
-const scrollY = ref(0);
-const elevation = ref(4);
-const profile = ref('');
-
-const background = ref('white');
-const onScroll = (e) => {
-  scrollY.value = e.currentTarget.scrollY;
-}
-window.addEventListener('scroll', onScroll);
-
-const backgroundNavbar = computed(() => {
-  if (scrollY.value >= 60) {
-    return background.value;
-  }
-  return 'none';
-})
-const elevationNavbar = computed(() => {
-  if (scrollY.value >= 60) {
-    return elevation.value;
-  }
-  return 0;
-})
-
-
-const getImage=(event)=> {
-  var file = event.target.files[0];
-  console.log(file);
-      var form = new FormData();
-      form.append('profile', file);
-      axios.post('/imageProfile', form).then((response) => {
-        profile.value = response.data;
-        update();
-      });
-
-}
-const update = () => {
-  let id = localStorage.getItem('user_id');
-      const picture = {
-        id: id,
-        image: profile.value
+export default {
+  data(){
+    return {
+      isLoggedOut :false,
+      navItems : [
+        { title: 'Home', name: 'Home' },
+        { title: 'About US', name: 'About' },
+        { title: 'Property', name: 'property' },
+        { title: 'Map', name: 'Map' },
+        { title: 'Contact Us', name: 'Contact' },
+      ],
+      roleUser : Cookies.get('role'),
+      email : Cookies.get('email'),
+      username : Cookies.get('username'),
+      scrollY : 0,
+      elevation : 4,
+      background : 'white',
+    }
+  },
+  methods:{
+    ...mapActions(useAuthStore, ['logout']),
+    onScroll(e){
+      this.scrollY = e.currentTarget.scrollY;
+    },
+    getImage(event){
+      var file = event.target.files[0];
+      console.log(file);
+          var form = new FormData();
+          form.append('profile', file);
+          axios.post('/imageProfile', form).then((response) => {
+            this.profile = response.data;
+            this.update();
+          });
+      },
+      update(){
+      let id = localStorage.getItem('user_id');
+          const picture = {
+            id: id,
+            image: this.profile
+          }
+          axios.post(`/editProfile`,picture).then(response =>{
+            console.log(response);
+          });
+          Cookies.set('image', this.profile);
+          this.profileCookie= Cookies.get('image')
+    },
+    singOut(){
+      this.logout()
+      this.$router.push('/')
+    }
+  },
+  computed:{
+    ...mapState(useAuthStore, ["role", "token", "isLoggedIn", "profile"]),
+    backgroundNavbar(){
+      if (this.scrollY >= 60) {
+        return this.background;
       }
-      axios.post(`/editProfile`,picture).then(response =>{
-        console.log(response);
-      });
-      Cookies.set('image', profile.value);
-      profileCookie.value= Cookies.get('image')
+      return 'none';
+    },
+  elevationNavbar(){
+    if (this.scrollY >= 60) {
+      return this.elevation;
+    }
+    return 0;
+  }
+  },
+  components:{
+    BaseButton
+  },
+  created(){
+    window.addEventListener('scroll', this.onScroll)
+  }
 }
-
 </script>
 
 <style scoped>
