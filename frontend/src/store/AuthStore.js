@@ -7,12 +7,10 @@ import axios from "axios";
 export const useAuthStore = defineStore("auth", {
   state: () => ({
     errors: "",
-    // router : useRouter(),
-    isValid: false,
     token: localStorage.getItem("token"),
     emailSend: "",
     message: "",
-    profile:"",
+    profile: "",
     user_id: localStorage.getItem("user_id"),
     role: Cookies.get("role"),
 
@@ -21,42 +19,52 @@ export const useAuthStore = defineStore("auth", {
     passwordConfirmation: "",
     emailLocalStorage: "",
     alert: false,
+    allUsers: [],
+    allCustomers: [],
+    allLandlords: [],
   }),
   actions: {
-    setUserData(username, image, role, email, user_id, token){
+    setUserData(username, image, role, email, user_id, token) {
       Cookies.set("username", username, { expires: 30 });
-      Cookies.set("profile", image, { expires: 30 });
+      Cookies.set("image", image, { expires: 30 });
       Cookies.set("role", role, { expires: 30 });
       Cookies.set("email", email, { expires: 30 });
       localStorage.setItem("user_id", user_id);
       localStorage.setItem("token", token);
     },
-    resetUserData(){
+    resetUserData() {
       Cookies.remove("email");
       Cookies.remove("role");
       Cookies.remove("username");
-      Cookies.remove("profile");
+      Cookies.remove("image");
       localStorage.removeItem("user_id");
       localStorage.removeItem("token");
       localStorage.removeItem("wishListData");
       this.user_id = null;
       this.token = null;
       this.profile = null;
+      this.role = null;
     },
     // Register
     async register(user) {
       await axios
         .post("/register", user)
         .then((res) => {
-          this.setUserData(res.data.user.username,res.data.user.image,res.data.user.role,user.email,res.data.user.id,res.data.token)
+          this.setUserData(
+            res.data.user.username,
+            res.data.user.image,
+            res.data.user.role,
+            user.email,
+            res.data.user.id,
+            res.data.token
+          );
+          this.role = res.data.user.role;
           this.user_id = res.data.user.id;
           this.token = res.data.token;
-          this.profile = res.data.user.image
-          // this.router.push('/')
+          this.profile = res.data.user.image;
         })
         .catch((err) => {
           console.log(err);
-          // errors.value = err.response.data
         });
     },
 
@@ -65,16 +73,18 @@ export const useAuthStore = defineStore("auth", {
       await axios
         .post("/login", user)
         .then((res) => {
-          this.setUserData(res.data.user.username,res.data.user.image,res.data.user.role,user.email,res.data.user.id,res.data.token)
-          this.user_id = localStorage.getItem("user_id");
-          this.token = localStorage.getItem("token");
-          if (res.data.user.role === "admin") {
-            // this.router.push('/dashboard/admin')
-          } else if (res.data.user.role === "landlord") {
-            // this.router.push('/dashboard/landlord')
-          } else {
-            // this.router.push('/')
-          }
+          this.setUserData(
+            res.data.user.username,
+            res.data.user.image,
+            res.data.user.role,
+            user.email,
+            res.data.user.id,
+            res.data.token
+          );
+          this.role = res.data.user.role;
+          this.user_id = res.data.user.id;
+          this.token = res.data.token;
+          this.profile = res.data.user.image;
         })
         .catch((err) => {
           this.errors = err.response.data.message;
@@ -90,8 +100,7 @@ export const useAuthStore = defineStore("auth", {
           },
         })
         .then(() => {
-          this.resetUserData()
-          window.location.href = "/";
+          this.resetUserData();
         })
         .catch((err) => {
           this.errors = err.response.data.errors;
@@ -138,8 +147,41 @@ export const useAuthStore = defineStore("auth", {
           console.error(error.response.data);
         });
     },
+    async getUsers() {
+      await axios
+        .get(`/users`)
+        .then((res) => {
+          this.allUsers = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async getCustomers() {
+      await axios
+        .get(`/customers`)
+        .then((res) => {
+          this.allCustomers = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async getLandlords() {
+      await axios
+        .get(`/landlords`)
+        .then((res) => {
+          this.allLandlords = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
-  getters:{
-    isLoggedIn:(state) => state.token && state.user_id
-  }
+  getters: {
+    isLoggedIn: (state) => state.token && state.user_id,
+    userCount: (state) => state.allUsers.length,
+    customerCount: (state) => state.allCustomers.length,
+    landlordCount: (state) => state.allLandlords.length,
+  },
 });

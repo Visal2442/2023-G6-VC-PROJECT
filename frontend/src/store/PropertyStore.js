@@ -1,78 +1,71 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
 import axios from "axios";
 
-export const usePropertyStore = defineStore("property", () => {
-    const properties = ref([]);
-    const propertiesPerpage = ref([]);
-    const userProperties = ref([]);
-    const userId = ref(localStorage.getItem('user_id'));
-
+export const usePropertyStore = defineStore("property", {
+  state: () => ({
+    properties: [],
+    propertiesPerpage: [],
+    userProperties: [],
+    userId: localStorage.getItem("user_id"),
+  }),
+  actions: {
     // Get all properties
-    const getAllProperties = async() => {
-        await axios.get("/properties")
-            .then((res) => {
-                properties.value = res.data.data
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-
+    async getAllProperties() {
+      await axios
+        .get("/properties")
+        .then((res) => {
+          this.properties = res.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     // Get 12 properties per page
-    const getPropertiesPerPage = async() => {
-        await axios.get("/properties/pagination")
-            .then((res) => {
-                propertiesPerpage.value = res.data;
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-
-    // Get properties by user id 
-    const getPropertiesByUserId = async() => {
-        await axios.get(`/getAllProperties/${userId.value}`)
-            .then((res) => {
-                userProperties.value = res.data.data;
-            })
-            .catch(err => console.log(err));
-    }
-
+    async getPropertiesPerPage() {
+      await axios
+        .get("/properties/pagination")
+        .then((res) => {
+          this.propertiesPerpage = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // Get properties by user id
+    async getPropertiesByUserId() {
+      await axios
+        .get(`/getAllProperties/${this.userId}`)
+        .then((res) => {
+          this.userProperties = res.data.data;
+        })
+        .catch((err) => console.log(err));
+    },
     // Delete property by id
-    const deletePropertyById = async(propertyId) => {
-       await axios.delete(`/properties/delete/${propertyId}`)
-            .then(() => {
-                getPropertiesByUserId();
-                getAllProperties();
-            })
-            .catch((errors) => {
-                console.log(errors);
-            });
-    };
-
-    // Update property by id
-    const updatePropertyById = async(propertyId, data) => {
-        await axios.put(`/updateProperty/${propertyId}`, data)
+    async deletePropertyById(propertyId) {
+      await axios
+        .delete(`/properties/delete/${propertyId}`)
         .then(() => {
-            getPropertiesByUserId();
-            getAllProperties();
+          this.getPropertiesByUserId();
+          this.getAllProperties();
         })
         .catch((errors) => {
           console.log(errors);
         });
-    };
-
-    getAllProperties();
-    getPropertiesPerPage();
-
-    return {
-        properties,
-        propertiesPerpage,
-        userProperties,
-        getAllProperties,
-        getPropertiesByUserId,
-        deletePropertyById,
-        updatePropertyById,
-    };
+    },
+    // Update property by id
+    async updatePropertyById(propertyId, data) {
+      await axios
+        .put(`/updateProperty/${propertyId}`, data)
+        .then(() => {
+          this.getPropertiesByUserId();
+          this.getAllProperties();
+        })
+        .catch((errors) => {
+          console.log(errors);
+        });
+    },
+  },
+  getters: {
+    propertyCount: (state) => state.properties.length,
+  },
 });

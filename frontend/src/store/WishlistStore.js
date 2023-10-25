@@ -1,55 +1,52 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
 import axios from "axios";
 
-export const useWishlistStore = defineStore("wishlist", () => {
-  const data_wish_list = ref({});
-  const user_id = ref(parseInt(localStorage.getItem("user_id")));
-  const property_id = ref(null);
-  const getWishlist = ref(JSON.parse(localStorage.getItem("wishListData")));
-
-  const getAllData = () => {
-    axios
-      .get(`/wishlist/${user_id.value}`)
-      .then((res) => {
-        getWishlist.value = res.data.data;
-        localStorage.setItem("wishListData", JSON.stringify(getWishlist.value));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const addWishlist = (property_id) => {
-    data_wish_list.value = {
-      user_id: user_id.value,
-      property_id: property_id,
+export const useWishlistStore = defineStore("wishlist", {
+  state() {
+    return {
+      data_wish_list: {},
+      user_id: parseInt(localStorage.getItem("user_id")),
+      property_id: null,
+      getWishlist: JSON.parse(localStorage.getItem("wishListData")),
     };
-    axios
-      .post("/wishlist", data_wish_list.value)
-      .then(() => {
-        getAllData();
-      })
-      .catch((err) => {
-        console.log(err.response.data.status);
-      });
-  };
-  const removeWishlist=(wishtList_id)=>{
-    axios.delete(`/wishlist/${wishtList_id}`)
-    .then(res=>{
-      getAllData();
-      console.log(res);
-    })
-    .catch(err=>console.log(err));
-  }
-
-  getAllData();
-
-  return {
-    addWishlist,
-    property_id,
-    getAllData,
-    removeWishlist,
-    getWishlist
-  };
+  },
+  actions: {
+    async getAllData() {
+      await axios
+        .get(`/wishlist/${this.user_id}`)
+        .then((res) => {
+          this.getWishlist = res.data.data;
+          localStorage.setItem(
+            "wishListData",
+            JSON.stringify(this.getWishlist)
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async addWishlist(property_id) {
+      this.data_wish_list = {
+        user_id: this.user_id,
+        property_id: property_id,
+      };
+      await axios
+        .post("/wishlist", this.data_wish_list)
+        .then(() => {
+          this.getAllData();
+        })
+        .catch((err) => {
+          console.log(err.response.data.status);
+        });
+    },
+    async removeWishlist(wishtList_id) {
+      await axios
+        .delete(`/wishlist/${wishtList_id}`)
+        .then((res) => {
+          this.getAllData();
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    },
+  },
 });

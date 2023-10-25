@@ -86,7 +86,7 @@
         >
         <div class="d-flex flex-column align-center">
           <p class="">Or Register With</p>
-          <GoogleLogin :callback="callback" class="my-5"></GoogleLogin>
+          <!-- <GoogleLogin :callback="callback" class="my-5"></GoogleLogin> -->
           <p class="ma-2">
             Already have an account? |
             <router-link :to="{ name: 'Login' }">Login Here</router-link>
@@ -98,40 +98,39 @@
   <!-- </v-container> -->
 </template>
 
-
-<script> 
-import { decodeCredential } from "vue3-google-login";
+<script>
+// import { decodeCredential } from "vue3-google-login";
 // Pinia Store
 import { mapActions, mapState } from "pinia";
 import { useAuthStore } from "../../store/AuthStore";
 export default {
-  data(){
+  data() {
     return {
-      validForm:false,
-      showPassword :false,
-      username :null,
-      password :null,
-      email :null,
-      phone_number :null,
-      password_confirmation :null,
-      errorMessage :null,
-    }
+      validForm: false,
+      showPassword: false,
+      username: null,
+      password: null,
+      email: null,
+      phone_number: null,
+      password_confirmation: null,
+      errorMessage: null,
+    };
   },
-  methods:{
-    ...mapActions(useAuthStore, ['register']),
+  methods: {
+    ...mapActions(useAuthStore, ["register"]),
     // Login with google
-    async callback(res){
-      const userDetail = decodeCredential(res.credential);
-      const user = {
-        username: userDetail.given_name + ' ' + userDetail.family_name,
-        email: userDetail.email,
-        image:userDetail.picture,
-        isGoogle: true,
-      };
-      this.register(user);
-    },
+    // async callback(res){
+    //   const userDetail = decodeCredential(res.credential);
+    //   const user = {
+    //     username: userDetail.given_name + ' ' + userDetail.family_name,
+    //     email: userDetail.email,
+    //     image:userDetail.picture,
+    //     isGoogle: true,
+    //   };
+    //   this.register(user);
+    // },
     // Login with form
-    async signUp(){
+    async signUp() {
       const user = {
         username: this.username,
         password: this.password,
@@ -140,23 +139,22 @@ export default {
         email: this.email,
       };
       await this.register(user);
-      if(this.isLoggedIn){
-        this.$router.push('/')
+      if (this.isLoggedIn) {
+        this.$router.push("/");
       }
-    }
+    },
   },
-  computed:{
-    ...mapState(useAuthStore, ['isLoggedIn', 'errors', 'isValid'])
+  computed: {
+    ...mapState(useAuthStore, ["isLoggedIn", "errors", "isValid"]),
   },
-  watch:{
-    errors(newValue, oldValue){
+  watch: {
+    errors(newValue, oldValue) {
       console.log(`Count changed from ${oldValue} to ${newValue}`);
       this.errorMessage = newValue;
       console.log(this.errorMessage);
-    }
-  }
-}
-
+    },
+  },
+};
 </script>
 
 <style scoped>
